@@ -1,5 +1,7 @@
 import numpy as np
 import math
+from scipy.stats import norm
+from scipy.stats import t
 from IPython import embed
 
 
@@ -55,9 +57,12 @@ def N_risky_plus_RFA_portfolio(M, m, r):
     # Optimised risk
     s = math.sqrt(w_T * M['X'] * w)
 
-    l = [w, s]
+    # Sharpe ratio
+    sharpe = (m - r) / s
+
+    l = [w, s, sharpe]
     print '--- Portfolio of N risky assets plus RFA ---\n' \
-          'w_opt = {0}, s_opt = {1}'.format(l[0], l[1])
+          'w_opt = {0}, s_opt = {1}, sharpe = {2}'.format(l[0], l[1], l[2])
 
     return l
 
@@ -73,13 +78,22 @@ def tangency_portfolio(M, r):
     # Tangency return
     m = (M['C'] - M['B'] * r) / (M['B'] - M['A'] * r)
 
-    l = [w, s, m]
+    # Sharpe ratio
+    sharpe = (m - r) / s
+
+    l = [w, s, m, sharpe]
 
     print '--- Tangency Portfolio ---\n' \
-          'w_opt = {0}, s_opt = {1}, m = {2}'.format(l[0], l[1], l[2])
+          'w_opt = {0}, s_opt = {1}, m = {2}, sharpe = {3}'.format(l[0], l[1], l[2], l[3])
 
     return l
 
+def tangency_portfolio_var(mu, w, s, factor):
+
+    w_T = np.matrix.transpose(w)
+    VaR = w_T * mu + factor * s
+
+    return VaR
 
 if __name__ == "__main__":
 
@@ -141,6 +155,25 @@ if __name__ == "__main__":
     # M = get_useful_matrices(mu, sigma, R)
     # P1 = N_risky_plus_RFA_portfolio(M, m, r)
     # P2 = tangency_portfolio(M, m, r)
+    # # -------------------------------------
+
+    print '--- Tangency Portfolio Analytics VaR ---'
+
+    c = 0.99
+
+    # Normal distribution   - see http://stackoverflow.com/questions/20626994/how-to-calculate-the-inverse-of-the-normal-cumulative-distribution-function-in-p
+    factor = norm.ppf(1 - c)
+    # print norm.cdf(norm.ppf(c))  # Check that it is the inverse of the CDF
+    VaR = tangency_portfolio_var(mu=mu, w=P2[0], s=P2[1], factor=factor)
+    print 'normal dist factor = {0}, 99% C.L. VaR = {1}'.format(factor, VaR)
+
+    # Student's / t-distribution
+    factor = t.ppf((1 - c), df=30)  # df stands for degrees of freedom
+    # print t.cdf(t.ppf(c, df=30), df=30)  # Check that it is the inverse of the CDF
+    VaR = tangency_portfolio_var(mu=mu, w=P2[0], s=P2[1], factor=factor)
+    print 't-dist factor = {0}, 99% C.L. VaR = {1}'.format(factor, VaR)
+
+
 
 
 # RESULTS
@@ -170,3 +203,25 @@ if __name__ == "__main__":
 #  [ 0.06526604]
 #  [ 0.12436147]
 #  [ 0.09770128]], s_opt = 0.128731140503, m = [[ 0.08523575]]
+
+# Inverse CDF factors
+# 1.64485362695
+# 0.95
+# 1.69726089436
+# 0.950000000742
+
+#
+# In [23]: %run portfolio_optimisation.py
+# --- Portfolio of N risky assets plus RFA ---
+# w_opt = [[ 0.39572412]
+#  [ 1.05408235]
+#  [-0.82682859]
+#  [ 0.73127679]], s_opt = 0.132119656709, sharpe = 0.529822751163
+# --- Tangency Portfolio ---
+# w_opt = [[ 0.29220805]
+#  [ 0.77834869]
+#  [-0.61054144]
+#  [ 0.53998469]], s_opt = 0.0975589452358, m = [[ 0.08168895]], sharpe = [[ 0.52982275]]
+# --- Tangency Portfolio Analytics VaR ---
+# normal dist factor = 2.32634787404, 99% C.L. VaR = [[ 0.30864499]]
+# t dist factor = 2.4572615424, 99% C.L. VaR = [[ 0.32141679]]
