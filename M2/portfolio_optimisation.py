@@ -223,5 +223,6 @@ if __name__ == "__main__":
 #  [-0.61054144]
 #  [ 0.53998469]], s_opt = 0.0975589452358, m = [[ 0.08168895]], sharpe = [[ 0.52982275]]
 # --- Tangency Portfolio Analytics VaR ---
-# normal dist factor = 2.32634787404, 99% C.L. VaR = [[ 0.30864499]]
-# t dist factor = 2.4572615424, 99% C.L. VaR = [[ 0.32141679]]
+# --- Tangency Portfolio Analytics VaR ---
+# normal dist factor = -2.32634787404, 99% C.L. VaR = [[-0.1452671]]
+# t-dist factor = -2.4572615424, 99% C.L. VaR = [[-0.1580389]]
