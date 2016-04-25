@@ -14,9 +14,10 @@ from IPython import embed
 import sys
 
 
-def asian_option_simulator(S0, T, r, sigma, M, I, k):
+def asian_option_simulator(S0, K, T, r, sigma, M, I, k):
     """
     :param S0: initial stock value
+    :param K: strike
     :param T: maturity
     :param r: risk-free rate
     :param sigma: volatility
@@ -96,69 +97,115 @@ def asian_option_simulator(S0, T, r, sigma, M, I, k):
     G_c_join = np.concatenate((G_c_plus, G_c_minus), axis=1)
     G_c_join = np.exp(G_c_join)
 
+    # Calculate option value for Asian and EU (to have EU as benchmark)
+
+    # ----------------------------------------------------
+    # EUROPEAN CALL - using antithetic variance reduction
+    # ----------------------------------------------------
+    DF = math.exp(-r * T)
+    V_join = DF * np.maximum(S_join - K, 0)
+    V = np.mean(V_join[-1])
+
+    V_plus = DF * np.maximum(S_plus[-1] - K, 0) # just for demonstration purposes
+
+    # --------------------------------------------------
+    # ASIAN CALL - using antithetic variance reduction
+    # --------------------------------------------------
+
+    # ----------------------------------------
+    # ARITHMETIC
+    # ----------------------------------------
+
+    # Continuous sampling
+    AC_c_join = DF * np.maximum(A_c_join - K, 0)
+    AC_c = np.mean(AC_c_join[-1])
+
+    # Discrete sampling
+    AC_d_join = DF * np.maximum(A_d_join - K, 0)
+    AC_d = np.mean(AC_d_join[-1])
+
+    # ----------------------------------------
+    # GEOMETRIC
+    # ----------------------------------------
+
+    # Continuous sampling
+    GC_c_join = DF * np.maximum(G_c_join - K, 0)
+    GC_c = np.mean(GC_c_join[-1])
+
+    # --------------------------------------------------
+    # Variables into Dictionary
+    # --------------------------------------------------
+
     dic = {'S_join': S_join,
-           'S_plus': S_plus,
-           'S_minus': S_minus,
+           # 'S_plus': S_plus,
+           # 'S_minus': S_minus,
            'A_c_join': A_c_join,
            'A_d_join': A_d_join,
            'G_c_join': G_c_join,
-           'DF': math.exp(-r * T) # discount factor (can assume constant since r constant)
+           'V_join': V_join,
+           # 'V_plus': V_plus,
+           'V': V,
+           'AC_c_join': AC_c_join,
+           'AC_d_join': AC_d_join,
+           'GC_c_join': AC_d_join,
+           'AC_c': AC_c,
+           'AC_d': AC_d,
+           'GC_c': GC_c
            }
     return dic
 
+# ---------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------
 
-dic = asian_option_simulator(S0=100., T=1.0, r=0.05, sigma=0.2, M=100, I=100, k=8)
+dic = asian_option_simulator(S0=100., K=100., T=1.0, r=0.05, sigma=0.2, M=100, I=100, k=8)
 
 S_join = dic['S_join']
-S_plus = dic['S_plus']
+S_plus = S_join[:, 0:100]
 A_c_join = dic['A_c_join']
 A_d_join = dic['A_d_join']
 G_c_join = dic['G_c_join']
-DF = dic['DF']
+V_join = dic['V_join']
+V_plus = V_join[:, 0:100]
+V = dic['V']
+AC_c_join = dic['AC_c_join']
+AC_d_join = dic['AC_d_join']
+GC_c_join = dic['GC_c_join']
+AC_c = dic['AC_c']
+AC_d = dic['AC_d']
+GC_c = dic['GC_c']
 
-# Additional parameters for option value calc
-K = 100.  # strike price
-
-# ---------------------------------------------------------------------------------
+# --------------------------------------------------
 # EUROPEAN CALL - using antithetic variance reduction
-# ---------------------------------------------------------------------------------
-
-V_join = DF * np.maximum(S_join - K, 0)
-V = np.mean(V_join[-1])
+# --------------------------------------------------
 print 'EU V(T) = {0}'.format(V)
 
-# V vs S plot
-# sns.regplot(x=S_join, y=V_join, fit_reg=False)
-V_plus = DF * np.maximum(S_plus[-1] - K, 0) # just for demonstration purposes
-# sns.regplot(x=S_plus[-1], y=V_plus, fit_reg=False, color='yellow', marker='+')
+# # V vs S plot without and with variance reduction
+# sns.regplot(x=S_join[-1], y=V_join[-1], fit_reg=False)
+# sns.regplot(x=S_plus[-1], y=V_plus[-1], fit_reg=False, color='yellow', marker='+')
 
-# ---------------------------------------------------------------------------------
+# --------------------------------------------------
 # ASIAN CALL - using antithetic variance reduction
-# ---------------------------------------------------------------------------------
+# --------------------------------------------------
 
 # ----------------------------------------
 # ARITHMETIC
 # ----------------------------------------
-print '________ ARITHMETIC ________'
 
 # -----------------------
 # Continuous sampling
 # -----------------------
-C_c_join = DF * np.maximum(A_c_join - K, 0)
-C_c = np.mean(C_c_join[-1])
-print 'Asian C_c(T) = {0}'.format(C_c)
+print 'Asian AC_c(T) = {0}'.format(AC_c)
 # # V vs S plot
-# sns.regplot(x=S_join, y=C_c_join, fit_reg=False)
+# sns.regplot(x=S_join[-1], y=AC_c_join[-1], fit_reg=False)
+# # sns.regplot(x=S_join[-1, 0:100], y=AC_c_join[-1, 0:100], fit_reg=False)  # plot only for S_plus and AC_c_plus
 
 # -----------------------
 # Discrete sampling
 # -----------------------
-C_d_join = DF * np.maximum(A_d_join - K, 0)
-C_d = np.mean(C_d_join[-1])
-print 'Asian C_d(T) = {0}'.format(C_d)
+print 'Asian AC_d(T) = {0}'.format(AC_d)
 
 # -----------------------
-# Continuous vs Discrete
+# Continuous vs Discrete plots
 # -----------------------
 
 # # S plot for MC, cont. and discrete avg
@@ -167,22 +214,19 @@ print 'Asian C_d(T) = {0}'.format(C_d)
 # plt.plot(A_d_join[0:,0:1], label='Disc. Avg.')
 # plt.legend()
 
-# Evolution of Asian Call value with number of time steps
-c = C_c_join.mean(axis=1)
-d = C_d_join.mean(axis=1)
+# # Evolution of Asian Call value with number of time steps
+# c = AC_c_join.mean(axis=1)
+# d = AC_d_join.mean(axis=1)
 # plt.plot(c)
 # plt.plot(d)
 
 # ----------------------------------------
 # GEOMETRIC
 # ----------------------------------------
-print '________ GEOMETRIC ________'
 
 # -----------------------
 # Continuous sampling
 # -----------------------
-C_c_join = DF * np.maximum(G_c_join - K, 0)
-C_c = np.mean(C_c_join[-1])
-print 'Asian C_c(T) = {0}'.format(C_c)
+print 'Asian GC_c(T) = {0}'.format(GC_c)
 
 

@@ -30,3 +30,29 @@ Asian C_c(T) = 5.7713372896 #continuous
 Asian C_d(T) = 5.5618419093 # discrete
 ________ GEOMETRIC ________
 Asian C_c(T) = 5.55281242283
+
+##########################################################################
+
+# -----------------------------------------------------------------------
+# SETTINGS
+# -----------------------------------------------------------------------
+
+# Allows plots to be embedded in notebook
+%matplotlib inline
+
+import seaborn as sns
+
+# Sets plot size in notebook
+import matplotlib.pylab as pylab
+pylab.rcParams['figure.figsize'] = (10, 6)
+
+# Appends relevant path where class lives so it can be imported in notebook
+import sys
+sys.path.append("C:\\Users\\Tanya.Sandoval\\_QT\\simpleQT\\backtester")
+sys.path.append("C:\\Users\\Tanya.Sandoval\\_QT\\simpleQT\\dougal")
+
+import CMACs
+reload(CMACs)
+from CMACs import *
+
+from datetime import datetime
