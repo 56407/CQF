@@ -168,32 +168,4 @@ C_c_join = DF * np.maximum(G_c_join - K, 0)
 C_c = np.mean(C_c_join[-1])
 print 'Asian C_c(T) = {0}'.format(C_c)
 
-# ---------------------------------------------------------------------------------
-# APPENDIX
-# ---------------------------------------------------------------------------------
-
-# Evolution of Asian Call value with number of time step
-# b = np.maximum(df_A_c_plus - K, 0)
-# df_C_c = DF * b.mean(axis=1)  # average across columns instead of rows
-# b = np.maximum(df_A_d_plus - K, 0)
-# df_C_d = DF * b.mean(axis=1)  # average across columns instead of rows
-# df_C_c.plot()
-# df_C_d.plot()
-
-# # -----------------------
-# # Continuous vs Discrete Sampling
-# # -----------------------
-# df_S_plus.sim1.plot(label='S_plus_sim1')
-# df_A_c_plus.sim1.plot(label='Cont. Avg.')
-# df_A_d_plus.sim1.plot(label='Disc. Avg.')
-# plt.legend()
-
-# -----------------------
-# Discrete sampling
-# -----------------------
-# sel = list(range(0, M + 1, 4))
-# df_S_plus_d = df_S_plus.reset_index()
-# df_S_plus_d = df_S_plus_d[df_S_plus_d.index.map(lambda x: x in sel)]
-# df_S_plus_d = df_S_plus_d.drop('index', 1)
-
 
