@@ -2,7 +2,6 @@ from __future__ import division  # Force to return a float in division
 
 import numpy as np
 import pandas as pd
-from IPython import embed
 import math
 from math import exp, sqrt, log
 
@@ -10,97 +9,115 @@ from math import exp, sqrt, log
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+# Debugging
+from IPython import embed
 import sys
 
-# Parameters
-S0 = 100.  # initial value
+
+def asian_option_simulator(S0, T, r, sigma, M, I, k):
+    """
+    :param S0: initial stock value
+    :param T: maturity
+    :param r: risk-free rate
+    :param sigma: volatility
+    :param M: no. of time steps
+    :param I: no. of MC simulations (S paths)
+    :param k: discrete sampling freq
+    :return: dictionary with paths (S_join), cont. and disc. arithmetic avg's of S (A_c_join, A_d_join)
+    and cont. geo avg. (G_c)
+    """
+    dt = T / M  # time step size
+
+    # Define time index for dataframe
+    t_index = np.zeros((M + 1), dtype=np.float)  # fill t_index object with zeros
+    t_index[0] = 0
+
+    # Define S_plus and S_minus to apply antithetic variance reduction technique
+    # warning: must ensure S_plus and S_minus are different objects otherwise memory issues causes df's to be identical
+    shape = (M + 1, I)
+    S_plus = np.zeros((M + 1, I), dtype=np.float)  # fill S object with zeros
+    S_plus[0] = S0
+    S_minus = S_plus.copy()
+
+    # Define continuous and discrete arithmetic average numpy arrays
+    A_c_plus = np.zeros((M + 1, I), dtype=np.float)  # continuous
+    A_c_plus[0] = S0
+    A_c_minus = A_c_plus.copy()
+    # ----
+    A_d_plus = A_c_plus.copy()  # discrete
+    A_d_minus = A_d_plus.copy()
+    sel = list(range(0, M + 1, k))  # discrete indices based on sampling freq
+
+    # Define continuous geometric average numpy arrays
+    G_c_plus = A_c_plus.copy()
+    G_c_plus[0] = math.log(S0)
+    G_c_minus = G_c_plus.copy()
+
+    # Define random number generator, in this case only one 'phi' required
+    np.random.seed(1000)  # makes tne random numbers predictable (if commented diff will be generated every time)
+    rand1 = np.random.standard_normal(shape)
+
+    # Numpy array loop
+    for i in xrange(1, M + 1, 1):
+
+        t_index[i] = t_index[i - 1] + dt
+
+        S_plus[i] = S_plus[i - 1] * (1 +
+                                     r * dt +
+                                     sigma * math.sqrt(dt) * rand1[i] +
+                                     0.5 * sigma ** 2 * (rand1[i] ** 2 - 1) * dt
+                                     )
+
+        S_minus[i] = S_minus[i - 1] * (1 +
+                                       r * dt +
+                                       sigma * math.sqrt(dt) * (-rand1[i]) +
+                                       0.5 * sigma ** 2 * ((-rand1[i]) ** 2 - 1) * dt
+                                       )
+
+        # MC 'continuous' average using updating rule (just for demonstration purposes since df.mean more efficient)
+        A_c_plus[i] = (i / (i + 1)) * A_c_plus[i - 1] + S_plus[i] / (i + 1)
+        A_c_minus[i] = (i / (i + 1)) * A_c_minus[i - 1] + S_minus[i] / (i + 1)
+        G_c_plus[i] = (i / (i + 1)) * G_c_plus[i - 1] + np.log(S_plus[i]) / (i + 1)
+        G_c_minus[i] = (i / (i + 1)) * G_c_minus[i - 1] + np.log(S_minus[i]) / (i + 1)
+
+        # MC 'discrete' average
+        if i in sel:
+            j = int(i / k)
+            A_d_plus[i] = (j / (j + 1)) * A_d_plus[i - 1] + S_plus[i] / (j + 1)
+            A_d_minus[i] = (j / (j + 1)) * A_d_minus[i - 1] + S_minus[i] / (j + 1)
+        else:  # if not part of the sampling, then just copy previous value to have same dim as other arrays
+            A_d_plus[i] = A_d_plus[i - 1]
+            A_d_minus[i] = A_d_minus[i - 1]
+
+    # Join plus and minus stats (antithetic correction)
+    S_join = np.concatenate((S_plus, S_minus), axis=1)
+    A_c_join = np.concatenate((A_c_plus, A_c_minus), axis=1)
+    A_d_join = np.concatenate((A_d_plus, A_d_minus), axis=1)
+    G_c_join = np.concatenate((G_c_plus, G_c_minus), axis=1)
+    G_c_join = np.exp(G_c_join)
+
+    dic = {'S_join': S_join,
+           'S_plus': S_plus,
+           'S_minus': S_minus,
+           'A_c_join': A_c_join,
+           'A_d_join': A_d_join,
+           'G_c_join': G_c_join,
+           'DF': math.exp(-r * T) # discount factor (can assume constant since r constant)
+           }
+    return dic
+
+
+dic = asian_option_simulator(S0=100., T=1.0, r=0.05, sigma=0.2, M=100, I=100, k=8)
+
+S_join = dic['S_join']
+S_plus = dic['S_plus']
+A_c_join = dic['A_c_join']
+A_d_join = dic['A_d_join']
+G_c_join = dic['G_c_join']
+DF = dic['DF']
+
+# Additional parameters for option value calc
 K = 100.  # strike price
-T = 1.0  # maturity
-r = 0.05  # risk-free interest rate (replaces mu in formulae)
-sigma = 0.2  # volatility
-M = 100  # number of time steps
-I = 100  # number of MC simulations (paths)
-
-dt = T / M  # time step size
-DF = math.exp(-r * T)  # discount factor (can assume constant since r constant)
-
-# Define time index for dataframe
-t_index = np.zeros((M + 1), dtype=np.float)  # fill t_index object with zeros
-t_index[0] = 0
-
-# Define S_plus and S_minus to apply antithetic variance reduction technique
-# warning: must ensure S_plus and S_minus are different objects otherwise memory issues causes df's to be identical
-shape = (M + 1, I)
-S_plus = np.zeros((M + 1, I), dtype=np.float)  # fill S object with zeros
-S_plus[0] = S0
-S_minus = S_plus.copy()
-
-# Define continuous and discrete arithmetic average numpy arrays
-
-A_c_plus = np.zeros((M + 1, I), dtype=np.float)  # continuous
-A_c_plus[0] = S0
-A_c_minus = A_c_plus.copy()
-
-A_d_plus = A_c_plus.copy()  # discrete
-A_d_minus = A_d_plus.copy()
-k = 8  # discrete sampling frequency
-sel = list(range(0, M + 1, k))  # discrete indices
-
-# Define continuous geometric average numpy arrays
-G_c_plus = A_c_plus.copy()
-G_c_plus[0] = math.log(S0)
-G_c_minus = G_c_plus.copy()
-
-# Define random number generator, in this case only one 'phi' required
-np.random.seed(1000)  # makes tne random numbers predictable (if commented diff will be generated every time)
-rand1 = np.random.standard_normal(shape)
-
-# Numpy array loop
-for i in xrange(1, M + 1, 1):
-
-    t_index[i] = t_index[i - 1] + dt
-
-    S_plus[i] = S_plus[i - 1] * (1 +
-                                 r * dt +
-                                 sigma * math.sqrt(dt) * rand1[i] +
-                                 0.5 * sigma ** 2 * (rand1[i] ** 2 - 1) * dt
-                                 )
-
-    S_minus[i] = S_minus[i - 1] * (1 +
-                                   r * dt +
-                                   sigma * math.sqrt(dt) * (-rand1[i]) +
-                                   0.5 * sigma ** 2 * ((-rand1[i]) ** 2 - 1) * dt
-                                   )
-
-    # MC 'continuous' average using updating rule (just for demonstration purposes since df.mean more efficient)
-    A_c_plus[i] = (i / (i + 1)) * A_c_plus[i - 1] + S_plus[i] / (i + 1)
-    A_c_minus[i] = (i / (i + 1)) * A_c_minus[i - 1] + S_minus[i] / (i + 1)
-    G_c_plus[i] = (i / (i + 1)) * G_c_plus[i - 1] + np.log(S_plus[i]) / (i + 1)
-    G_c_minus[i] = (i / (i + 1)) * G_c_minus[i - 1] + np.log(S_minus[i]) / (i + 1)
-
-    # MC 'discrete' average
-    if i in sel:
-        j = int(i/k)
-        A_d_plus[i] = (j / (j + 1)) * A_d_plus[i - 1] + S_plus[i] / (j + 1)
-        A_d_minus[i] = (j / (j + 1)) * A_d_minus[i - 1] + S_minus[i] / (j + 1)
-    else:  # if not part of the sampling, then just copy previous value to have same dim as other arrays
-        A_d_plus[i] = A_d_plus[i - 1]
-        A_d_minus[i] = A_d_minus[i - 1]
-
-# Join plus and minus stats (antithetic correction)
-S_join = np.concatenate((S_plus, S_minus), axis=1)
-A_c_join = np.concatenate((A_c_plus, A_c_minus), axis=1)
-A_d_join = np.concatenate((A_d_plus, A_d_minus), axis=1)
-G_c_join = np.concatenate((G_c_plus, G_c_minus), axis=1)
-G_c_join = np.exp(G_c_join)
-
-# # Convert numpy arrays into dataframes
-# colNames = ['sim' + str(x + 1) for x in range(I)]
-# df_S_plus = pd.DataFrame(data=S_plus, index=t_index, columns=colNames)
-# df_S_minus = pd.DataFrame(data=S_minus, index=t_index, columns=colNames)
-# df_A_c_plus = pd.DataFrame(data=A_c_plus, index=t_index, columns=colNames)
-# df_A_d_plus = pd.DataFrame(data=A_d_plus, index=t_index, columns=colNames)
-
 
 # ---------------------------------------------------------------------------------
 # EUROPEAN CALL - using antithetic variance reduction
