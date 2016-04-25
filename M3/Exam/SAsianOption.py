@@ -13,14 +13,13 @@ import seaborn as sns
 import sys
 
 # Parameters
-
 S0 = 100.  # initial value
 K = 100.  # strike price
 T = 1.0  # maturity
 r = 0.05  # risk-free interest rate (replaces mu in formulae)
 sigma = 0.2  # volatility
 M = 100  # number of time steps
-I = 100  # number of paths to simulate
+I = 100  # number of MC simulations (paths)
 
 dt = T / M  # time step size
 DF = math.exp(-r * T)  # discount factor (can assume constant since r constant)
@@ -43,9 +42,9 @@ A_c_plus[0] = S0
 A_c_minus = A_c_plus.copy()
 
 A_d_plus = A_c_plus.copy()  # discrete
+A_d_minus = A_d_plus.copy()
 k = 8  # discrete sampling frequency
 sel = list(range(0, M + 1, k))  # discrete indices
-A_d_minus = A_d_plus.copy()
 
 # Define continuous geometric average numpy arrays
 G_c_plus = A_c_plus.copy()
@@ -95,7 +94,7 @@ A_d_join = np.concatenate((A_d_plus, A_d_minus), axis=1)
 G_c_join = np.concatenate((G_c_plus, G_c_minus), axis=1)
 G_c_join = np.exp(G_c_join)
 
-# # Put numpy arrays into dataframes
+# # Convert numpy arrays into dataframes
 # colNames = ['sim' + str(x + 1) for x in range(I)]
 # df_S_plus = pd.DataFrame(data=S_plus, index=t_index, columns=colNames)
 # df_S_minus = pd.DataFrame(data=S_minus, index=t_index, columns=colNames)
@@ -141,11 +140,21 @@ C_d_join = DF * np.maximum(A_d_join - K, 0)
 C_d = np.mean(C_d_join[-1])
 print 'Asian C_d(T) = {0}'.format(C_d)
 
+# -----------------------
+# Continuous vs Discrete
+# -----------------------
+
+# # S plot for MC, cont. and discrete avg
+# plt.plot(S_join[0:,0:1], label='S_sim1')
+# plt.plot(A_c_join[0:,0:1], label='Cont. Avg.')
+# plt.plot(A_d_join[0:,0:1], label='Disc. Avg.')
+# plt.legend()
+
 # Evolution of Asian Call value with number of time steps
 c = C_c_join.mean(axis=1)
 d = C_d_join.mean(axis=1)
-plt.plot(c)
-plt.plot(d)
+# plt.plot(c)
+# plt.plot(d)
 
 # ----------------------------------------
 # GEOMETRIC
@@ -159,6 +168,11 @@ C_c_join = DF * np.maximum(G_c_join - K, 0)
 C_c = np.mean(C_c_join[-1])
 print 'Asian C_c(T) = {0}'.format(C_c)
 
+# ---------------------------------------------------------------------------------
+# APPENDIX
+# ---------------------------------------------------------------------------------
+
+# Evolution of Asian Call value with number of time step
 # b = np.maximum(df_A_c_plus - K, 0)
 # df_C_c = DF * b.mean(axis=1)  # average across columns instead of rows
 # b = np.maximum(df_A_d_plus - K, 0)
@@ -173,8 +187,6 @@ print 'Asian C_c(T) = {0}'.format(C_c)
 # df_A_c_plus.sim1.plot(label='Cont. Avg.')
 # df_A_d_plus.sim1.plot(label='Disc. Avg.')
 # plt.legend()
-
-
 
 # -----------------------
 # Discrete sampling
