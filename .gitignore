@@ -2,3 +2,4 @@
 *.xlsx
 *.xlsm
 *.csv
+*.ipynb_checkpoints*

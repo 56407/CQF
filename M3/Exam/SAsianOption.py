@@ -63,6 +63,7 @@ def asian_option_simulator(S0, K, T, r, sigma, M, I, k):
 
         t_index[i] = t_index[i - 1] + dt
 
+        # Generate S paths using Milstein convention
         S_plus[i] = S_plus[i - 1] * (1 +
                                      r * dt +
                                      sigma * math.sqrt(dt) * rand1[i] +
@@ -90,7 +91,7 @@ def asian_option_simulator(S0, K, T, r, sigma, M, I, k):
             A_d_plus[i] = A_d_plus[i - 1]
             A_d_minus[i] = A_d_minus[i - 1]
 
-    # Join plus and minus stats (antithetic correction)
+    # Join plus and minus stats (antithetic technique)
     S_join = np.concatenate((S_plus, S_minus), axis=1)
     A_c_join = np.concatenate((A_c_plus, A_c_minus), axis=1)
     A_d_join = np.concatenate((A_d_plus, A_d_minus), axis=1)
@@ -136,14 +137,14 @@ def asian_option_simulator(S0, K, T, r, sigma, M, I, k):
     # Variables into Dictionary
     # --------------------------------------------------
 
-    dic = {'S_join': S_join,
-           # 'S_plus': S_plus,
-           # 'S_minus': S_minus,
+    t_index[-1] = 1.0  # ensures plots do not extend the x-axis to account for slight rounding error
+
+    dic = {'t_index': t_index,
+           'S_join': S_join,
            'A_c_join': A_c_join,
            'A_d_join': A_d_join,
            'G_c_join': G_c_join,
            'V_join': V_join,
-           # 'V_plus': V_plus,
            'V': V,
            'AC_c_join': AC_c_join,
            'AC_d_join': AC_d_join,
@@ -157,8 +158,9 @@ def asian_option_simulator(S0, K, T, r, sigma, M, I, k):
 # ---------------------------------------------------------------------------------------
 # ---------------------------------------------------------------------------------------
 
-dic = asian_option_simulator(S0=100., K=100., T=1.0, r=0.05, sigma=0.2, M=100, I=100, k=8)
+dic = asian_option_simulator(S0=100., K=100., T=1.0, r=0.05, sigma=0.2, M=100, I=100, k=10)
 
+t_index = dic['t_index']
 S_join = dic['S_join']
 S_plus = S_join[:, 0:100]
 A_c_join = dic['A_c_join']
@@ -180,8 +182,8 @@ GC_c = dic['GC_c']
 print 'EU V(T) = {0}'.format(V)
 
 # # V vs S plot without and with variance reduction
-# sns.regplot(x=S_join[-1], y=V_join[-1], fit_reg=False)
-# sns.regplot(x=S_plus[-1], y=V_plus[-1], fit_reg=False, color='yellow', marker='+')
+# sns.regplot(x=S_join[-1], y=V_join[-1], fit_reg=False) # with antithetic correction
+# sns.regplot(x=S_plus[-1], y=V_plus[-1], fit_reg=False, color='yellow', marker='+') # without antithetic correction
 
 # --------------------------------------------------
 # ASIAN CALL - using antithetic variance reduction
@@ -196,8 +198,8 @@ print 'EU V(T) = {0}'.format(V)
 # -----------------------
 print 'Asian AC_c(T) = {0}'.format(AC_c)
 # # V vs S plot
-# sns.regplot(x=S_join[-1], y=AC_c_join[-1], fit_reg=False)
-# # sns.regplot(x=S_join[-1, 0:100], y=AC_c_join[-1, 0:100], fit_reg=False)  # plot only for S_plus and AC_c_plus
+# sns.regplot(x=S_join[-1], y=AC_c_join[-1], fit_reg=False) # with antithetic correction
+# # sns.regplot(x=S_join[-1, 0:100], y=AC_c_join[-1, 0:100], fit_reg=False)  # without antithetic correction
 
 # -----------------------
 # Discrete sampling
@@ -208,7 +210,7 @@ print 'Asian AC_d(T) = {0}'.format(AC_d)
 # Continuous vs Discrete plots
 # -----------------------
 
-# # S plot for MC, cont. and discrete avg
+# # S plot for MC, Arithmetic cont. and discrete averages
 # plt.plot(S_join[0:,0:1], label='S_sim1')
 # plt.plot(A_c_join[0:,0:1], label='Cont. Avg.')
 # plt.plot(A_d_join[0:,0:1], label='Disc. Avg.')

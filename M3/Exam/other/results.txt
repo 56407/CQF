@@ -56,3 +56,30 @@ reload(CMACs)
 from CMACs import *
 
 from datetime import datetime
+
+##########################################################################
+
+# Start ipython notebook
+C:\Apps\Anaconda2\envs\simpleQT\python.exe C:\Apps\Anaconda2\envs\simpleQT\Scripts\ipython-script.py notebook --no-browser --ip 127.0.0.1 --port 8888
+
+# Convert to latex (from within latex dir)
+ipython nbconvert --to latex ..\asianOptionPricing.ipynb
+
+##########################################################################
+
+plt.legend(loc='lower left', borderaxespad=0., fontsize='small')
+df_S_plus = pd.DataFrame(data=S_plus, index=t_index, columns=colNames)
+
+##########################################################################
+##########################################################################
+
+## Continuous vs Discrete Sampling
+
+For practical and legal reasons path-dependent quantities are
+never measured continuously.
+
+There is minimum time step between sampling of the path dependent quantity, since from a practical viewpoint it is difficult to incorporate every single traded price into an average, for example, data can be unreliable and the exact time of a trade may not be known accurately
+
+Within the context of MC, we define the following:
+
+--- put here of evolution of AC pricing vs number of time steps for continuous and discrete case
