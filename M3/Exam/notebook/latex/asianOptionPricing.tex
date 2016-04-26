@@ -93,7 +93,8 @@
     \def\gt{>}
     \def\lt{<}
     % Document parameters
-    \title{asianOptionPricing}
+    \title{Asian Option Pricing using Monte Carlo}
+    \author{Tanya Sandoval}
     
     
     
@@ -214,7 +215,7 @@
       }
     % Slightly bigger margins than the latex defaults
     
-    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    \geometry{verbose,tmargin=0.8in,bmargin=0.8in,lmargin=1in,rmargin=1in}
     
     
 
@@ -230,45 +231,55 @@
 Carlo}\label{asian-option-pricing-using-monte-carlo}
 
 This report presents the results of using Monte Carlo (MC) to price an
-Asian call option (for brevity of the report, the results for a put
-option have been omitted).
+\textbf{Asian Call option} as given by:
+
+\begin{equation}
+V(S, t) = \mathbb{E}^\mathbb{Q} [e^{-\int^T_t rdr} \mathrm{Payoff}(S_T)] 
+\end{equation}
+
+The model was developed using {\textbf{Python 2.7}}. All the related code can be found elsewhere. 
+
+For brevity, the results for a put option have been omitted and also the details of the theory and mathematics of Asian options. The documentation of the {\it{Milstein}} convention and {\it antithetic variance reduction} technique can also be found elsewhere.
 
     \subsection{Initial parameters}\label{initial-parameters}
 
-The following parameters are used for the simulation:
+The following parameters are used for the simulation, unless otherwise
+stated:
 
 \begin{itemize}
 \tightlist
 \item
-  Todays stock price S0 = 100
+  Today's stock price S0 = 100
 \item
   Strike E = 100
 \item
-  Time to expiry (T = t) = 1 year
+  Time to expiry (T-t) = 1 year (100 time steps)
 \item
-volatility = 20\%
+  Volatility = 20\%
 \item
-  constant risk-free interest rate r = 5\%
+  Constant risk-free interest rate r = 5\%
 \end{itemize}
 
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}47}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
-         \PY{c}{\PYZsh{} Sets plot size in notebook}
-         \PY{k+kn}{import} \PY{n+nn}{matplotlib.pylab} \PY{k+kn}{as} \PY{n+nn}{pylab}
-         \PY{n}{pylab}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{figure.figsize}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}
-         
-         \PY{o}{\PYZpc{}}\PY{k}{run} ../SAsianOption.py
-         \PY{c}{\PYZsh{} dic = asian\PYZus{}option\PYZus{}simulator(S0=100., K=100., T=1.0, r=0.05, sigma=0.2, M=100, I=100, k=10)}
-\end{Verbatim}
+%    \begin{Verbatim}[commandchars=\\\{\}]
+%{\color{incolor}In [{\color{incolor}1}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+%        
+%        \PY{o}{\PYZpc{}}\PY{k}{run} ../SAsianOption.py
+%        \PY{c}{\PYZsh{} Above line runs the following function }
+%        \PY{c}{\PYZsh{} dic = asian\PYZus{}option\PYZus{}simulator(S0=100., K=100., T=1.0, r=0.05, sigma=0.2, M=100, I=100, k=10)}
+%        
+%        \PY{c}{\PYZsh{} Sets plot size in notebook}
+%        \PY{k+kn}{import} \PY{n+nn}{matplotlib.pylab} \PY{k+kn}{as} \PY{n+nn}{pylab}
+%        \PY{n}{pylab}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{figure.figsize}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}
+%\end{Verbatim}
+%
+%    \begin{Verbatim}[commandchars=\\\{\}]
+%EU V(T) = 10.0892013234
+%Asian AC\_c(T) = 5.54659143575
+%Asian AC\_d(T) = 5.49974029651
+%Asian GC\_c(T) = 5.33383690461
+%    \end{Verbatim}
 
-    \begin{Verbatim}[commandchars=\\\{\}]
-EU V(T) = 10.0892013234
-Asian AC\_c(T) = 5.54659143575
-Asian AC\_d(T) = 5.49974029651
-Asian GC\_c(T) = 5.33383690461
-    \end{Verbatim}
-
-    \subsection{1. Stock Path Generation}\label{stock-path-generation}
+    \subsection{Stock Path Generation}\label{stock-path-generation}
 
 We start by using MC to generate 100 stock price paths using the
 \emph{Milstein} convention. In this process we use the antithetic
@@ -277,61 +288,63 @@ the option price with minimal computational effort.
 
 The below plot shows 100 of these paths:
 
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t\PYZus{}index}\PY{p}{,} \PY{n}{S\PYZus{}plus}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{S(t)}\PY{l+s}{\PYZdq{}}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{t}\PY{l+s}{\PYZdq{}}\PY{p}{)}
-\end{Verbatim}
-
-            \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}48}]:} <matplotlib.text.Text at 0x106b0ef0>
-\end{Verbatim}
-        
+%    \begin{Verbatim}[commandchars=\\\{\}]
+%{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t\PYZus{}index}\PY{p}{,} \PY{n}{S\PYZus{}plus}\PY{p}{)}
+%        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{S(t)}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+%        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{t}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+%\end{Verbatim}
+%
+%            \begin{Verbatim}[commandchars=\\\{\}]
+%{\color{outcolor}Out[{\color{outcolor}2}]:} <matplotlib.text.Text at 0x8e847b8>
+%\end{Verbatim}
+%        
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{asianOptionPricing_files/asianOptionPricing_4_1.png}
+    \adjustimage{max size={0.8\linewidth}{0.9\paperheight}}{asianOptionPricing_files/asianOptionPricing_4_1.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
-    \subsection{2. European Call Pricing}\label{european-call-pricing}
+    \subsection{European Call Pricing}\label{european-call-pricing}
 
 The same methodology is used to price a European Call option in order to
 compare to the Asian results later on. For the same input parameters
-above the following result is obtained:
+above the following result is obtained (later one we discuss the error in the estimate):
+
+%    \begin{Verbatim}[commandchars=\\\{\}]
+%{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{print} \PY{l+s}{\PYZsq{}}\PY{l+s}{EU V(T) = \PYZob{}0\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{V}\PY{p}{)}
+%\end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}49}]:} \PY{k}{print} \PY{l+s}{\PYZsq{}}\PY{l+s}{EU V(T) = \PYZob{}0\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{V}\PY{p}{)}
-\end{Verbatim}
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-EU V(T) = 10.0892013234
+EU V(T) = 10.089201 (0.131768)
     \end{Verbatim}
 
-    This yields the following Payoff plot at expiry (t=T), where the effect
-of the variance reduction technique is shown to boost the statistics to
-get a lower simulation error at little computing cost.
+    The corresponding Payoff function at expiry (t=T) is shown below, where the effect
+of the variance reduction technique is shown to boost the statistics. This hence reduces the estimate error at little computational cost.
 
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}50}]:} \PY{c}{\PYZsh{} V vs S plot without and with variance reduction}
-         \PY{n}{sns}\PY{o}{.}\PY{n}{regplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{S\PYZus{}join}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{V\PYZus{}join}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{fit\PYZus{}reg}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)} \PY{c}{\PYZsh{} with antithetic correction}
-         \PY{n}{sns}\PY{o}{.}\PY{n}{regplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{S\PYZus{}plus}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{V\PYZus{}plus}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{fit\PYZus{}reg}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{yellow}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{+}\PY{l+s}{\PYZsq{}}\PY{p}{)} \PY{c}{\PYZsh{} without antithetic correction}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Discounted Payoff (t=T)}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{S(t=T)}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{With Antith. Red.}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Without Antith. Red.}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{upper left}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{large}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-\end{Verbatim}
+%    \begin{Verbatim}[commandchars=\\\{\}]
+%{\color{incolor}In [{\color{incolor}4}]:} \PY{c}{\PYZsh{} V vs S plot without and with variance reduction}
+%        \PY{n}{sns}\PY{o}{.}\PY{n}{regplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{S\PYZus{}join}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{V\PYZus{}join}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{fit\PYZus{}reg}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)} \PY{c}{\PYZsh{} with antithetic correction}
+%        \PY{n}{sns}\PY{o}{.}\PY{n}{regplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{S\PYZus{}plus}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{V\PYZus{}plus}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{fit\PYZus{}reg}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{yellow}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{+}\PY{l+s}{\PYZsq{}}\PY{p}{)} \PY{c}{\PYZsh{} without antithetic correction}
+%        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Discounted Payoff (t=T)}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+%        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{S(t=T)}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+%        \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{With Antith. Red.}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Without Antith. Red.}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{upper left}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{large}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+%\end{Verbatim}
 
-            \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}50}]:} <matplotlib.legend.Legend at 0x1193ac88>
-\end{Verbatim}
+%            \begin{Verbatim}[commandchars=\\\{\}]
+%{\color{outcolor}Out[{\color{outcolor}4}]:} <matplotlib.legend.Legend at 0x95d14e0>
+%\end{Verbatim}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{asianOptionPricing_files/asianOptionPricing_8_1.png}
+    \adjustimage{max size={0.8\linewidth}{0.9\paperheight}}{asianOptionPricing_files/asianOptionPricing_8_1.png}
     \end{center}
-    { \hspace*{\fill} \\}
-    
-    \subsection{3. Asian Call Pricing}\label{asian-call-pricing}
 
-The Asian Call value is then calculated using the same parameters above
-but with different methodologies to calculate the average of S:
+    
+    \subsection{Asian Call Pricing}\label{asian-call-pricing}
+
+An Asian option (or average value option) falls in the {\it{exotics}} options class. For Asian options the payoff is determined by the average of the underlying price over some pre-set period of time, hence it is a path-dependent instrument.
+
+An Asian Call value is then calculated using the same parameters above
+but with different methodologies to calculate the average of the stock
+price:
 
 \begin{itemize}
 \tightlist
@@ -346,7 +359,9 @@ but with different methodologies to calculate the average of S:
 Note in the context of MC, we refer to `continous sampling' when all the
 data points available up to that time are used, whereas `discrete
 sampling' uses a sample determined by sampling frequency k (10 days in
-this case)
+this case).
+
+For all the examples below a \textbf{fixed strike} is assumed unless otherwise stated.
 
     \subsubsection{Continuous vs Discrete
 Sampling}\label{continuous-vs-discrete-sampling}
@@ -355,24 +370,24 @@ First let's understand the effects of continuous vs discrete sampling.
 For this purpose we restrict to the Arithmetic case only and assume the
 Geometric case observes the same behaviour.
 
-Plotting one of the simulated stock paths and correspondinge arithmetic
+Plotting one of the simulated stock paths and corresponding arithmetic
 continuous and discrete averages (using a sampling frequency of 10
 days), we get the following:
 
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}51}]:} \PY{c}{\PYZsh{} S plot for MC, Arithmetic cont. and discrete averages}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t\PYZus{}index}\PY{p}{,} \PY{n}{S\PYZus{}join}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{S\PYZus{}sim1}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t\PYZus{}index}\PY{p}{,} \PY{n}{A\PYZus{}c\PYZus{}join}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{Cont. Avg.}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t\PYZus{}index}\PY{p}{,} \PY{n}{A\PYZus{}d\PYZus{}join}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{Disc. Avg.}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{S(t)}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{t}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
-\end{Verbatim}
-
-            \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}51}]:} <matplotlib.legend.Legend at 0x11e885f8>
-\end{Verbatim}
-        
+%    \begin{Verbatim}[commandchars=\\\{\}]
+%{\color{incolor}In [{\color{incolor}5}]:} \PY{c}{\PYZsh{} S plot for MC, Arithmetic cont. and discrete averages}
+%        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t\PYZus{}index}\PY{p}{,} \PY{n}{S\PYZus{}join}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{S\PYZus{}sim1}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+%        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t\PYZus{}index}\PY{p}{,} \PY{n}{A\PYZus{}c\PYZus{}join}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{Cont. Avg.}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+%        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t\PYZus{}index}\PY{p}{,} \PY{n}{A\PYZus{}d\PYZus{}join}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{Disc. Avg.}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+%        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{S(t)}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+%        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{t}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+%        \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+%\end{Verbatim}
+%
+%            \begin{Verbatim}[commandchars=\\\{\}]
+%{\color{outcolor}Out[{\color{outcolor}5}]:} <matplotlib.legend.Legend at 0x992bc50>
+%\end{Verbatim}
+%        
     \begin{center}
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{asianOptionPricing_files/asianOptionPricing_11_1.png}
     \end{center}
@@ -381,34 +396,34 @@ days), we get the following:
     Hence we note that A\_c and A\_d differ slightly. This difference grows
 with the sampling frequency \emph{k} because for the same time to expiry
 we have less data points to calculate the average. This behaviour is
-show in the plot below where d\_10 is more unstable than d\_4, but as
+shown in the plot below where d\_10 is more unstable than d\_4. As
 the number of data points increase, we expect the difference to get
-smaller and smaller, shown by the convergence trend close to expiry
+smaller, shown by the convergence trend close to expiry
 
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}65}]:} \PY{c}{\PYZsh{} Changing discrete sampling frequency from k=10 to k=4}
-         \PY{n}{dic2} \PY{o}{=} \PY{n}{asian\PYZus{}option\PYZus{}simulator}\PY{p}{(}\PY{n}{S0}\PY{o}{=}\PY{l+m+mf}{100.}\PY{p}{,} \PY{n}{K}\PY{o}{=}\PY{l+m+mf}{100.}\PY{p}{,} \PY{n}{T}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{r}\PY{o}{=}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{M}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{I}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
-         
-         \PY{c}{\PYZsh{} Calculate differences wrt continous case}
-         \PY{n}{d\PYZus{}10} \PY{o}{=} \PY{n}{A\PYZus{}c\PYZus{}join} \PY{o}{\PYZhy{}} \PY{n}{A\PYZus{}d\PYZus{}join}
-         \PY{n}{d\PYZus{}4} \PY{o}{=} \PY{n}{A\PYZus{}c\PYZus{}join} \PY{o}{\PYZhy{}} \PY{n}{dic2}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{A\PYZus{}d\PYZus{}join}\PY{l+s}{\PYZsq{}}\PY{p}{]}
-         
-         \PY{c}{\PYZsh{} Plot for just one simulation}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t\PYZus{}index}\PY{p}{,} \PY{n}{d\PYZus{}4}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{Disc. samp. freq=4}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t\PYZus{}index}\PY{p}{,} \PY{n}{d\PYZus{}10}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{Disc. samp freq=10}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Diff wrt to Cont. Avg.}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{t}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
-\end{Verbatim}
-
-            \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}65}]:} <matplotlib.legend.Legend at 0x14695fd0>
-\end{Verbatim}
-        
+%    \begin{Verbatim}[commandchars=\\\{\}]
+%{\color{incolor}In [{\color{incolor}6}]:} \PY{c}{\PYZsh{} Changing discrete sampling frequency from k=10 to k=4}
+%        \PY{n}{dic2} \PY{o}{=} \PY{n}{asian\PYZus{}option\PYZus{}simulator}\PY{p}{(}\PY{n}{S0}\PY{o}{=}\PY{l+m+mf}{100.}\PY{p}{,} \PY{n}{K}\PY{o}{=}\PY{l+m+mf}{100.}\PY{p}{,} \PY{n}{T}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{r}\PY{o}{=}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{M}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{I}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+%        
+%        \PY{c}{\PYZsh{} Calculate differences wrt continous case}
+%        \PY{n}{d\PYZus{}10} \PY{o}{=} \PY{n}{A\PYZus{}c\PYZus{}join} \PY{o}{\PYZhy{}} \PY{n}{A\PYZus{}d\PYZus{}join}
+%        \PY{n}{d\PYZus{}4} \PY{o}{=} \PY{n}{A\PYZus{}c\PYZus{}join} \PY{o}{\PYZhy{}} \PY{n}{dic2}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{A\PYZus{}d\PYZus{}join}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+%        
+%        \PY{c}{\PYZsh{} Plot for just one simulation}
+%        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t\PYZus{}index}\PY{p}{,} \PY{n}{d\PYZus{}4}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{Disc. samp. freq=4}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+%        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t\PYZus{}index}\PY{p}{,} \PY{n}{d\PYZus{}10}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{Disc. samp freq=10}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+%        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Diff wrt to Cont. Avg.}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+%        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{t}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+%        \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+%\end{Verbatim}
+%
+%            \begin{Verbatim}[commandchars=\\\{\}]
+%{\color{outcolor}Out[{\color{outcolor}6}]:} <matplotlib.legend.Legend at 0xa981e80>
+%\end{Verbatim}
+%        
     \begin{center}
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{asianOptionPricing_files/asianOptionPricing_13_1.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     
     However, for practical and legal reasons path-dependent quantities are
 never measured continuously. There is minimum time step between sampling
@@ -420,76 +435,284 @@ The option price also evolves with number of time steps to expiry and
 whether the average is calculated discretely or continously, as shown in
 the below plot:
 
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}66}]:} \PY{c}{\PYZsh{} Evolution of Asian Call value with number of time steps}
-         \PY{n}{c} \PY{o}{=} \PY{n}{AC\PYZus{}c\PYZus{}join}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
-         \PY{n}{d} \PY{o}{=} \PY{n}{AC\PYZus{}d\PYZus{}join}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t\PYZus{}index}\PY{p}{,} \PY{n}{c}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{Arithmetic Continous Avg.}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t\PYZus{}index}\PY{p}{,} \PY{n}{d}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{Arithmetic Discrete Avg.}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{C(t)}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{t}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{upper left}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{large}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-\end{Verbatim}
-
-            \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}66}]:} <matplotlib.legend.Legend at 0x14a77860>
-\end{Verbatim}
+%    \begin{Verbatim}[commandchars=\\\{\}]
+%{\color{incolor}In [{\color{incolor}7}]:} \PY{c}{\PYZsh{} Evolution of Asian Call value with number of time steps}
+%        \PY{n}{c} \PY{o}{=} \PY{n}{AC\PYZus{}c\PYZus{}join}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+%        \PY{n}{d} \PY{o}{=} \PY{n}{AC\PYZus{}d\PYZus{}join}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+%        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t\PYZus{}index}\PY{p}{,} \PY{n}{c}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{Arithmetic Continous Avg.}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+%        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t\PYZus{}index}\PY{p}{,} \PY{n}{d}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{Arithmetic Discrete Avg.}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+%        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{C(t)}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+%        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{t}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+%        \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{upper left}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{large}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+%\end{Verbatim}
+%
+%            \begin{Verbatim}[commandchars=\\\{\}]
+%{\color{outcolor}Out[{\color{outcolor}7}]:} <matplotlib.legend.Legend at 0xac0be48>
+%\end{Verbatim}
         
     \begin{center}
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{asianOptionPricing_files/asianOptionPricing_15_1.png}
     \end{center}
-    { \hspace*{\fill} \\}
     
     \subsubsection{Payoff function}\label{payoff-function}
 
-The Payoff function at=T of the Asian call is also a lot more complex
+The Payoff function at expiry $t=T$ of the Asian call is also a lot more complex
 than it's European equivalent, which is expected given it's
 path-dependent nature. This justifies the need for using Monte Carlo
 methods for the pricing.
 
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}29}]:} \PY{c}{\PYZsh{} \PYZsh{} V vs S plot}
-         \PY{n}{sns}\PY{o}{.}\PY{n}{regplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{S\PYZus{}join}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{AC\PYZus{}c\PYZus{}join}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{fit\PYZus{}reg}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)} \PY{c}{\PYZsh{} with antithetic correction}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{V(T)}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{S(T)}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{With Antith. Red.}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{upper left}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{large}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-\end{Verbatim}
-
-            \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}29}]:} <matplotlib.legend.Legend at 0xe7ea550>
-\end{Verbatim}
+%    \begin{Verbatim}[commandchars=\\\{\}]
+%{\color{incolor}In [{\color{incolor}8}]:} \PY{c}{\PYZsh{} \PYZsh{} V vs S plot}
+%        \PY{n}{sns}\PY{o}{.}\PY{n}{regplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{S\PYZus{}join}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{AC\PYZus{}c\PYZus{}join}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{fit\PYZus{}reg}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)} \PY{c}{\PYZsh{} with antithetic correction}
+%        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{V(T)}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+%        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{S(T)}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+%        \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{With Antith. Red.}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{upper left}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{large}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+%\end{Verbatim}
+%
+%            \begin{Verbatim}[commandchars=\\\{\}]
+%{\color{outcolor}Out[{\color{outcolor}8}]:} <matplotlib.legend.Legend at 0xaa4e780>
+%\end{Verbatim}
         
     \begin{center}
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{asianOptionPricing_files/asianOptionPricing_17_1.png}
     \end{center}
     { \hspace*{\fill} \\}
     
-    \subsubsection{Results and Errors}\label{results-and-errors}
+    \subsection{Results and Errors}\label{results-and-errors}
 
-The results for this ATM option using above parameters are summarised
-below:
+The results from varying the parameters in the model to study the
+effects on the pricing are presented now. The key for all below tables
+is the following:
 
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}79}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{r}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{sigma}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{S}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{K}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Type}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{V}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{AC\PYZus{}c}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{AC\PYZus{}d}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{GC\PYZus{}c}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
-         \PY{n}{df}\PY{o}{.}\PY{n}{r} \PY{o}{=} \PY{l+m+mf}{0.05}
-         \PY{n}{df}\PY{o}{.}\PY{n}{sigma} \PY{o}{=} \PY{l+m+mf}{0.2}
-         \PY{n}{df}\PY{o}{.}\PY{n}{S} \PY{o}{=} \PY{l+m+mi}{100}
-         \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{K}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{100}
-         \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{V}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{V}
-         \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Opt. Type}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{ATM}\PY{l+s}{\PYZsq{}}
-         \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{AC\PYZus{}c}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{AC\PYZus{}c}
-         \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{AC\PYZus{}d}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{AC\PYZus{}d}
-         \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{GC\PYZus{}c}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{GC\PYZus{}c}
-         \PY{n}{df}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}
-\end{Verbatim}
+\begin{itemize}
+\tightlist
+\item
+  N\_S: number of simulations
+\item
+  V: European call equivalent
+\item
+  AC\_c: Arithmetic continuous average Asian Call price
+\item
+  AC\_d: Arithmetic discrete average Asian Call price
+\item
+  GC\_c: Geometric continuous average Asian Call price
+\item
+  The error is represented in brackets next to the option values and is
+  defined as the standard deviation of the estimate divided by the
+  square root of the number of simulations (\(\mathrm{std}/ \sqrt{N}\))
+\item
+  All the option values and errors are displayed to 6 significant
+  figures
+\end{itemize}
+
+    \subsubsection{Varying the Number of
+Simulations}\label{varying-the-number-of-simulations}
+
+We see that as the number of simulations increases, the error in the
+estimate decreases (approximately by a factor of 10 every time the
+simulations increase by a factor of 10). Also note that the effect of
+the variance reduction technique is to effectively increase N\_S by a
+factor of 2, which is why the error presented is smaller than for the
+N\_S values shown. Run times weren't compared since the underlying
+python code for any of these cases takes less than 2 seconds and this
+was deemed quite acceptable.
+
+%    \begin{Verbatim}[commandchars=\\\{\}]
+%{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+%        
+%        \PY{c}{\PYZsh{} 100 simulations}
+%        \PY{n}{fill\PYZus{}in\PYZus{}df}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{dic}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+%        
+%        \PY{c}{\PYZsh{} 1,000 simulations}
+%        \PY{n}{dic\PYZus{}1k} \PY{o}{=} \PY{n}{asian\PYZus{}option\PYZus{}simulator}\PY{p}{(}\PY{n}{S0}\PY{o}{=}\PY{l+m+mf}{100.}\PY{p}{,} \PY{n}{K}\PY{o}{=}\PY{l+m+mf}{100.}\PY{p}{,} \PY{n}{T}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{r}\PY{o}{=}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{M}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{I}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+%        \PY{n}{fill\PYZus{}in\PYZus{}df}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{dic\PYZus{}1k}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+%        
+%        \PY{c}{\PYZsh{} 10,000 simulations}
+%        \PY{n}{dic\PYZus{}10k} \PY{o}{=} \PY{n}{asian\PYZus{}option\PYZus{}simulator}\PY{p}{(}\PY{n}{S0}\PY{o}{=}\PY{l+m+mf}{100.}\PY{p}{,} \PY{n}{K}\PY{o}{=}\PY{l+m+mf}{100.}\PY{p}{,} \PY{n}{T}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{r}\PY{o}{=}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{M}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{I}\PY{o}{=}\PY{l+m+mi}{10000}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+%        \PY{n}{fill\PYZus{}in\PYZus{}df}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{dic\PYZus{}10k}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+%        
+%        \PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{N\PYZus{}S}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{r}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{sigma}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{S0}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{K}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Class}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{V}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{AC\PYZus{}c}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{AC\PYZus{}d}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{GC\PYZus{}c}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+%\end{Verbatim}
 
             \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}79}]:}       r  sigma    S    K Type        V     AC\_c     AC\_d     GC\_c Opt. Type
-         1  0.05    0.2  100  100  NaN  10.0892  5.54659  5.49974  5.33384       ATM
+{\color{outcolor}Out[{\color{outcolor}9}]:}        N\_S     r  sigma     S0      K Class                     V  \textbackslash{}
+        0    100.0  0.05    0.2  100.0  100.0   ATM  10.089201 (0.131768)   
+        1   1000.0  0.05    0.2  100.0  100.0   ATM  10.610881 (0.015165)   
+        2  10000.0  0.05    0.2  100.0  100.0   ATM  10.388515 (0.001471)   
+        
+                          AC\_c                 AC\_d                 GC\_c  
+        0  5.546591 (0.071872)  5.499740 (0.071726)  5.333837 (0.069442)  
+        1  5.783801 (0.008124)  5.707166 (0.008020)  5.564119 (0.007840)  
+        2  5.771337 (0.000798)  5.685983 (0.000786)  5.552812 (0.000770)  
 \end{Verbatim}
         
-    This shows that for the same ATM option (S=K=100), the European Call (V)
-is considerably more expensive than the Asian equivalents.
+    \subsubsection{Varying the Strike}\label{varying-the-strike}
+
+In this case we see the following:
+
+\begin{itemize}
+\tightlist
+\item
+  ITM option is of course more expensive than OTM option for both the
+  Asian and European Call
+\item
+  The difference between the stock price (S0) and exercise price (K) has
+  little effect on the estimate error (although there is perhaps a
+  slight increase as the option evolves from OTM to ITM)
+\item
+  The methodology used to calculate the average of the stock (continous
+  vs dicrete, arithmetic vs geometric) for the Asian option seems to
+  have little effect in the error too
+\item
+  The price of the European equivalent is always higher and by a
+  consierable amount. However the difference (diff\_GC\_c) seems similar
+  accross ITM, ATM and OTM (although this might not always hold
+  depending on other parameters values)
+\end{itemize}
+
+%    \begin{Verbatim}[commandchars=\\\{\}]
+%{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{df2} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+%         
+%         \PY{c}{\PYZsh{} OTM, 10k simulations}
+%         \PY{n}{dic\PYZus{}OTM} \PY{o}{=} \PY{n}{asian\PYZus{}option\PYZus{}simulator}\PY{p}{(}\PY{n}{S0}\PY{o}{=}\PY{l+m+mf}{100.}\PY{p}{,} \PY{n}{K}\PY{o}{=}\PY{l+m+mf}{95.}\PY{p}{,} \PY{n}{T}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{r}\PY{o}{=}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{M}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{I}\PY{o}{=}\PY{l+m+mi}{10000}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+%         \PY{n}{fill\PYZus{}in\PYZus{}df}\PY{p}{(}\PY{n}{df2}\PY{p}{,} \PY{n}{dic\PYZus{}OTM}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+%         
+%         \PY{c}{\PYZsh{} ATM, 10k simulations}
+%         \PY{n}{df2}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+%         
+%         \PY{c}{\PYZsh{} ITM, 10k simulations}
+%         \PY{n}{dic\PYZus{}ITM} \PY{o}{=} \PY{n}{asian\PYZus{}option\PYZus{}simulator}\PY{p}{(}\PY{n}{S0}\PY{o}{=}\PY{l+m+mf}{100.}\PY{p}{,} \PY{n}{K}\PY{o}{=}\PY{l+m+mf}{105.}\PY{p}{,} \PY{n}{T}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{r}\PY{o}{=}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{M}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{I}\PY{o}{=}\PY{l+m+mi}{10000}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+%         \PY{n}{fill\PYZus{}in\PYZus{}df}\PY{p}{(}\PY{n}{df2}\PY{p}{,} \PY{n}{dic\PYZus{}ITM}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+%         
+%         \PY{n}{df2}\PY{p}{[}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{N\PYZus{}S}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{r}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{sigma}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{S0}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{K}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Class}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{V}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{AC\PYZus{}c}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{AC\PYZus{}d}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{GC\PYZus{}c}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{diff\PYZus{}GC\PYZus{}c}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+%\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:}        N\_S     r  sigma     S0      K Class                     V  \textbackslash{}
+         0  10000.0  0.05    0.2  100.0   95.0   ITM  13.306567 (0.001611)   
+         1  10000.0  0.05    0.2  100.0  100.0   ATM  10.388515 (0.001471)   
+         2  10000.0  0.05    0.2  100.0  105.0   OTM   7.957399 (0.001319)   
+         
+                           AC\_c                 AC\_d                 GC\_c diff\_GC\_c  
+         0  8.825431 (0.000938)  8.753649 (0.000925)  8.575778 (0.000912)  4.730789  
+         1  5.771337 (0.000798)  5.685983 (0.000786)  5.552812 (0.000770)  4.835703  
+         2  3.514907 (0.000641)  3.432210 (0.000630)  3.330691 (0.000612)  4.626708  
+\end{Verbatim}
+        
+    \subsubsection{Varying the Volatility}\label{varying-the-volatility}
+
+The error appears to significantly increase when the volatility of the
+stock increases. This is expected since an increase in uncertainty in
+stock prices undermines the predictability of the model itself. The
+increase in option price with volatility is also readily confirmed.
+
+%    \begin{Verbatim}[commandchars=\\\{\}]
+%{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{df3} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+%         
+%         \PY{c}{\PYZsh{} Vol=20\PYZpc{}}
+%         \PY{n}{dic\PYZus{}vol30} \PY{o}{=} \PY{n}{asian\PYZus{}option\PYZus{}simulator}\PY{p}{(}\PY{n}{S0}\PY{o}{=}\PY{l+m+mf}{100.}\PY{p}{,} \PY{n}{K}\PY{o}{=}\PY{l+m+mf}{100.}\PY{p}{,} \PY{n}{T}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{r}\PY{o}{=}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{M}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{I}\PY{o}{=}\PY{l+m+mi}{10000}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+%         \PY{n}{fill\PYZus{}in\PYZus{}df}\PY{p}{(}\PY{n}{df3}\PY{p}{,} \PY{n}{dic\PYZus{}vol30}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+%         
+%         \PY{c}{\PYZsh{} Vol=30\PYZpc{}}
+%         \PY{n}{dic\PYZus{}vol30} \PY{o}{=} \PY{n}{asian\PYZus{}option\PYZus{}simulator}\PY{p}{(}\PY{n}{S0}\PY{o}{=}\PY{l+m+mf}{100.}\PY{p}{,} \PY{n}{K}\PY{o}{=}\PY{l+m+mf}{100.}\PY{p}{,} \PY{n}{T}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{r}\PY{o}{=}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{M}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{I}\PY{o}{=}\PY{l+m+mi}{10000}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+%         \PY{n}{fill\PYZus{}in\PYZus{}df}\PY{p}{(}\PY{n}{df3}\PY{p}{,} \PY{n}{dic\PYZus{}vol30}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+%         
+%         \PY{c}{\PYZsh{} Vol=40\PYZpc{}}
+%         \PY{n}{dic\PYZus{}vol40} \PY{o}{=} \PY{n}{asian\PYZus{}option\PYZus{}simulator}\PY{p}{(}\PY{n}{S0}\PY{o}{=}\PY{l+m+mf}{100.}\PY{p}{,} \PY{n}{K}\PY{o}{=}\PY{l+m+mf}{100.}\PY{p}{,} \PY{n}{T}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{r}\PY{o}{=}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{l+m+mf}{0.4}\PY{p}{,} \PY{n}{M}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{I}\PY{o}{=}\PY{l+m+mi}{10000}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+%         \PY{n}{fill\PYZus{}in\PYZus{}df}\PY{p}{(}\PY{n}{df3}\PY{p}{,} \PY{n}{dic\PYZus{}vol40}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+%         
+%         \PY{n}{df3}\PY{p}{[}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{N\PYZus{}S}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{r}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{sigma}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{S0}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{K}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Class}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{V}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{AC\PYZus{}c}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{AC\PYZus{}d}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{GC\PYZus{}c}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+%\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:}        N\_S     r  sigma     S0      K Class                     V  \textbackslash{}
+         0  10000.0  0.05    0.2  100.0  100.0   ATM  10.388515 (0.001471)   
+         1  10000.0  0.05    0.3  100.0  100.0   ATM  14.135187 (0.002251)   
+         2  10000.0  0.05    0.4  100.0  100.0   ATM  17.893775 (0.003127)   
+         
+                            AC\_c                 AC\_d                 GC\_c  
+         0   5.771337 (0.000798)  5.685983 (0.000786)  5.552812 (0.000770)  
+         1   7.961140 (0.001204)  7.832518 (0.001187)  7.507157 (0.001140)  
+         2  10.158977 (0.001646)  9.986547 (0.001624)  9.379621 (0.001526)  
+\end{Verbatim}
+        
+    \subsubsection{Varying the interest
+rate}\label{varying-the-interest-rate}
+
+In contrast to volatility, varying the interest rate has a negligible
+effect on the error. The increase in option value seems to be slower
+than that observed with volatility variation.
+
+%    \begin{Verbatim}[commandchars=\\\{\}]
+%{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{df4} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+%         
+%         \PY{c}{\PYZsh{} r=3\PYZpc{}}
+%         \PY{n}{dic\PYZus{}r3} \PY{o}{=} \PY{n}{asian\PYZus{}option\PYZus{}simulator}\PY{p}{(}\PY{n}{S0}\PY{o}{=}\PY{l+m+mf}{100.}\PY{p}{,} \PY{n}{K}\PY{o}{=}\PY{l+m+mf}{100.}\PY{p}{,} \PY{n}{T}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{r}\PY{o}{=}\PY{l+m+mf}{0.03}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{M}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{I}\PY{o}{=}\PY{l+m+mi}{10000}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+%         \PY{n}{fill\PYZus{}in\PYZus{}df}\PY{p}{(}\PY{n}{df4}\PY{p}{,} \PY{n}{dic\PYZus{}r3}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+%         
+%         \PY{c}{\PYZsh{} r=5\PYZpc{}}
+%         \PY{n}{dic\PYZus{}r5} \PY{o}{=} \PY{n}{asian\PYZus{}option\PYZus{}simulator}\PY{p}{(}\PY{n}{S0}\PY{o}{=}\PY{l+m+mf}{100.}\PY{p}{,} \PY{n}{K}\PY{o}{=}\PY{l+m+mf}{100.}\PY{p}{,} \PY{n}{T}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{r}\PY{o}{=}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{M}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{I}\PY{o}{=}\PY{l+m+mi}{10000}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+%         \PY{n}{fill\PYZus{}in\PYZus{}df}\PY{p}{(}\PY{n}{df4}\PY{p}{,} \PY{n}{dic\PYZus{}r5}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+%         
+%         \PY{c}{\PYZsh{} r=7\PYZpc{}}
+%         \PY{n}{dic\PYZus{}r7} \PY{o}{=} \PY{n}{asian\PYZus{}option\PYZus{}simulator}\PY{p}{(}\PY{n}{S0}\PY{o}{=}\PY{l+m+mf}{100.}\PY{p}{,} \PY{n}{K}\PY{o}{=}\PY{l+m+mf}{100.}\PY{p}{,} \PY{n}{T}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{r}\PY{o}{=}\PY{l+m+mf}{0.07}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{M}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{I}\PY{o}{=}\PY{l+m+mi}{10000}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+%         \PY{n}{fill\PYZus{}in\PYZus{}df}\PY{p}{(}\PY{n}{df4}\PY{p}{,} \PY{n}{dic\PYZus{}r7}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+%         
+%         \PY{n}{df4}\PY{p}{[}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{N\PYZus{}S}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{r}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{sigma}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{S0}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{K}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Class}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{V}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{AC\PYZus{}c}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{AC\PYZus{}d}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{GC\PYZus{}c}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+%\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:}        N\_S     r  sigma     S0      K Class                     V  \textbackslash{}
+         0  10000.0  0.03    0.2  100.0  100.0   ATM   9.352018 (0.001411)   
+         1  10000.0  0.05    0.2  100.0  100.0   ATM  10.388515 (0.001471)   
+         2  10000.0  0.07    0.2  100.0  100.0   ATM  11.485530 (0.001528)   
+         
+                           AC\_c                 AC\_d                 GC\_c  
+         0  5.293044 (0.000773)  5.204118 (0.000761)  5.094293 (0.000747)  
+         1  5.771337 (0.000798)  5.685983 (0.000786)  5.552812 (0.000770)  
+         2  6.268640 (0.000822)  6.188231 (0.000811)  6.028783 (0.000792)  
+\end{Verbatim}
+        
+    \subsubsection{Float vs Fixed Strike}\label{float-vs-fixed-strike}
+
+Within errors, the float and fixed strike Asian options seem to be
+nearly the same, suggesting an `equivalence' between them.
+
+%    \begin{Verbatim}[commandchars=\\\{\}]
+%{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{df5} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+%         
+%         \PY{c}{\PYZsh{} Fixed (default mode)}
+%         \PY{n}{dic\PYZus{}fx} \PY{o}{=} \PY{n}{asian\PYZus{}option\PYZus{}simulator}\PY{p}{(}\PY{n}{S0}\PY{o}{=}\PY{l+m+mf}{100.}\PY{p}{,} \PY{n}{K}\PY{o}{=}\PY{l+m+mf}{100.}\PY{p}{,} \PY{n}{T}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{r}\PY{o}{=}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{M}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{I}\PY{o}{=}\PY{l+m+mi}{10000}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+%         \PY{n}{fill\PYZus{}in\PYZus{}df}\PY{p}{(}\PY{n}{df5}\PY{p}{,} \PY{n}{dic\PYZus{}fx}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+%         \PY{c}{\PYZsh{} Float}
+%         \PY{n}{dic\PYZus{}fl} \PY{o}{=} \PY{n}{asian\PYZus{}option\PYZus{}simulator}\PY{p}{(}\PY{n}{S0}\PY{o}{=}\PY{l+m+mf}{100.}\PY{p}{,} \PY{n}{K}\PY{o}{=}\PY{l+m+mf}{100.}\PY{p}{,} \PY{n}{T}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{r}\PY{o}{=}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{M}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{I}\PY{o}{=}\PY{l+m+mi}{10000}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{float}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+%         \PY{n}{fill\PYZus{}in\PYZus{}df}\PY{p}{(}\PY{n}{df5}\PY{p}{,} \PY{n}{dic\PYZus{}fl}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+%         
+%         \PY{n}{df5}\PY{p}{[}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{N\PYZus{}S}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{mode}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{r}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{sigma}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{S0}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{AC\PYZus{}c}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{AC\PYZus{}d}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{GC\PYZus{}c}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+%\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:}        N\_S   mode     r  sigma     S0                 AC\_c  \textbackslash{}
+         0  10000.0  fixed  0.05    0.2  100.0  5.771337 (0.000798)   
+         1  10000.0  float  0.05    0.2  100.0  5.808603 (0.000846)   
+         
+                           AC\_d                 GC\_c  
+         0  5.685983 (0.000786)  5.552812 (0.000770)  
+         1  5.715516 (0.000831)  6.019974 (0.000874)  
+\end{Verbatim}
+        
+    \subsection{Summary}\label{summary}
+
+In summary, Monte Carlo seems a suitable method to efficiently price European
+and Asian options. The number of simulations has the biggest effect on
+the option price estimate, followed by volatility. The variance
+reduction technique proved to be useful to reduce significantly the
+error at little computing cost. An equivalence between float and fixed
+strikes in the pricing seems to suggest an equivalence, although to
+validate this, more test cases should be examined. For all test cases,
+the Asian option price appears considerably lower than the European,
+making it an attractive financial instrument for certain risk management
+strategies.
 
 
     % Add a bibliography block to the postdoc

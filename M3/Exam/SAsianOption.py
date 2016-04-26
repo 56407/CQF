@@ -14,7 +14,7 @@ from IPython import embed
 import sys
 
 
-def asian_option_simulator(S0, K, T, r, sigma, M, I, k):
+def asian_option_simulator(S0, K, T, r, sigma, M, I, k, mode='fixed'):
     """
     :param S0: initial stock value
     :param K: strike
@@ -24,6 +24,7 @@ def asian_option_simulator(S0, K, T, r, sigma, M, I, k):
     :param M: no. of time steps
     :param I: no. of MC simulations (S paths)
     :param k: discrete sampling freq
+    :param mode: fixed or floating strike used in payoff function (default is fixed)
     :return: dictionary with paths (S_join), cont. and disc. arithmetic avg's of S (A_c_join, A_d_join)
     and cont. geo avg. (G_c)
     """
@@ -114,17 +115,24 @@ def asian_option_simulator(S0, K, T, r, sigma, M, I, k):
     # ASIAN CALL - using antithetic variance reduction
     # --------------------------------------------------
 
+    if mode == 'float':  # convert between fixed and floating strike
+        fac = -1.0
+        K = S_join[-1]  # stock price at maturity S(T) - see https://en.wikipedia.org/wiki/Asian_option
+    else:
+        fac = 1.0
+
+
     # ----------------------------------------
     # ARITHMETIC
     # ----------------------------------------
 
     # Continuous sampling
-    AC_c_join = DF * np.maximum(A_c_join - K, 0)
+    AC_c_join = DF * np.maximum(fac * A_c_join - fac * K, 0)
     AC_c = np.mean(AC_c_join[-1])
     AC_c_e = np.std(AC_c_join[-1]) / I  # error std/sqrt(N)
 
     # Discrete sampling
-    AC_d_join = DF * np.maximum(A_d_join - K, 0)
+    AC_d_join = DF * np.maximum(fac * A_d_join - fac * K, 0)
     AC_d = np.mean(AC_d_join[-1])
     AC_d_e = np.std(AC_d_join[-1]) / I  # error std/sqrt(N)
 
@@ -133,7 +141,7 @@ def asian_option_simulator(S0, K, T, r, sigma, M, I, k):
     # ----------------------------------------
 
     # Continuous sampling
-    GC_c_join = DF * np.maximum(G_c_join - K, 0)
+    GC_c_join = DF * np.maximum(fac * G_c_join - fac * K, 0)
     GC_c = np.mean(GC_c_join[-1])
     GC_c_e = np.std(GC_c_join[-1]) / I  # error std/sqrt(N)
 
@@ -160,29 +168,33 @@ def asian_option_simulator(S0, K, T, r, sigma, M, I, k):
            'AC_d': AC_d,
            'AC_d_e': AC_d_e,
            'GC_c': GC_c,
-           'GC_c_e': GC_c_e
+           'GC_c_e': GC_c_e,
+           'mode': mode
            }
     return dic
 
 
 def fill_in_df(df, dic, i):
     # i represents the row number in the df
+    mode = dic['mode']
+    df.loc[i, 'mode'] = mode
     df.loc[i, 'N_S'] = dic['I']
     df.loc[i, 'N_t'] = dic['M']
     df.loc[i, 'S0'] = dic['S0']
-    df.loc[i, 'K'] = dic['K']
+    if mode == 'fixed':
+        df.loc[i, 'K'] = dic['K']
+        if dic['S0'] > dic['K']:
+            df.loc[i, 'Class'] = 'ITM'  # in the money
+        elif dic['S0'] < dic['K']:
+            df.loc[i, 'Class'] = 'OTM'  # out of the money
+        else:
+            df.loc[i, 'Class'] = 'ATM'  # at the money
     df.loc[i, 'r'] = dic['r']
     df.loc[i, 'sigma'] = dic['sigma']
     df.loc[i, 'T'] = dic['T']
     df.loc[i, 'k'] = dic['k']
     df.loc[i, 'diff_GC_c'] = '{0:.6f}'.format(dic['V'] - dic['GC_c'])
     df.loc[i, 'V'] = '{0:.6f} ({1:.6f})'.format(dic['V'], dic['V_e'])
-    if dic['S0'] > dic['K']:
-        df.loc[i, 'Class'] = 'ITM'  # in the money
-    elif dic['S0'] < dic['K']:
-        df.loc[i, 'Class'] = 'OTM'  # out of the money
-    else:
-        df.loc[i, 'Class'] = 'ATM'  # at the money
     df.loc[i, 'AC_c'] = '{0:.6f} ({1:.6f})'.format(dic['AC_c'], dic['AC_c_e'])
     df.loc[i, 'AC_d'] = '{0:.6f} ({1:.6f})'.format(dic['AC_d'], dic['AC_d_e'])
     df.loc[i, 'GC_c'] = '{0:.6f} ({1:.6f})'.format(dic['GC_c'], dic['GC_c_e'])
@@ -190,7 +202,7 @@ def fill_in_df(df, dic, i):
 # ---------------------------------------------------------------------------------------
 # ---------------------------------------------------------------------------------------
 
-dic = asian_option_simulator(S0=100., K=100., T=1.0, r=0.05, sigma=0.2, M=100, I=100, k=10)
+dic = asian_option_simulator(S0=100., K=100., T=1.0, r=0.05, sigma=0.2, M=100, I=100, k=10, mode='fixed')
 
 t_index = dic['t_index']
 S_join = dic['S_join']
