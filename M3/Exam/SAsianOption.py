@@ -106,6 +106,7 @@ def asian_option_simulator(S0, K, T, r, sigma, M, I, k):
     DF = math.exp(-r * T)
     V_join = DF * np.maximum(S_join - K, 0)
     V = np.mean(V_join[-1])
+    V_e = np.std(V_join[-1]) / I  # error std/sqrt(N)
 
     V_plus = DF * np.maximum(S_plus[-1] - K, 0) # just for demonstration purposes
 
@@ -120,10 +121,12 @@ def asian_option_simulator(S0, K, T, r, sigma, M, I, k):
     # Continuous sampling
     AC_c_join = DF * np.maximum(A_c_join - K, 0)
     AC_c = np.mean(AC_c_join[-1])
+    AC_c_e = np.std(AC_c_join[-1]) / I  # error std/sqrt(N)
 
     # Discrete sampling
     AC_d_join = DF * np.maximum(A_d_join - K, 0)
     AC_d = np.mean(AC_d_join[-1])
+    AC_d_e = np.std(AC_d_join[-1]) / I  # error std/sqrt(N)
 
     # ----------------------------------------
     # GEOMETRIC
@@ -132,6 +135,7 @@ def asian_option_simulator(S0, K, T, r, sigma, M, I, k):
     # Continuous sampling
     GC_c_join = DF * np.maximum(G_c_join - K, 0)
     GC_c = np.mean(GC_c_join[-1])
+    GC_c_e = np.std(GC_c_join[-1]) / I  # error std/sqrt(N)
 
     # --------------------------------------------------
     # Variables into Dictionary
@@ -147,14 +151,40 @@ def asian_option_simulator(S0, K, T, r, sigma, M, I, k):
            'G_c_join': G_c_join,
            'V_join': V_join,
            'V': V,
+           'V_e': V_e,
            'AC_c_join': AC_c_join,
            'AC_d_join': AC_d_join,
            'GC_c_join': GC_c_join,
            'AC_c': AC_c,
+           'AC_c_e': AC_c_e,
            'AC_d': AC_d,
-           'GC_c': GC_c
+           'AC_d_e': AC_d_e,
+           'GC_c': GC_c,
+           'GC_c_e': GC_c_e
            }
     return dic
+
+
+def fill_in_df(df, dic, i):
+    # i represents the row number in the df
+    df.loc[i, 'N_S'] = dic['I']
+    df.loc[i, 'N_t'] = dic['M']
+    df.loc[i, 'S0'] = dic['S0']
+    df.loc[i, 'K'] = dic['K']
+    df.loc[i, 'r'] = dic['r']
+    df.loc[i, 'sigma'] = dic['sigma']
+    df.loc[i, 'T'] = dic['T']
+    df.loc[i, 'k'] = dic['k']
+    df.loc[i, 'V'] = '{0:.6f} ({1:.6f})'.format(dic['V'], dic['V_e'])
+    if dic['S0'] > dic['K']:
+        df.loc[i, 'Class'] = 'ITM'  # in the money
+    elif dic['S0'] < dic['K']:
+        df.loc[i, 'Class'] = 'OTM'  # out of the money
+    else:
+        df.loc[i, 'Class'] = 'ATM'  # at the money
+    df.loc[i, 'AC_c'] = '{0:.6f} ({1:.6f})'.format(dic['AC_c'], dic['AC_c_e'])
+    df.loc[i, 'AC_d'] = '{0:.6f} ({1:.6f})'.format(dic['AC_d'], dic['AC_d_e'])
+    df.loc[i, 'GC_c'] = '{0:.6f} ({1:.6f})'.format(dic['GC_c'], dic['GC_c_e'])
 
 # ---------------------------------------------------------------------------------------
 # ---------------------------------------------------------------------------------------
