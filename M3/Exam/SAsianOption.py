@@ -139,7 +139,8 @@ def asian_option_simulator(S0, K, T, r, sigma, M, I, k):
 
     t_index[-1] = 1.0  # ensures plots do not extend the x-axis to account for slight rounding error
 
-    dic = {'t_index': t_index,
+    dic = {'S0': S0, 'K': K, 'T': T, 'r': r, 'sigma': sigma, 'M': M, 'I': I, 'k': k,  # params
+           't_index': t_index,
            'S_join': S_join,
            'A_c_join': A_c_join,
            'A_d_join': A_d_join,
@@ -148,7 +149,7 @@ def asian_option_simulator(S0, K, T, r, sigma, M, I, k):
            'V': V,
            'AC_c_join': AC_c_join,
            'AC_d_join': AC_d_join,
-           'GC_c_join': AC_d_join,
+           'GC_c_join': GC_c_join,
            'AC_c': AC_c,
            'AC_d': AC_d,
            'GC_c': GC_c
