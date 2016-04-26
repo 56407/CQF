@@ -175,6 +175,7 @@ def fill_in_df(df, dic, i):
     df.loc[i, 'sigma'] = dic['sigma']
     df.loc[i, 'T'] = dic['T']
     df.loc[i, 'k'] = dic['k']
+    df.loc[i, 'diff_GC_c'] = '{0:.6f}'.format(dic['V'] - dic['GC_c'])
     df.loc[i, 'V'] = '{0:.6f} ({1:.6f})'.format(dic['V'], dic['V_e'])
     if dic['S0'] > dic['K']:
         df.loc[i, 'Class'] = 'ITM'  # in the money
