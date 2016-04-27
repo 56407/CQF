@@ -358,10 +358,13 @@ price:
 
 Note in the context of MC, we refer to `continous sampling' when all the
 data points available up to that time are used, whereas `discrete
-sampling' uses a sample determined by sampling frequency k (10 days in
+sampling' uses a sample determined by sampling period $k$ (10 days in
 this case).
 
-For all the examples below a \textbf{fixed strike} is assumed unless otherwise stated.
+For all the examples below a \textbf{fixed strike} is assumed unless otherwise stated. This is defined as
+\begin{equation}
+C(T) = \text{max}\left( A(0,T) - K, 0 \right)
+\end{equation}
 
     \subsubsection{Continuous vs Discrete
 Sampling}\label{continuous-vs-discrete-sampling}
@@ -371,7 +374,7 @@ For this purpose we restrict to the Arithmetic case only and assume the
 Geometric case observes the same behaviour.
 
 Plotting one of the simulated stock paths and corresponding arithmetic
-continuous and discrete averages (using a sampling frequency of 10
+continuous and discrete averages (using a sampling period of 10
 days), we get the following:
 
 %    \begin{Verbatim}[commandchars=\\\{\}]
@@ -394,14 +397,14 @@ days), we get the following:
     { \hspace*{\fill} \\}
     
     Hence we note that A\_c and A\_d differ slightly. This difference grows
-with the sampling frequency \emph{k} because for the same time to expiry
+with the sampling period \emph{k} because for the same time to expiry
 we have less data points to calculate the average. This behaviour is
 shown in the plot below where d\_10 is more unstable than d\_4. As
 the number of data points increase, we expect the difference to get
 smaller, shown by the convergence trend close to expiry
 
 %    \begin{Verbatim}[commandchars=\\\{\}]
-%{\color{incolor}In [{\color{incolor}6}]:} \PY{c}{\PYZsh{} Changing discrete sampling frequency from k=10 to k=4}
+%{\color{incolor}In [{\color{incolor}6}]:} \PY{c}{\PYZsh{} Changing discrete sampling period from k=10 to k=4}
 %        \PY{n}{dic2} \PY{o}{=} \PY{n}{asian\PYZus{}option\PYZus{}simulator}\PY{p}{(}\PY{n}{S0}\PY{o}{=}\PY{l+m+mf}{100.}\PY{p}{,} \PY{n}{K}\PY{o}{=}\PY{l+m+mf}{100.}\PY{p}{,} \PY{n}{T}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{r}\PY{o}{=}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{M}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{I}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
 %        
 %        \PY{c}{\PYZsh{} Calculate differences wrt continous case}
@@ -565,8 +568,8 @@ In this case we see the following:
   have little effect in the error too
 \item
   The price of the European equivalent is always higher and by a
-  consierable amount. However the difference (diff\_GC\_c) seems similar
-  accross ITM, ATM and OTM (although this might not always hold
+  considerable amount. However the difference (diff\_GC\_c) seems similar
+  across ITM, ATM and OTM (although this might not always hold
   depending on other parameters values)
 \end{itemize}
 
@@ -675,8 +678,15 @@ than that observed with volatility variation.
         
     \subsubsection{Float vs Fixed Strike}\label{float-vs-fixed-strike}
 
+For the Asian call option the float strike was defined here as:
+
+\begin{equation}
+C_{float}(T) = \text{max}\left( S(T) -  A(0,T), 0 \right)
+\end{equation}
+i.e. the strike is taken to be the value of the stock at expiry.
+
 Within errors, the float and fixed strike Asian options seem to be
-nearly the same, suggesting an `equivalence' between them.
+nearly the same, suggesting an `equivalence' relationship between them.
 
 %    \begin{Verbatim}[commandchars=\\\{\}]
 %{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{df5} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
@@ -705,7 +715,7 @@ nearly the same, suggesting an `equivalence' between them.
 
 In summary, Monte Carlo seems a suitable method to efficiently price European
 and Asian options. The number of simulations has the biggest effect on
-the option price estimate, followed by volatility. The variance
+the option price accuracy, followed by volatility. The variance
 reduction technique proved to be useful to reduce significantly the
 error at little computing cost. An equivalence between float and fixed
 strikes in the pricing seems to suggest an equivalence, although to
