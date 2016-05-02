@@ -281,9 +281,9 @@ stated:
 
     \subsection{Stock Path Generation}\label{stock-path-generation}
 
-We start by using MC to generate 100 stock price paths using the
-\emph{Milstein} convention. In this process we use the antithetic
-variance reduction technique which increases the statistics to compute
+We start by using MC to generate 100 stock price paths (risk-neutral random walks) using the
+\emph{Milstein} convention, which makes use of Ito's lemma to increase the accuracy of the approximation by adding a second order term. In this process we use the \emph{antithetic
+variance reduction technique} which increases the statistics to compute
 the option price with minimal computational effort.
 
 The below plot shows 100 of these paths:
@@ -356,20 +356,21 @@ price:
   \textbf{only} (`GC\_c')
 \end{itemize}
 
-Note in the context of MC, we refer to `continous sampling' when all the
+Note in the context of MC, we refer to `continuous sampling' when all the
 data points available up to that time are used, whereas `discrete
 sampling' uses a sample determined by sampling period $k$ (10 days in
 this case).
 
-For all the examples below a \textbf{fixed strike} is assumed unless otherwise stated. This is defined as
+For all the examples below 100 time steps of size 0.01 each are used to reach the option maturity at $t=T=1$, starting from $t=0$. Similarly, a \textbf{fixed strike} is implemented except in the last section. This is defined as
 \begin{equation}
 C(T) = \text{max}\left( A(0,T) - K, 0 \right)
 \end{equation}
 
-    \subsubsection{Continuous vs Discrete
-Sampling}\label{continuous-vs-discrete-sampling}
 
-First let's understand the effects of continuous vs discrete sampling.
+    \subsubsection{Continuous vs Discrete
+Averaging Error}\label{continuous-vs-discrete-sampling}
+
+First let's understand the effects of continuous vs discrete averaging.
 For this purpose we restrict to the Arithmetic case only and assume the
 Geometric case observes the same behaviour.
 
@@ -396,12 +397,10 @@ days), we get the following:
     \end{center}
     { \hspace*{\fill} \\}
     
-    Hence we note that A\_c and A\_d differ slightly. This difference grows
+    Hence we note that $A_c$ and $A_d$ differ slightly. This difference grows
 with the sampling period \emph{k} because for the same time to expiry
-we have less data points to calculate the average. This behaviour is
-shown in the plot below where d\_10 is more unstable than d\_4. As
-the number of data points increase, we expect the difference to get
-smaller, shown by the convergence trend close to expiry
+we have less data points to calculate the average. However, as the number of data points increases, we expect the difference to get smaller. This behaviour is
+shown in the plot below where $d_10$ is more unstable than $d_4$ initially, but then both tend  to converge towards zero. This is also an example of the law of large numbers (LLN). We hence expect the error from this to be small at expiry.
 
 %    \begin{Verbatim}[commandchars=\\\{\}]
 %{\color{incolor}In [{\color{incolor}6}]:} \PY{c}{\PYZsh{} Changing discrete sampling period from k=10 to k=4}
@@ -434,9 +433,11 @@ since it is difficult to incorporate every single traded price into an
 average, for example, data can be unreliable and the exact time of a
 trade may not be known accurately.
 
-The option price also evolves with number of time steps to expiry and
-whether the average is calculated discretely or continously, as shown in
-the below plot:
+\subsubsection{Time Step Error}\label{time-step-error}
+
+Because we have used the \emph{Milstein} scheme, the error in the estimate from this is $O(\delta t)$ (which is better than with the \emph{Euler-Mayurama} method which is $O(\delta t^{1/2})$).
+The option price  evolution with $n$th time step to expiry is shown in
+the below plot for continuous and discrete arithmetic averaging. Again we see at expiry the difference between continuos and discrete averaging is minimal. 
 
 %    \begin{Verbatim}[commandchars=\\\{\}]
 %{\color{incolor}In [{\color{incolor}7}]:} \PY{c}{\PYZsh{} Evolution of Asian Call value with number of time steps}
@@ -460,7 +461,7 @@ the below plot:
     \subsubsection{Payoff function}\label{payoff-function}
 
 The Payoff function at expiry $t=T$ of the Asian call is also a lot more complex
-than it's European equivalent, which is expected given it's
+than its European equivalent, which is expected given its
 path-dependent nature. This justifies the need for using Monte Carlo
 methods for the pricing.
 
@@ -484,13 +485,13 @@ methods for the pricing.
     \subsection{Results and Errors}\label{results-and-errors}
 
 The results from varying the parameters in the model to study the
-effects on the pricing are presented now. The key for all below tables
+effects on the pricing estimate are presented now. The key for all below tables
 is the following:
 
 \begin{itemize}
 \tightlist
 \item
-  N\_S: number of simulations
+  N\_S: number of simulations 
 \item
   V: European call equivalent
 \item
@@ -511,6 +512,7 @@ is the following:
     \subsubsection{Varying the Number of
 Simulations}\label{varying-the-number-of-simulations}
 
+Because we are only simulating a finite number of an infinite number of possible stock paths, the error due to using $N$ realisations is $O(N^{1/2})$.
 We see that as the number of simulations increases, the error in the
 estimate decreases (approximately by a factor of 10 every time the
 simulations increase by a factor of 10). Also note that the effect of
@@ -518,7 +520,7 @@ the variance reduction technique is to effectively increase N\_S by a
 factor of 2, which is why the error presented is smaller than for the
 N\_S values shown. Run times weren't compared since the underlying
 python code for any of these cases takes less than 2 seconds and this
-was deemed quite acceptable.
+was deemed quite acceptable. However we expect this to increase  for improved accuracy (as the number of simulations and time steps increase).
 
 %    \begin{Verbatim}[commandchars=\\\{\}]
 %{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
