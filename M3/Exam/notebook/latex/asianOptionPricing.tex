@@ -237,9 +237,7 @@ This report presents the results of using Monte Carlo (MC) to price an
 V(S, t) = \mathbb{E}^\mathbb{Q} [e^{-\int^T_t rdr} \mathrm{Payoff}(S_T)] 
 \end{equation}
 
-The model was developed using {\textbf{Python 2.7}}. All the related code can be found elsewhere. 
-
-For brevity, the results for a put option have been omitted and also the details of the theory and mathematics of Asian options. The documentation of the {\it{Milstein}} convention and {\it antithetic variance reduction} technique can also be found elsewhere.
+For brevity, the results for a put option have been omitted as well as the details of the theory and mathematics of Asian options. The documentation of the {\it{Milstein}} convention and {\it antithetic variance reduction} technique can also be found elsewhere. This model was developed using {\textbf{Python 2.7}} and all the related code can be found as a separate attachment. 
 
     \subsection{Initial parameters}\label{initial-parameters}
 
@@ -249,15 +247,15 @@ stated:
 \begin{itemize}
 \tightlist
 \item
-  Today's stock price S0 = 100
+  Today's stock price $S_0$ = 100
 \item
-  Strike E = 100
+  Strike $K$ = 100
 \item
-  Time to expiry (T-t) = 1 year (100 time steps)
+  Time to expiry $(T-t)$ = 1 year (100 time steps)
 \item
-  Volatility = 20\%
+  Volatility $\sigma$= 20\%
 \item
-  Constant risk-free interest rate r = 5\%
+  Constant risk-free interest rate $r$ = 5\%
 \end{itemize}
 
 %    \begin{Verbatim}[commandchars=\\\{\}]
@@ -281,12 +279,10 @@ stated:
 
     \subsection{Stock Path Generation}\label{stock-path-generation}
 
-We start by using MC to generate 100 stock price paths (risk-neutral random walks) using the
-\emph{Milstein} convention, which makes use of Ito's lemma to increase the accuracy of the approximation by adding a second order term. In this process we use the \emph{antithetic
+We start by using MC to generate 100 stock price paths using the
+\emph{Milstein} convention for a risk-neutral random walk, which makes use of Ito's lemma to increase the accuracy of the approximation by adding a second order term. In this process we use the \emph{antithetic
 variance reduction technique} which increases the statistics to compute
-the option price with minimal computational effort.
-
-The below plot shows 100 of these paths:
+the option price at minimal computational effort. The below plot shows 100 of these paths:
 
 %    \begin{Verbatim}[commandchars=\\\{\}]
 %{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t\PYZus{}index}\PY{p}{,} \PY{n}{S\PYZus{}plus}\PY{p}{)}
@@ -299,7 +295,7 @@ The below plot shows 100 of these paths:
 %\end{Verbatim}
 %        
     \begin{center}
-    \adjustimage{max size={0.8\linewidth}{0.9\paperheight}}{asianOptionPricing_files/asianOptionPricing_4_1.png}
+    \adjustimage{max size={0.75\linewidth}{0.9\paperheight}}{asianOptionPricing_files/asianOptionPricing_4_1.png}
     \end{center}
 
     
@@ -334,7 +330,7 @@ of the variance reduction technique is shown to boost the statistics. This hence
 %\end{Verbatim}
         
     \begin{center}
-    \adjustimage{max size={0.8\linewidth}{0.9\paperheight}}{asianOptionPricing_files/asianOptionPricing_8_1.png}
+    \adjustimage{max size={0.85\linewidth}{0.9\paperheight}}{asianOptionPricing_files/asianOptionPricing_8_1.png}
     \end{center}
 
     
@@ -393,14 +389,14 @@ days), we get the following:
 %\end{Verbatim}
 %        
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{asianOptionPricing_files/asianOptionPricing_11_1.png}
+    \adjustimage{max size={0.85\linewidth}{0.9\paperheight}}{asianOptionPricing_files/asianOptionPricing_11_1.png}
     \end{center}
     { \hspace*{\fill} \\}
     
     Hence we note that $A_c$ and $A_d$ differ slightly. This difference grows
 with the sampling period \emph{k} because for the same time to expiry
 we have less data points to calculate the average. However, as the number of data points increases, we expect the difference to get smaller. This behaviour is
-shown in the plot below where $d_10$ is more unstable than $d_4$ initially, but then both tend  to converge towards zero. This is also an example of the law of large numbers (LLN). We hence expect the error from this to be small at expiry.
+shown in the plot below where $d_{10}$ is more unstable than $d_4$ initially, but then both tend  to converge towards zero. This is also an example of the law of large numbers (LLN). We hence expect the error from this to be small at expiry.
 
 %    \begin{Verbatim}[commandchars=\\\{\}]
 %{\color{incolor}In [{\color{incolor}6}]:} \PY{c}{\PYZsh{} Changing discrete sampling period from k=10 to k=4}
@@ -423,7 +419,7 @@ shown in the plot below where $d_10$ is more unstable than $d_4$ initially, but 
 %\end{Verbatim}
 %        
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{asianOptionPricing_files/asianOptionPricing_13_1.png}
+    \adjustimage{max size={0.85\linewidth}{0.9\paperheight}}{asianOptionPricing_files/asianOptionPricing_13_1.png}
     \end{center}
 
     
@@ -436,8 +432,8 @@ trade may not be known accurately.
 \subsubsection{Time Step Error}\label{time-step-error}
 
 Because we have used the \emph{Milstein} scheme, the error in the estimate from this is $O(\delta t)$ (which is better than with the \emph{Euler-Mayurama} method which is $O(\delta t^{1/2})$).
-The option price  evolution with $n$th time step to expiry is shown in
-the below plot for continuous and discrete arithmetic averaging. Again we see at expiry the difference between continuos and discrete averaging is minimal. 
+The option price  evolution with the $n$th time step to expiry is shown in
+the below plot for different number of time steps. Again we see at expiry the difference between continuous and discrete averaging is minimal, but the error from the number of time steps can become quite significant. 
 
 %    \begin{Verbatim}[commandchars=\\\{\}]
 %{\color{incolor}In [{\color{incolor}7}]:} \PY{c}{\PYZsh{} Evolution of Asian Call value with number of time steps}
@@ -455,7 +451,7 @@ the below plot for continuous and discrete arithmetic averaging. Again we see at
 %\end{Verbatim}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{asianOptionPricing_files/asianOptionPricing_15_1.png}
+    \adjustimage{max size={0.85\linewidth}{0.9\paperheight}}{asianOptionPricing_files/asianOptionPricing_15_1.png}
     \end{center}
     
     \subsubsection{Payoff function}\label{payoff-function}
@@ -716,11 +712,11 @@ nearly the same, suggesting an `equivalence' relationship between them.
     \subsection{Summary}\label{summary}
 
 In summary, Monte Carlo seems a suitable method to efficiently price European
-and Asian options. The number of simulations has the biggest effect on
+and Asian options. The number time steps and simulations have the biggest effect on
 the option price accuracy, followed by volatility. The variance
 reduction technique proved to be useful to reduce significantly the
 error at little computing cost. An equivalence between float and fixed
-strikes in the pricing seems to suggest an equivalence, although to
+strikes in the pricing seems to suggest an equivalence relationship, although to
 validate this, more test cases should be examined. For all test cases,
 the Asian option price appears considerably lower than the European,
 making it an attractive financial instrument for certain risk management
