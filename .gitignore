@@ -3,3 +3,4 @@
 *.xlsm
 *.csv
 *.ipynb_checkpoints*
+*.DS_store*
