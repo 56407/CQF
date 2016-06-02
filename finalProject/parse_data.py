@@ -1,15 +1,7 @@
 # Parse data from Reuters
-import eikon as ek
 
-ek.set_app_id('D79B714919385CD9D749D1')
-import pandas as pd
+def parse_data(start_date, end_date, comm_list):
 
-from IPython import embed
-
-def parse_data(start_date, end_date, *args):
-
-    comm_list = args
-    print comm_list
     list_dfs = []
     for k in comm_list:
         dic = ek.get_timeseries([k], start_date=start_date, end_date=end_date, interval='daily', fields=['CLOSE'])
@@ -37,6 +29,16 @@ def parse_data(start_date, end_date, *args):
 
     return df
 
-# if __name__ == "__main__":
-#     import sys
-#     parse_data(list(sys.argv[1]))
+if __name__ == "__main__":
+    # import sys
+    # parse_data(list(sys.argv[1]))
+
+    from datetime import datetime
+    import eikon as ek
+
+    ek.set_app_id('D79B714919385CD9D749D1')
+    import pandas as pd
+
+    start_date = datetime(2009, 1, 1)
+    end_date = datetime(2016, 5, 31)
+    df2 = parse_data(start_date, end_date, ["Cc1", "Sc1", "Wc1"])
