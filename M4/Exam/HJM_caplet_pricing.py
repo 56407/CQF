@@ -37,81 +37,126 @@ df = pd.read_csv("input.csv", index_col=0)
 
 T = 10.0  # t_max
 M = 1000  # no. of time steps
-I = 1  # no. of MC simulations (S paths)
+I = 2  # no. of MC simulations (S paths)
 n_tau = 51  # no. of tenors
-# Take drift, vol1, vol2, vol4 and r_t0_T values from CQF spreadsheet
-mu = np.array(df.iloc[0, :])  # drift
-vol1 = np.array(df.iloc[1, :])
-vol2 = np.array(df.iloc[2, :])
-vol3 = np.array(df.iloc[3, :])
-S0 = np.array(df.iloc[4, :])  # r_t0_T (forward curve at t=0 for different tenors)
 
 # Derived params
 dt = T / M  # time step size
-shape = (M + 1, n_tau, I)
+# shape_3D = (M + 1, I, n_tau)
+# shape_2D = (M + 1, I)
+# shape_3D = (M + 1, n_tau, I)
+shape_2D = (M + 1, n_tau)
+shape_MC = (M + 1)
 
-# Define time index for dataframe
-t_index = np.zeros((M + 1), dtype=np.float)  # fill t_index object with zeros
-t_index[0] = 0  # set first value
+# Take drift, vol1, vol2, vol4 and r_t0_T values from CQF spreadsheet
+mu = np.array(df.iloc[0, :])
+vol1 = np.array(df.iloc[1, :])
+vol2 = np.array(df.iloc[2, :])
+vol3 = np.array(df.iloc[3, :])
+S0 = np.array(df.iloc[4, :])
 
-# Define X_plus and X_minus for S and A to apply antithetic variance reduction technique
+# Calculate the diffs for the tenor and df and append last value to get correct vector dimension
+d_tau = np.diff(np.array(df.columns, dtype=np.float))
+d_tau = np.append(d_tau, d_tau[-1])
+d_S_plus = np.diff(S0)
+d_S_plus = np.append(d_S_plus, d_S_plus[-1])
+
+# Define matrix equivalents
 # warning: must ensure X_plus and X_minus are different objects otherwise memory issues causes df's to be identical
 
-# Define numpy array for the underlying S
-S_plus = np.zeros(shape, dtype=np.float)  # fill S object with zeros
-S_plus[0] = S0  # set first value
-S_minus = S_plus.copy()
+# Constant
+mu_m = np.zeros(shape_2D, dtype=np.float)
+vol1_m = np.zeros(shape_2D, dtype=np.float)
+vol2_m = np.zeros(shape_2D, dtype=np.float)
+vol3_m = np.zeros(shape_2D, dtype=np.float)
+d_tau_m = np.zeros(shape_2D, dtype=np.float)
 
-# Define numpy array for the rolling arithmetic average of S
-A_c_plus = np.zeros(shape, dtype=np.float)  # continuous
-A_c_plus[0] = S0  # set first value
-A_c_minus = A_c_plus.copy()
+# Dynamic
+d_S_plus_m = np.zeros(shape_2D, dtype=np.float)
+t_index = np.zeros((M + 1), dtype=np.float)  # fill t_index object with zeros
+S_plus_m = np.zeros(shape_2D, dtype=np.float)
+A_c_plus_m = np.zeros(shape_2D, dtype=np.float)  # arithmentic continuous average
+
+# Initialise row=0 of matrices since loop starts at row=1
+mu_m[0] = mu
+vol1_m[0] = vol1
+vol2_m[0] = vol2
+vol3_m[0] = vol3
+d_tau_m[0] = d_tau
+d_S_plus_m[0] = d_S_plus
+t_index[0] = 0
+S_plus_m[0] = S0
+A_c_plus_m[0] = S0  # set first value
+
+# plus and minus for S and A to apply antithetic variance reduction technique
+S_minus_m = S_plus_m.copy()
+A_c_minus_m = A_c_plus_m.copy()
+d_S_minus_m = d_S_plus_m.copy()
 
 # Define random number generator, in this case 3 different (phi's) are required
 np.random.seed(1000)  # makes tne random numbers predictable (if commented diff will be generated every time)
-rand1 = np.random.standard_normal(shape)  # this creates a numpy array of RNs to feed S array for a given time step
-rand2 = np.random.standard_normal(shape)
-rand3 = np.random.standard_normal(shape)
+rand1 = np.random.standard_normal(shape_MC)  # this creates a numpy array of RNs to feed S array for a given time step
+rand2 = np.random.standard_normal(shape_MC)
+rand3 = np.random.standard_normal(shape_MC)
 
 # Numpy array loop - start from 2nd row since we have set initial values
 for i in xrange(1, M + 1, 1):
 
+    # Constant
+    mu_m[i] = mu
+    vol1_m[i] = vol1
+    vol2_m[i] = vol2
+    vol3_m[i] = vol3
+    d_tau_m[i] = d_tau
+
+    # Dynamic
+    temp = np.diff(S_plus_m[i-1])
+    d_S_plus_m[i] = np.append(temp, temp[-1])
+
+    # time step
     t_index[i] = t_index[i - 1] + dt
 
-    # Generate S paths using Milstein convention
-    S_plus[i] = S_plus[i - 1] * (1 +
-                                 r * dt +
-                                 sigma * math.sqrt(dt) * rand1[i] +
-                                 0.5 * sigma ** 2 * (rand1[i] ** 2 - 1) * dt
-                                 )
+    # Generate S paths using antithetic reduction
+    S_plus_m[i] = S_plus_m[i - 1] + \
+                  mu_m[i] * dt +\
+                  (vol1_m[i] * rand1[i] + vol2_m[i] * rand2[i] + vol3_m[i] * rand3[i]) * math.sqrt(dt) + \
+                  (d_S_plus_m[i] / d_tau_m[i]) * dt
 
-    S_minus[i] = S_minus[i - 1] * (1 +
-                                   r * dt +
-                                   sigma * math.sqrt(dt) * (-rand1[i]) +
-                                   0.5 * sigma ** 2 * ((-rand1[i]) ** 2 - 1) * dt
-                                   )
+    S_minus_m[i] = S_minus_m[i - 1] + \
+                  mu_m[i] * dt + \
+                  (vol1_m[i] * (-rand1[i]) + vol2_m[i] * (-rand2[i]) + vol3_m[i] * (-rand3[i])) * math.sqrt(dt) + \
+                  (d_S_minus_m[i] / d_tau_m[i]) * dt
 
-    # MC 'continuous' average using updating rule (just for demonstration purposes since df.mean more efficient)
-    A_c_plus[i] = (i / (i + 1)) * A_c_plus[i - 1] + S_plus[i] / (i + 1)
-    A_c_minus[i] = (i / (i + 1)) * A_c_minus[i - 1] + S_minus[i] / (i + 1)
-    G_c_plus[i] = (i / (i + 1)) * G_c_plus[i - 1] + np.log(S_plus[i]) / (i + 1)
-    G_c_minus[i] = (i / (i + 1)) * G_c_minus[i - 1] + np.log(S_minus[i]) / (i + 1)
+    # # MC 'continuous' average using updating rule (just for demonstration purposes since df.mean more efficient)
+    # A_c_plus[i] = (i / (i + 1)) * A_c_plus[i - 1] + S_plus[i] / (i + 1)
+    # A_c_minus[i] = (i / (i + 1)) * A_c_minus[i - 1] + S_minus[i] / (i + 1)
 
-    # MC 'discrete' average
-    if i in sel:
-        j = int(i / k)
-        A_d_plus[i] = (j / (j + 1)) * A_d_plus[i - 1] + S_plus[i] / (j + 1)
-        A_d_minus[i] = (j / (j + 1)) * A_d_minus[i - 1] + S_minus[i] / (j + 1)
-    else:  # if not part of the sampling, then just copy previous value to have same dim as other arrays
-        A_d_plus[i] = A_d_plus[i - 1]
-        A_d_minus[i] = A_d_minus[i - 1]
 
 # Join plus and minus stats (antithetic technique)
 S_join = np.concatenate((S_plus, S_minus), axis=1)
-A_c_join = np.concatenate((A_c_plus, A_c_minus), axis=1)
-A_d_join = np.concatenate((A_d_plus, A_d_minus), axis=1)
-G_c_join = np.concatenate((G_c_plus, G_c_minus), axis=1)
-G_c_join = np.exp(G_c_join)
+# A_c_join = np.concatenate((A_c_plus, A_c_minus), axis=1)
+
+# Plotting
+
+# Simulated Forward Curves
+plt.plot(S_plus_m[0, :])  # today
+plt.plot(S_plus_m[101, :])  # 1Y
+plt.plot(S_plus_m[501, :])  # 5Y
+
+# Projection of Forward Rate
+plt.plot(S_plus_m[:, 0])  # today
+plt.plot(S_plus_m[:, 11])  # 5Y?
+plt.plot(S_plus_m[:, -1])  # 25Y
+
+# Simulated Forward Curves
+plt.plot(S_minus_m[0, :])  # today
+plt.plot(S_minus_m[101, :])  # 1Y
+plt.plot(S_minus_m[501, :])  # 5Y
+
+# Projection of Forward Rate
+plt.plot(S_minus_m[:, 0])  # today
+plt.plot(S_minus_m[:, 11])  # 5Y?
+plt.plot(S_minus_m[:, -1])  # 25Y
 
 # Calculate option value for Asian and EU (to have EU as benchmark)
 
@@ -144,20 +189,6 @@ else:
 AC_c_join = DF * np.maximum(fac * A_c_join - fac * K, 0)
 AC_c = np.mean(AC_c_join[-1])
 AC_c_e = np.std(AC_c_join[-1]) / I  # error std/sqrt(N)
-
-# Discrete sampling
-AC_d_join = DF * np.maximum(fac * A_d_join - fac * K, 0)
-AC_d = np.mean(AC_d_join[-1])
-AC_d_e = np.std(AC_d_join[-1]) / I  # error std/sqrt(N)
-
-# ----------------------------------------
-# GEOMETRIC
-# ----------------------------------------
-
-# Continuous sampling
-GC_c_join = DF * np.maximum(fac * G_c_join - fac * K, 0)
-GC_c = np.mean(GC_c_join[-1])
-GC_c_e = np.std(GC_c_join[-1]) / I  # error std/sqrt(N)
 
 # --------------------------------------------------
 # Variables into Dictionary
