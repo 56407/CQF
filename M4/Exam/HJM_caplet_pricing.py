@@ -16,6 +16,12 @@ import seaborn as sns
 from IPython import embed
 import sys
 
+#############################################################
+#
+#  This script does 1 MC simulation of the HJM model in
+#  M4/Exam/docs/HJM Model - MC - Caplet v2.xlsm
+#
+#############################################################
 
 # def asian_option_simulator(S0, K, T, r, sigma, M, I, k, mode='fixed'):
 
