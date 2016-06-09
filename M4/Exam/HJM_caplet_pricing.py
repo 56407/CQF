@@ -131,9 +131,11 @@ for i in xrange(1, M + 1, 1):
     # A_c_plus[i] = (i / (i + 1)) * A_c_plus[i - 1] + S_plus[i] / (i + 1)
     # A_c_minus[i] = (i / (i + 1)) * A_c_minus[i - 1] + S_minus[i] / (i + 1)
 
+############################################################################################
+sys.exit()
 
 # Join plus and minus stats (antithetic technique)
-S_join = np.concatenate((S_plus, S_minus), axis=1)
+# S_join = np.concatenate((S_plus_m, S_minus_m), axis=1)
 # A_c_join = np.concatenate((A_c_plus, A_c_minus), axis=1)
 
 # Plotting
