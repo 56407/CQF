@@ -246,8 +246,21 @@ for i in xrange(1, I):
 
 sys.exit()
 
+## ---------- Plotting
+
 # plt.plot(x, A_c_plus_m[1, :, 0], 'o')
-# df_plus = pd.DataFrame(index=x, data=A_c_plus_m[1, :, 0], columns=['V'])
+p = sns.pointplot(np.array(x, dtype=int), A_c_plus_m[1, :, 0])
+# p.xaxis.set_visible(False)
+plt.locator_params(nbins=5, axis='x')
+x_values = [0, 20, 40, 60, 80, 100]
+p.xaxis.set_ticklabels(x_values)
+
+# max_xticks = 10
+# xloc = plt.MaxNLocator(max_xticks)
+# p.xaxis.set_major_locator(xloc)
+
+plt.show()
+# df_plus = pd.DataFrame(data=A_c_plus_m[1, :, 0], columns=['V'])
 
 # Calculate option value for Asian and EU (to have EU as benchmark)
 
