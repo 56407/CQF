@@ -9,8 +9,8 @@ import math
 from math import exp, sqrt, log
 
 # Plotting
-import matplotlib.pyplot as plt
 import seaborn as sns
+import matplotlib.pyplot as plt
 
 # Debugging
 from IPython import embed
@@ -18,7 +18,7 @@ import sys
 
 #############################################################
 #
-#  This script does N MC simulations of the HJM model in
+#  This script does I MC simulations of the HJM model in
 #  M4/Exam/docs/HJM Model - MC - Caplet v2.xlsm
 #
 #############################################################
@@ -26,60 +26,45 @@ import sys
 # def asian_option_simulator(S0, K, T, r, sigma, M, I, k, mode='fixed'):
 
 """
-:param S0: initial stock value
+:param S0: initial forward rate values f(t=0, T)
 :param K: strike
 :param T: maturity
-:param r: risk-free rate
-:param sigma: volatility
 :param M: no. of time steps
 :param I: no. of MC simulations (S paths)
-:param k: discrete sampling freq
 :param mode: fixed or floating strike used in payoff function (default is fixed)
-:return: dictionary with paths (S_join), cont. and disc. arithmetic avg's of S (A_c_join, A_d_join)
-and cont. geo avg. (G_c)
+:return:
 """
 
-df = pd.read_csv("input.csv", index_col=0)
-
-T = 10.0  # t_max
+# Define parameters values
+T = 10.0  # t_max or maturity
 M = 1000  # no. of time steps
-I = 100  # no. of MC simulations (S paths)
-n_tau = 51  # no. of tenors
+I = 2  # no. of MC simulations (S paths)
+n_tau = 50  # no. of tenors
 
 # Derived params
 dt = T / M  # time step size
-shape_3D = (M + 1, I, n_tau)
+shape_3D = (M + 1, I, n_tau + 1)
 # shape_2D = (M + 1, I)
-# shape_3D = (M + 1, n_tau, I)
-# shape_2D = (M + 1, n_tau)
-# shape_MC = (M + 1)
-shape_MC = (M + 1, I)
 
-# Take drift, vol1, vol2, vol4 and r_t0_T values from CQF spreadsheet
-mu = np.array(df.iloc[0, :])
-vol1 = np.array(df.iloc[1, :])
-vol2 = np.array(df.iloc[2, :])
-vol3 = np.array(df.iloc[3, :])
-S0 = np.array(df.iloc[4, :])
+# Take drift, volatilities and f(t=0, T)  from CQF 'HJM Model - MC - Caplet v2.xlsm'
+data = pd.read_csv("input.csv", index_col=0)
+mu = np.array(data.iloc[0, :])  # drift
+vol1 = np.array(data.iloc[1, :])  # volatility of highest eigenvalue e(1)
+vol2 = np.array(data.iloc[2, :])  # volatility of 2nd highest eigenvalue e(2)
+vol3 = np.array(data.iloc[3, :])  # volatility of 3rd highest eigenvalue e(3)
+S0 = np.array(data.iloc[4, :])  # initial forward rate f(t=0, T)
 
-# Calculate the diffs for the tenor and df and append last value to get correct vector dimension
-d_tau = np.diff(np.array(df.columns, dtype=np.float))
-d_tau = np.append(d_tau, d_tau[-1])
+# Calculate the dtau and dF for Musiela correction term dF/dtau in forward rate
+# Must append last value again to get correct vector dimension - this means 25Y maturity uses a backward derivative
+d_tau = np.diff(np.array(data.columns, dtype=np.float))  # convert from string to float to take diff
+d_tau = np.append(d_tau, d_tau[-1])  # this is dtau
 d_S_plus = np.diff(S0)
-d_S_plus = np.append(d_S_plus, d_S_plus[-1])
+d_S_plus = np.append(d_S_plus, d_S_plus[-1])  # this is dF
 
-# Define matrix equivalents
-# warning: must ensure X_plus and X_minus are different objects otherwise memory issues causes df's to be identical
-# notation: [t, N, tau]
+# Define numpy arrays to account for I MC simulations
+# 3D array shape is [t, I, tau] where t is time, I is number of simulations and tau the tenor
 
 # Constant
-
-# mu_m = np.zeros(shape_2D, dtype=np.float)
-# vol1_m = np.zeros(shape_2D, dtype=np.float)
-# vol2_m = np.zeros(shape_2D, dtype=np.float)
-# vol3_m = np.zeros(shape_2D, dtype=np.float)
-# d_tau_m = np.zeros(shape_2D, dtype=np.float)
-
 mu_m = np.zeros(shape_3D, dtype=np.float)
 vol1_m = np.zeros(shape_3D, dtype=np.float)
 vol2_m = np.zeros(shape_3D, dtype=np.float)
@@ -87,30 +72,12 @@ vol3_m = np.zeros(shape_3D, dtype=np.float)
 d_tau_m = np.zeros(shape_3D, dtype=np.float)
 
 # Dynamic
-
-# d_S_plus_m = np.zeros(shape_2D, dtype=np.float)
-# t_index = np.zeros((M + 1), dtype=np.float)  # fill t_index object with zeros
-# S_plus_m = np.zeros(shape_2D, dtype=np.float)
-# A_c_plus_m = np.zeros(shape_2D, dtype=np.float)  # arithmentic continuous average
-
+t_index = np.zeros((M + 1), dtype=np.float)  # note this is a 2D array
 d_S_plus_m = np.zeros(shape_3D, dtype=np.float)
-t_index = np.zeros((M + 1), dtype=np.float)  # fill t_index object with zeros
 S_plus_m = np.zeros(shape_3D, dtype=np.float)
-A_c_plus_m = np.zeros(shape_3D, dtype=np.float)  # arithmentic continuous average
+# A_c_plus_m = np.zeros(shape_3D, dtype=np.float)  # arithmetic continuous average
 
-
-# Initialise row=0 of matrices since loop starts at row=1
-
-# mu_m[0] = mu
-# vol1_m[0] = vol1
-# vol2_m[0] = vol2
-# vol3_m[0] = vol3
-# d_tau_m[0] = d_tau
-# d_S_plus_m[0] = d_S_plus
-# t_index[0] = 0
-# S_plus_m[0] = S0
-# A_c_plus_m[0] = S0  # set first value
-
+# Set first value of arrays (row=0, t=0) since loop starts at row=1
 mu_m[0][:] = mu
 vol1_m[0][:] = vol1
 vol2_m[0][:] = vol2
@@ -119,112 +86,148 @@ d_tau_m[0][:] = d_tau
 d_S_plus_m[0][:] = d_S_plus
 t_index[0] = 0
 S_plus_m[0][:] = S0
-A_c_plus_m[0][:] = S0  # set first value
+# A_c_plus_m[0][:] = S0  # same as S_plus_m
 
-# plus and minus for S and A to apply antithetic variance reduction technique
+# Create 'minus' array for S and dS to apply antithetic variance reduction technique
+# warning: must ensure plus and minus objects are set via copy() instead of '=' otherwise memory issues
 S_minus_m = S_plus_m.copy()
-A_c_minus_m = A_c_plus_m.copy()
+# A_c_minus_m = A_c_plus_m.copy()
 d_S_minus_m = d_S_plus_m.copy()
 
-# Define random number generator, in this case 3 different (phi's) are required
-np.random.seed(1000)  # makes tne random numbers predictable (if commented diff will be generated every time)
+# Define random number generator seed - this makes tne RNs predictable, otherwise get different everytime
+np.random.seed(1000)
 
-# rand1 = np.random.standard_normal(shape_MC)  # this creates a numpy array of RNs to feed S array for a given time step
-# rand2 = np.random.standard_normal(shape_MC)
-# rand3 = np.random.standard_normal(shape_MC)
+# *** Below is only for testing purposes (to replicate excel results) ***
+RNs = pd.read_csv("temp_RNs.csv")
+rand1_m = np.array(RNs.iloc[:, 0])
+rand1_m = np.insert(rand1_m, 0, rand1_m[0])
+rand2_m = np.array(RNs.iloc[:, 1])
+rand2_m = np.insert(rand2_m, 0, rand2_m[0])
+rand3_m = np.array(RNs.iloc[:, 2])
+rand3_m = np.insert(rand3_m, 0, rand3_m[0])
 
-# rand1_m = np.zeros(shape_3D, dtype=np.float)
-# rand2_m = np.zeros(shape_3D, dtype=np.float)
-# rand3_m = np.zeros(shape_3D, dtype=np.float)
-# rand1_m[0][:] = np.random.standard_normal()
-# rand2_m[0][:] = np.random.standard_normal()
-# rand3_m[0][:] = np.random.standard_normal()
-
-# rand_m = np.zeros((M + 1, 3, I), dtype=np.float)
-# rand_m = np.random.standard_normal((M + 1, 3))
-
-# Numpy array loop - start from 2nd row since we have set initial values
+# Loop over time - start from 2nd row since we have set initial values
 for i in xrange(1, M + 1, 1):
 
-    # # Constant
-    # mu_m[i] = mu
-    # vol1_m[i] = vol1
-    # vol2_m[i] = vol2
-    # vol3_m[i] = vol3
-    # d_tau_m[i] = d_tau
+    # ----- CONSTANT -----
 
-    # Constant
+    # (although must set array to these values at each row)
     mu_m[i][:] = mu
     vol1_m[i][:] = vol1
     vol2_m[i][:] = vol2
     vol3_m[i][:] = vol3
     d_tau_m[i][:] = d_tau
 
-    # rand
-    rand1 = np.random.standard_normal((I, 1))
-    rand2 = np.random.standard_normal((I, 1))
-    rand3 = np.random.standard_normal((I, 1))
+    # # Get I RNs sampled from standard normal distribution
+    # rand1 = np.random.standard_normal((I, 1))
+    # rand2 = np.random.standard_normal((I, 1))
+    # rand3 = np.random.standard_normal((I, 1))
 
-    # # Dynamic
-    # temp = np.diff(S_plus_m[i-1])
-    # d_S_plus_m[i] = np.append(temp, temp[-1])
+    # *** Below is only for testing purposes (to replicate excel results) ***
+    rand1 = np.array([[rand1_m[i]], [np.random.standard_normal()]])
+    rand2 = np.array([[rand2_m[i]], [np.random.standard_normal()]])
+    rand3 = np.array([[rand3_m[i]], [np.random.standard_normal()]])
+    # rand1 = rand_m[i]
+    # rand2 = rand2_m[i]
+    # rand3 = rand3_m[i]
 
-    # Dynamic
+    # ----- DYNAMIC -----
+
+    # Recalculate dF term (dtau is constant)
     temp = np.diff(S_plus_m[i-1][:])
     d_S_plus_m[i][:] = np.hstack((temp, temp[:, -1].reshape(I, 1)))
     temp = np.diff(S_minus_m[i-1][:])
     d_S_minus_m[i][:] = np.hstack((temp, temp[:, -1].reshape(I, 1)))
 
-    # time step
+    # Time step
     t_index[i] = t_index[i - 1] + dt
 
     # Generate S paths using antithetic reduction
     S_plus_m[i][:] = S_plus_m[i - 1][:] + \
-                  mu_m[i][:] * dt +\
-                  (vol1_m[i][:] * rand1 + vol2_m[i][:] * rand2 + vol3_m[i][:] * rand3) * math.sqrt(dt) + \
-                  (d_S_plus_m[i][:] / d_tau_m[i][:]) * dt
-    
-    S_minus_m[i][:] = S_minus_m[i - 1][:] + \
                      mu_m[i][:] * dt + \
-                     (vol1_m[i][:] * (-rand1) + vol2_m[i][:] * (-rand2) + vol3_m[i][:] * (-rand3)) * math.sqrt(dt) + \
-                     (d_S_minus_m[i][:] / d_tau_m[i][:]) * dt
+                     (vol1_m[i][:] * rand1 + vol2_m[i][:] * rand2 + vol3_m[i][:] * rand3) * math.sqrt(dt) + \
+                     (d_S_plus_m[i][:] / d_tau_m[i][:]) * dt
+
+    S_minus_m[i][:] = S_minus_m[i - 1][:] + \
+                      mu_m[i][:] * dt + \
+                      (vol1_m[i][:] * (-rand1) + vol2_m[i][:] * (-rand2) + vol3_m[i][:] * (-rand3)) * math.sqrt(dt) + \
+                      (d_S_minus_m[i][:] / d_tau_m[i][:]) * dt
     
-    # MC 'continuous' average using updating rule (just for demonstration purposes since df.mean more efficient)
-    A_c_plus_m[i][:] = S_plus_m[i][:]
-    # A_c_plus_m[i][:] = (i / (i + 1)) * A_c_plus_m[i - 1][:] + S_plus_m[i][:] / (i + 1)
-    # A_c_plus[i] = (i / (i + 1)) * A_c_plus[i - 1] + S_plus[i] / (i + 1)
-    # A_c_minus[i] = (i / (i + 1)) * A_c_minus[i - 1] + S_minus[i] / (i + 1)
+    # # Arithmetic continuous average must be set equal to S to calculate the true values later
+    # A_c_plus_m[i][:] = S_plus_m[i][:]
+    # A_c_minus_m[i][:] = S_minus_m[i][:]
 
 ############################################################################################
 
-# Plotting
-# notation: [t, N, tau]
+# -------------------------
+#       PLOTTING
+# -------------------------
+#  notation: [t, I, tau]
 
-# ------ Simulated Forward Curves -------
-
-# # Today, 2 simulations
-# plt.plot(S_plus_m[0, 0, :])  # notation: [t, N, tau]
+# #------ Simulated Forward Curves -------
+#
+# # t=0, simulation 1 and 2, tau=all
+# plt.plot(S_plus_m[0, 0, :])
 # plt.plot(S_plus_m[0, 1, :])
-# # 1Y, 2 simulations
+# # t=1Y, simulation 1 and 2, all tenors
 # plt.plot(S_plus_m[101, 0, :])
 # plt.plot(S_plus_m[101, 1, :])
-# # 5Y, 2 simulations
+# # t=5Y, simulation 1 and 2, all tenors
 # plt.plot(S_plus_m[501, 0, :])
 # plt.plot(S_plus_m[501, 1, :])
 #
 # # ------ Projection of Forward Rate -------
 #
-# plt.plot(S_plus_m[:, 0, 0])  # today, notation: [t, N, tau]
-# plt.plot(S_plus_m[:, 1, 0])  # today
-# plt.plot(S_plus_m[:, 0, 11])  # 5Y, notation: [t, N, tau]
-# plt.plot(S_plus_m[:, 1, 11])  # 5Y
+# # t=all, simulation 1 and 2, tau=5Y
+# plt.plot(S_plus_m[:, 0, 0])
+# plt.plot(S_plus_m[:, 1, 0])
+# # t=all, simulation 1 and 2, tau=5Y
+# plt.plot(S_plus_m[:, 0, 11])
+# plt.plot(S_plus_m[:, 1, 11])
 
 
 ############################################################################################
 
+# --------------------------------
+#       ANTITHETIC TECHNIQUE
+# --------------------------------
+
 # Join plus and minus stats (antithetic technique)
-S_join_m = np.concatenate((S_plus_m, S_minus_m), axis=1)  # shape (1001L, 4L, 51L)
-# A_c_join = np.concatenate((A_c_plus, A_c_minus), axis=1)
+S_join_m = np.concatenate((S_plus_m, S_minus_m), axis=1)  # shape (M + 1, 2 * I, n_tau)
+# A_c_join_m = np.concatenate((S_plus_m, S_minus_m), axis=1)  # shape (M + 1, 2 * I, n_tau)
+# A_c_join_m = np.concatenate((A_c_plus_m, A_c_minus_m), axis=1)  # shape (M + 1, 2 * I, n_tau)
+
+# --------------------------------
+#       EXPANDING MEAN
+# --------------------------------
+
+# Arithmetic continuous expanding mean
+A_c_plus_m = S_plus_m.copy()
+A_c_minus_m = S_minus_m.copy()
+A_c_join_m = S_plus_m.copy()  # antithetic version, for now set to same no. of dims as S_plus to plot it against it
+# A_c_join_m[:][0] = 0.5 * (A_c_plus_m[:][0] + A_c_minus_m[:][0])
+
+for i in xrange(1, I):
+    # loop over all simulations for all tenors and times
+    A_c_plus_m[:, i, :] = (i / (i + 1)) * A_c_plus_m[:, i - 1, :] + S_plus_m[:, i, :] / (i + 1)
+    A_c_minus_m[:, i, :] = (i / (i + 1)) * A_c_minus_m[:, i - 1, :] + S_minus_m[:, i, :] / (i + 1)
+    A_c_join_m[:, i, :] = 0.5 * (A_c_plus_m[:, i, :] + A_c_minus_m[:, i, :])
+
+# -------------------------
+#       PLOTTING
+# -------------------------
+
+sys.exit()
+
+# p = sns.pointplot(np.arange(I), A_c_plus_m[1, :, 0])
+# # p.xaxis.set_visible(False)
+# plt.locator_params(nbins=5, axis='x')
+# x_values = [0, 20, 40, 60, 80, 100]
+# p.xaxis.set_ticklabels(x_values)
+
+sns.pointplot(np.arange(I), A_c_plus_m[1, :, 0])
+sns.pointplot(np.arange(I), A_c_join_m[1, :, 0])
+
 
 ############################################################################################
 
@@ -235,25 +238,14 @@ b = np.mean(S_join_m, axis=1)
 
 # Rolling mean
 
-x = np.zeros(I, dtype=np.float)
+
 # y = np.zeros(shape_3D, dtype=np.float)
 
-for i in xrange(1, I):
-    x[i] = i
-    # A_c_plus_m[1, i, 0] = (i / (i + 1)) * A_c_plus_m[1, i - 1, 0] + S_plus_m[1, i, 0] / (i + 1)  # for 1 tenor and 1 time only
-    # A_c_plus_m[:, i, 0] = (i / (i + 1)) * A_c_plus_m[:, i - 1, 0] + S_plus_m[:, i, 0] / (i + 1)  # for 1 tenor only
-    A_c_plus_m[:, i, :] = (i / (i + 1)) * A_c_plus_m[:, i - 1, :] + S_plus_m[:, i, :] / (i + 1)  # for all tenors and all times
 
-sys.exit()
 
 ## ---------- Plotting
 
-# plt.plot(x, A_c_plus_m[1, :, 0], 'o')
-p = sns.pointplot(np.array(x, dtype=int), A_c_plus_m[1, :, 0])
-# p.xaxis.set_visible(False)
-plt.locator_params(nbins=5, axis='x')
-x_values = [0, 20, 40, 60, 80, 100]
-p.xaxis.set_ticklabels(x_values)
+
 
 # max_xticks = 10
 # xloc = plt.MaxNLocator(max_xticks)
