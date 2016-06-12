@@ -38,7 +38,7 @@ import sys
 # Define parameters values
 T = 10.0  # t_max or maturity
 M = 1000  # no. of time steps
-I = 3000  # no. of MC simulations (S paths)
+I = 2000  # no. of MC simulations (S paths)
 n_tau = 50  # no. of tenors
 
 # Derived params
@@ -106,8 +106,10 @@ np.random.seed(1000)
 # rand3_m = np.insert(rand3_m, 0, rand3_m[0])
 
 # Loop over time - start from 2nd row since we have set initial values
+print 'Starting t loop....'
 for i in xrange(1, M + 1, 1):
-
+    if i % 100 == 0:
+        print 'i=', i
     # ----- CONSTANT -----
 
     # (although must set array to these values at each row)
@@ -152,7 +154,7 @@ for i in xrange(1, M + 1, 1):
                       (vol1_m[i][:] * (-rand1) + vol2_m[i][:] * (-rand2) + vol3_m[i][:] * (-rand3)) * math.sqrt(dt) + \
                       (d_S_minus_m[i][:] / d_tau_m[i][:]) * dt
 
-
+print 'Finished t loop....'
 ############################################################################################
 
 # -------------------------
@@ -189,7 +191,7 @@ for i in xrange(1, M + 1, 1):
 # --------------------------------
 
 # Join plus and minus stats (antithetic technique)
-S_join_m = np.concatenate((S_plus_m, S_minus_m), axis=1)  # shape (M + 1, 2 * I, n_tau)
+# S_join_m = np.concatenate((S_plus_m, S_minus_m), axis=1)  # shape (M + 1, 2 * I, n_tau)
 
 # --------------------------------
 #       ROLLING MEAN
@@ -201,12 +203,16 @@ A_c_minus_m = S_minus_m.copy()
 A_c_join_m = np.zeros(shape_3D, dtype=np.float)  # antithetic version, for now set to same no. of dims as S_plus to plot it against it
 A_c_join_m[:, 0, :] = 0.5*(A_c_plus_m[:, 0, :] + A_c_minus_m[:, 0, :])
 
+print 'Starting MC loop....'
 for i in xrange(1, I):
+    if i % 100 == 0:
+        print 'i=', i
     # loop over all simulations for all tenors and times
     A_c_plus_m[:, i, :] = (i / (i + 1)) * A_c_plus_m[:, i - 1, :] + S_plus_m[:, i, :] / (i + 1)
     A_c_minus_m[:, i, :] = (i / (i + 1)) * A_c_minus_m[:, i - 1, :] + S_minus_m[:, i, :] / (i + 1)
     A_c_join_m[:, i, :] = 0.5 * (A_c_plus_m[:, i, :] + A_c_minus_m[:, i, :])
 
+print 'End MC loop....'
 # -------------------------
 #       PLOTTING
 # -------------------------
@@ -272,6 +278,7 @@ my_L_join = (1.0 / my_tau) * (np.exp(my_f_join * my_tau) - 1)
 my_cap_plus = my_DF * np.maximum(my_L_plus - my_K, 0) * my_tau * my_notional
 my_cap_join = my_DF * np.maximum(my_L_join - my_K, 0) * my_tau * my_notional
 
+print 'Caplet price is my_cap_plus = {0}, my_cap_join = {1}'.format(my_cap_plus[-1], my_cap_join[-1])
 
 # -------------------------
 #       PLOTTING
