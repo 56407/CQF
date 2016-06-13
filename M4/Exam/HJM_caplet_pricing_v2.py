@@ -37,12 +37,13 @@ import sys
 
 # Define parameters values
 T = 10.0  # t_max or maturity
-M = 1000  # no. of time steps
-I = 2000  # no. of MC simulations (S paths)
+M = 50  # no. of time steps
+I = 1000  # no. of MC simulations (S paths)
 n_tau = 50  # no. of tenors
 
 # Derived params
-dt = T / M  # time step size
+# dt = T / M  # time step size
+dt = 0.01  # time step size
 shape_3D = (M + 1, I, n_tau + 1)
 # shape_2D = (M + 1, I)
 
@@ -108,7 +109,7 @@ np.random.seed(1000)
 # Loop over time - start from 2nd row since we have set initial values
 print 'Starting t loop....'
 for i in xrange(1, M + 1, 1):
-    if i % 100 == 0:
+    if i % 10 == 0:
         print 'i=', i
     # ----- CONSTANT -----
 
@@ -155,6 +156,7 @@ for i in xrange(1, M + 1, 1):
                       (d_S_minus_m[i][:] / d_tau_m[i][:]) * dt
 
 print 'Finished t loop....'
+
 ############################################################################################
 
 # -------------------------
@@ -270,12 +272,15 @@ my_t_loc = np.where(np.round(t_index, 2) == np.round(my_t, 2))[0][0]  # locate t
 my_tau_loc = np.where(np.round(tau, 2) == np.round(my_tau, 2))[0][0]  # locate the tau index for my_tau, must round
 
 my_f_plus = A_c_plus_m[my_t_loc, :, my_tau_loc]
+my_f_minus = A_c_minus_m[my_t_loc, :, my_tau_loc]
 my_f_join = A_c_join_m[my_t_loc, :, my_tau_loc]
 
 my_L_plus = (1.0 / my_tau) * (np.exp(my_f_plus * my_tau) - 1)
+my_L_minus = (1.0 / my_tau) * (np.exp(my_f_minus * my_tau) - 1)
 my_L_join = (1.0 / my_tau) * (np.exp(my_f_join * my_tau) - 1)
 
 my_cap_plus = my_DF * np.maximum(my_L_plus - my_K, 0) * my_tau * my_notional
+my_cap_minus = my_DF * np.maximum(my_L_minus - my_K, 0) * my_tau * my_notional
 my_cap_join = my_DF * np.maximum(my_L_join - my_K, 0) * my_tau * my_notional
 
 print 'Caplet price is my_cap_plus = {0}, my_cap_join = {1}'.format(my_cap_plus[-1], my_cap_join[-1])
@@ -285,10 +290,11 @@ print 'Caplet price is my_cap_plus = {0}, my_cap_join = {1}'.format(my_cap_plus[
 # -------------------------
 
 # Convergence diagram
-plt.plot(np.arange(I), my_cap_plus, '.-', ms=10, label='without Antith.')
+plt.plot(np.arange(I), my_cap_plus, '.-', ms=7, label='No Antithetic')
+plt.plot(np.arange(I), my_cap_minus, '.-', ms=7, label='Antithetic')
 # plt.plot(np.arange(I), my_cap_plus, '.', ms=10, label='without Antith.', color='blue')
 # plt.plot(np.arange(I), my_cap_plus, '-', ms=1, label='without Antith.', color='blue')
-plt.plot(np.arange(I), my_cap_join, '.-', ms=7, label='with Antith.')
+plt.plot(np.arange(I), my_cap_join, '.-', ms=7, label='Antithetic avg.')
 plt.xlabel('No. of MC simulations')
 plt.ylabel('Caplet price')
 plt.legend()
