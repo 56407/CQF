@@ -38,7 +38,7 @@ import sys
 # Define parameters values
 T = 10.0  # t_max or maturity
 M = 50  # no. of time steps
-I = 1000  # no. of MC simulations (S paths)
+I = 6000  # no. of MC simulations (S paths)
 n_tau = 50  # no. of tenors
 
 # Derived params
