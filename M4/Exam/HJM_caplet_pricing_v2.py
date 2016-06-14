@@ -35,35 +35,37 @@ import sys
 :return:
 """
 
-# Define parameters values
-T = 10.0  # t_max or maturity
+# MC parameters
 M = 50  # no. of time steps
-I = 6000  # no. of MC simulations (S paths)
+I = 5000  # no. of MC simulations (S paths)
 n_tau = 50  # no. of tenors
-
-# Derived params
-# dt = T / M  # time step size
 dt = 0.01  # time step size
 shape_3D = (M + 1, I, n_tau + 1)
-# shape_2D = (M + 1, I)
+
+# Caplet parameters
+my_t = 0.50  # future time (want expectation of 6M LIBOR)
+my_tau = 0.50
+my_DF = 0.996  # discount factor
+my_notional = 100000.0  # notional
+my_K = 0.035  # strike
 
 # Take drift, volatilities and f(t=0, T)  from CQF 'HJM Model - MC - Caplet v2.xlsm'
-data = pd.read_csv("input.csv", index_col=0)
-mu = np.array(data.iloc[0, :])  # drift
-vol1 = np.array(data.iloc[1, :])  # volatility of highest eigenvalue e(1)
-vol2 = np.array(data.iloc[2, :])  # volatility of 2nd highest eigenvalue e(2)
-vol3 = np.array(data.iloc[3, :])  # volatility of 3rd highest eigenvalue e(3)
-S0 = np.array(data.iloc[4, :])  # initial forward rate f(t=0, T)
+data = pd.read_csv("params.csv", index_col=0)
+mu = np.array(data.iloc[0, :], dtype=np.float)  # drift
+vol1 = np.array(data.iloc[1, :], dtype=np.float)  # volatility of highest eigenvalue e(1)
+vol2 = np.array(data.iloc[2, :], dtype=np.float)  # volatility of 2nd highest eigenvalue e(2)
+vol3 = np.array(data.iloc[3, :], dtype=np.float)  # volatility of 3rd highest eigenvalue e(3)
+S0 = np.array(data.iloc[4, :], dtype=np.float)  # initial forward rate f(t=0, T)
 
-# Calculate the dtau and dF for Musiela correction term dF/dtau in forward rate
+# Calculate Musiela correction term dF/dtau
 # Must append last value again to get correct vector dimension - this means 25Y maturity uses a backward derivative
-tau = np.array(data.columns, dtype=np.float)
-d_tau = np.diff(tau)  # convert from string to float to take diff
-d_tau = np.append(d_tau, d_tau[-1])  # this is dtau
 d_S_plus = np.diff(S0)
 d_S_plus = np.append(d_S_plus, d_S_plus[-1])  # this is dF
+tau = np.array(data.columns, dtype=np.float) # convert from string to float to take diff
+d_tau = np.diff(tau)
+d_tau = np.append(d_tau, d_tau[-1])  # this is dtau
 
-# Define numpy arrays to account for I MC simulations
+# Create a 3D numpy array for the above variables to account for n MC simulations
 # 3D array shape is [t, I, tau] where t is time, I is number of simulations and tau the tenor
 
 # Constant
@@ -74,43 +76,41 @@ vol3_m = np.zeros(shape_3D, dtype=np.float)
 d_tau_m = np.zeros(shape_3D, dtype=np.float)
 
 # Dynamic
-t_index = np.zeros((M + 1), dtype=np.float)  # note this is a 2D array
+t_m = np.zeros((M + 1), dtype=np.float)  # note this is a 2D array
 d_S_plus_m = np.zeros(shape_3D, dtype=np.float)
 S_plus_m = np.zeros(shape_3D, dtype=np.float)
+C_plus_m = np.zeros(shape_3D, dtype=np.float)
 
+# Initialise arrays (row=0, t=0) since loop starts at row=1
 
-# Set first value of arrays (row=0, t=0) since loop starts at row=1
 mu_m[0][:] = mu
 vol1_m[0][:] = vol1
 vol2_m[0][:] = vol2
 vol3_m[0][:] = vol3
 d_tau_m[0][:] = d_tau
 d_S_plus_m[0][:] = d_S_plus
-t_index[0] = 0
+t_m[0] = 0.0
 S_plus_m[0][:] = S0
+# Caplet payoff
+C_plus_m[0][:] = my_DF * np.maximum((1.0 / my_tau) * (np.exp(S0 * my_tau) - 1.0) - my_K, 0) * my_tau * my_notional
 
-# Create 'minus' array for S and dS to apply antithetic variance reduction technique
+# Create Antithetic for S_plus, d_S_plus and C_plus, called them 'minus'
 # warning: must ensure plus and minus objects are set via copy() instead of '=' otherwise memory issues
-S_minus_m = S_plus_m.copy()
 d_S_minus_m = d_S_plus_m.copy()
+S_minus_m = S_plus_m.copy()
+C_minus_m = C_plus_m.copy()
 
 # Define random number generator seed - this makes tne RNs predictable, otherwise get different everytime
 np.random.seed(1000)
 
-# # *** Below is only for testing purposes (to replicate excel results) ***
-# RNs = pd.read_csv("temp_RNs.csv")
-# rand1_m = np.array(RNs.iloc[:, 0])
-# rand1_m = np.insert(rand1_m, 0, rand1_m[0])
-# rand2_m = np.array(RNs.iloc[:, 1])
-# rand2_m = np.insert(rand2_m, 0, rand2_m[0])
-# rand3_m = np.array(RNs.iloc[:, 2])
-# rand3_m = np.insert(rand3_m, 0, rand3_m[0])
-
 # Loop over time - start from 2nd row since we have set initial values
 print 'Starting t loop....'
+
 for i in xrange(1, M + 1, 1):
+    
     if i % 10 == 0:
         print 'i=', i
+        
     # ----- CONSTANT -----
 
     # (although must set array to these values at each row)
@@ -125,14 +125,6 @@ for i in xrange(1, M + 1, 1):
     rand2 = np.random.standard_normal((I, 1))
     rand3 = np.random.standard_normal((I, 1))
 
-    # # *** Below is only for testing purposes (to replicate excel results) ***
-    # rand1 = np.array([[rand1_m[i]], [np.random.standard_normal()]])
-    # rand2 = np.array([[rand2_m[i]], [np.random.standard_normal()]])
-    # rand3 = np.array([[rand3_m[i]], [np.random.standard_normal()]])
-    # # rand1 = rand_m[i]
-    # # rand2 = rand2_m[i]
-    # # rand3 = rand3_m[i]
-
     # ----- DYNAMIC -----
 
     # Recalculate dF term (dtau is constant)
@@ -142,7 +134,7 @@ for i in xrange(1, M + 1, 1):
     d_S_minus_m[i][:] = np.hstack((temp, temp[:, -1].reshape(I, 1)))
 
     # Time step
-    t_index[i] = t_index[i - 1] + dt
+    t_m[i] = t_m[i - 1] + dt
 
     # Generate S paths using antithetic reduction
     S_plus_m[i][:] = S_plus_m[i - 1][:] + \
@@ -155,79 +147,65 @@ for i in xrange(1, M + 1, 1):
                       (vol1_m[i][:] * (-rand1) + vol2_m[i][:] * (-rand2) + vol3_m[i][:] * (-rand3)) * math.sqrt(dt) + \
                       (d_S_minus_m[i][:] / d_tau_m[i][:]) * dt
 
+    # Calculate payoff function for caplet
+    C_plus_m[i][:] = my_DF * np.maximum((1.0 / d_tau_m[i][:]) * (np.exp(S_plus_m[i][:] * d_tau_m[i][:]) - 1.0) - my_K, 0) * d_tau_m[i][:] * my_notional
+    C_minus_m[i][:] = my_DF * np.maximum((1.0 / d_tau_m[i][:]) * (np.exp(S_minus_m[i][:] * d_tau_m[i][:]) - 1.0) - my_K, 0) * d_tau_m[i][:] * my_notional
+
+
 print 'Finished t loop....'
 
 ############################################################################################
-
-# -------------------------
-#       PLOTTING
-# -------------------------
-#  notation: [t, I, tau]
-
-# #------ Simulated Forward Curves -------
-#
-# # t=0, simulation 1 and 2, tau=all
-# plt.plot(S_plus_m[0, 0, :])
-# plt.plot(S_plus_m[0, 1, :])
-# # t=1Y, simulation 1 and 2, all tenors
-# plt.plot(S_plus_m[101, 0, :])
-# plt.plot(S_plus_m[101, 1, :])
-# # t=5Y, simulation 1 and 2, all tenors
-# plt.plot(S_plus_m[501, 0, :])
-# plt.plot(S_plus_m[501, 1, :])
-#
-# # ------ Projection of Forward Rate -------
-#
-# # t=all, simulation 1 and 2, tau=5Y
-# plt.plot(S_plus_m[:, 0, 0])
-# plt.plot(S_plus_m[:, 1, 0])
-# # t=all, simulation 1 and 2, tau=5Y
-# plt.plot(S_plus_m[:, 0, 11])
-# plt.plot(S_plus_m[:, 1, 11])
-
-
-############################################################################################
-
-# --------------------------------
-#       ANTITHETIC TECHNIQUE
-# --------------------------------
-
-# Join plus and minus stats (antithetic technique)
-# S_join_m = np.concatenate((S_plus_m, S_minus_m), axis=1)  # shape (M + 1, 2 * I, n_tau)
 
 # --------------------------------
 #       ROLLING MEAN
 # --------------------------------
 
-# Arithmetic continuous running average
-A_c_plus_m = S_plus_m.copy()
-A_c_minus_m = S_minus_m.copy()
+# Join plus and minus stats (antithetic technique)
+# S_join_m = np.concatenate((S_plus_m, S_minus_m), axis=1)  # shape (M + 1, 2 * I, n_tau)
+
+# Arithmetic continuous running average for plus, minus and join
+A_c_plus_m = C_plus_m.copy()
+A_c_minus_m = C_minus_m.copy()
 A_c_join_m = np.zeros(shape_3D, dtype=np.float)  # antithetic version, for now set to same no. of dims as S_plus to plot it against it
 A_c_join_m[:, 0, :] = 0.5*(A_c_plus_m[:, 0, :] + A_c_minus_m[:, 0, :])
 
 print 'Starting MC loop....'
+
 for i in xrange(1, I):
     if i % 100 == 0:
         print 'i=', i
     # loop over all simulations for all tenors and times
-    A_c_plus_m[:, i, :] = (i / (i + 1)) * A_c_plus_m[:, i - 1, :] + S_plus_m[:, i, :] / (i + 1)
-    A_c_minus_m[:, i, :] = (i / (i + 1)) * A_c_minus_m[:, i - 1, :] + S_minus_m[:, i, :] / (i + 1)
+    A_c_plus_m[:, i, :] = (i / (i + 1)) * A_c_plus_m[:, i - 1, :] + C_plus_m[:, i, :] / (i + 1)
+    A_c_minus_m[:, i, :] = (i / (i + 1)) * A_c_minus_m[:, i - 1, :] + C_minus_m[:, i, :] / (i + 1)
     A_c_join_m[:, i, :] = 0.5 * (A_c_plus_m[:, i, :] + A_c_minus_m[:, i, :])
 
 print 'End MC loop....'
-# -------------------------
-#       PLOTTING
-# -------------------------
 
-# # Convergence diagram
-# sns.pointplot(np.arange(I), A_c_plus_m[1, :, 0])  # f(t=0.01, tau=0) vs number of simulations
-# sns.pointplot(np.arange(I), A_c_join_m[1, :, 0])  # same as above but using antithetic technique
+# Locate index of desired t and tau to get caplet pricing for corresponding libor L(t, tau)
+my_t_loc = np.where(np.round(t_m, 2) == np.round(my_t, 2))[0][0]
+my_tau_loc = np.where(np.round(tau, 2) == np.round(my_tau, 2))[0][0]
 
-# p = sns.pointplot(np.arange(I), A_c_plus_m[1, :, 0])
-# # p.xaxis.set_visible(False)
-# plt.locator_params(nbins=5, axis='x')
-# x_values = [0, 20, 40, 60, 80, 100]
-# p.xaxis.set_ticklabels(x_values)
+# Convergence diagram
+plt.plot(np.arange(I), A_c_plus_m[my_t_loc, :, my_tau_loc], '-', ms=7, label='Standard MC')
+plt.plot(np.arange(I), A_c_minus_m[my_t_loc, :, my_tau_loc], '-', ms=7, label='Antithetic MC')
+plt.plot(np.arange(I), A_c_join_m[my_t_loc, :, my_tau_loc], '-', ms=7, label='Average')
+plt.xlabel('No. of MC simulations')
+plt.ylabel('Caplet price')
+plt.legend()
+
+e_plus = A_c_plus_m[my_t_loc, :, my_tau_loc].std()/np.sqrt(I)
+e_minus = A_c_minus_m[my_t_loc, :, my_tau_loc].std()/np.sqrt(I)
+e_join = A_c_join_m[my_t_loc, :, my_tau_loc].std()/np.sqrt(I)
+
+print 'Caplet price is: \n' \
+      'Std. MC ={0} ({3}) \n ' \
+      'Antithetic MC ={1} ({4}) \n' \
+      'Average ={2} ({5})'.format(A_c_plus_m[my_t_loc, -1, my_tau_loc],
+                                  A_c_minus_m[my_t_loc, -1, my_tau_loc],
+                                  A_c_join_m[my_t_loc, -1, my_tau_loc],
+                                  e_plus,
+                                  e_minus,
+                                  e_join)
 
 
 ############################################################################################
@@ -253,51 +231,52 @@ print 'End MC loop....'
 
 #  Price a caplet option written on 6M LIBOR starting six months from today
 
-# Convert forward rate to LIBOR
-my_T_0 = 0.5  # LIBOR fixed
-my_T_1 = 1.0  # Cashflow paid
-my_tau = my_T_1 - my_T_0  # tenor
-my_t = 0.50  # future time (want expectation of 6M LIBOR)
 
-my_DF = 0.996  # discount factor
-my_notional = 100000.0  # notional
-my_K = 0.035  # strike
 
 # # *** Below values are just for testing benchmark ***
 # my_DF = 0.9518545  # discount factor
 # my_notional = 1.0  # notional
 # my_K = 0.03  # strike
 
-my_t_loc = np.where(np.round(t_index, 2) == np.round(my_t, 2))[0][0]  # locate the t index for my_t, must round
-my_tau_loc = np.where(np.round(tau, 2) == np.round(my_tau, 2))[0][0]  # locate the tau index for my_tau, must round
+#
+# my_f_plus = A_c_plus_m[my_t_loc, :, my_tau_loc]
+# my_f_minus = A_c_minus_m[my_t_loc, :, my_tau_loc]
+# my_f_join = A_c_join_m[my_t_loc, :, my_tau_loc]
+#
+# my_C_plus = (1.0 / my_tau) * (np.exp(my_f_plus * my_tau) - 1)
+# my_C_minus = (1.0 / my_tau) * (np.exp(my_f_minus * my_tau) - 1)
+# my_C_join = (1.0 / my_tau) * (np.exp(my_f_join * my_tau) - 1)
+#
+# my_cap_plus = my_DF * np.maximum(my_C_plus - my_K, 0) * my_tau * my_notional
+# my_cap_minus = my_DF * np.maximum(my_C_minus - my_K, 0) * my_tau * my_notional
+# my_cap_join = my_DF * np.maximum(my_C_join - my_K, 0) * my_tau * my_notional
 
-my_f_plus = A_c_plus_m[my_t_loc, :, my_tau_loc]
-my_f_minus = A_c_minus_m[my_t_loc, :, my_tau_loc]
-my_f_join = A_c_join_m[my_t_loc, :, my_tau_loc]
 
-my_L_plus = (1.0 / my_tau) * (np.exp(my_f_plus * my_tau) - 1)
-my_L_minus = (1.0 / my_tau) * (np.exp(my_f_minus * my_tau) - 1)
-my_L_join = (1.0 / my_tau) * (np.exp(my_f_join * my_tau) - 1)
-
-my_cap_plus = my_DF * np.maximum(my_L_plus - my_K, 0) * my_tau * my_notional
-my_cap_minus = my_DF * np.maximum(my_L_minus - my_K, 0) * my_tau * my_notional
-my_cap_join = my_DF * np.maximum(my_L_join - my_K, 0) * my_tau * my_notional
-
-print 'Caplet price is my_cap_plus = {0}, my_cap_join = {1}'.format(my_cap_plus[-1], my_cap_join[-1])
-
+############################################################################################
 # -------------------------
 #       PLOTTING
 # -------------------------
-
-# Convergence diagram
-plt.plot(np.arange(I), my_cap_plus, '.-', ms=7, label='No Antithetic')
-plt.plot(np.arange(I), my_cap_minus, '.-', ms=7, label='Antithetic')
-# plt.plot(np.arange(I), my_cap_plus, '.', ms=10, label='without Antith.', color='blue')
-# plt.plot(np.arange(I), my_cap_plus, '-', ms=1, label='without Antith.', color='blue')
-plt.plot(np.arange(I), my_cap_join, '.-', ms=7, label='Antithetic avg.')
-plt.xlabel('No. of MC simulations')
-plt.ylabel('Caplet price')
-plt.legend()
+# 
+# #------ Simulated Forward Curves -------
+#
+# # t=0, simulation 1 and 2, tau=all
+# plt.plot(S_plus_m[0, 0, :])
+# plt.plot(S_plus_m[0, 1, :])
+# # t=1Y, simulation 1 and 2, all tenors
+# plt.plot(S_plus_m[101, 0, :])
+# plt.plot(S_plus_m[101, 1, :])
+# # t=5Y, simulation 1 and 2, all tenors
+# plt.plot(S_plus_m[501, 0, :])
+# plt.plot(S_plus_m[501, 1, :])
+#
+# # ------ Projection of Forward Rate -------
+#
+# # t=all, simulation 1 and 2, tau=5Y
+# plt.plot(S_plus_m[:, 0, 0])
+# plt.plot(S_plus_m[:, 1, 0])
+# # t=all, simulation 1 and 2, tau=5Y
+# plt.plot(S_plus_m[:, 0, 11])
+# plt.plot(S_plus_m[:, 1, 11])
 
 # # # Seaborn pointplot (inefficient)
 #
@@ -314,3 +293,17 @@ plt.legend()
 # my_x = x[0::nbins]
 # plt.locator_params(nbins=my_x.shape[0], axis='x')
 # ax1.xaxis.set_ticklabels(my_x)
+
+# -------------------------
+#       PLOTTING
+# -------------------------
+
+# # Convergence diagram
+# sns.pointplot(np.arange(I), A_c_plus_m[1, :, 0])  # f(t=0.01, tau=0) vs number of simulations
+# sns.pointplot(np.arange(I), A_c_join_m[1, :, 0])  # same as above but using antithetic technique
+
+# p = sns.pointplot(np.arange(I), A_c_plus_m[1, :, 0])
+# # p.xaxis.set_visible(False)
+# plt.locator_params(nbins=5, axis='x')
+# x_values = [0, 20, 40, 60, 80, 100]
+# p.xaxis.set_ticklabels(x_values)
