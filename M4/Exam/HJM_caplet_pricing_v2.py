@@ -37,7 +37,7 @@ import sys
 
 # MC parameters
 M = 50  # no. of time steps
-I = 5000  # no. of MC simulations (S paths)
+I = 6000  # no. of MC simulations (S paths)
 n_tau = 50  # no. of tenors
 dt = 0.01  # time step size
 shape_3D = (M + 1, I, n_tau + 1)
@@ -206,104 +206,3 @@ print 'Caplet price is: \n' \
                                   e_plus,
                                   e_minus,
                                   e_join)
-
-
-############################################################################################
-
-# -------------------------
-#       PRICING
-# -------------------------
-
-
-# # Average across all simulations
-# # a_plus = np.mean(S_plus_m, axis=1)
-# a_plus = A_c_plus_m[:, -1, :]  # above line is equivalent to getting the last element of A_c_plus
-#
-# # a_minus = np.mean(S_minus_m, axis=1)
-# a_minus = A_c_minus_m[:, -1, :]  # above line is equivalent to getting the last element of A_c_minus
-#
-# # a_join = np.mean(S_join_m, axis=1)
-# a_join = A_c_join_m[:, -1, :]  # above line is equivalent to getting the last element of A_c_join
-
-# -------------------------
-#       Caplet
-# -------------------------
-
-#  Price a caplet option written on 6M LIBOR starting six months from today
-
-
-
-# # *** Below values are just for testing benchmark ***
-# my_DF = 0.9518545  # discount factor
-# my_notional = 1.0  # notional
-# my_K = 0.03  # strike
-
-#
-# my_f_plus = A_c_plus_m[my_t_loc, :, my_tau_loc]
-# my_f_minus = A_c_minus_m[my_t_loc, :, my_tau_loc]
-# my_f_join = A_c_join_m[my_t_loc, :, my_tau_loc]
-#
-# my_C_plus = (1.0 / my_tau) * (np.exp(my_f_plus * my_tau) - 1)
-# my_C_minus = (1.0 / my_tau) * (np.exp(my_f_minus * my_tau) - 1)
-# my_C_join = (1.0 / my_tau) * (np.exp(my_f_join * my_tau) - 1)
-#
-# my_cap_plus = my_DF * np.maximum(my_C_plus - my_K, 0) * my_tau * my_notional
-# my_cap_minus = my_DF * np.maximum(my_C_minus - my_K, 0) * my_tau * my_notional
-# my_cap_join = my_DF * np.maximum(my_C_join - my_K, 0) * my_tau * my_notional
-
-
-############################################################################################
-# -------------------------
-#       PLOTTING
-# -------------------------
-# 
-# #------ Simulated Forward Curves -------
-#
-# # t=0, simulation 1 and 2, tau=all
-# plt.plot(S_plus_m[0, 0, :])
-# plt.plot(S_plus_m[0, 1, :])
-# # t=1Y, simulation 1 and 2, all tenors
-# plt.plot(S_plus_m[101, 0, :])
-# plt.plot(S_plus_m[101, 1, :])
-# # t=5Y, simulation 1 and 2, all tenors
-# plt.plot(S_plus_m[501, 0, :])
-# plt.plot(S_plus_m[501, 1, :])
-#
-# # ------ Projection of Forward Rate -------
-#
-# # t=all, simulation 1 and 2, tau=5Y
-# plt.plot(S_plus_m[:, 0, 0])
-# plt.plot(S_plus_m[:, 1, 0])
-# # t=all, simulation 1 and 2, tau=5Y
-# plt.plot(S_plus_m[:, 0, 11])
-# plt.plot(S_plus_m[:, 1, 11])
-
-# # # Seaborn pointplot (inefficient)
-#
-# ax1 = sns.pointplot(np.arange(I), my_cap_plus, scale=0.5)
-# ax1.xaxis.set_visible(False)
-# ax1.set_xlabel('No. of MC simulations')
-# ax1.set_ylabel('Caplet price')
-# ax2 = sns.pointplot(np.arange(I), my_cap_join, scale=0.5, color="#bb3f3f")
-# ax2.xaxis.set_visible(False)
-#
-# # reduce number of x labels to plot
-# nbins = 100
-# x = np.arange(I)
-# my_x = x[0::nbins]
-# plt.locator_params(nbins=my_x.shape[0], axis='x')
-# ax1.xaxis.set_ticklabels(my_x)
-
-# -------------------------
-#       PLOTTING
-# -------------------------
-
-# # Convergence diagram
-# sns.pointplot(np.arange(I), A_c_plus_m[1, :, 0])  # f(t=0.01, tau=0) vs number of simulations
-# sns.pointplot(np.arange(I), A_c_join_m[1, :, 0])  # same as above but using antithetic technique
-
-# p = sns.pointplot(np.arange(I), A_c_plus_m[1, :, 0])
-# # p.xaxis.set_visible(False)
-# plt.locator_params(nbins=5, axis='x')
-# x_values = [0, 20, 40, 60, 80, 100]
-# p.xaxis.set_ticklabels(x_values)
