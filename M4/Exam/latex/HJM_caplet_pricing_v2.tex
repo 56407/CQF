@@ -234,7 +234,9 @@ model}\label{caplet-pricing-with-hjm-model}
 of a \textbf{caplet option} written on 6M LIBOR starting 6 months from
 today using the formula:
 
-\[  DF_{OIS}(0, 1) \times \max (L(0;, 0.5, 1) - K, 0) \times \tau \times N\]
+\begin{equation} \label{eq:payoff}
+ DF_{OIS}(0, 1) \times \max (L(0;, 0.5, 1) - K, 0) \times \tau \times N
+ \end{equation}
 
 with the following parameters:
 
@@ -247,7 +249,7 @@ with the following parameters:
 \item
   Tenor \(\tau = 0.5\)
 \item
-  Discount factor \$ DF\_\{OIS\}(0, 1) = 0.996\$ taken from a curve
+  Discount factor $ DF_{OIS}(0, 1) = 0.996$ taken from a curve
   built from traded OIS swaps
 \end{itemize}
 
@@ -267,65 +269,73 @@ The was done using {\bf Python 2.7} and the code has been attached separately (i
   The drift and volatilities of the forward rate were taken from the
   `HJM Model - MC - Caplet v2.xlsm' spreadsheet
 \item
-  The initial value for the forward rate \(f(t=0, T)\) was taken as the
+  The initial value for the forward rate \(f(t=0, \tau)\) was taken as the
   last row in `HJM Model - PCA.xlsm'
 \item
   The random number generator used is python's numpy standard normal
-  random number generator (`np.random.standard\_normal') which draw
-  samples from a standard Normal distribution (mean=0, stdev=1)
+  random number generator (`np.random.standard\_normal') which draws samples from the standard normal distribution (mean=0, stdev=1)
+  \item The antithetic variance reduction technique is used to increase the accuracy of the caplet price at minimal computational cost
 \end{itemize}
 
-To obtain an expectation of LIBOR rate in the future
-\(L(t; T_i, T_{i+1})\), the rate is selected from the corresponding
-tenor column \(\tau = T_{i+1} - T_i\) of the HJM output of forward
-rates, from the correct simulated time \(t\). We then convert to the
-simple annualised rate using \(L = m(e^{f/m}-1)\) where m is compounding
+To obtain an expectation of Libor rate in the future
+\(L(t; T_i, T_{i+1})\), the forward rate is selected from the corresponding
+tenor column \(\tau = T_{i+1} - T_i\) of the HJM output, for the correct simulated time \(t\). We then convert to Libor rate using \(L = m(e^{f/m}-1)\) where $m$ is the compounding
 frequency per year.
 
-For the 6M Libor starting 6 months from today, this means:
+For the caplet option written on 6M Libor starting 6 months from today this means:
 
 \begin{itemize}
 \tightlist
 \item
-  \(T_i = 0.5\) (Libor fixed)
+  \(T_i = 0.5\) (6 months Libor)
 \item
   \(T_{i+1} = 1.0\) (cashflow paid)
-\item
-  \(t = 0.5\) (6 months from today)
-\item
-  \(m = 1/\tau\) where \(\tau=0.5\)
+  \item
+Hence \(\tau = T_{i+1} - T_i =0.5\)
+\item   \(m = 1/\tau = 1/0.5 = 2.0\)
+
 \end{itemize}
 
-Hence we look for the result \(f(0.5; 0.5, 1)\) and plug the equation
-above and obtain the following result:
+Hence, for each MC simulation we look for the forward rate \(f(0; \tau=0.5)\) and plug this into equation (\ref{eq:payoff})
+above. 
+
+\newpage
+
+After 6,000 simulations, the caplet price with the above parameters converges to:
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-Caplet price without variance reduction = 463.421987344 (0.178897519137), 
-and with variance reduction = 464.017319875 (0.0)
+	Caplet price is:
+	Std. MC = 472.068922926 (0.144284561179)
+	Antithetic MC = 472.763692789 (0.175699863066)
+	Average = 472.416307857 (0.0199682961394)
     \end{Verbatim}
-
+where in brackets we see the MC error from the number of simulations (std/sqrt($N$))
     \subsubsection{Convergence diagram}\label{convergence-diagram}
 
  
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{HJM_caplet_pricing_v2_files/HJM_caplet_pricing_v2_7_0.png}
+    \adjustimage{max size={1.1\linewidth}{1.2\paperheight}}{HJM_caplet_pricing_v2_files/caplet_6000_MC_fixed}
     \end{center}
     { \hspace*{\fill} \\}
     
-    The figure shows in blue the simulated Caplet price and it's antithetic
-in green. The average of the two, also known as variance reduction, is
-shown in red. The caplet price shows robustness after around 4,000
-simulations. The antithetic appears to be the mirror image - this is
-expected as the technique simply takes the negative of a number drawn
-from the standard normal distribution to boost the statistics and we
-know this distribution is symmetric. The variance reduction therefore
-has a dramatic efect even at the start of the simulation, where the
-fluctuations about the mean are negligible. The convergence is shown to be in accordance to the
-variance-reduced curve, which means one could get a very good estimate
-of the price at the first simulation using this technique.
+    The figure shows in blue the standard MC result and it's antithetic
+in green. They appear to be roughly the mirror image of each other about their average (the variance-corrected result).   The caplet prices without the variance correction show robustness only after  $\sim 3,500$
+simulations, where they both appear converge to the average. The variance reduction therefore
+has a dramatic effect in reducing the simulation error even at early stages of the simulation. If this was the only source of error, one could get a very good estimate
+of the caplet price with just under $\sim 500$ simulations using the variance reduction technique, which would result in significantly faster computational times. However, MC integration has additional sources of error.
 
+\subsubsection{Sources of error}
+There are two main sources of error in the MC:
+\begin{itemize}
+\item Simulation error: this is because we are only simulating a finite number of realizations (possible paths). As discussed, this is calculated as $\sigma_N/\sqrt(N)$ where $\sigma_N$ is the standard deviation of the sample, which is a good approximation as $N \to \infty $
+
+\item Time step error: an error is introduced by the step size $dt$ by virtue of the discrete approximation to continuous events. Given the HJM model SDE to model the forward rate, this error is $\mathcal O( dt ) $ (although this could perhaps be reduced by adding a second order term like in the Milstein scheme)
+
+\item Other sources of error come from for example using a PCA model to calculate the volatility and having used only the 3 largest eigenvalues 
+
+\end{itemize}
 
     % Add a bibliography block to the postdoc
     
