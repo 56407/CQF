@@ -35,8 +35,8 @@ import sys
 """
 
 # MC parameters
-M = 50  # no. of time steps
-I = 1000  # no. of MC simulations (S paths)
+M = 500  # no. of time steps
+I = 10  # no. of MC simulations (S paths)
 n_tau = 50  # no. of tenors
 dt = 0.01  # time step size
 shape_3D = (M + 1, I, n_tau + 1)
@@ -44,9 +44,9 @@ shape_3D = (M + 1, I, n_tau + 1)
 # # Other parameters
 my_t = 0.50  # future time (want expectation of 6M LIBOR)
 my_tau = 0.50
-# my_DF = 0.996  # discount factor
-# my_notional = 100000.0  # notional
-# my_K = 0.035  # strike
+# my_DF = 0.996  # discount factor -- now calculated more accurately
+my_notional = 1.0  # notional
+my_K = 0.00637435465921353  # fixed rate (set to L(t, 0, 0.5) to have zero initial cashflows
 
 # Take drift, volatilities and f(t=0, T)  from CQF 'my HJM Model - MC - Caplet v2.xlsm'
 data = pd.read_csv("params.csv", index_col=0)
@@ -78,7 +78,17 @@ d_tau_m = np.zeros(shape_3D, dtype=np.float)
 t_m = np.zeros((M + 1), dtype=np.float)  # note this is a 2D array
 d_S_plus_m = np.zeros(shape_3D, dtype=np.float)
 S_plus_m = np.zeros(shape_3D, dtype=np.float)
-L_plus_m = np.zeros(shape_3D, dtype=np.float)
+E_plus_m = np.zeros(shape_3D, dtype=np.float)
+
+# Discount factors
+data2 = pd.read_csv("input.csv", index_col=0)
+DF_m = np.zeros((M + 1), dtype=np.float)
+i = 0
+j = 50
+for row in data2['DF_T1_T2'][0.5]:
+    DF_m[i:j+1] = row
+    i = j + 1
+    j += 50
 
 # Initialise arrays (row=0, t=0) since loop starts at row=1
 
@@ -91,13 +101,14 @@ d_S_plus_m[0][:] = d_S_plus
 t_m[0] = 0.0
 S_plus_m[0][:] = S0
 # LIBOR
-L_plus_m[0][:] = (1.0 / my_tau) * (np.exp(S0 * my_tau) - 1.0)
+# E_plus_m[0][:] = (1.0 / my_tau) * (np.exp(S0 * my_tau) - 1.0)
+E_plus_m[0][:] = np.maximum(my_notional * my_tau * DF_m[0]*((1.0 / d_tau) * (np.exp(S0 * d_tau) - 1.0) - my_K), 0)
 
-# Create Antithetic for S_plus, d_S_plus and L_plus, called them 'minus'
+# Create Antithetic for S_plus, d_S_plus and E_plus, called them 'minus'
 # warning: must ensure plus and minus objects are set via copy() instead of '=' otherwise memory issues
 d_S_minus_m = d_S_plus_m.copy()
 S_minus_m = S_plus_m.copy()
-L_minus_m = L_plus_m.copy()
+E_minus_m = E_plus_m.copy()
 
 # Define random number generator seed - this makes tne RNs predictable, otherwise get different everytime
 np.random.seed(1000)
@@ -146,13 +157,33 @@ for i in xrange(1, M + 1, 1):
                       (vol1_m[i][:] * (-rand1) + vol2_m[i][:] * (-rand2) + vol3_m[i][:] * (-rand3)) * math.sqrt(dt) + \
                       (d_S_minus_m[i][:] / d_tau_m[i][:]) * dt
 
-    # Calculate LIBOR function
-    L_plus_m[i][:] = (1.0 / d_tau_m[i][:]) * (np.exp(S_plus_m[i][:] * d_tau_m[i][:]) - 1.0)
-    L_minus_m[i][:] = (1.0 / d_tau_m[i][:]) * (np.exp(S_minus_m[i][:] * d_tau_m[i][:]) - 1.0)
+    # Calculate the M2M of the swap V(t)
+    E_plus_m[i][:] = np.maximum(my_notional * my_tau * DF_m[i]*((1.0 / d_tau_m[i][:]) * (np.exp(S_plus_m[i][:] * d_tau_m[i][:]) - 1.0) - my_K), 0)
+    E_minus_m[i][:] = np.maximum(my_notional * my_tau * DF_m[i]*((1.0 / d_tau_m[i][:]) * (np.exp(S_minus_m[i][:] * d_tau_m[i][:]) - 1.0) - my_K), 0)
 
+    # E_minus_m[i][:] = (1.0 / d_tau_m[i][:]) * (np.exp(S_minus_m[i][:] * d_tau_m[i][:]) - 1.0)
+    # # Calculate payoff function for caplet
+    # C_plus_m[i][:] = my_DF * np.maximum((1.0 / d_tau_m[i][:]) * (np.exp(S_plus_m[i][:] * d_tau_m[i][:]) - 1.0) - my_K, 0) * \
+    #                  d_tau_m[i][:] * my_notional
+    # C_minus_m[i][:] = my_DF * np.maximum((1.0 / d_tau_m[i][:]) * (np.exp(S_minus_m[i][:] * d_tau_m[i][:]) - 1.0) - my_K,
+    #                                      0) * d_tau_m[i][:] * my_notional
 
 print 'Finished t loop....'
+# sys.exit()
+col_names = ['Sim'+str(x) for x in xrange(1, I+1)]
+df = pd.DataFrame(index=data2.index, columns=col_names)
+# df.iloc[1, :] = E_plus_m[51, :, 1]
 
+i = 0
+for index, row in df.iterrows():
+    # embed()
+    # print E_plus_m[int(i), :, 1]
+    df.loc[index, :] = E_plus_m[int(i), :, 1]
+    # df.iloc[0, row = E_plus_m[int(i), :, 1]
+    i += 50
+
+
+sys.exit()
 ############################################################################################
 
 # --------------------------------
@@ -163,8 +194,8 @@ print 'Finished t loop....'
 # S_join_m = np.concatenate((S_plus_m, S_minus_m), axis=1)  # shape (M + 1, 2 * I, n_tau)
 
 # Arithmetic continuous running average for plus, minus and join
-A_c_plus_m = L_plus_m.copy()
-A_c_minus_m = L_minus_m.copy()
+A_c_plus_m = E_plus_m.copy()
+A_c_minus_m = E_minus_m.copy()
 A_c_join_m = np.zeros(shape_3D, dtype=np.float)  # antithetic version, for now set to same no. of dims as S_plus to plot it against it
 A_c_join_m[:, 0, :] = 0.5*(A_c_plus_m[:, 0, :] + A_c_minus_m[:, 0, :])
 
@@ -174,8 +205,8 @@ for i in xrange(1, I):
     if i % 100 == 0:
         print 'i=', i
     # loop over all simulations for all tenors and times
-    A_c_plus_m[:, i, :] = (i / (i + 1)) * A_c_plus_m[:, i - 1, :] + L_plus_m[:, i, :] / (i + 1)
-    A_c_minus_m[:, i, :] = (i / (i + 1)) * A_c_minus_m[:, i - 1, :] + L_minus_m[:, i, :] / (i + 1)
+    A_c_plus_m[:, i, :] = (i / (i + 1)) * A_c_plus_m[:, i - 1, :] + E_plus_m[:, i, :] / (i + 1)
+    A_c_minus_m[:, i, :] = (i / (i + 1)) * A_c_minus_m[:, i - 1, :] + E_minus_m[:, i, :] / (i + 1)
     A_c_join_m[:, i, :] = 0.5 * (A_c_plus_m[:, i, :] + A_c_minus_m[:, i, :])
 
 print 'End MC loop....'
