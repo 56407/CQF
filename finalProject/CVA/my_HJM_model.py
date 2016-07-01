@@ -22,31 +22,13 @@ import sys
 #
 #############################################################
 
-# def asian_option_simulator(S0, K, T, r, sigma, M, I, k, mode='fixed'):
-
-"""
-:param S0: initial forward rate values f(t=0, T)
-:param K: strike
-:param T: maturity
-:param M: no. of time steps
-:param I: no. of MC simulations (S paths)
-:param mode: fixed or floating strike used in payoff function (default is fixed)
-:return:
-"""
-
 # MC parameters
 M = 500  # no. of time steps
-I = 10  # no. of MC simulations (S paths)
+I = 1000  # no. of MC simulations (S paths)
 n_tau = 50  # no. of tenors
 dt = 0.01  # time step size
 shape_3D = (M + 1, I, n_tau + 1)
-
-# # Other parameters
-my_t = 0.50  # future time (want expectation of 6M LIBOR)
-my_tau = 0.50
-# my_DF = 0.996  # discount factor -- now calculated more accurately
-my_notional = 1.0  # notional
-my_K = 0.00637435465921353  # fixed rate (set to L(t, 0, 0.5) to have zero initial cashflows
+np.random.seed(1000)  # this makes RNs predictable
 
 # Take drift, volatilities and f(t=0, T)  from CQF 'my HJM Model - MC - Caplet v2.xlsm'
 data = pd.read_csv("params.csv", index_col=0)
@@ -55,136 +37,107 @@ vol1 = np.array(data.iloc[1, :], dtype=np.float)  # volatility of highest eigenv
 vol2 = np.array(data.iloc[2, :], dtype=np.float)  # volatility of 2nd highest eigenvalue e(2)
 vol3 = np.array(data.iloc[3, :], dtype=np.float)  # volatility of 3rd highest eigenvalue e(3)
 S0 = np.array(data.iloc[4, :], dtype=np.float)  # initial forward rate f(t=0, T)
+tau = np.array(data.columns, dtype=np.float)  # convert from string to float to take diff
 
 # Calculate Musiela correction term dF/dtau
 # Must append last value again to get correct vector dimension - this means 25Y maturity uses a backward derivative
 d_S_plus = np.diff(S0)
 d_S_plus = np.append(d_S_plus, d_S_plus[-1])  # this is dF
-tau = np.array(data.columns, dtype=np.float) # convert from string to float to take diff
 d_tau = np.diff(tau)
 d_tau = np.append(d_tau, d_tau[-1])  # this is dtau
 
-# Create a 3D numpy array for the above variables to account for n MC simulations
-# 3D array shape is [t, I, tau] where t is time, I is number of simulations and tau the tenor
-
-# Constant
-mu_m = np.zeros(shape_3D, dtype=np.float)
-vol1_m = np.zeros(shape_3D, dtype=np.float)
-vol2_m = np.zeros(shape_3D, dtype=np.float)
-vol3_m = np.zeros(shape_3D, dtype=np.float)
-d_tau_m = np.zeros(shape_3D, dtype=np.float)
-
-# Dynamic
-t_m = np.zeros((M + 1), dtype=np.float)  # note this is a 2D array
-d_S_plus_m = np.zeros(shape_3D, dtype=np.float)
-S_plus_m = np.zeros(shape_3D, dtype=np.float)
-E_plus_m = np.zeros(shape_3D, dtype=np.float)
-
-# Discount factors
+# Get pre-calculated discount factors
 data2 = pd.read_csv("input.csv", index_col=0)
 DF_m = np.zeros((M + 1), dtype=np.float)
 i = 0
 j = 50
-for row in data2['DF_T1_T2'][0.5]:
-    DF_m[i:j+1] = row
-    i = j + 1
+for row in data2['DF_T1_T2']:
+    DF_m[i:j] = row
+    i = j
     j += 50
 
-# Initialise arrays (row=0, t=0) since loop starts at row=1
+# Define numpy arrays for MC
+t_m = np.zeros((M + 1), dtype=np.float)  # note this is a 2D array
+S_plus_m = np.zeros(shape_3D, dtype=np.float)
 
-mu_m[0][:] = mu
-vol1_m[0][:] = vol1
-vol2_m[0][:] = vol2
-vol3_m[0][:] = vol3
-d_tau_m[0][:] = d_tau
-d_S_plus_m[0][:] = d_S_plus
+# Initialise arrays (row=0, t=0) since loop starts at row=1
 t_m[0] = 0.0
 S_plus_m[0][:] = S0
-# LIBOR
-# E_plus_m[0][:] = (1.0 / my_tau) * (np.exp(S0 * my_tau) - 1.0)
-E_plus_m[0][:] = np.maximum(my_notional * my_tau * DF_m[0]*((1.0 / d_tau) * (np.exp(S0 * d_tau) - 1.0) - my_K), 0)
-
-# Create Antithetic for S_plus, d_S_plus and E_plus, called them 'minus'
-# warning: must ensure plus and minus objects are set via copy() instead of '=' otherwise memory issues
-d_S_minus_m = d_S_plus_m.copy()
-S_minus_m = S_plus_m.copy()
-E_minus_m = E_plus_m.copy()
-
-# Define random number generator seed - this makes tne RNs predictable, otherwise get different everytime
-np.random.seed(1000)
+S_minus_m = S_plus_m.copy()  # antithetic
 
 # Loop over time - start from 2nd row since we have set initial values
 print 'Starting t loop....'
 
 for i in xrange(1, M + 1, 1):
-    
     if i % 10 == 0:
         print 'i=', i
         
-    # ----- CONSTANT -----
-
-    # (although must set array to these values at each row)
-    mu_m[i][:] = mu
-    vol1_m[i][:] = vol1
-    vol2_m[i][:] = vol2
-    vol3_m[i][:] = vol3
-    d_tau_m[i][:] = d_tau
-
     # Get I RNs sampled from standard normal distribution
     rand1 = np.random.standard_normal((I, 1))
     rand2 = np.random.standard_normal((I, 1))
     rand3 = np.random.standard_normal((I, 1))
 
-    # ----- DYNAMIC -----
-
-    # Recalculate dF term (dtau is constant)
-    temp = np.diff(S_plus_m[i-1][:])
-    d_S_plus_m[i][:] = np.hstack((temp, temp[:, -1].reshape(I, 1)))
-    temp = np.diff(S_minus_m[i-1][:])
-    d_S_minus_m[i][:] = np.hstack((temp, temp[:, -1].reshape(I, 1)))
+    # Recalculate dF for Musiela term
+    d_S_plus = np.diff(S_plus_m[i-1][:])
+    d_S_plus = np.hstack((d_S_plus, d_S_plus[:, -1].reshape(I, 1)))
+    d_S_minus = np.diff(S_minus_m[i-1][:])
+    d_S_minus = np.hstack((d_S_minus, d_S_minus[:, -1].reshape(I, 1)))
 
     # Time step
-    t_m[i] = t_m[i - 1] + dt
+    t_m[i] = round(t_m[i - 1] + dt, 2)  # rounding used to correct float arithmetic
 
     # Generate S paths using antithetic reduction
     S_plus_m[i][:] = S_plus_m[i - 1][:] + \
-                     mu_m[i][:] * dt + \
-                     (vol1_m[i][:] * rand1 + vol2_m[i][:] * rand2 + vol3_m[i][:] * rand3) * math.sqrt(dt) + \
-                     (d_S_plus_m[i][:] / d_tau_m[i][:]) * dt
-
+                     mu * dt + \
+                     (vol1 * rand1 + vol2 * rand2 + vol3 * rand3) * math.sqrt(dt) + \
+                     (d_S_plus / d_tau) * dt
     S_minus_m[i][:] = S_minus_m[i - 1][:] + \
-                      mu_m[i][:] * dt + \
-                      (vol1_m[i][:] * (-rand1) + vol2_m[i][:] * (-rand2) + vol3_m[i][:] * (-rand3)) * math.sqrt(dt) + \
-                      (d_S_minus_m[i][:] / d_tau_m[i][:]) * dt
-
-    # Calculate the M2M of the swap V(t)
-    E_plus_m[i][:] = np.maximum(my_notional * my_tau * DF_m[i]*((1.0 / d_tau_m[i][:]) * (np.exp(S_plus_m[i][:] * d_tau_m[i][:]) - 1.0) - my_K), 0)
-    E_minus_m[i][:] = np.maximum(my_notional * my_tau * DF_m[i]*((1.0 / d_tau_m[i][:]) * (np.exp(S_minus_m[i][:] * d_tau_m[i][:]) - 1.0) - my_K), 0)
-
-    # E_minus_m[i][:] = (1.0 / d_tau_m[i][:]) * (np.exp(S_minus_m[i][:] * d_tau_m[i][:]) - 1.0)
-    # # Calculate payoff function for caplet
-    # C_plus_m[i][:] = my_DF * np.maximum((1.0 / d_tau_m[i][:]) * (np.exp(S_plus_m[i][:] * d_tau_m[i][:]) - 1.0) - my_K, 0) * \
-    #                  d_tau_m[i][:] * my_notional
-    # C_minus_m[i][:] = my_DF * np.maximum((1.0 / d_tau_m[i][:]) * (np.exp(S_minus_m[i][:] * d_tau_m[i][:]) - 1.0) - my_K,
-    #                                      0) * d_tau_m[i][:] * my_notional
+                     mu * dt + \
+                     (vol1 * (-rand1) + vol2 * (-rand2) + vol3 * (-rand3)) * math.sqrt(dt) + \
+                     (d_S_minus / d_tau) * dt
 
 print 'Finished t loop....'
-# sys.exit()
-col_names = ['Sim'+str(x) for x in xrange(1, I+1)]
-df = pd.DataFrame(index=data2.index, columns=col_names)
-# df.iloc[1, :] = E_plus_m[51, :, 1]
 
+
+# Take only the relevant rates for the swap we want and store in a dataframe
+# t = 0.5, 1.0, ..., 5.0 (index=50, 100, 150,...,500); I = all (index=:); tau = 0.5 (index=1)
+col_names = ['Sim'+str(x) for x in xrange(1, I+1)]
+df_plus = pd.DataFrame(index=data2.index, columns=col_names, dtype=np.float)  # ensure dtype is set to float otherwise np.exp doesn't work
 i = 0
-for index, row in df.iterrows():
-    # embed()
-    # print E_plus_m[int(i), :, 1]
-    df.loc[index, :] = E_plus_m[int(i), :, 1]
-    # df.iloc[0, row = E_plus_m[int(i), :, 1]
+for index, row in df_plus.iterrows():
+    df_plus.loc[index, :] = S_plus_m[int(i), :, 1]
     i += 50
 
+# Convert to LIBOR
+my_freq = 0.5  # payment frequency (day count fraction)
+L_plus = (1.0 / my_freq) * (np.exp(df_plus * my_freq) - 1.0)
+
+# Get swap payments
+my_N = 1.0  # notional
+my_K_plus = L_plus.iloc[0, :]  # fixed rate (set to L(t, 0, 0.5) to have zero initial cashflows
+DF = data2['DF_T1_T2'].reshape(data2.shape[0], 1)  # Discount Factors (transpose to multiply by dataframe correctly)
+payments_plus = my_N * my_freq * DF * (L_plus - my_K_plus)
+
+# Get the M2M value of the swap (reverse cum sum of payments)
+V_plus = payments_plus.sort_index(axis=0, ascending=False).cumsum()
+V_plus = V_plus.shift(1).sort_index(ascending=True)
+V_plus.iloc[-1, :] = 0  # set the value of the swap to zero at the end of the term
+
+# Get Exposure
+E_plus = np.maximum(V_plus, 0)
+
+# # Plot all Exposure profiles for which the 0.5 tenor is less than or equal to zero
+# E_plus.loc[:, E_plus.loc[0.5] <= 0].plot()
 
 sys.exit()
 ############################################################################################
+
+# # # Other parameters
+# my_t = 0.50  # future time (want expectation of 6M LIBOR)
+# my_tau = 0.50
+# # my_DF = 0.996  # discount factor -- now calculated more accurately
+# my_notional = 1.0  # notional
+# my_K = 0.00637435465921353  # fixed rate (set to L(t, 0, 0.5) to have zero initial cashflows
 
 # --------------------------------
 #       ROLLING MEAN
