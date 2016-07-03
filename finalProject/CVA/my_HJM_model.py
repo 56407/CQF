@@ -19,16 +19,20 @@ import sys
 #############################################################
 #
 #  This script does I MC simulations of the HJM model
+#  and calculates the CVA for an IRS
 #
 #############################################################
 
 # MC parameters
 M = 500  # no. of time steps
-I = 1000  # no. of MC simulations (S paths)
+I = 5  # no. of MC simulations (S paths)
 n_tau = 50  # no. of tenors
 dt = 0.01  # time step size
 shape_3D = (M + 1, I, n_tau + 1)
 np.random.seed(1000)  # this makes RNs predictable
+
+# Read other pre-calculated data like DFs, PD, CDS, etc. necessary for CVA calculation
+data2 = pd.read_csv("input.csv", index_col=0)
 
 # Take drift, volatilities and f(t=0, T)  from CQF 'my HJM Model - MC - Caplet v2.xlsm'
 data = pd.read_csv("params.csv", index_col=0)
@@ -46,16 +50,6 @@ d_S_plus = np.append(d_S_plus, d_S_plus[-1])  # this is dF
 d_tau = np.diff(tau)
 d_tau = np.append(d_tau, d_tau[-1])  # this is dtau
 
-# Get pre-calculated discount factors
-data2 = pd.read_csv("input.csv", index_col=0)
-DF_m = np.zeros((M + 1), dtype=np.float)
-i = 0
-j = 50
-for row in data2['DF_T1_T2']:
-    DF_m[i:j] = row
-    i = j
-    j += 50
-
 # Define numpy arrays for MC
 t_m = np.zeros((M + 1), dtype=np.float)  # note this is a 2D array
 S_plus_m = np.zeros(shape_3D, dtype=np.float)
@@ -71,7 +65,7 @@ print 'Starting t loop....'
 for i in xrange(1, M + 1, 1):
     if i % 10 == 0:
         print 'i=', i
-        
+
     # Get I RNs sampled from standard normal distribution
     rand1 = np.random.standard_normal((I, 1))
     rand2 = np.random.standard_normal((I, 1))
@@ -98,94 +92,140 @@ for i in xrange(1, M + 1, 1):
 
 print 'Finished t loop....'
 
+###################################################
+#
+#       CVA CALCULATION
+#
+###################################################
 
-# Take only the relevant rates for the swap we want and store in a dataframe
+# Take only the relevant forward rates for the IRS we want (6M LIBOR expiring in 5Y) and store in dataframe
 # t = 0.5, 1.0, ..., 5.0 (index=50, 100, 150,...,500); I = all (index=:); tau = 0.5 (index=1)
-col_names = ['Sim'+str(x) for x in xrange(1, I+1)]
-df_plus = pd.DataFrame(index=data2.index, columns=col_names, dtype=np.float)  # ensure dtype is set to float otherwise np.exp doesn't work
+col_names = ['Sim' + str(x) for x in xrange(1, I + 1)]
+f_plus = pd.DataFrame(index=data2.index, columns=col_names, dtype=np.float)  # ensure dtype is set to float otherwise np.exp doesn't work
 i = 0
-for index, row in df_plus.iterrows():
-    df_plus.loc[index, :] = S_plus_m[int(i), :, 1]
+for index, row in f_plus.iterrows():
+    f_plus.loc[index, :] = S_plus_m[int(i), :, 1]
     i += 50
 
 # Convert to LIBOR
-my_freq = 0.5  # payment frequency (day count fraction)
-L_plus = (1.0 / my_freq) * (np.exp(df_plus * my_freq) - 1.0)
+freq = 0.5  # payment frequency (day count fraction)
+L_plus = (1.0 / freq) * (np.exp(f_plus * freq) - 1.0)
 
-# Get swap payments
-my_N = 1.0  # notional
-my_K_plus = L_plus.iloc[0, :]  # fixed rate (set to L(t, 0, 0.5) to have zero initial cashflows
-DF = data2['DF_T1_T2'].reshape(data2.shape[0], 1)  # Discount Factors (transpose to multiply by dataframe correctly)
-payments_plus = my_N * my_freq * DF * (L_plus - my_K_plus)
+# Calculate Discount Factors matrix
+ois = data2['OIS_spot']
+DF = pd.DataFrame(index=data2.index, columns=list(data2.index))
+DF.loc[0.0, :] = np.exp(-ois * (ois.index - 0.0))  # set first row to DF(0, T_i)
 
-# Get the M2M value of the swap (reverse cum sum of payments)
-V_plus = payments_plus.sort_index(axis=0, ascending=False).cumsum()
-V_plus = V_plus.shift(1).sort_index(ascending=True)
-V_plus.iloc[-1, :] = 0  # set the value of the swap to zero at the end of the term
+for index, row in DF.iterrows():
+    if index == 0.0:  # skip first row as already set above
+        continue
+    x = DF.loc[0.0][row.index]/DF.loc[0.0, index]
+    # x = np.exp(-ois * (row.index - index))
+    x[x > 1] = 0  # set to zero cases when the DF start time > final time
+    DF.loc[index, :] = x
 
-# Get Exposure
+np.fill_diagonal(DF.values, 0)  # set values along diagonal to zero to exclude them from the dot product sum below
+
+# Get the MTM value of the swap i.e. as a function of time
+N = 1.0  # notional
+K_plus = L_plus.iloc[0, :]  # fixed rate set to L(t, 0, 0.5) to have zero initial cashflows (par swap)
+V_plus = N * freq * DF.dot(L_plus - K_plus)  # note matrix multiplication using dot method
+
+# Get Exposure profile
 E_plus = np.maximum(V_plus, 0)
 
 # # Plot all Exposure profiles for which the 0.5 tenor is less than or equal to zero
 # E_plus.loc[:, E_plus.loc[0.5] <= 0].plot()
+# # Plot all Exposure profiles for which the 0.0 tenor values are less than 0.5 values
+# E_plus.loc[:, E_plus.loc[0.5] < E_plus.loc[1.0]].plot()
+
+# Get Expected Exposure (EE)
+x = np.ma.masked_where(E_plus == 0, E_plus)  # need to mask zero values to exclude them from the median
+x = np.ma.median(x[:-1], axis=1)  # mean is not so good as big outliers in data
+EE_plus = pd.DataFrame(index=E_plus.index[:-1], data=x, columns=['EE_plus'])
+
+sys.exit()
+
+# Calculate CVA by taking median (average) between tenors for the exposure and DFs (PD already ok)
+E_plus_med = (E_plus + E_plus.shift(-1)) / 2.0
+E_plus_med = E_plus_med.reset_index(drop=True).dropna()  # must reset index and drop NaN to multiply by below vars
+DF2 = data2['DF_T1_T2']  # need to parse discount factors again to use shift and take median
+DF2.iloc[0] = 1.0  # set this to one to take the median and not get nan
+DF_med = (DF2 + DF2.shift(-1)) / 2.0
+DF_med = DF_med.reset_index(drop=True).dropna()
+PD = data2['PD'].shift(-1)
+PD = PD.reset_index(drop=True).dropna()
+RR = 0.4  # recovery rate
+CVA = E_plus_med * DF_med * PD * (1 - RR)
+CVA_cum = CVA.cumsum()
+
+# Mention accruals missing
+# Only include positive part becasue negative is a libability rather than an asset - so only consider +v2 M2M, this is exposure
+
 
 sys.exit()
 ############################################################################################
 
-# # # Other parameters
-# my_t = 0.50  # future time (want expectation of 6M LIBOR)
-# my_tau = 0.50
-# # my_DF = 0.996  # discount factor -- now calculated more accurately
-# my_notional = 1.0  # notional
-# my_K = 0.00637435465921353  # fixed rate (set to L(t, 0, 0.5) to have zero initial cashflows
+# # Get the MTM value of the swap i.e. as a function of time (reverse cum sum of payments)
+# V_plus = payments_plus.sort_index(axis=0, ascending=False).cumsum()
+# V_plus = V_plus.shift(1).sort_index(ascending=True)
+# V_plus.iloc[-1, :] = 0  # set the value of the swap to zero at the end of the term
+#
+# # Get Exposure profile
+# E_plus = np.maximum(V_plus, 0)
+#
+# # # Plot all Exposure profiles for which the 0.5 tenor is less than or equal to zero
+# # E_plus.loc[:, E_plus.loc[0.5] <= 0].plot()
+# # # Plot all Exposure profiles for which the 0.0 tenor values are less than 0.5 values
+# # E_plus.loc[:, E_plus.loc[0.5] < E_plus.loc[1.0]].plot()
 
-# --------------------------------
-#       ROLLING MEAN
-# --------------------------------
-
-# Join plus and minus stats (antithetic technique)
-# S_join_m = np.concatenate((S_plus_m, S_minus_m), axis=1)  # shape (M + 1, 2 * I, n_tau)
-
-# Arithmetic continuous running average for plus, minus and join
-A_c_plus_m = E_plus_m.copy()
-A_c_minus_m = E_minus_m.copy()
-A_c_join_m = np.zeros(shape_3D, dtype=np.float)  # antithetic version, for now set to same no. of dims as S_plus to plot it against it
-A_c_join_m[:, 0, :] = 0.5*(A_c_plus_m[:, 0, :] + A_c_minus_m[:, 0, :])
-
-print 'Starting MC loop....'
-
-for i in xrange(1, I):
-    if i % 100 == 0:
-        print 'i=', i
-    # loop over all simulations for all tenors and times
-    A_c_plus_m[:, i, :] = (i / (i + 1)) * A_c_plus_m[:, i - 1, :] + E_plus_m[:, i, :] / (i + 1)
-    A_c_minus_m[:, i, :] = (i / (i + 1)) * A_c_minus_m[:, i - 1, :] + E_minus_m[:, i, :] / (i + 1)
-    A_c_join_m[:, i, :] = 0.5 * (A_c_plus_m[:, i, :] + A_c_minus_m[:, i, :])
-
-print 'End MC loop....'
-
-# Locate index of desired t and tau to get corresponding LIBOR L(t, tau)
-my_t_loc = np.where(np.round(t_m, 2) == np.round(my_t, 2))[0][0]
-my_tau_loc = np.where(np.round(tau, 2) == np.round(my_tau, 2))[0][0]
-
-# Convergence diagram
-plt.plot(np.arange(I), A_c_plus_m[my_t_loc, :, my_tau_loc], '-', ms=7, label='Standard MC')
-plt.plot(np.arange(I), A_c_minus_m[my_t_loc, :, my_tau_loc], '-', ms=7, label='Antithetic MC')
-plt.plot(np.arange(I), A_c_join_m[my_t_loc, :, my_tau_loc], '-', ms=7, label='Average')
-plt.xlabel('No. of MC simulations')
-plt.ylabel('LIBOR')
-plt.legend()
-
-e_plus = A_c_plus_m[my_t_loc, :, my_tau_loc].std()/np.sqrt(I)
-e_minus = A_c_minus_m[my_t_loc, :, my_tau_loc].std()/np.sqrt(I)
-e_join = A_c_join_m[my_t_loc, :, my_tau_loc].std()/np.sqrt(I)
-
-print 'LIBOR is: \n' \
-      'Std. MC ={0} ({3}) \n ' \
-      'Antithetic MC ={1} ({4}) \n' \
-      'Average ={2} ({5})'.format(A_c_plus_m[my_t_loc, -1, my_tau_loc],
-                                  A_c_minus_m[my_t_loc, -1, my_tau_loc],
-                                  A_c_join_m[my_t_loc, -1, my_tau_loc],
-                                  e_plus,
-                                  e_minus,
-                                  e_join)
+# # --------------------------------
+# #       ROLLING MEAN
+# # --------------------------------
+#
+# # Join plus and minus stats (antithetic technique)
+# # S_join_m = np.concatenate((S_plus_m, S_minus_m), axis=1)  # shape (M + 1, 2 * I, n_tau)
+#
+# # Arithmetic continuous running average for plus, minus and join
+# A_c_plus_m = E_plus_m.copy()
+# A_c_minus_m = E_minus_m.copy()
+# A_c_join_m = np.zeros(shape_3D, dtype=np.float)  # antithetic version, for now set to same no. of dims as S_plus to plot it against it
+# A_c_join_m[:, 0, :] = 0.5*(A_c_plus_m[:, 0, :] + A_c_minus_m[:, 0, :])
+#
+# print 'Starting MC loop....'
+#
+# for i in xrange(1, I):
+#     if i % 100 == 0:
+#         print 'i=', i
+#     # loop over all simulations for all tenors and times
+#     A_c_plus_m[:, i, :] = (i / (i + 1)) * A_c_plus_m[:, i - 1, :] + E_plus_m[:, i, :] / (i + 1)
+#     A_c_minus_m[:, i, :] = (i / (i + 1)) * A_c_minus_m[:, i - 1, :] + E_minus_m[:, i, :] / (i + 1)
+#     A_c_join_m[:, i, :] = 0.5 * (A_c_plus_m[:, i, :] + A_c_minus_m[:, i, :])
+#
+# print 'End MC loop....'
+#
+# # Locate index of desired t and tau to get corresponding LIBOR L(t, tau)
+# my_t_loc = np.where(np.round(t_m, 2) == np.round(my_t, 2))[0][0]
+# my_tau_loc = np.where(np.round(tau, 2) == np.round(my_tau, 2))[0][0]
+#
+# # Convergence diagram
+# plt.plot(np.arange(I), A_c_plus_m[my_t_loc, :, my_tau_loc], '-', ms=7, label='Standard MC')
+# plt.plot(np.arange(I), A_c_minus_m[my_t_loc, :, my_tau_loc], '-', ms=7, label='Antithetic MC')
+# plt.plot(np.arange(I), A_c_join_m[my_t_loc, :, my_tau_loc], '-', ms=7, label='Average')
+# plt.xlabel('No. of MC simulations')
+# plt.ylabel('LIBOR')
+# plt.legend()
+#
+# e_plus = A_c_plus_m[my_t_loc, :, my_tau_loc].std()/np.sqrt(I)
+# e_minus = A_c_minus_m[my_t_loc, :, my_tau_loc].std()/np.sqrt(I)
+# e_join = A_c_join_m[my_t_loc, :, my_tau_loc].std()/np.sqrt(I)
+#
+# print 'LIBOR is: \n' \
+#       'Std. MC ={0} ({3}) \n ' \
+#       'Antithetic MC ={1} ({4}) \n' \
+#       'Average ={2} ({5})'.format(A_c_plus_m[my_t_loc, -1, my_tau_loc],
+#                                   A_c_minus_m[my_t_loc, -1, my_tau_loc],
+#                                   A_c_join_m[my_t_loc, -1, my_tau_loc],
+#                                   e_plus,
+#                                   e_minus,
+#                                   e_join)
