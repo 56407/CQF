@@ -25,7 +25,7 @@ import sys
 
 # MC parameters
 M = 500  # no. of time steps
-I = 5  # no. of MC simulations (S paths)
+I = 1000  # no. of MC simulations (S paths)
 n_tau = 50  # no. of tenors
 dt = 0.01  # time step size
 shape_3D = (M + 1, I, n_tau + 1)
@@ -139,12 +139,27 @@ E_plus = np.maximum(V_plus, 0)
 # # Plot all Exposure profiles for which the 0.0 tenor values are less than 0.5 values
 # E_plus.loc[:, E_plus.loc[0.5] < E_plus.loc[1.0]].plot()
 
-# Get Expected Exposure (EE)
+# Get Expected Exposure (EE) from median of positive E
 x = np.ma.masked_where(E_plus == 0, E_plus)  # need to mask zero values to exclude them from the median
 x = np.ma.median(x[:-1], axis=1)  # mean is not so good as big outliers in data
-EE_plus = pd.DataFrame(index=E_plus.index[:-1], data=x, columns=['EE_plus'])
+EE_plus_median = pd.DataFrame(index=E_plus.index[:-1], data=x, columns=['EE_plus_median'])
+EE_plus_median.loc[5.0] = [0.0]  # add 5.0 tenor row as we know it's zero EE
+
+# Get Expected Exposure (EE) from mean of positive E
+x = np.array(E_plus, dtype=np.float32)  # need to do this line otherwise np.ma.mean throws error
+x = np.ma.masked_where(x == 0, x)
+x = np.ma.mean(x[:-1], axis=1)
+EE_plus_mean = pd.DataFrame(index=E_plus.index[:-1], data=x, columns=['EE_plus_mean'])
+EE_plus_mean.loc[5.0] = [0.0]  # add 5.0 tenor row as we know it's zero EE
 
 sys.exit()
+
+plt.plot(EE_plus_median, label="EE_median")
+plt.plot(EE_plus_mean, label="EE_mean")
+plt.xlabel("Tenor")
+plt.ylabel("Expected Exposure")
+plt.legend()
+
 
 # Calculate CVA by taking median (average) between tenors for the exposure and DFs (PD already ok)
 E_plus_med = (E_plus + E_plus.shift(-1)) / 2.0
