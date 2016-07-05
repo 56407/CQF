@@ -186,6 +186,7 @@ PD_interpol.index = index_interpol
 RR = 0.4  # recovery rate
 CVA = (1 - RR) * EE_plus_median_interpol * DF_interpol * PD_interpol
 CVA_total = CVA.sum()
+#text
 
 # # Plotting
 # CVA.plot.bar(width=1.0, alpha=0.5)
