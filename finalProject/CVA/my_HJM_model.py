@@ -25,7 +25,7 @@ import sys
 
 # MC parameters
 M = 500  # no. of time steps
-I = 1000  # no. of MC simulations (S paths)
+I = 100  # no. of MC simulations (S paths)
 n_tau = 50  # no. of tenors
 dt = 0.01  # time step size
 shape_3D = (M + 1, I, n_tau + 1)
@@ -100,6 +100,7 @@ print 'Finished t loop....'
 
 # Take only the relevant forward rates for the IRS we want (6M LIBOR expiring in 5Y) and store in dataframe
 # t = 0.5, 1.0, ..., 5.0 (index=50, 100, 150,...,500); I = all (index=:); tau = 0.5 (index=1)
+
 col_names = ['Sim' + str(x) for x in xrange(1, I + 1)]
 f_plus = pd.DataFrame(index=data2.index, columns=col_names, dtype=np.float)  # ensure dtype is set to float otherwise np.exp doesn't work
 i = 0
@@ -108,10 +109,12 @@ for index, row in f_plus.iterrows():
     i += 50
 
 # Convert to LIBOR
+
 freq = 0.5  # payment frequency (day count fraction)
 L_plus = (1.0 / freq) * (np.exp(f_plus * freq) - 1.0)
 
 # Calculate Discount Factors matrix
+
 ois = data2['OIS_spot']
 DF = pd.DataFrame(index=data2.index, columns=list(data2.index))
 DF.loc[0.0, :] = np.exp(-ois * (ois.index - 0.0))  # set first row to DF(0, T_i)
@@ -127,11 +130,13 @@ for index, row in DF.iterrows():
 np.fill_diagonal(DF.values, 0)  # set values along diagonal to zero to exclude them from the dot product sum below
 
 # Get the MTM value of the swap i.e. as a function of time
+
 N = 1.0  # notional
 K_plus = L_plus.iloc[0, :]  # fixed rate set to L(t, 0, 0.5) to have zero initial cashflows (par swap)
 V_plus = N * freq * DF.dot(L_plus - K_plus)  # note matrix multiplication using dot method
 
 # Get Exposure profile
+# (only include positive part because negative is a liability rather than an asset)
 E_plus = np.maximum(V_plus, 0)
 
 # # Plot all Exposure profiles for which the 0.5 tenor is less than or equal to zero
@@ -142,58 +147,58 @@ E_plus = np.maximum(V_plus, 0)
 # Get Expected Exposure (EE) from median of positive E
 x = np.ma.masked_where(E_plus == 0, E_plus)  # need to mask zero values to exclude them from the median
 x = np.ma.median(x[:-1], axis=1)  # mean is not so good as big outliers in data
-EE_plus_median = pd.DataFrame(index=E_plus.index[:-1], data=x, columns=['EE_plus_median'])
-EE_plus_median.loc[5.0] = [0.0]  # add 5.0 tenor row as we know it's zero EE
+EE_plus_median = pd.Series(index=E_plus.index[:-1], data=x)
+EE_plus_median.loc[5.0] = 0.0  # add 5.0 tenor row as we know it's zero EE
 
 # Get Expected Exposure (EE) from mean of positive E
 x = np.array(E_plus, dtype=np.float32)  # need to do this line otherwise np.ma.mean throws error
 x = np.ma.masked_where(x == 0, x)
 x = np.ma.mean(x[:-1], axis=1)
-EE_plus_mean = pd.DataFrame(index=E_plus.index[:-1], data=x, columns=['EE_plus_mean'])
-EE_plus_mean.loc[5.0] = [0.0]  # add 5.0 tenor row as we know it's zero EE
+EE_plus_mean = pd.Series(index=E_plus.index[:-1], data=x)
+EE_plus_mean.loc[5.0] = 0.0  # add 5.0 tenor row as we know it's zero EE
 
-sys.exit()
+# plt.plot(EE_plus_median, label="EE_median")
+# plt.plot(EE_plus_mean, label="EE_mean")
+# plt.xlabel("Tenor")
+# plt.ylabel("Expected Exposure")
+# plt.legend()
 
-plt.plot(EE_plus_median, label="EE_median")
-plt.plot(EE_plus_mean, label="EE_mean")
-plt.xlabel("Tenor")
-plt.ylabel("Expected Exposure")
-plt.legend()
+# Interpolate EE and DF between tenors to calculate CVA
 
+index_interpol = ['0.0-0.5', '0.5-1.0', '1.0-1.5', '1.5-2.0', '2.0-2.5', '2.5-3.0', '3.0-3.5', '3.5-4.0', '4.0-4.5',
+                  '4.5-5.0']
 
-# Calculate CVA by taking median (average) between tenors for the exposure and DFs (PD already ok)
-E_plus_med = (E_plus + E_plus.shift(-1)) / 2.0
-E_plus_med = E_plus_med.reset_index(drop=True).dropna()  # must reset index and drop NaN to multiply by below vars
-DF2 = data2['DF_T1_T2']  # need to parse discount factors again to use shift and take median
-DF2.iloc[0] = 1.0  # set this to one to take the median and not get nan
-DF_med = (DF2 + DF2.shift(-1)) / 2.0
-DF_med = DF_med.reset_index(drop=True).dropna()
-PD = data2['PD'].shift(-1)
-PD = PD.reset_index(drop=True).dropna()
+EE_plus_median_interpol = (EE_plus_median + EE_plus_median.shift(-1)) / 2.0
+EE_plus_median_interpol = EE_plus_median_interpol.iloc[:-1]
+EE_plus_median_interpol.index = index_interpol
+
+DF_interpol = DF.loc[0.0, :].copy()  # for simplicity take only DF(t=0, T_i)
+DF_interpol[0.0] = 1.0  # need to set this to 1 again to take the average
+DF_interpol = (DF_interpol + DF_interpol.shift(-1))/2.0
+DF_interpol = DF_interpol.iloc[:-1]
+DF_interpol.index = index_interpol
+
+PD_interpol = data2['PD'].iloc[1:]
+PD_interpol.index = index_interpol
+
+# Calculate CVA
+
 RR = 0.4  # recovery rate
-CVA = E_plus_med * DF_med * PD * (1 - RR)
-CVA_cum = CVA.cumsum()
+CVA = (1 - RR) * EE_plus_median_interpol * DF_interpol * PD_interpol
+CVA_total = CVA.sum()
 
-# Mention accruals missing
-# Only include positive part becasue negative is a libability rather than an asset - so only consider +v2 M2M, this is exposure
+# # Plotting
+# CVA.plot.bar(width=1.0, alpha=0.5)
+# Loss = pd.Series(index=index_interpol, data=(1-RR))
+# df = pd.concat([Loss, EE_plus_median_interpol, DF_interpol, PD_interpol, CVA], axis=1,
+#                keys=['1-RR', 'EE_interpol', 'DF_interpol', 'PD_bootstr', 'CVA'])
+# df.plot(subplots=True, marker='o')
+# # df.plot(subplots=True, kind='bar', alpha=0.5, width=1.0)
 
+# NOTE: the above analysis doesn't account for accruals effects
 
-sys.exit()
 ############################################################################################
-
-# # Get the MTM value of the swap i.e. as a function of time (reverse cum sum of payments)
-# V_plus = payments_plus.sort_index(axis=0, ascending=False).cumsum()
-# V_plus = V_plus.shift(1).sort_index(ascending=True)
-# V_plus.iloc[-1, :] = 0  # set the value of the swap to zero at the end of the term
 #
-# # Get Exposure profile
-# E_plus = np.maximum(V_plus, 0)
-#
-# # # Plot all Exposure profiles for which the 0.5 tenor is less than or equal to zero
-# # E_plus.loc[:, E_plus.loc[0.5] <= 0].plot()
-# # # Plot all Exposure profiles for which the 0.0 tenor values are less than 0.5 values
-# # E_plus.loc[:, E_plus.loc[0.5] < E_plus.loc[1.0]].plot()
-
 # # --------------------------------
 # #       ROLLING MEAN
 # # --------------------------------
@@ -204,7 +209,7 @@ sys.exit()
 # # Arithmetic continuous running average for plus, minus and join
 # A_c_plus_m = E_plus_m.copy()
 # A_c_minus_m = E_minus_m.copy()
-# A_c_join_m = np.zeros(shape_3D, dtype=np.float)  # antithetic version, for now set to same no. of dims as S_plus to plot it against it
+# A_c_join_m = np.zeros(shape_3D, dtype=np.float)
 # A_c_join_m[:, 0, :] = 0.5*(A_c_plus_m[:, 0, :] + A_c_minus_m[:, 0, :])
 #
 # print 'Starting MC loop....'
