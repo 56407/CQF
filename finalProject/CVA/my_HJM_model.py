@@ -114,10 +114,13 @@ freq = 0.5  # payment frequency (day count fraction)
 L_plus = (1.0 / freq) * (np.exp(f_plus * freq) - 1.0)
 
 # Calculate Discount Factors matrix
+L_plus_mean = L_plus.mean(axis=1)  # get expectation of Libor across tenors
+ZCB = 1.0 / (1 + freq * L_plus_mean)  # Zero Coupon Bond
+ZCB.iloc[0] = 1.0  # set first row to 1 by definition
+ZCB = ZCB.cumprod()  # take cumulative product (equivalent to 'integrating under f_plus')
 
-ois = data2['OIS_spot']
 DF = pd.DataFrame(index=data2.index, columns=list(data2.index))
-DF.loc[0.0, :] = np.exp(-ois * (ois.index - 0.0))  # set first row to DF(0, T_i)
+DF.loc[0.0, :] = ZCB  # set first row to DF(0, T_i)
 
 for index, row in DF.iterrows():
     if index == 0.0:  # skip first row as already set above
@@ -144,18 +147,23 @@ E_plus = np.maximum(V_plus, 0)
 # # Plot all Exposure profiles for which the 0.0 tenor values are less than 0.5 values
 # E_plus.loc[:, E_plus.loc[0.5] < E_plus.loc[1.0]].plot()
 
-# Get Expected Exposure (EE) from median of positive E
-x = np.ma.masked_where(E_plus == 0, E_plus)  # need to mask zero values to exclude them from the median
-x = np.ma.median(x[:-1], axis=1)  # mean is not so good as big outliers in data
-EE_plus_median = pd.Series(index=E_plus.index[:-1], data=x)
+# Get masked version to mask zero values to exclude them from the median
+E_plus_masked = np.ma.masked_where(E_plus == 0, E_plus)
+
+# Get Expected Exposure (EE) from median of positive E (mean is not so good as big outliers in data)
+EE_plus_median = np.ma.median(E_plus_masked[:-1], axis=1)  # must remove last row as all elements zero &will throw error
+EE_plus_median = pd.Series(index=E_plus.index[:-1], data=EE_plus_median)  # convert to pandas series
 EE_plus_median.loc[5.0] = 0.0  # add 5.0 tenor row as we know it's zero EE
 
 # Get Expected Exposure (EE) from mean of positive E
-x = np.array(E_plus, dtype=np.float32)  # need to do this line otherwise np.ma.mean throws error
-x = np.ma.masked_where(x == 0, x)
-x = np.ma.mean(x[:-1], axis=1)
-EE_plus_mean = pd.Series(index=E_plus.index[:-1], data=x)
+E_plus2 = np.array(E_plus, dtype=np.float32)  # need to do this line otherwise np.ma.mean throws error
+E_plus_masked = np.ma.masked_where(E_plus2 == 0, E_plus2)
+EE_plus_mean = np.ma.mean(E_plus_masked[:-1], axis=1)
+EE_plus_mean = pd.Series(index=E_plus.index[:-1], data=EE_plus_mean)
 EE_plus_mean.loc[5.0] = 0.0  # add 5.0 tenor row as we know it's zero EE
+
+# Get PFE from the Exposure 97.5 percentile
+PFE_plus = pd.Series(index=E_plus.index, data=np.percentile(E_plus_masked, q=97.5, axis=1))
 
 # plt.plot(EE_plus_median, label="EE_median")
 # plt.plot(EE_plus_mean, label="EE_mean")
@@ -186,7 +194,6 @@ PD_interpol.index = index_interpol
 RR = 0.4  # recovery rate
 CVA = (1 - RR) * EE_plus_median_interpol * DF_interpol * PD_interpol
 CVA_total = CVA.sum()
-#text
 
 # # Plotting
 # CVA.plot.bar(width=1.0, alpha=0.5)
