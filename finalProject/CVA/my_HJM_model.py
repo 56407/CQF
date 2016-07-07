@@ -25,14 +25,11 @@ import sys
 
 # MC parameters
 M = 500  # no. of time steps
-I = 100  # no. of MC simulations (S paths)
+I = 1000  # no. of MC simulations (S paths)
 n_tau = 50  # no. of tenors
 dt = 0.01  # time step size
 shape_3D = (M + 1, I, n_tau + 1)
 np.random.seed(1000)  # this makes RNs predictable
-
-# Read other pre-calculated data like DFs, PD, CDS, etc. necessary for CVA calculation
-data2 = pd.read_csv("input.csv", index_col=0)
 
 # Take drift, volatilities and f(t=0, T)  from CQF 'my HJM Model - MC - Caplet v2.xlsm'
 data = pd.read_csv("params.csv", index_col=0)
@@ -98,9 +95,11 @@ print 'Finished t loop....'
 #
 ###################################################
 
+# Read other pre-calculated data like DFs, PD, CDS, etc. necessary for CVA calculation
+data2 = pd.read_csv("input.csv", index_col=0)
+
 # Take only the relevant forward rates for the IRS we want (6M LIBOR expiring in 5Y) and store in dataframe
 # t = 0.5, 1.0, ..., 5.0 (index=50, 100, 150,...,500); I = all (index=:); tau = 0.5 (index=1)
-
 col_names = ['Sim' + str(x) for x in xrange(1, I + 1)]
 f_plus = pd.DataFrame(index=data2.index, columns=col_names, dtype=np.float)  # ensure dtype is set to float otherwise np.exp doesn't work
 i = 0
@@ -109,18 +108,29 @@ for index, row in f_plus.iterrows():
     i += 50
 
 # Convert to LIBOR
-
 freq = 0.5  # payment frequency (day count fraction)
 L_plus = (1.0 / freq) * (np.exp(f_plus * freq) - 1.0)
 
-# Calculate Discount Factors matrix
-L_plus_mean = L_plus.mean(axis=1)  # get expectation of Libor across tenors
-ZCB = 1.0 / (1 + freq * L_plus_mean)  # Zero Coupon Bond
-ZCB.iloc[0] = 1.0  # set first row to 1 by definition
-ZCB = ZCB.cumprod()  # take cumulative product (equivalent to 'integrating under f_plus')
+# Set fixed rate K - to L(t, 0, 0.5) to have zero initial cashflows (par swap)
+K_plus = L_plus.iloc[0, :][0]  # getting scalar here but know same value across all simulations
 
-DF = pd.DataFrame(index=data2.index, columns=list(data2.index))
-DF.loc[0.0, :] = ZCB  # set first row to DF(0, T_i)
+# Mask the rates which don't contribute to the Exposure (when Libor is less than the agreed rate)
+L_plus_masked = np.ma.masked_where(L_plus < K_plus, L_plus)
+
+# Calculate Discount Factors for each simulation, ZCB stands for Zero Coupon Bond
+ZCB_plus = 1.0 / (1 + freq * L_plus)
+ZCB_plus.iloc[0, :] = 1.0  # set first row to 1 by definition
+ZCB_plus = ZCB_plus.cumprod()  # take cumulative product (equivalent to 'integrating under f_plus')
+ZCB_plus_mean = pd.Series(index=ZCB_plus.index, data=np.mean(ZCB_plus, axis=1))
+
+# Not sure if commented lines below would be valid
+# # For simplicity, take the mean of the DFs that contribute to the Exposure and calculate the DF matrix from this
+# ZCB_plus_masked = np.ma.masked_array(ZCB_plus, mask=L_plus_masked.mask)
+# ZCB_plus_masked_mean = pd.Series(index=ZCB_plus.index, data=np.mean(ZCB_plus_masked, axis=1))
+
+DF = pd.DataFrame(index=ZCB_plus.index, columns=list(ZCB_plus.index))
+# DF.loc[0.0, :] = ZCB_plus_masked_mean  # unsure if this would be valid (see above)
+DF.loc[0.0, :] = ZCB_plus_mean  # set first row to DF(0, T_i)
 
 for index, row in DF.iterrows():
     if index == 0.0:  # skip first row as already set above
@@ -133,13 +143,10 @@ for index, row in DF.iterrows():
 np.fill_diagonal(DF.values, 0)  # set values along diagonal to zero to exclude them from the dot product sum below
 
 # Get the MTM value of the swap i.e. as a function of time
-
 N = 1.0  # notional
-K_plus = L_plus.iloc[0, :]  # fixed rate set to L(t, 0, 0.5) to have zero initial cashflows (par swap)
 V_plus = N * freq * DF.dot(L_plus - K_plus)  # note matrix multiplication using dot method
 
-# Get Exposure profile
-# (only include positive part because negative is a liability rather than an asset)
+# Get Exposure profile (only include positive part because negative is a liability rather than an asset)
 E_plus = np.maximum(V_plus, 0)
 
 # # Plot all Exposure profiles for which the 0.5 tenor is less than or equal to zero
@@ -147,32 +154,27 @@ E_plus = np.maximum(V_plus, 0)
 # # Plot all Exposure profiles for which the 0.0 tenor values are less than 0.5 values
 # E_plus.loc[:, E_plus.loc[0.5] < E_plus.loc[1.0]].plot()
 
-# Get masked version to mask zero values to exclude them from the median
-E_plus_masked = np.ma.masked_where(E_plus == 0, E_plus)
-
-# Get Expected Exposure (EE) from median of positive E (mean is not so good as big outliers in data)
-EE_plus_median = np.ma.median(E_plus_masked[:-1], axis=1)  # must remove last row as all elements zero &will throw error
-EE_plus_median = pd.Series(index=E_plus.index[:-1], data=EE_plus_median)  # convert to pandas series
-EE_plus_median.loc[5.0] = 0.0  # add 5.0 tenor row as we know it's zero EE
-
-# Get Expected Exposure (EE) from mean of positive E
+# Mask zero values to exclude them from the mean and median calculations
 E_plus2 = np.array(E_plus, dtype=np.float32)  # need to do this line otherwise np.ma.mean throws error
 E_plus_masked = np.ma.masked_where(E_plus2 == 0, E_plus2)
-EE_plus_mean = np.ma.mean(E_plus_masked[:-1], axis=1)
-EE_plus_mean = pd.Series(index=E_plus.index[:-1], data=EE_plus_mean)
+
+# Get Expected Exposure (EE) from median and mean of positive E (though mean is not so good as big outliers in data)
+# must remove last row of E_plus as all elements zero & below will throw error
+EE_plus_median = pd.Series(index=E_plus.index[:-1], data=np.ma.median(E_plus_masked[:-1], axis=1))
+EE_plus_median.loc[5.0] = 0.0  # add 5.0 tenor row as we know it's zero EE
+EE_plus_mean = pd.Series(index=E_plus.index[:-1], data=np.ma.mean(E_plus_masked[:-1], axis=1))
 EE_plus_mean.loc[5.0] = 0.0  # add 5.0 tenor row as we know it's zero EE
 
 # Get PFE from the Exposure 97.5 percentile
 PFE_plus = pd.Series(index=E_plus.index, data=np.percentile(E_plus_masked, q=97.5, axis=1))
 
-# plt.plot(EE_plus_median, label="EE_median")
-# plt.plot(EE_plus_mean, label="EE_mean")
-# plt.xlabel("Tenor")
-# plt.ylabel("Expected Exposure")
+# # Plotting
+# EE_plus_mean.plot(label="EE_mean")
+# EE_plus_median.plot(label="EE_median")
+# PFE_plus.plot(label="PFE")
 # plt.legend()
 
 # Interpolate EE and DF between tenors to calculate CVA
-
 index_interpol = ['0.0-0.5', '0.5-1.0', '1.0-1.5', '1.5-2.0', '2.0-2.5', '2.5-3.0', '3.0-3.5', '3.5-4.0', '4.0-4.5',
                   '4.5-5.0']
 
@@ -186,11 +188,10 @@ DF_interpol = (DF_interpol + DF_interpol.shift(-1))/2.0
 DF_interpol = DF_interpol.iloc[:-1]
 DF_interpol.index = index_interpol
 
-PD_interpol = data2['PD'].iloc[1:]
+PD_interpol = data2['PD'].iloc[1:]  # this is already interpolated
 PD_interpol.index = index_interpol
 
 # Calculate CVA
-
 RR = 0.4  # recovery rate
 CVA = (1 - RR) * EE_plus_median_interpol * DF_interpol * PD_interpol
 CVA_total = CVA.sum()
