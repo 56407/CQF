@@ -1,0 +1,1233 @@
+Code,Source,Exchange,Symbol,Depth,Rule,Name,Method,Data Start Date
+SCF/CME_TY1_EB,SCF,CME,TY,1,EB,CBOT 10-year US Treasury Note,"Roll on Last Trading Day, Backwards Panama Canal Method",21/06/1982
+SCF/CME_TY1_EF,SCF,CME,TY,1,EF,CBOT 10-year US Treasury Note,"Roll on Last Trading Day, Forwards Panama Canal Method",21/06/1982
+SCF/CME_TY1_EN,SCF,CME,TY,1,EN,CBOT 10-year US Treasury Note,"Roll on Last Trading Day, No Price Adjustment",21/06/1982
+SCF/CME_TY1_ER,SCF,CME,TY,1,ER,CBOT 10-year US Treasury Note,"Roll on Last Trading Day, Backwards Ratio Method",21/06/1982
+SCF/CME_TY1_EW,SCF,CME,TY,1,EW,CBOT 10-year US Treasury Note,"Roll on Last Trading Day, Calendar-Weighted Method",21/06/1982
+SCF/CME_TY1_FB,SCF,CME,TY,1,FB,CBOT 10-year US Treasury Note,"Roll on First Day of Month, Backwards Panama Canal Method",21/06/1982
+SCF/CME_TY1_FF,SCF,CME,TY,1,FF,CBOT 10-year US Treasury Note,"Roll on First Day of Month, Forwards Panama Canal Method",21/06/1982
+SCF/CME_TY1_FN,SCF,CME,TY,1,FN,CBOT 10-year US Treasury Note,"Roll on First Day of Month, No Price Adjustment",21/06/1982
+SCF/CME_TY1_FR,SCF,CME,TY,1,FR,CBOT 10-year US Treasury Note,"Roll on First Day of Month, Backwards Ratio Method",21/06/1982
+SCF/CME_TY1_FW,SCF,CME,TY,1,FW,CBOT 10-year US Treasury Note,"Roll on First Day of Month, Calendar-Weighted Method",21/06/1982
+SCF/CME_TY1_OB,SCF,CME,TY,1,OB,CBOT 10-year US Treasury Note,"Roll on Open Interest Switch, Backwards Panama Canal Method",21/06/1982
+SCF/CME_TY1_OF,SCF,CME,TY,1,OF,CBOT 10-year US Treasury Note,"Roll on Open Interest Switch, Forwards Panama Canal Method",21/06/1982
+SCF/CME_TY1_ON,SCF,CME,TY,1,ON,CBOT 10-year US Treasury Note,"Roll on Open Interest Switch, No Price Adjustment",21/06/1982
+SCF/CME_TY1_OR,SCF,CME,TY,1,OR,CBOT 10-year US Treasury Note,"Roll on Open Interest Switch, Backwards Ratio Method",21/06/1982
+SCF/CME_FV1_EB,SCF,CME,FV,1,EB,CBOT 5-year US Treasury Note,"Roll on Last Trading Day, Backwards Panama Canal Method",21/06/1988
+SCF/CME_FV1_EF,SCF,CME,FV,1,EF,CBOT 5-year US Treasury Note,"Roll on Last Trading Day, Forwards Panama Canal Method",21/06/1988
+SCF/CME_FV1_EN,SCF,CME,FV,1,EN,CBOT 5-year US Treasury Note,"Roll on Last Trading Day, No Price Adjustment",21/06/1988
+SCF/CME_FV1_ER,SCF,CME,FV,1,ER,CBOT 5-year US Treasury Note,"Roll on Last Trading Day, Backwards Ratio Method",21/06/1988
+SCF/CME_FV1_EW,SCF,CME,FV,1,EW,CBOT 5-year US Treasury Note,"Roll on Last Trading Day, Calendar-Weighted Method",21/06/1988
+SCF/CME_FV1_FB,SCF,CME,FV,1,FB,CBOT 5-year US Treasury Note,"Roll on First Day of Month, Backwards Panama Canal Method",21/06/1988
+SCF/CME_FV1_FF,SCF,CME,FV,1,FF,CBOT 5-year US Treasury Note,"Roll on First Day of Month, Forwards Panama Canal Method",21/06/1988
+SCF/CME_FV1_FN,SCF,CME,FV,1,FN,CBOT 5-year US Treasury Note,"Roll on First Day of Month, No Price Adjustment",21/06/1988
+SCF/CME_FV1_FR,SCF,CME,FV,1,FR,CBOT 5-year US Treasury Note,"Roll on First Day of Month, Backwards Ratio Method",21/06/1988
+SCF/CME_FV1_FW,SCF,CME,FV,1,FW,CBOT 5-year US Treasury Note,"Roll on First Day of Month, Calendar-Weighted Method",21/06/1988
+SCF/CME_FV1_OB,SCF,CME,FV,1,OB,CBOT 5-year US Treasury Note,"Roll on Open Interest Switch, Backwards Panama Canal Method",21/06/1988
+SCF/CME_FV1_OF,SCF,CME,FV,1,OF,CBOT 5-year US Treasury Note,"Roll on Open Interest Switch, Forwards Panama Canal Method",21/06/1988
+SCF/CME_FV1_ON,SCF,CME,FV,1,ON,CBOT 5-year US Treasury Note,"Roll on Open Interest Switch, No Price Adjustment",21/06/1988
+SCF/CME_FV1_OR,SCF,CME,FV,1,OR,CBOT 5-year US Treasury Note,"Roll on Open Interest Switch, Backwards Ratio Method",21/06/1988
+SCF/CME_TU1_EB,SCF,CME,TU,1,EB,CBOT 2-year US Treasury Note,"Roll on Last Trading Day, Backwards Panama Canal Method",19/09/1990
+SCF/CME_TU1_EF,SCF,CME,TU,1,EF,CBOT 2-year US Treasury Note,"Roll on Last Trading Day, Forwards Panama Canal Method",19/09/1990
+SCF/CME_TU1_EN,SCF,CME,TU,1,EN,CBOT 2-year US Treasury Note,"Roll on Last Trading Day, No Price Adjustment",19/09/1990
+SCF/CME_TU1_ER,SCF,CME,TU,1,ER,CBOT 2-year US Treasury Note,"Roll on Last Trading Day, Backwards Ratio Method",19/09/1990
+SCF/CME_TU1_EW,SCF,CME,TU,1,EW,CBOT 2-year US Treasury Note,"Roll on Last Trading Day, Calendar-Weighted Method",19/09/1990
+SCF/CME_TU1_FB,SCF,CME,TU,1,FB,CBOT 2-year US Treasury Note,"Roll on First Day of Month, Backwards Panama Canal Method",19/09/1990
+SCF/CME_TU1_FF,SCF,CME,TU,1,FF,CBOT 2-year US Treasury Note,"Roll on First Day of Month, Forwards Panama Canal Method",19/09/1990
+SCF/CME_TU1_FN,SCF,CME,TU,1,FN,CBOT 2-year US Treasury Note,"Roll on First Day of Month, No Price Adjustment",19/09/1990
+SCF/CME_TU1_FR,SCF,CME,TU,1,FR,CBOT 2-year US Treasury Note,"Roll on First Day of Month, Backwards Ratio Method",19/09/1990
+SCF/CME_TU1_FW,SCF,CME,TU,1,FW,CBOT 2-year US Treasury Note,"Roll on First Day of Month, Calendar-Weighted Method",19/09/1990
+SCF/CME_TU1_OB,SCF,CME,TU,1,OB,CBOT 2-year US Treasury Note,"Roll on Open Interest Switch, Backwards Panama Canal Method",19/09/1990
+SCF/CME_TU1_OF,SCF,CME,TU,1,OF,CBOT 2-year US Treasury Note,"Roll on Open Interest Switch, Forwards Panama Canal Method",19/09/1990
+SCF/CME_TU1_ON,SCF,CME,TU,1,ON,CBOT 2-year US Treasury Note,"Roll on Open Interest Switch, No Price Adjustment",19/09/1990
+SCF/CME_TU1_OR,SCF,CME,TU,1,OR,CBOT 2-year US Treasury Note,"Roll on Open Interest Switch, Backwards Ratio Method",19/09/1990
+SCF/CME_FF1_EB,SCF,CME,FF,1,EB,CBOT 30-day Federal Funds,"Roll on Last Trading Day, Backwards Panama Canal Method",01/12/1988
+SCF/CME_FF1_EF,SCF,CME,FF,1,EF,CBOT 30-day Federal Funds,"Roll on Last Trading Day, Forwards Panama Canal Method",01/12/1988
+SCF/CME_FF1_EN,SCF,CME,FF,1,EN,CBOT 30-day Federal Funds,"Roll on Last Trading Day, No Price Adjustment",01/12/1988
+SCF/CME_FF1_ER,SCF,CME,FF,1,ER,CBOT 30-day Federal Funds,"Roll on Last Trading Day, Backwards Ratio Method",01/12/1988
+SCF/CME_FF1_EW,SCF,CME,FF,1,EW,CBOT 30-day Federal Funds,"Roll on Last Trading Day, Calendar-Weighted Method",01/12/1988
+SCF/CME_FF1_FB,SCF,CME,FF,1,FB,CBOT 30-day Federal Funds,"Roll on First Day of Month, Backwards Panama Canal Method",01/12/1988
+SCF/CME_FF1_FF,SCF,CME,FF,1,FF,CBOT 30-day Federal Funds,"Roll on First Day of Month, Forwards Panama Canal Method",01/12/1988
+SCF/CME_FF1_FN,SCF,CME,FF,1,FN,CBOT 30-day Federal Funds,"Roll on First Day of Month, No Price Adjustment",01/12/1988
+SCF/CME_FF1_FR,SCF,CME,FF,1,FR,CBOT 30-day Federal Funds,"Roll on First Day of Month, Backwards Ratio Method",01/12/1988
+SCF/CME_FF1_FW,SCF,CME,FF,1,FW,CBOT 30-day Federal Funds,"Roll on First Day of Month, Calendar-Weighted Method",01/12/1988
+SCF/CME_FF1_OB,SCF,CME,FF,1,OB,CBOT 30-day Federal Funds,"Roll on Open Interest Switch, Backwards Panama Canal Method",01/12/1988
+SCF/CME_FF1_OF,SCF,CME,FF,1,OF,CBOT 30-day Federal Funds,"Roll on Open Interest Switch, Forwards Panama Canal Method",01/12/1988
+SCF/CME_FF1_ON,SCF,CME,FF,1,ON,CBOT 30-day Federal Funds,"Roll on Open Interest Switch, No Price Adjustment",01/12/1988
+SCF/CME_FF1_OR,SCF,CME,FF,1,OR,CBOT 30-day Federal Funds,"Roll on Open Interest Switch, Backwards Ratio Method",01/12/1988
+SCF/CME_FF2_EB,SCF,CME,FF,2,EB,CBOT 30-day Federal Funds,"Roll on Last Trading Day, Backwards Panama Canal Method",01/12/1988
+SCF/CME_FF2_EF,SCF,CME,FF,2,EF,CBOT 30-day Federal Funds,"Roll on Last Trading Day, Forwards Panama Canal Method",01/12/1988
+SCF/CME_FF2_EN,SCF,CME,FF,2,EN,CBOT 30-day Federal Funds,"Roll on Last Trading Day, No Price Adjustment",01/12/1988
+SCF/CME_FF2_ER,SCF,CME,FF,2,ER,CBOT 30-day Federal Funds,"Roll on Last Trading Day, Backwards Ratio Method",01/12/1988
+SCF/CME_FF2_EW,SCF,CME,FF,2,EW,CBOT 30-day Federal Funds,"Roll on Last Trading Day, Calendar-Weighted Method",01/12/1988
+SCF/CME_FF2_FB,SCF,CME,FF,2,FB,CBOT 30-day Federal Funds,"Roll on First Day of Month, Backwards Panama Canal Method",01/12/1988
+SCF/CME_FF2_FF,SCF,CME,FF,2,FF,CBOT 30-day Federal Funds,"Roll on First Day of Month, Forwards Panama Canal Method",01/12/1988
+SCF/CME_FF2_FN,SCF,CME,FF,2,FN,CBOT 30-day Federal Funds,"Roll on First Day of Month, No Price Adjustment",01/12/1988
+SCF/CME_FF2_FR,SCF,CME,FF,2,FR,CBOT 30-day Federal Funds,"Roll on First Day of Month, Backwards Ratio Method",01/12/1988
+SCF/CME_FF2_FW,SCF,CME,FF,2,FW,CBOT 30-day Federal Funds,"Roll on First Day of Month, Calendar-Weighted Method",01/12/1988
+SCF/CME_FF2_OB,SCF,CME,FF,2,OB,CBOT 30-day Federal Funds,"Roll on Open Interest Switch, Backwards Panama Canal Method",01/12/1988
+SCF/CME_FF2_OF,SCF,CME,FF,2,OF,CBOT 30-day Federal Funds,"Roll on Open Interest Switch, Forwards Panama Canal Method",01/12/1988
+SCF/CME_FF2_ON,SCF,CME,FF,2,ON,CBOT 30-day Federal Funds,"Roll on Open Interest Switch, No Price Adjustment",01/12/1988
+SCF/CME_FF2_OR,SCF,CME,FF,2,OR,CBOT 30-day Federal Funds,"Roll on Open Interest Switch, Backwards Ratio Method",01/12/1988
+SCF/CME_US1_EB,SCF,CME,US,1,EB,CBOT 30-year US Treasury Bond,"Roll on Last Trading Day, Backwards Panama Canal Method",20/12/1977
+SCF/CME_US1_EF,SCF,CME,US,1,EF,CBOT 30-year US Treasury Bond,"Roll on Last Trading Day, Forwards Panama Canal Method",20/12/1977
+SCF/CME_US1_EN,SCF,CME,US,1,EN,CBOT 30-year US Treasury Bond,"Roll on Last Trading Day, No Price Adjustment",20/12/1977
+SCF/CME_US1_ER,SCF,CME,US,1,ER,CBOT 30-year US Treasury Bond,"Roll on Last Trading Day, Backwards Ratio Method",20/12/1977
+SCF/CME_US1_EW,SCF,CME,US,1,EW,CBOT 30-year US Treasury Bond,"Roll on Last Trading Day, Calendar-Weighted Method",20/12/1977
+SCF/CME_US1_FB,SCF,CME,US,1,FB,CBOT 30-year US Treasury Bond,"Roll on First Day of Month, Backwards Panama Canal Method",20/12/1977
+SCF/CME_US1_FF,SCF,CME,US,1,FF,CBOT 30-year US Treasury Bond,"Roll on First Day of Month, Forwards Panama Canal Method",20/12/1977
+SCF/CME_US1_FN,SCF,CME,US,1,FN,CBOT 30-year US Treasury Bond,"Roll on First Day of Month, No Price Adjustment",20/12/1977
+SCF/CME_US1_FR,SCF,CME,US,1,FR,CBOT 30-year US Treasury Bond,"Roll on First Day of Month, Backwards Ratio Method",20/12/1977
+SCF/CME_US1_FW,SCF,CME,US,1,FW,CBOT 30-year US Treasury Bond,"Roll on First Day of Month, Calendar-Weighted Method",20/12/1977
+SCF/CME_US1_OB,SCF,CME,US,1,OB,CBOT 30-year US Treasury Bond,"Roll on Open Interest Switch, Backwards Panama Canal Method",20/12/1977
+SCF/CME_US1_OF,SCF,CME,US,1,OF,CBOT 30-year US Treasury Bond,"Roll on Open Interest Switch, Forwards Panama Canal Method",20/12/1977
+SCF/CME_US1_ON,SCF,CME,US,1,ON,CBOT 30-year US Treasury Bond,"Roll on Open Interest Switch, No Price Adjustment",20/12/1977
+SCF/CME_US1_OR,SCF,CME,US,1,OR,CBOT 30-year US Treasury Bond,"Roll on Open Interest Switch, Backwards Ratio Method",20/12/1977
+SCF/CME_US2_EB,SCF,CME,US,2,EB,CBOT 30-year US Treasury Bond,"Roll on Last Trading Day, Backwards Panama Canal Method",20/12/1977
+SCF/CME_US2_EF,SCF,CME,US,2,EF,CBOT 30-year US Treasury Bond,"Roll on Last Trading Day, Forwards Panama Canal Method",20/12/1977
+SCF/CME_US2_EN,SCF,CME,US,2,EN,CBOT 30-year US Treasury Bond,"Roll on Last Trading Day, No Price Adjustment",20/12/1977
+SCF/CME_US2_ER,SCF,CME,US,2,ER,CBOT 30-year US Treasury Bond,"Roll on Last Trading Day, Backwards Ratio Method",20/12/1977
+SCF/CME_US2_EW,SCF,CME,US,2,EW,CBOT 30-year US Treasury Bond,"Roll on Last Trading Day, Calendar-Weighted Method",20/12/1977
+SCF/CME_US2_FB,SCF,CME,US,2,FB,CBOT 30-year US Treasury Bond,"Roll on First Day of Month, Backwards Panama Canal Method",20/12/1977
+SCF/CME_US2_FF,SCF,CME,US,2,FF,CBOT 30-year US Treasury Bond,"Roll on First Day of Month, Forwards Panama Canal Method",20/12/1977
+SCF/CME_US2_FN,SCF,CME,US,2,FN,CBOT 30-year US Treasury Bond,"Roll on First Day of Month, No Price Adjustment",20/12/1977
+SCF/CME_US2_FR,SCF,CME,US,2,FR,CBOT 30-year US Treasury Bond,"Roll on First Day of Month, Backwards Ratio Method",20/12/1977
+SCF/CME_US2_FW,SCF,CME,US,2,FW,CBOT 30-year US Treasury Bond,"Roll on First Day of Month, Calendar-Weighted Method",20/12/1977
+SCF/CME_US2_OB,SCF,CME,US,2,OB,CBOT 30-year US Treasury Bond,"Roll on Open Interest Switch, Backwards Panama Canal Method",20/12/1977
+SCF/CME_US2_OF,SCF,CME,US,2,OF,CBOT 30-year US Treasury Bond,"Roll on Open Interest Switch, Forwards Panama Canal Method",20/12/1977
+SCF/CME_US2_ON,SCF,CME,US,2,ON,CBOT 30-year US Treasury Bond,"Roll on Open Interest Switch, No Price Adjustment",20/12/1977
+SCF/CME_US2_OR,SCF,CME,US,2,OR,CBOT 30-year US Treasury Bond,"Roll on Open Interest Switch, Backwards Ratio Method",20/12/1977
+SCF/CME_C1_EB,SCF,CME,C,1,EB,CBOT Corn,"Roll on Last Trading Day, Backwards Panama Canal Method",22/03/1960
+SCF/CME_C1_EF,SCF,CME,C,1,EF,CBOT Corn,"Roll on Last Trading Day, Forwards Panama Canal Method",22/03/1960
+SCF/CME_C1_EN,SCF,CME,C,1,EN,CBOT Corn,"Roll on Last Trading Day, No Price Adjustment",22/03/1960
+SCF/CME_C1_ER,SCF,CME,C,1,ER,CBOT Corn,"Roll on Last Trading Day, Backwards Ratio Method",22/03/1960
+SCF/CME_C1_EW,SCF,CME,C,1,EW,CBOT Corn,"Roll on Last Trading Day, Calendar-Weighted Method",22/03/1960
+SCF/CME_C1_FB,SCF,CME,C,1,FB,CBOT Corn,"Roll on First Day of Month, Backwards Panama Canal Method",22/03/1960
+SCF/CME_C1_FF,SCF,CME,C,1,FF,CBOT Corn,"Roll on First Day of Month, Forwards Panama Canal Method",22/03/1960
+SCF/CME_C1_FN,SCF,CME,C,1,FN,CBOT Corn,"Roll on First Day of Month, No Price Adjustment",22/03/1960
+SCF/CME_C1_FR,SCF,CME,C,1,FR,CBOT Corn,"Roll on First Day of Month, Backwards Ratio Method",22/03/1960
+SCF/CME_C1_FW,SCF,CME,C,1,FW,CBOT Corn,"Roll on First Day of Month, Calendar-Weighted Method",22/03/1960
+SCF/CME_C1_OB,SCF,CME,C,1,OB,CBOT Corn,"Roll on Open Interest Switch, Backwards Panama Canal Method",22/03/1960
+SCF/CME_C1_OF,SCF,CME,C,1,OF,CBOT Corn,"Roll on Open Interest Switch, Forwards Panama Canal Method",22/03/1960
+SCF/CME_C1_ON,SCF,CME,C,1,ON,CBOT Corn,"Roll on Open Interest Switch, No Price Adjustment",22/03/1960
+SCF/CME_C1_OR,SCF,CME,C,1,OR,CBOT Corn,"Roll on Open Interest Switch, Backwards Ratio Method",22/03/1960
+SCF/CME_C2_EB,SCF,CME,C,2,EB,CBOT Corn,"Roll on Last Trading Day, Backwards Panama Canal Method",22/03/1960
+SCF/CME_C2_EF,SCF,CME,C,2,EF,CBOT Corn,"Roll on Last Trading Day, Forwards Panama Canal Method",22/03/1960
+SCF/CME_C2_EN,SCF,CME,C,2,EN,CBOT Corn,"Roll on Last Trading Day, No Price Adjustment",22/03/1960
+SCF/CME_C2_ER,SCF,CME,C,2,ER,CBOT Corn,"Roll on Last Trading Day, Backwards Ratio Method",22/03/1960
+SCF/CME_C2_EW,SCF,CME,C,2,EW,CBOT Corn,"Roll on Last Trading Day, Calendar-Weighted Method",22/03/1960
+SCF/CME_C2_FB,SCF,CME,C,2,FB,CBOT Corn,"Roll on First Day of Month, Backwards Panama Canal Method",22/03/1960
+SCF/CME_C2_FF,SCF,CME,C,2,FF,CBOT Corn,"Roll on First Day of Month, Forwards Panama Canal Method",22/03/1960
+SCF/CME_C2_FN,SCF,CME,C,2,FN,CBOT Corn,"Roll on First Day of Month, No Price Adjustment",22/03/1960
+SCF/CME_C2_FR,SCF,CME,C,2,FR,CBOT Corn,"Roll on First Day of Month, Backwards Ratio Method",22/03/1960
+SCF/CME_C2_FW,SCF,CME,C,2,FW,CBOT Corn,"Roll on First Day of Month, Calendar-Weighted Method",22/03/1960
+SCF/CME_C2_OB,SCF,CME,C,2,OB,CBOT Corn,"Roll on Open Interest Switch, Backwards Panama Canal Method",22/03/1960
+SCF/CME_C2_OF,SCF,CME,C,2,OF,CBOT Corn,"Roll on Open Interest Switch, Forwards Panama Canal Method",22/03/1960
+SCF/CME_C2_ON,SCF,CME,C,2,ON,CBOT Corn,"Roll on Open Interest Switch, No Price Adjustment",22/03/1960
+SCF/CME_C2_OR,SCF,CME,C,2,OR,CBOT Corn,"Roll on Open Interest Switch, Backwards Ratio Method",22/03/1960
+SCF/CME_DJ1_EB,SCF,CME,DJ,1,EB,CBOT Dow Jones Ind Avg (DJIA),"Roll on Last Trading Day, Backwards Panama Canal Method",19/03/1998
+SCF/CME_DJ1_EF,SCF,CME,DJ,1,EF,CBOT Dow Jones Ind Avg (DJIA),"Roll on Last Trading Day, Forwards Panama Canal Method",19/03/1998
+SCF/CME_DJ1_EN,SCF,CME,DJ,1,EN,CBOT Dow Jones Ind Avg (DJIA),"Roll on Last Trading Day, No Price Adjustment",19/03/1998
+SCF/CME_DJ1_ER,SCF,CME,DJ,1,ER,CBOT Dow Jones Ind Avg (DJIA),"Roll on Last Trading Day, Backwards Ratio Method",19/03/1998
+SCF/CME_DJ1_EW,SCF,CME,DJ,1,EW,CBOT Dow Jones Ind Avg (DJIA),"Roll on Last Trading Day, Calendar-Weighted Method",19/03/1998
+SCF/CME_DJ1_FB,SCF,CME,DJ,1,FB,CBOT Dow Jones Ind Avg (DJIA),"Roll on First Day of Month, Backwards Panama Canal Method",19/03/1998
+SCF/CME_DJ1_FF,SCF,CME,DJ,1,FF,CBOT Dow Jones Ind Avg (DJIA),"Roll on First Day of Month, Forwards Panama Canal Method",19/03/1998
+SCF/CME_DJ1_FN,SCF,CME,DJ,1,FN,CBOT Dow Jones Ind Avg (DJIA),"Roll on First Day of Month, No Price Adjustment",19/03/1998
+SCF/CME_DJ1_FR,SCF,CME,DJ,1,FR,CBOT Dow Jones Ind Avg (DJIA),"Roll on First Day of Month, Backwards Ratio Method",19/03/1998
+SCF/CME_DJ1_FW,SCF,CME,DJ,1,FW,CBOT Dow Jones Ind Avg (DJIA),"Roll on First Day of Month, Calendar-Weighted Method",19/03/1998
+SCF/CME_DJ1_OB,SCF,CME,DJ,1,OB,CBOT Dow Jones Ind Avg (DJIA),"Roll on Open Interest Switch, Backwards Panama Canal Method",19/03/1998
+SCF/CME_DJ1_OF,SCF,CME,DJ,1,OF,CBOT Dow Jones Ind Avg (DJIA),"Roll on Open Interest Switch, Forwards Panama Canal Method",19/03/1998
+SCF/CME_DJ1_ON,SCF,CME,DJ,1,ON,CBOT Dow Jones Ind Avg (DJIA),"Roll on Open Interest Switch, No Price Adjustment",19/03/1998
+SCF/CME_DJ1_OR,SCF,CME,DJ,1,OR,CBOT Dow Jones Ind Avg (DJIA),"Roll on Open Interest Switch, Backwards Ratio Method",19/03/1998
+SCF/CME_DJ2_EB,SCF,CME,DJ,2,EB,CBOT Dow Jones Ind Avg (DJIA),"Roll on Last Trading Day, Backwards Panama Canal Method",19/03/1998
+SCF/CME_DJ2_EF,SCF,CME,DJ,2,EF,CBOT Dow Jones Ind Avg (DJIA),"Roll on Last Trading Day, Forwards Panama Canal Method",19/03/1998
+SCF/CME_DJ2_EN,SCF,CME,DJ,2,EN,CBOT Dow Jones Ind Avg (DJIA),"Roll on Last Trading Day, No Price Adjustment",19/03/1998
+SCF/CME_DJ2_ER,SCF,CME,DJ,2,ER,CBOT Dow Jones Ind Avg (DJIA),"Roll on Last Trading Day, Backwards Ratio Method",19/03/1998
+SCF/CME_DJ2_EW,SCF,CME,DJ,2,EW,CBOT Dow Jones Ind Avg (DJIA),"Roll on Last Trading Day, Calendar-Weighted Method",19/03/1998
+SCF/CME_DJ2_FB,SCF,CME,DJ,2,FB,CBOT Dow Jones Ind Avg (DJIA),"Roll on First Day of Month, Backwards Panama Canal Method",19/03/1998
+SCF/CME_DJ2_FF,SCF,CME,DJ,2,FF,CBOT Dow Jones Ind Avg (DJIA),"Roll on First Day of Month, Forwards Panama Canal Method",19/03/1998
+SCF/CME_DJ2_FN,SCF,CME,DJ,2,FN,CBOT Dow Jones Ind Avg (DJIA),"Roll on First Day of Month, No Price Adjustment",19/03/1998
+SCF/CME_DJ2_FR,SCF,CME,DJ,2,FR,CBOT Dow Jones Ind Avg (DJIA),"Roll on First Day of Month, Backwards Ratio Method",19/03/1998
+SCF/CME_DJ2_FW,SCF,CME,DJ,2,FW,CBOT Dow Jones Ind Avg (DJIA),"Roll on First Day of Month, Calendar-Weighted Method",19/03/1998
+SCF/CME_DJ2_OB,SCF,CME,DJ,2,OB,CBOT Dow Jones Ind Avg (DJIA),"Roll on Open Interest Switch, Backwards Panama Canal Method",19/03/1998
+SCF/CME_DJ2_OF,SCF,CME,DJ,2,OF,CBOT Dow Jones Ind Avg (DJIA),"Roll on Open Interest Switch, Forwards Panama Canal Method",19/03/1998
+SCF/CME_DJ2_ON,SCF,CME,DJ,2,ON,CBOT Dow Jones Ind Avg (DJIA),"Roll on Open Interest Switch, No Price Adjustment",19/03/1998
+SCF/CME_DJ2_OR,SCF,CME,DJ,2,OR,CBOT Dow Jones Ind Avg (DJIA),"Roll on Open Interest Switch, Backwards Ratio Method",19/03/1998
+SCF/CME_SM1_EB,SCF,CME,SM,1,EB,CBOT Soybean Meal,"Roll on Last Trading Day, Backwards Panama Canal Method",19/03/1964
+SCF/CME_SM1_EF,SCF,CME,SM,1,EF,CBOT Soybean Meal,"Roll on Last Trading Day, Forwards Panama Canal Method",19/03/1964
+SCF/CME_SM1_EN,SCF,CME,SM,1,EN,CBOT Soybean Meal,"Roll on Last Trading Day, No Price Adjustment",19/03/1964
+SCF/CME_SM1_ER,SCF,CME,SM,1,ER,CBOT Soybean Meal,"Roll on Last Trading Day, Backwards Ratio Method",19/03/1964
+SCF/CME_SM1_EW,SCF,CME,SM,1,EW,CBOT Soybean Meal,"Roll on Last Trading Day, Calendar-Weighted Method",19/03/1964
+SCF/CME_SM1_FB,SCF,CME,SM,1,FB,CBOT Soybean Meal,"Roll on First Day of Month, Backwards Panama Canal Method",19/03/1964
+SCF/CME_SM1_FF,SCF,CME,SM,1,FF,CBOT Soybean Meal,"Roll on First Day of Month, Forwards Panama Canal Method",19/03/1964
+SCF/CME_SM1_FN,SCF,CME,SM,1,FN,CBOT Soybean Meal,"Roll on First Day of Month, No Price Adjustment",19/03/1964
+SCF/CME_SM1_FR,SCF,CME,SM,1,FR,CBOT Soybean Meal,"Roll on First Day of Month, Backwards Ratio Method",19/03/1964
+SCF/CME_SM1_FW,SCF,CME,SM,1,FW,CBOT Soybean Meal,"Roll on First Day of Month, Calendar-Weighted Method",19/03/1964
+SCF/CME_SM1_OB,SCF,CME,SM,1,OB,CBOT Soybean Meal,"Roll on Open Interest Switch, Backwards Panama Canal Method",19/03/1964
+SCF/CME_SM1_OF,SCF,CME,SM,1,OF,CBOT Soybean Meal,"Roll on Open Interest Switch, Forwards Panama Canal Method",19/03/1964
+SCF/CME_SM1_ON,SCF,CME,SM,1,ON,CBOT Soybean Meal,"Roll on Open Interest Switch, No Price Adjustment",19/03/1964
+SCF/CME_SM1_OR,SCF,CME,SM,1,OR,CBOT Soybean Meal,"Roll on Open Interest Switch, Backwards Ratio Method",19/03/1964
+SCF/CME_SM2_EB,SCF,CME,SM,2,EB,CBOT Soybean Meal,"Roll on Last Trading Day, Backwards Panama Canal Method",19/03/1964
+SCF/CME_SM2_EF,SCF,CME,SM,2,EF,CBOT Soybean Meal,"Roll on Last Trading Day, Forwards Panama Canal Method",19/03/1964
+SCF/CME_SM2_EN,SCF,CME,SM,2,EN,CBOT Soybean Meal,"Roll on Last Trading Day, No Price Adjustment",19/03/1964
+SCF/CME_SM2_ER,SCF,CME,SM,2,ER,CBOT Soybean Meal,"Roll on Last Trading Day, Backwards Ratio Method",19/03/1964
+SCF/CME_SM2_EW,SCF,CME,SM,2,EW,CBOT Soybean Meal,"Roll on Last Trading Day, Calendar-Weighted Method",19/03/1964
+SCF/CME_SM2_FB,SCF,CME,SM,2,FB,CBOT Soybean Meal,"Roll on First Day of Month, Backwards Panama Canal Method",19/03/1964
+SCF/CME_SM2_FF,SCF,CME,SM,2,FF,CBOT Soybean Meal,"Roll on First Day of Month, Forwards Panama Canal Method",19/03/1964
+SCF/CME_SM2_FN,SCF,CME,SM,2,FN,CBOT Soybean Meal,"Roll on First Day of Month, No Price Adjustment",19/03/1964
+SCF/CME_SM2_FR,SCF,CME,SM,2,FR,CBOT Soybean Meal,"Roll on First Day of Month, Backwards Ratio Method",19/03/1964
+SCF/CME_SM2_FW,SCF,CME,SM,2,FW,CBOT Soybean Meal,"Roll on First Day of Month, Calendar-Weighted Method",19/03/1964
+SCF/CME_SM2_OB,SCF,CME,SM,2,OB,CBOT Soybean Meal,"Roll on Open Interest Switch, Backwards Panama Canal Method",19/03/1964
+SCF/CME_SM2_OF,SCF,CME,SM,2,OF,CBOT Soybean Meal,"Roll on Open Interest Switch, Forwards Panama Canal Method",19/03/1964
+SCF/CME_SM2_ON,SCF,CME,SM,2,ON,CBOT Soybean Meal,"Roll on Open Interest Switch, No Price Adjustment",19/03/1964
+SCF/CME_SM2_OR,SCF,CME,SM,2,OR,CBOT Soybean Meal,"Roll on Open Interest Switch, Backwards Ratio Method",19/03/1964
+SCF/CME_BO1_EB,SCF,CME,BO,1,EB,CBOT Soybean Oil,"Roll on Last Trading Day, Backwards Panama Canal Method",20/09/1961
+SCF/CME_BO1_EF,SCF,CME,BO,1,EF,CBOT Soybean Oil,"Roll on Last Trading Day, Forwards Panama Canal Method",20/09/1961
+SCF/CME_BO1_EN,SCF,CME,BO,1,EN,CBOT Soybean Oil,"Roll on Last Trading Day, No Price Adjustment",20/09/1961
+SCF/CME_BO1_ER,SCF,CME,BO,1,ER,CBOT Soybean Oil,"Roll on Last Trading Day, Backwards Ratio Method",20/09/1961
+SCF/CME_BO1_EW,SCF,CME,BO,1,EW,CBOT Soybean Oil,"Roll on Last Trading Day, Calendar-Weighted Method",20/09/1961
+SCF/CME_BO1_FB,SCF,CME,BO,1,FB,CBOT Soybean Oil,"Roll on First Day of Month, Backwards Panama Canal Method",20/09/1961
+SCF/CME_BO1_FF,SCF,CME,BO,1,FF,CBOT Soybean Oil,"Roll on First Day of Month, Forwards Panama Canal Method",20/09/1961
+SCF/CME_BO1_FN,SCF,CME,BO,1,FN,CBOT Soybean Oil,"Roll on First Day of Month, No Price Adjustment",20/09/1961
+SCF/CME_BO1_FR,SCF,CME,BO,1,FR,CBOT Soybean Oil,"Roll on First Day of Month, Backwards Ratio Method",20/09/1961
+SCF/CME_BO1_FW,SCF,CME,BO,1,FW,CBOT Soybean Oil,"Roll on First Day of Month, Calendar-Weighted Method",20/09/1961
+SCF/CME_BO1_OB,SCF,CME,BO,1,OB,CBOT Soybean Oil,"Roll on Open Interest Switch, Backwards Panama Canal Method",20/09/1961
+SCF/CME_BO1_OF,SCF,CME,BO,1,OF,CBOT Soybean Oil,"Roll on Open Interest Switch, Forwards Panama Canal Method",20/09/1961
+SCF/CME_BO1_ON,SCF,CME,BO,1,ON,CBOT Soybean Oil,"Roll on Open Interest Switch, No Price Adjustment",20/09/1961
+SCF/CME_BO1_OR,SCF,CME,BO,1,OR,CBOT Soybean Oil,"Roll on Open Interest Switch, Backwards Ratio Method",20/09/1961
+SCF/CME_BO2_EB,SCF,CME,BO,2,EB,CBOT Soybean Oil,"Roll on Last Trading Day, Backwards Panama Canal Method",20/09/1961
+SCF/CME_BO2_EF,SCF,CME,BO,2,EF,CBOT Soybean Oil,"Roll on Last Trading Day, Forwards Panama Canal Method",20/09/1961
+SCF/CME_BO2_EN,SCF,CME,BO,2,EN,CBOT Soybean Oil,"Roll on Last Trading Day, No Price Adjustment",20/09/1961
+SCF/CME_BO2_ER,SCF,CME,BO,2,ER,CBOT Soybean Oil,"Roll on Last Trading Day, Backwards Ratio Method",20/09/1961
+SCF/CME_BO2_EW,SCF,CME,BO,2,EW,CBOT Soybean Oil,"Roll on Last Trading Day, Calendar-Weighted Method",20/09/1961
+SCF/CME_BO2_FB,SCF,CME,BO,2,FB,CBOT Soybean Oil,"Roll on First Day of Month, Backwards Panama Canal Method",20/09/1961
+SCF/CME_BO2_FF,SCF,CME,BO,2,FF,CBOT Soybean Oil,"Roll on First Day of Month, Forwards Panama Canal Method",20/09/1961
+SCF/CME_BO2_FN,SCF,CME,BO,2,FN,CBOT Soybean Oil,"Roll on First Day of Month, No Price Adjustment",20/09/1961
+SCF/CME_BO2_FR,SCF,CME,BO,2,FR,CBOT Soybean Oil,"Roll on First Day of Month, Backwards Ratio Method",20/09/1961
+SCF/CME_BO2_FW,SCF,CME,BO,2,FW,CBOT Soybean Oil,"Roll on First Day of Month, Calendar-Weighted Method",20/09/1961
+SCF/CME_BO2_OB,SCF,CME,BO,2,OB,CBOT Soybean Oil,"Roll on Open Interest Switch, Backwards Panama Canal Method",20/09/1961
+SCF/CME_BO2_OF,SCF,CME,BO,2,OF,CBOT Soybean Oil,"Roll on Open Interest Switch, Forwards Panama Canal Method",20/09/1961
+SCF/CME_BO2_ON,SCF,CME,BO,2,ON,CBOT Soybean Oil,"Roll on Open Interest Switch, No Price Adjustment",20/09/1961
+SCF/CME_BO2_OR,SCF,CME,BO,2,OR,CBOT Soybean Oil,"Roll on Open Interest Switch, Backwards Ratio Method",20/09/1961
+SCF/CME_S1_EB,SCF,CME,S,1,EB,CBOT Soybeans,"Roll on Last Trading Day, Backwards Panama Canal Method",21/01/1970
+SCF/CME_S1_EF,SCF,CME,S,1,EF,CBOT Soybeans,"Roll on Last Trading Day, Forwards Panama Canal Method",21/01/1970
+SCF/CME_S1_EN,SCF,CME,S,1,EN,CBOT Soybeans,"Roll on Last Trading Day, No Price Adjustment",21/01/1970
+SCF/CME_S1_ER,SCF,CME,S,1,ER,CBOT Soybeans,"Roll on Last Trading Day, Backwards Ratio Method",21/01/1970
+SCF/CME_S1_EW,SCF,CME,S,1,EW,CBOT Soybeans,"Roll on Last Trading Day, Calendar-Weighted Method",21/01/1970
+SCF/CME_S1_FB,SCF,CME,S,1,FB,CBOT Soybeans,"Roll on First Day of Month, Backwards Panama Canal Method",21/01/1970
+SCF/CME_S1_FF,SCF,CME,S,1,FF,CBOT Soybeans,"Roll on First Day of Month, Forwards Panama Canal Method",21/01/1970
+SCF/CME_S1_FN,SCF,CME,S,1,FN,CBOT Soybeans,"Roll on First Day of Month, No Price Adjustment",21/01/1970
+SCF/CME_S1_FR,SCF,CME,S,1,FR,CBOT Soybeans,"Roll on First Day of Month, Backwards Ratio Method",21/01/1970
+SCF/CME_S1_FW,SCF,CME,S,1,FW,CBOT Soybeans,"Roll on First Day of Month, Calendar-Weighted Method",21/01/1970
+SCF/CME_S1_OB,SCF,CME,S,1,OB,CBOT Soybeans,"Roll on Open Interest Switch, Backwards Panama Canal Method",21/01/1970
+SCF/CME_S1_OF,SCF,CME,S,1,OF,CBOT Soybeans,"Roll on Open Interest Switch, Forwards Panama Canal Method",21/01/1970
+SCF/CME_S1_ON,SCF,CME,S,1,ON,CBOT Soybeans,"Roll on Open Interest Switch, No Price Adjustment",21/01/1970
+SCF/CME_S1_OR,SCF,CME,S,1,OR,CBOT Soybeans,"Roll on Open Interest Switch, Backwards Ratio Method",21/01/1970
+SCF/CME_S2_EB,SCF,CME,S,2,EB,CBOT Soybeans,"Roll on Last Trading Day, Backwards Panama Canal Method",21/01/1970
+SCF/CME_S2_EF,SCF,CME,S,2,EF,CBOT Soybeans,"Roll on Last Trading Day, Forwards Panama Canal Method",21/01/1970
+SCF/CME_S2_EN,SCF,CME,S,2,EN,CBOT Soybeans,"Roll on Last Trading Day, No Price Adjustment",21/01/1970
+SCF/CME_S2_ER,SCF,CME,S,2,ER,CBOT Soybeans,"Roll on Last Trading Day, Backwards Ratio Method",21/01/1970
+SCF/CME_S2_EW,SCF,CME,S,2,EW,CBOT Soybeans,"Roll on Last Trading Day, Calendar-Weighted Method",21/01/1970
+SCF/CME_S2_FB,SCF,CME,S,2,FB,CBOT Soybeans,"Roll on First Day of Month, Backwards Panama Canal Method",21/01/1970
+SCF/CME_S2_FF,SCF,CME,S,2,FF,CBOT Soybeans,"Roll on First Day of Month, Forwards Panama Canal Method",21/01/1970
+SCF/CME_S2_FN,SCF,CME,S,2,FN,CBOT Soybeans,"Roll on First Day of Month, No Price Adjustment",21/01/1970
+SCF/CME_S2_FR,SCF,CME,S,2,FR,CBOT Soybeans,"Roll on First Day of Month, Backwards Ratio Method",21/01/1970
+SCF/CME_S2_FW,SCF,CME,S,2,FW,CBOT Soybeans,"Roll on First Day of Month, Calendar-Weighted Method",21/01/1970
+SCF/CME_S2_OB,SCF,CME,S,2,OB,CBOT Soybeans,"Roll on Open Interest Switch, Backwards Panama Canal Method",21/01/1970
+SCF/CME_S2_OF,SCF,CME,S,2,OF,CBOT Soybeans,"Roll on Open Interest Switch, Forwards Panama Canal Method",21/01/1970
+SCF/CME_S2_ON,SCF,CME,S,2,ON,CBOT Soybeans,"Roll on Open Interest Switch, No Price Adjustment",21/01/1970
+SCF/CME_S2_OR,SCF,CME,S,2,OR,CBOT Soybeans,"Roll on Open Interest Switch, Backwards Ratio Method",21/01/1970
+SCF/CME_W1_EB,SCF,CME,W,1,EB,CBOT Wheat,"Roll on Last Trading Day, Backwards Panama Canal Method",21/12/1959
+SCF/CME_W1_EF,SCF,CME,W,1,EF,CBOT Wheat,"Roll on Last Trading Day, Forwards Panama Canal Method",21/12/1959
+SCF/CME_W1_EN,SCF,CME,W,1,EN,CBOT Wheat,"Roll on Last Trading Day, No Price Adjustment",21/12/1959
+SCF/CME_W1_ER,SCF,CME,W,1,ER,CBOT Wheat,"Roll on Last Trading Day, Backwards Ratio Method",21/12/1959
+SCF/CME_W1_EW,SCF,CME,W,1,EW,CBOT Wheat,"Roll on Last Trading Day, Calendar-Weighted Method",21/12/1959
+SCF/CME_W1_FB,SCF,CME,W,1,FB,CBOT Wheat,"Roll on First Day of Month, Backwards Panama Canal Method",21/12/1959
+SCF/CME_W1_FF,SCF,CME,W,1,FF,CBOT Wheat,"Roll on First Day of Month, Forwards Panama Canal Method",21/12/1959
+SCF/CME_W1_FN,SCF,CME,W,1,FN,CBOT Wheat,"Roll on First Day of Month, No Price Adjustment",21/12/1959
+SCF/CME_W1_FR,SCF,CME,W,1,FR,CBOT Wheat,"Roll on First Day of Month, Backwards Ratio Method",21/12/1959
+SCF/CME_W1_FW,SCF,CME,W,1,FW,CBOT Wheat,"Roll on First Day of Month, Calendar-Weighted Method",21/12/1959
+SCF/CME_W1_OB,SCF,CME,W,1,OB,CBOT Wheat,"Roll on Open Interest Switch, Backwards Panama Canal Method",21/12/1959
+SCF/CME_W1_OF,SCF,CME,W,1,OF,CBOT Wheat,"Roll on Open Interest Switch, Forwards Panama Canal Method",21/12/1959
+SCF/CME_W1_ON,SCF,CME,W,1,ON,CBOT Wheat,"Roll on Open Interest Switch, No Price Adjustment",21/12/1959
+SCF/CME_W1_OR,SCF,CME,W,1,OR,CBOT Wheat,"Roll on Open Interest Switch, Backwards Ratio Method",21/12/1959
+SCF/CME_W2_EB,SCF,CME,W,2,EB,CBOT Wheat,"Roll on Last Trading Day, Backwards Panama Canal Method",21/12/1959
+SCF/CME_W2_EF,SCF,CME,W,2,EF,CBOT Wheat,"Roll on Last Trading Day, Forwards Panama Canal Method",21/12/1959
+SCF/CME_W2_EN,SCF,CME,W,2,EN,CBOT Wheat,"Roll on Last Trading Day, No Price Adjustment",21/12/1959
+SCF/CME_W2_ER,SCF,CME,W,2,ER,CBOT Wheat,"Roll on Last Trading Day, Backwards Ratio Method",21/12/1959
+SCF/CME_W2_EW,SCF,CME,W,2,EW,CBOT Wheat,"Roll on Last Trading Day, Calendar-Weighted Method",21/12/1959
+SCF/CME_W2_FB,SCF,CME,W,2,FB,CBOT Wheat,"Roll on First Day of Month, Backwards Panama Canal Method",21/12/1959
+SCF/CME_W2_FF,SCF,CME,W,2,FF,CBOT Wheat,"Roll on First Day of Month, Forwards Panama Canal Method",21/12/1959
+SCF/CME_W2_FN,SCF,CME,W,2,FN,CBOT Wheat,"Roll on First Day of Month, No Price Adjustment",21/12/1959
+SCF/CME_W2_FR,SCF,CME,W,2,FR,CBOT Wheat,"Roll on First Day of Month, Backwards Ratio Method",21/12/1959
+SCF/CME_W2_FW,SCF,CME,W,2,FW,CBOT Wheat,"Roll on First Day of Month, Calendar-Weighted Method",21/12/1959
+SCF/CME_W2_OB,SCF,CME,W,2,OB,CBOT Wheat,"Roll on Open Interest Switch, Backwards Panama Canal Method",21/12/1959
+SCF/CME_W2_OF,SCF,CME,W,2,OF,CBOT Wheat,"Roll on Open Interest Switch, Forwards Panama Canal Method",21/12/1959
+SCF/CME_W2_ON,SCF,CME,W,2,ON,CBOT Wheat,"Roll on Open Interest Switch, No Price Adjustment",21/12/1959
+SCF/CME_W2_OR,SCF,CME,W,2,OR,CBOT Wheat,"Roll on Open Interest Switch, Backwards Ratio Method",21/12/1959
+SCF/CME_AD1_EB,SCF,CME,AD,1,EB,CME Australian Dollar AUD,"Roll on Last Trading Day, Backwards Panama Canal Method",16/03/1987
+SCF/CME_AD1_EF,SCF,CME,AD,1,EF,CME Australian Dollar AUD,"Roll on Last Trading Day, Forwards Panama Canal Method",16/03/1987
+SCF/CME_AD1_EN,SCF,CME,AD,1,EN,CME Australian Dollar AUD,"Roll on Last Trading Day, No Price Adjustment",16/03/1987
+SCF/CME_AD1_ER,SCF,CME,AD,1,ER,CME Australian Dollar AUD,"Roll on Last Trading Day, Backwards Ratio Method",16/03/1987
+SCF/CME_AD1_EW,SCF,CME,AD,1,EW,CME Australian Dollar AUD,"Roll on Last Trading Day, Calendar-Weighted Method",16/03/1987
+SCF/CME_AD1_FB,SCF,CME,AD,1,FB,CME Australian Dollar AUD,"Roll on First Day of Month, Backwards Panama Canal Method",16/03/1987
+SCF/CME_AD1_FF,SCF,CME,AD,1,FF,CME Australian Dollar AUD,"Roll on First Day of Month, Forwards Panama Canal Method",16/03/1987
+SCF/CME_AD1_FN,SCF,CME,AD,1,FN,CME Australian Dollar AUD,"Roll on First Day of Month, No Price Adjustment",16/03/1987
+SCF/CME_AD1_FR,SCF,CME,AD,1,FR,CME Australian Dollar AUD,"Roll on First Day of Month, Backwards Ratio Method",16/03/1987
+SCF/CME_AD1_FW,SCF,CME,AD,1,FW,CME Australian Dollar AUD,"Roll on First Day of Month, Calendar-Weighted Method",16/03/1987
+SCF/CME_AD1_OB,SCF,CME,AD,1,OB,CME Australian Dollar AUD,"Roll on Open Interest Switch, Backwards Panama Canal Method",16/03/1987
+SCF/CME_AD1_OF,SCF,CME,AD,1,OF,CME Australian Dollar AUD,"Roll on Open Interest Switch, Forwards Panama Canal Method",16/03/1987
+SCF/CME_AD1_ON,SCF,CME,AD,1,ON,CME Australian Dollar AUD,"Roll on Open Interest Switch, No Price Adjustment",16/03/1987
+SCF/CME_AD1_OR,SCF,CME,AD,1,OR,CME Australian Dollar AUD,"Roll on Open Interest Switch, Backwards Ratio Method",16/03/1987
+SCF/CME_BP1_EB,SCF,CME,BP,1,EB,CME British Pound GBP,"Roll on Last Trading Day, Backwards Panama Canal Method",15/09/1975
+SCF/CME_BP1_EF,SCF,CME,BP,1,EF,CME British Pound GBP,"Roll on Last Trading Day, Forwards Panama Canal Method",15/09/1975
+SCF/CME_BP1_EN,SCF,CME,BP,1,EN,CME British Pound GBP,"Roll on Last Trading Day, No Price Adjustment",15/09/1975
+SCF/CME_BP1_ER,SCF,CME,BP,1,ER,CME British Pound GBP,"Roll on Last Trading Day, Backwards Ratio Method",15/09/1975
+SCF/CME_BP1_EW,SCF,CME,BP,1,EW,CME British Pound GBP,"Roll on Last Trading Day, Calendar-Weighted Method",15/09/1975
+SCF/CME_BP1_FB,SCF,CME,BP,1,FB,CME British Pound GBP,"Roll on First Day of Month, Backwards Panama Canal Method",15/09/1975
+SCF/CME_BP1_FF,SCF,CME,BP,1,FF,CME British Pound GBP,"Roll on First Day of Month, Forwards Panama Canal Method",15/09/1975
+SCF/CME_BP1_FN,SCF,CME,BP,1,FN,CME British Pound GBP,"Roll on First Day of Month, No Price Adjustment",15/09/1975
+SCF/CME_BP1_FR,SCF,CME,BP,1,FR,CME British Pound GBP,"Roll on First Day of Month, Backwards Ratio Method",15/09/1975
+SCF/CME_BP1_FW,SCF,CME,BP,1,FW,CME British Pound GBP,"Roll on First Day of Month, Calendar-Weighted Method",15/09/1975
+SCF/CME_BP1_OB,SCF,CME,BP,1,OB,CME British Pound GBP,"Roll on Open Interest Switch, Backwards Panama Canal Method",15/09/1975
+SCF/CME_BP1_OF,SCF,CME,BP,1,OF,CME British Pound GBP,"Roll on Open Interest Switch, Forwards Panama Canal Method",15/09/1975
+SCF/CME_BP1_ON,SCF,CME,BP,1,ON,CME British Pound GBP,"Roll on Open Interest Switch, No Price Adjustment",15/09/1975
+SCF/CME_BP1_OR,SCF,CME,BP,1,OR,CME British Pound GBP,"Roll on Open Interest Switch, Backwards Ratio Method",15/09/1975
+SCF/CME_BP2_EB,SCF,CME,BP,2,EB,CME British Pound GBP,"Roll on Last Trading Day, Backwards Panama Canal Method",15/09/1975
+SCF/CME_BP2_EF,SCF,CME,BP,2,EF,CME British Pound GBP,"Roll on Last Trading Day, Forwards Panama Canal Method",15/09/1975
+SCF/CME_BP2_EN,SCF,CME,BP,2,EN,CME British Pound GBP,"Roll on Last Trading Day, No Price Adjustment",15/09/1975
+SCF/CME_BP2_ER,SCF,CME,BP,2,ER,CME British Pound GBP,"Roll on Last Trading Day, Backwards Ratio Method",15/09/1975
+SCF/CME_BP2_EW,SCF,CME,BP,2,EW,CME British Pound GBP,"Roll on Last Trading Day, Calendar-Weighted Method",15/09/1975
+SCF/CME_BP2_FB,SCF,CME,BP,2,FB,CME British Pound GBP,"Roll on First Day of Month, Backwards Panama Canal Method",15/09/1975
+SCF/CME_BP2_FF,SCF,CME,BP,2,FF,CME British Pound GBP,"Roll on First Day of Month, Forwards Panama Canal Method",15/09/1975
+SCF/CME_BP2_FN,SCF,CME,BP,2,FN,CME British Pound GBP,"Roll on First Day of Month, No Price Adjustment",15/09/1975
+SCF/CME_BP2_FR,SCF,CME,BP,2,FR,CME British Pound GBP,"Roll on First Day of Month, Backwards Ratio Method",15/09/1975
+SCF/CME_BP2_FW,SCF,CME,BP,2,FW,CME British Pound GBP,"Roll on First Day of Month, Calendar-Weighted Method",15/09/1975
+SCF/CME_BP2_OB,SCF,CME,BP,2,OB,CME British Pound GBP,"Roll on Open Interest Switch, Backwards Panama Canal Method",15/09/1975
+SCF/CME_BP2_OF,SCF,CME,BP,2,OF,CME British Pound GBP,"Roll on Open Interest Switch, Forwards Panama Canal Method",15/09/1975
+SCF/CME_BP2_ON,SCF,CME,BP,2,ON,CME British Pound GBP,"Roll on Open Interest Switch, No Price Adjustment",15/09/1975
+SCF/CME_BP2_OR,SCF,CME,BP,2,OR,CME British Pound GBP,"Roll on Open Interest Switch, Backwards Ratio Method",15/09/1975
+SCF/CME_CD1_EB,SCF,CME,CD,1,EB,CME Canadian Dollar CAD,"Roll on Last Trading Day, Backwards Panama Canal Method",14/06/1977
+SCF/CME_CD1_EF,SCF,CME,CD,1,EF,CME Canadian Dollar CAD,"Roll on Last Trading Day, Forwards Panama Canal Method",14/06/1977
+SCF/CME_CD1_EN,SCF,CME,CD,1,EN,CME Canadian Dollar CAD,"Roll on Last Trading Day, No Price Adjustment",14/06/1977
+SCF/CME_CD1_ER,SCF,CME,CD,1,ER,CME Canadian Dollar CAD,"Roll on Last Trading Day, Backwards Ratio Method",14/06/1977
+SCF/CME_CD1_EW,SCF,CME,CD,1,EW,CME Canadian Dollar CAD,"Roll on Last Trading Day, Calendar-Weighted Method",14/06/1977
+SCF/CME_CD1_FB,SCF,CME,CD,1,FB,CME Canadian Dollar CAD,"Roll on First Day of Month, Backwards Panama Canal Method",14/06/1977
+SCF/CME_CD1_FF,SCF,CME,CD,1,FF,CME Canadian Dollar CAD,"Roll on First Day of Month, Forwards Panama Canal Method",14/06/1977
+SCF/CME_CD1_FN,SCF,CME,CD,1,FN,CME Canadian Dollar CAD,"Roll on First Day of Month, No Price Adjustment",14/06/1977
+SCF/CME_CD1_FR,SCF,CME,CD,1,FR,CME Canadian Dollar CAD,"Roll on First Day of Month, Backwards Ratio Method",14/06/1977
+SCF/CME_CD1_FW,SCF,CME,CD,1,FW,CME Canadian Dollar CAD,"Roll on First Day of Month, Calendar-Weighted Method",14/06/1977
+SCF/CME_CD1_OB,SCF,CME,CD,1,OB,CME Canadian Dollar CAD,"Roll on Open Interest Switch, Backwards Panama Canal Method",14/06/1977
+SCF/CME_CD1_OF,SCF,CME,CD,1,OF,CME Canadian Dollar CAD,"Roll on Open Interest Switch, Forwards Panama Canal Method",14/06/1977
+SCF/CME_CD1_ON,SCF,CME,CD,1,ON,CME Canadian Dollar CAD,"Roll on Open Interest Switch, No Price Adjustment",14/06/1977
+SCF/CME_CD1_OR,SCF,CME,CD,1,OR,CME Canadian Dollar CAD,"Roll on Open Interest Switch, Backwards Ratio Method",14/06/1977
+SCF/CME_CD2_EB,SCF,CME,CD,2,EB,CME Canadian Dollar CAD,"Roll on Last Trading Day, Backwards Panama Canal Method",14/06/1977
+SCF/CME_CD2_EF,SCF,CME,CD,2,EF,CME Canadian Dollar CAD,"Roll on Last Trading Day, Forwards Panama Canal Method",14/06/1977
+SCF/CME_CD2_EN,SCF,CME,CD,2,EN,CME Canadian Dollar CAD,"Roll on Last Trading Day, No Price Adjustment",14/06/1977
+SCF/CME_CD2_ER,SCF,CME,CD,2,ER,CME Canadian Dollar CAD,"Roll on Last Trading Day, Backwards Ratio Method",14/06/1977
+SCF/CME_CD2_EW,SCF,CME,CD,2,EW,CME Canadian Dollar CAD,"Roll on Last Trading Day, Calendar-Weighted Method",14/06/1977
+SCF/CME_CD2_FB,SCF,CME,CD,2,FB,CME Canadian Dollar CAD,"Roll on First Day of Month, Backwards Panama Canal Method",14/06/1977
+SCF/CME_CD2_FF,SCF,CME,CD,2,FF,CME Canadian Dollar CAD,"Roll on First Day of Month, Forwards Panama Canal Method",14/06/1977
+SCF/CME_CD2_FN,SCF,CME,CD,2,FN,CME Canadian Dollar CAD,"Roll on First Day of Month, No Price Adjustment",14/06/1977
+SCF/CME_CD2_FR,SCF,CME,CD,2,FR,CME Canadian Dollar CAD,"Roll on First Day of Month, Backwards Ratio Method",14/06/1977
+SCF/CME_CD2_FW,SCF,CME,CD,2,FW,CME Canadian Dollar CAD,"Roll on First Day of Month, Calendar-Weighted Method",14/06/1977
+SCF/CME_CD2_OB,SCF,CME,CD,2,OB,CME Canadian Dollar CAD,"Roll on Open Interest Switch, Backwards Panama Canal Method",14/06/1977
+SCF/CME_CD2_OF,SCF,CME,CD,2,OF,CME Canadian Dollar CAD,"Roll on Open Interest Switch, Forwards Panama Canal Method",14/06/1977
+SCF/CME_CD2_ON,SCF,CME,CD,2,ON,CME Canadian Dollar CAD,"Roll on Open Interest Switch, No Price Adjustment",14/06/1977
+SCF/CME_CD2_OR,SCF,CME,CD,2,OR,CME Canadian Dollar CAD,"Roll on Open Interest Switch, Backwards Ratio Method",14/06/1977
+SCF/CME_EC1_EB,SCF,CME,EC,1,EB,CME Euro FX,"Roll on Last Trading Day, Backwards Panama Canal Method",15/03/1999
+SCF/CME_EC1_EF,SCF,CME,EC,1,EF,CME Euro FX,"Roll on Last Trading Day, Forwards Panama Canal Method",15/03/1999
+SCF/CME_EC1_EN,SCF,CME,EC,1,EN,CME Euro FX,"Roll on Last Trading Day, No Price Adjustment",15/03/1999
+SCF/CME_EC1_ER,SCF,CME,EC,1,ER,CME Euro FX,"Roll on Last Trading Day, Backwards Ratio Method",15/03/1999
+SCF/CME_EC1_EW,SCF,CME,EC,1,EW,CME Euro FX,"Roll on Last Trading Day, Calendar-Weighted Method",15/03/1999
+SCF/CME_EC1_FB,SCF,CME,EC,1,FB,CME Euro FX,"Roll on First Day of Month, Backwards Panama Canal Method",15/03/1999
+SCF/CME_EC1_FF,SCF,CME,EC,1,FF,CME Euro FX,"Roll on First Day of Month, Forwards Panama Canal Method",15/03/1999
+SCF/CME_EC1_FN,SCF,CME,EC,1,FN,CME Euro FX,"Roll on First Day of Month, No Price Adjustment",15/03/1999
+SCF/CME_EC1_FR,SCF,CME,EC,1,FR,CME Euro FX,"Roll on First Day of Month, Backwards Ratio Method",15/03/1999
+SCF/CME_EC1_FW,SCF,CME,EC,1,FW,CME Euro FX,"Roll on First Day of Month, Calendar-Weighted Method",15/03/1999
+SCF/CME_EC1_OB,SCF,CME,EC,1,OB,CME Euro FX,"Roll on Open Interest Switch, Backwards Panama Canal Method",15/03/1999
+SCF/CME_EC1_OF,SCF,CME,EC,1,OF,CME Euro FX,"Roll on Open Interest Switch, Forwards Panama Canal Method",15/03/1999
+SCF/CME_EC1_ON,SCF,CME,EC,1,ON,CME Euro FX,"Roll on Open Interest Switch, No Price Adjustment",15/03/1999
+SCF/CME_EC1_OR,SCF,CME,EC,1,OR,CME Euro FX,"Roll on Open Interest Switch, Backwards Ratio Method",15/03/1999
+SCF/CME_EC2_EB,SCF,CME,EC,2,EB,CME Euro FX,"Roll on Last Trading Day, Backwards Panama Canal Method",15/03/1999
+SCF/CME_EC2_EF,SCF,CME,EC,2,EF,CME Euro FX,"Roll on Last Trading Day, Forwards Panama Canal Method",15/03/1999
+SCF/CME_EC2_EN,SCF,CME,EC,2,EN,CME Euro FX,"Roll on Last Trading Day, No Price Adjustment",15/03/1999
+SCF/CME_EC2_ER,SCF,CME,EC,2,ER,CME Euro FX,"Roll on Last Trading Day, Backwards Ratio Method",15/03/1999
+SCF/CME_EC2_EW,SCF,CME,EC,2,EW,CME Euro FX,"Roll on Last Trading Day, Calendar-Weighted Method",15/03/1999
+SCF/CME_EC2_FB,SCF,CME,EC,2,FB,CME Euro FX,"Roll on First Day of Month, Backwards Panama Canal Method",15/03/1999
+SCF/CME_EC2_FF,SCF,CME,EC,2,FF,CME Euro FX,"Roll on First Day of Month, Forwards Panama Canal Method",15/03/1999
+SCF/CME_EC2_FN,SCF,CME,EC,2,FN,CME Euro FX,"Roll on First Day of Month, No Price Adjustment",15/03/1999
+SCF/CME_EC2_FR,SCF,CME,EC,2,FR,CME Euro FX,"Roll on First Day of Month, Backwards Ratio Method",15/03/1999
+SCF/CME_EC2_FW,SCF,CME,EC,2,FW,CME Euro FX,"Roll on First Day of Month, Calendar-Weighted Method",15/03/1999
+SCF/CME_EC2_OB,SCF,CME,EC,2,OB,CME Euro FX,"Roll on Open Interest Switch, Backwards Panama Canal Method",15/03/1999
+SCF/CME_EC2_OF,SCF,CME,EC,2,OF,CME Euro FX,"Roll on Open Interest Switch, Forwards Panama Canal Method",15/03/1999
+SCF/CME_EC2_ON,SCF,CME,EC,2,ON,CME Euro FX,"Roll on Open Interest Switch, No Price Adjustment",15/03/1999
+SCF/CME_EC2_OR,SCF,CME,EC,2,OR,CME Euro FX,"Roll on Open Interest Switch, Backwards Ratio Method",15/03/1999
+SCF/CME_ED1_EB,SCF,CME,ED,1,EB,CME Eurodollar,"Roll on Last Trading Day, Backwards Panama Canal Method",15/03/1982
+SCF/CME_ED1_EF,SCF,CME,ED,1,EF,CME Eurodollar,"Roll on Last Trading Day, Forwards Panama Canal Method",15/03/1982
+SCF/CME_ED1_EN,SCF,CME,ED,1,EN,CME Eurodollar,"Roll on Last Trading Day, No Price Adjustment",15/03/1982
+SCF/CME_ED1_ER,SCF,CME,ED,1,ER,CME Eurodollar,"Roll on Last Trading Day, Backwards Ratio Method",15/03/1982
+SCF/CME_ED1_EW,SCF,CME,ED,1,EW,CME Eurodollar,"Roll on Last Trading Day, Calendar-Weighted Method",15/03/1982
+SCF/CME_ED1_FB,SCF,CME,ED,1,FB,CME Eurodollar,"Roll on First Day of Month, Backwards Panama Canal Method",15/03/1982
+SCF/CME_ED1_FF,SCF,CME,ED,1,FF,CME Eurodollar,"Roll on First Day of Month, Forwards Panama Canal Method",15/03/1982
+SCF/CME_ED1_FN,SCF,CME,ED,1,FN,CME Eurodollar,"Roll on First Day of Month, No Price Adjustment",15/03/1982
+SCF/CME_ED1_FR,SCF,CME,ED,1,FR,CME Eurodollar,"Roll on First Day of Month, Backwards Ratio Method",15/03/1982
+SCF/CME_ED1_FW,SCF,CME,ED,1,FW,CME Eurodollar,"Roll on First Day of Month, Calendar-Weighted Method",15/03/1982
+SCF/CME_ED1_OB,SCF,CME,ED,1,OB,CME Eurodollar,"Roll on Open Interest Switch, Backwards Panama Canal Method",15/03/1982
+SCF/CME_ED1_OF,SCF,CME,ED,1,OF,CME Eurodollar,"Roll on Open Interest Switch, Forwards Panama Canal Method",15/03/1982
+SCF/CME_ED1_ON,SCF,CME,ED,1,ON,CME Eurodollar,"Roll on Open Interest Switch, No Price Adjustment",15/03/1982
+SCF/CME_ED1_OR,SCF,CME,ED,1,OR,CME Eurodollar,"Roll on Open Interest Switch, Backwards Ratio Method",15/03/1982
+SCF/CME_ED2_EB,SCF,CME,ED,2,EB,CME Eurodollar,"Roll on Last Trading Day, Backwards Panama Canal Method",15/03/1982
+SCF/CME_ED2_EF,SCF,CME,ED,2,EF,CME Eurodollar,"Roll on Last Trading Day, Forwards Panama Canal Method",15/03/1982
+SCF/CME_ED2_EN,SCF,CME,ED,2,EN,CME Eurodollar,"Roll on Last Trading Day, No Price Adjustment",15/03/1982
+SCF/CME_ED2_ER,SCF,CME,ED,2,ER,CME Eurodollar,"Roll on Last Trading Day, Backwards Ratio Method",15/03/1982
+SCF/CME_ED2_EW,SCF,CME,ED,2,EW,CME Eurodollar,"Roll on Last Trading Day, Calendar-Weighted Method",15/03/1982
+SCF/CME_ED2_FB,SCF,CME,ED,2,FB,CME Eurodollar,"Roll on First Day of Month, Backwards Panama Canal Method",15/03/1982
+SCF/CME_ED2_FF,SCF,CME,ED,2,FF,CME Eurodollar,"Roll on First Day of Month, Forwards Panama Canal Method",15/03/1982
+SCF/CME_ED2_FN,SCF,CME,ED,2,FN,CME Eurodollar,"Roll on First Day of Month, No Price Adjustment",15/03/1982
+SCF/CME_ED2_FR,SCF,CME,ED,2,FR,CME Eurodollar,"Roll on First Day of Month, Backwards Ratio Method",15/03/1982
+SCF/CME_ED2_FW,SCF,CME,ED,2,FW,CME Eurodollar,"Roll on First Day of Month, Calendar-Weighted Method",15/03/1982
+SCF/CME_ED2_OB,SCF,CME,ED,2,OB,CME Eurodollar,"Roll on Open Interest Switch, Backwards Panama Canal Method",15/03/1982
+SCF/CME_ED2_OF,SCF,CME,ED,2,OF,CME Eurodollar,"Roll on Open Interest Switch, Forwards Panama Canal Method",15/03/1982
+SCF/CME_ED2_ON,SCF,CME,ED,2,ON,CME Eurodollar,"Roll on Open Interest Switch, No Price Adjustment",15/03/1982
+SCF/CME_ED2_OR,SCF,CME,ED,2,OR,CME Eurodollar,"Roll on Open Interest Switch, Backwards Ratio Method",15/03/1982
+SCF/CME_JY1_EB,SCF,CME,JY,1,EB,CME Japanese Yen JPY,"Roll on Last Trading Day, Backwards Panama Canal Method",11/03/1977
+SCF/CME_JY1_EF,SCF,CME,JY,1,EF,CME Japanese Yen JPY,"Roll on Last Trading Day, Forwards Panama Canal Method",11/03/1977
+SCF/CME_JY1_EN,SCF,CME,JY,1,EN,CME Japanese Yen JPY,"Roll on Last Trading Day, No Price Adjustment",11/03/1977
+SCF/CME_JY1_ER,SCF,CME,JY,1,ER,CME Japanese Yen JPY,"Roll on Last Trading Day, Backwards Ratio Method",11/03/1977
+SCF/CME_JY1_EW,SCF,CME,JY,1,EW,CME Japanese Yen JPY,"Roll on Last Trading Day, Calendar-Weighted Method",11/03/1977
+SCF/CME_JY1_FB,SCF,CME,JY,1,FB,CME Japanese Yen JPY,"Roll on First Day of Month, Backwards Panama Canal Method",11/03/1977
+SCF/CME_JY1_FF,SCF,CME,JY,1,FF,CME Japanese Yen JPY,"Roll on First Day of Month, Forwards Panama Canal Method",11/03/1977
+SCF/CME_JY1_FN,SCF,CME,JY,1,FN,CME Japanese Yen JPY,"Roll on First Day of Month, No Price Adjustment",11/03/1977
+SCF/CME_JY1_FR,SCF,CME,JY,1,FR,CME Japanese Yen JPY,"Roll on First Day of Month, Backwards Ratio Method",11/03/1977
+SCF/CME_JY1_FW,SCF,CME,JY,1,FW,CME Japanese Yen JPY,"Roll on First Day of Month, Calendar-Weighted Method",11/03/1977
+SCF/CME_JY1_OB,SCF,CME,JY,1,OB,CME Japanese Yen JPY,"Roll on Open Interest Switch, Backwards Panama Canal Method",11/03/1977
+SCF/CME_JY1_OF,SCF,CME,JY,1,OF,CME Japanese Yen JPY,"Roll on Open Interest Switch, Forwards Panama Canal Method",11/03/1977
+SCF/CME_JY1_ON,SCF,CME,JY,1,ON,CME Japanese Yen JPY,"Roll on Open Interest Switch, No Price Adjustment",11/03/1977
+SCF/CME_JY1_OR,SCF,CME,JY,1,OR,CME Japanese Yen JPY,"Roll on Open Interest Switch, Backwards Ratio Method",11/03/1977
+SCF/CME_JY2_EB,SCF,CME,JY,2,EB,CME Japanese Yen JPY,"Roll on Last Trading Day, Backwards Panama Canal Method",11/03/1977
+SCF/CME_JY2_EF,SCF,CME,JY,2,EF,CME Japanese Yen JPY,"Roll on Last Trading Day, Forwards Panama Canal Method",11/03/1977
+SCF/CME_JY2_EN,SCF,CME,JY,2,EN,CME Japanese Yen JPY,"Roll on Last Trading Day, No Price Adjustment",11/03/1977
+SCF/CME_JY2_ER,SCF,CME,JY,2,ER,CME Japanese Yen JPY,"Roll on Last Trading Day, Backwards Ratio Method",11/03/1977
+SCF/CME_JY2_EW,SCF,CME,JY,2,EW,CME Japanese Yen JPY,"Roll on Last Trading Day, Calendar-Weighted Method",11/03/1977
+SCF/CME_JY2_FB,SCF,CME,JY,2,FB,CME Japanese Yen JPY,"Roll on First Day of Month, Backwards Panama Canal Method",11/03/1977
+SCF/CME_JY2_FF,SCF,CME,JY,2,FF,CME Japanese Yen JPY,"Roll on First Day of Month, Forwards Panama Canal Method",11/03/1977
+SCF/CME_JY2_FN,SCF,CME,JY,2,FN,CME Japanese Yen JPY,"Roll on First Day of Month, No Price Adjustment",11/03/1977
+SCF/CME_JY2_FR,SCF,CME,JY,2,FR,CME Japanese Yen JPY,"Roll on First Day of Month, Backwards Ratio Method",11/03/1977
+SCF/CME_JY2_FW,SCF,CME,JY,2,FW,CME Japanese Yen JPY,"Roll on First Day of Month, Calendar-Weighted Method",11/03/1977
+SCF/CME_JY2_OB,SCF,CME,JY,2,OB,CME Japanese Yen JPY,"Roll on Open Interest Switch, Backwards Panama Canal Method",11/03/1977
+SCF/CME_JY2_OF,SCF,CME,JY,2,OF,CME Japanese Yen JPY,"Roll on Open Interest Switch, Forwards Panama Canal Method",11/03/1977
+SCF/CME_JY2_ON,SCF,CME,JY,2,ON,CME Japanese Yen JPY,"Roll on Open Interest Switch, No Price Adjustment",11/03/1977
+SCF/CME_JY2_OR,SCF,CME,JY,2,OR,CME Japanese Yen JPY,"Roll on Open Interest Switch, Backwards Ratio Method",11/03/1977
+SCF/CME_KW1_EB,SCF,CME,KW,1,EB,CME Kansas City Wheat,"Roll on Last Trading Day, Backwards Panama Canal Method",21/09/1976
+SCF/CME_KW1_EF,SCF,CME,KW,1,EF,CME Kansas City Wheat,"Roll on Last Trading Day, Forwards Panama Canal Method",21/09/1976
+SCF/CME_KW1_EN,SCF,CME,KW,1,EN,CME Kansas City Wheat,"Roll on Last Trading Day, No Price Adjustment",21/09/1976
+SCF/CME_KW1_ER,SCF,CME,KW,1,ER,CME Kansas City Wheat,"Roll on Last Trading Day, Backwards Ratio Method",21/09/1976
+SCF/CME_KW1_EW,SCF,CME,KW,1,EW,CME Kansas City Wheat,"Roll on Last Trading Day, Calendar-Weighted Method",21/09/1976
+SCF/CME_KW1_FB,SCF,CME,KW,1,FB,CME Kansas City Wheat,"Roll on First Day of Month, Backwards Panama Canal Method",21/09/1976
+SCF/CME_KW1_FF,SCF,CME,KW,1,FF,CME Kansas City Wheat,"Roll on First Day of Month, Forwards Panama Canal Method",21/09/1976
+SCF/CME_KW1_FN,SCF,CME,KW,1,FN,CME Kansas City Wheat,"Roll on First Day of Month, No Price Adjustment",21/09/1976
+SCF/CME_KW1_FR,SCF,CME,KW,1,FR,CME Kansas City Wheat,"Roll on First Day of Month, Backwards Ratio Method",21/09/1976
+SCF/CME_KW1_FW,SCF,CME,KW,1,FW,CME Kansas City Wheat,"Roll on First Day of Month, Calendar-Weighted Method",21/09/1976
+SCF/CME_KW1_OB,SCF,CME,KW,1,OB,CME Kansas City Wheat,"Roll on Open Interest Switch, Backwards Panama Canal Method",21/09/1976
+SCF/CME_KW1_OF,SCF,CME,KW,1,OF,CME Kansas City Wheat,"Roll on Open Interest Switch, Forwards Panama Canal Method",21/09/1976
+SCF/CME_KW1_ON,SCF,CME,KW,1,ON,CME Kansas City Wheat,"Roll on Open Interest Switch, No Price Adjustment",21/09/1976
+SCF/CME_KW1_OR,SCF,CME,KW,1,OR,CME Kansas City Wheat,"Roll on Open Interest Switch, Backwards Ratio Method",21/09/1976
+SCF/CME_KW2_EB,SCF,CME,KW,2,EB,CME Kansas City Wheat,"Roll on Last Trading Day, Backwards Panama Canal Method",21/09/1976
+SCF/CME_KW2_EF,SCF,CME,KW,2,EF,CME Kansas City Wheat,"Roll on Last Trading Day, Forwards Panama Canal Method",21/09/1976
+SCF/CME_KW2_EN,SCF,CME,KW,2,EN,CME Kansas City Wheat,"Roll on Last Trading Day, No Price Adjustment",21/09/1976
+SCF/CME_KW2_ER,SCF,CME,KW,2,ER,CME Kansas City Wheat,"Roll on Last Trading Day, Backwards Ratio Method",21/09/1976
+SCF/CME_KW2_EW,SCF,CME,KW,2,EW,CME Kansas City Wheat,"Roll on Last Trading Day, Calendar-Weighted Method",21/09/1976
+SCF/CME_KW2_FB,SCF,CME,KW,2,FB,CME Kansas City Wheat,"Roll on First Day of Month, Backwards Panama Canal Method",21/09/1976
+SCF/CME_KW2_FF,SCF,CME,KW,2,FF,CME Kansas City Wheat,"Roll on First Day of Month, Forwards Panama Canal Method",21/09/1976
+SCF/CME_KW2_FN,SCF,CME,KW,2,FN,CME Kansas City Wheat,"Roll on First Day of Month, No Price Adjustment",21/09/1976
+SCF/CME_KW2_FR,SCF,CME,KW,2,FR,CME Kansas City Wheat,"Roll on First Day of Month, Backwards Ratio Method",21/09/1976
+SCF/CME_KW2_FW,SCF,CME,KW,2,FW,CME Kansas City Wheat,"Roll on First Day of Month, Calendar-Weighted Method",21/09/1976
+SCF/CME_KW2_OB,SCF,CME,KW,2,OB,CME Kansas City Wheat,"Roll on Open Interest Switch, Backwards Panama Canal Method",21/09/1976
+SCF/CME_KW2_OF,SCF,CME,KW,2,OF,CME Kansas City Wheat,"Roll on Open Interest Switch, Forwards Panama Canal Method",21/09/1976
+SCF/CME_KW2_ON,SCF,CME,KW,2,ON,CME Kansas City Wheat,"Roll on Open Interest Switch, No Price Adjustment",21/09/1976
+SCF/CME_KW2_OR,SCF,CME,KW,2,OR,CME Kansas City Wheat,"Roll on Open Interest Switch, Backwards Ratio Method",21/09/1976
+SCF/CME_LN1_EB,SCF,CME,LN,1,EB,CME Lean Hogs,"Roll on Last Trading Day, Backwards Panama Canal Method",20/02/1970
+SCF/CME_LN1_EF,SCF,CME,LN,1,EF,CME Lean Hogs,"Roll on Last Trading Day, Forwards Panama Canal Method",20/02/1970
+SCF/CME_LN1_EN,SCF,CME,LN,1,EN,CME Lean Hogs,"Roll on Last Trading Day, No Price Adjustment",20/02/1970
+SCF/CME_LN1_ER,SCF,CME,LN,1,ER,CME Lean Hogs,"Roll on Last Trading Day, Backwards Ratio Method",20/02/1970
+SCF/CME_LN1_EW,SCF,CME,LN,1,EW,CME Lean Hogs,"Roll on Last Trading Day, Calendar-Weighted Method",20/02/1970
+SCF/CME_LN1_FB,SCF,CME,LN,1,FB,CME Lean Hogs,"Roll on First Day of Month, Backwards Panama Canal Method",20/02/1970
+SCF/CME_LN1_FF,SCF,CME,LN,1,FF,CME Lean Hogs,"Roll on First Day of Month, Forwards Panama Canal Method",20/02/1970
+SCF/CME_LN1_FN,SCF,CME,LN,1,FN,CME Lean Hogs,"Roll on First Day of Month, No Price Adjustment",20/02/1970
+SCF/CME_LN1_FR,SCF,CME,LN,1,FR,CME Lean Hogs,"Roll on First Day of Month, Backwards Ratio Method",20/02/1970
+SCF/CME_LN1_FW,SCF,CME,LN,1,FW,CME Lean Hogs,"Roll on First Day of Month, Calendar-Weighted Method",20/02/1970
+SCF/CME_LN1_OB,SCF,CME,LN,1,OB,CME Lean Hogs,"Roll on Open Interest Switch, Backwards Panama Canal Method",20/02/1970
+SCF/CME_LN1_OF,SCF,CME,LN,1,OF,CME Lean Hogs,"Roll on Open Interest Switch, Forwards Panama Canal Method",20/02/1970
+SCF/CME_LN1_ON,SCF,CME,LN,1,ON,CME Lean Hogs,"Roll on Open Interest Switch, No Price Adjustment",20/02/1970
+SCF/CME_LN1_OR,SCF,CME,LN,1,OR,CME Lean Hogs,"Roll on Open Interest Switch, Backwards Ratio Method",20/02/1970
+SCF/CME_LN2_EB,SCF,CME,LN,2,EB,CME Lean Hogs,"Roll on Last Trading Day, Backwards Panama Canal Method",20/02/1970
+SCF/CME_LN2_EF,SCF,CME,LN,2,EF,CME Lean Hogs,"Roll on Last Trading Day, Forwards Panama Canal Method",20/02/1970
+SCF/CME_LN2_EN,SCF,CME,LN,2,EN,CME Lean Hogs,"Roll on Last Trading Day, No Price Adjustment",20/02/1970
+SCF/CME_LN2_ER,SCF,CME,LN,2,ER,CME Lean Hogs,"Roll on Last Trading Day, Backwards Ratio Method",20/02/1970
+SCF/CME_LN2_EW,SCF,CME,LN,2,EW,CME Lean Hogs,"Roll on Last Trading Day, Calendar-Weighted Method",20/02/1970
+SCF/CME_LN2_FB,SCF,CME,LN,2,FB,CME Lean Hogs,"Roll on First Day of Month, Backwards Panama Canal Method",20/02/1970
+SCF/CME_LN2_FF,SCF,CME,LN,2,FF,CME Lean Hogs,"Roll on First Day of Month, Forwards Panama Canal Method",20/02/1970
+SCF/CME_LN2_FN,SCF,CME,LN,2,FN,CME Lean Hogs,"Roll on First Day of Month, No Price Adjustment",20/02/1970
+SCF/CME_LN2_FR,SCF,CME,LN,2,FR,CME Lean Hogs,"Roll on First Day of Month, Backwards Ratio Method",20/02/1970
+SCF/CME_LN2_FW,SCF,CME,LN,2,FW,CME Lean Hogs,"Roll on First Day of Month, Calendar-Weighted Method",20/02/1970
+SCF/CME_LN2_OB,SCF,CME,LN,2,OB,CME Lean Hogs,"Roll on Open Interest Switch, Backwards Panama Canal Method",20/02/1970
+SCF/CME_LN2_OF,SCF,CME,LN,2,OF,CME Lean Hogs,"Roll on Open Interest Switch, Forwards Panama Canal Method",20/02/1970
+SCF/CME_LN2_ON,SCF,CME,LN,2,ON,CME Lean Hogs,"Roll on Open Interest Switch, No Price Adjustment",20/02/1970
+SCF/CME_LN2_OR,SCF,CME,LN,2,OR,CME Lean Hogs,"Roll on Open Interest Switch, Backwards Ratio Method",20/02/1970
+SCF/CME_LC1_EB,SCF,CME,LC,1,EB,CME Live Cattle,"Roll on Last Trading Day, Backwards Panama Canal Method",20/04/1965
+SCF/CME_LC1_EF,SCF,CME,LC,1,EF,CME Live Cattle,"Roll on Last Trading Day, Forwards Panama Canal Method",20/04/1965
+SCF/CME_LC1_EN,SCF,CME,LC,1,EN,CME Live Cattle,"Roll on Last Trading Day, No Price Adjustment",20/04/1965
+SCF/CME_LC1_ER,SCF,CME,LC,1,ER,CME Live Cattle,"Roll on Last Trading Day, Backwards Ratio Method",20/04/1965
+SCF/CME_LC1_EW,SCF,CME,LC,1,EW,CME Live Cattle,"Roll on Last Trading Day, Calendar-Weighted Method",20/04/1965
+SCF/CME_LC1_FB,SCF,CME,LC,1,FB,CME Live Cattle,"Roll on First Day of Month, Backwards Panama Canal Method",20/04/1965
+SCF/CME_LC1_FF,SCF,CME,LC,1,FF,CME Live Cattle,"Roll on First Day of Month, Forwards Panama Canal Method",20/04/1965
+SCF/CME_LC1_FN,SCF,CME,LC,1,FN,CME Live Cattle,"Roll on First Day of Month, No Price Adjustment",20/04/1965
+SCF/CME_LC1_FR,SCF,CME,LC,1,FR,CME Live Cattle,"Roll on First Day of Month, Backwards Ratio Method",20/04/1965
+SCF/CME_LC1_FW,SCF,CME,LC,1,FW,CME Live Cattle,"Roll on First Day of Month, Calendar-Weighted Method",20/04/1965
+SCF/CME_LC1_OB,SCF,CME,LC,1,OB,CME Live Cattle,"Roll on Open Interest Switch, Backwards Panama Canal Method",20/04/1965
+SCF/CME_LC1_OF,SCF,CME,LC,1,OF,CME Live Cattle,"Roll on Open Interest Switch, Forwards Panama Canal Method",20/04/1965
+SCF/CME_LC1_ON,SCF,CME,LC,1,ON,CME Live Cattle,"Roll on Open Interest Switch, No Price Adjustment",20/04/1965
+SCF/CME_LC1_OR,SCF,CME,LC,1,OR,CME Live Cattle,"Roll on Open Interest Switch, Backwards Ratio Method",20/04/1965
+SCF/CME_LC2_EB,SCF,CME,LC,2,EB,CME Live Cattle,"Roll on Last Trading Day, Backwards Panama Canal Method",20/04/1965
+SCF/CME_LC2_EF,SCF,CME,LC,2,EF,CME Live Cattle,"Roll on Last Trading Day, Forwards Panama Canal Method",20/04/1965
+SCF/CME_LC2_EN,SCF,CME,LC,2,EN,CME Live Cattle,"Roll on Last Trading Day, No Price Adjustment",20/04/1965
+SCF/CME_LC2_ER,SCF,CME,LC,2,ER,CME Live Cattle,"Roll on Last Trading Day, Backwards Ratio Method",20/04/1965
+SCF/CME_LC2_EW,SCF,CME,LC,2,EW,CME Live Cattle,"Roll on Last Trading Day, Calendar-Weighted Method",20/04/1965
+SCF/CME_LC2_FB,SCF,CME,LC,2,FB,CME Live Cattle,"Roll on First Day of Month, Backwards Panama Canal Method",20/04/1965
+SCF/CME_LC2_FF,SCF,CME,LC,2,FF,CME Live Cattle,"Roll on First Day of Month, Forwards Panama Canal Method",20/04/1965
+SCF/CME_LC2_FN,SCF,CME,LC,2,FN,CME Live Cattle,"Roll on First Day of Month, No Price Adjustment",20/04/1965
+SCF/CME_LC2_FR,SCF,CME,LC,2,FR,CME Live Cattle,"Roll on First Day of Month, Backwards Ratio Method",20/04/1965
+SCF/CME_LC2_FW,SCF,CME,LC,2,FW,CME Live Cattle,"Roll on First Day of Month, Calendar-Weighted Method",20/04/1965
+SCF/CME_LC2_OB,SCF,CME,LC,2,OB,CME Live Cattle,"Roll on Open Interest Switch, Backwards Panama Canal Method",20/04/1965
+SCF/CME_LC2_OF,SCF,CME,LC,2,OF,CME Live Cattle,"Roll on Open Interest Switch, Forwards Panama Canal Method",20/04/1965
+SCF/CME_LC2_ON,SCF,CME,LC,2,ON,CME Live Cattle,"Roll on Open Interest Switch, No Price Adjustment",20/04/1965
+SCF/CME_LC2_OR,SCF,CME,LC,2,OR,CME Live Cattle,"Roll on Open Interest Switch, Backwards Ratio Method",20/04/1965
+SCF/CME_NQ1_EB,SCF,CME,NQ,1,EB,CME NASDAQ 100 Index Mini,"Roll on Last Trading Day, Backwards Panama Canal Method",17/09/1999
+SCF/CME_NQ1_EF,SCF,CME,NQ,1,EF,CME NASDAQ 100 Index Mini,"Roll on Last Trading Day, Forwards Panama Canal Method",17/09/1999
+SCF/CME_NQ1_EN,SCF,CME,NQ,1,EN,CME NASDAQ 100 Index Mini,"Roll on Last Trading Day, No Price Adjustment",17/09/1999
+SCF/CME_NQ1_ER,SCF,CME,NQ,1,ER,CME NASDAQ 100 Index Mini,"Roll on Last Trading Day, Backwards Ratio Method",17/09/1999
+SCF/CME_NQ1_EW,SCF,CME,NQ,1,EW,CME NASDAQ 100 Index Mini,"Roll on Last Trading Day, Calendar-Weighted Method",17/09/1999
+SCF/CME_NQ1_FB,SCF,CME,NQ,1,FB,CME NASDAQ 100 Index Mini,"Roll on First Day of Month, Backwards Panama Canal Method",17/09/1999
+SCF/CME_NQ1_FF,SCF,CME,NQ,1,FF,CME NASDAQ 100 Index Mini,"Roll on First Day of Month, Forwards Panama Canal Method",17/09/1999
+SCF/CME_NQ1_FN,SCF,CME,NQ,1,FN,CME NASDAQ 100 Index Mini,"Roll on First Day of Month, No Price Adjustment",17/09/1999
+SCF/CME_NQ1_FR,SCF,CME,NQ,1,FR,CME NASDAQ 100 Index Mini,"Roll on First Day of Month, Backwards Ratio Method",17/09/1999
+SCF/CME_NQ1_FW,SCF,CME,NQ,1,FW,CME NASDAQ 100 Index Mini,"Roll on First Day of Month, Calendar-Weighted Method",17/09/1999
+SCF/CME_NQ1_OB,SCF,CME,NQ,1,OB,CME NASDAQ 100 Index Mini,"Roll on Open Interest Switch, Backwards Panama Canal Method",17/09/1999
+SCF/CME_NQ1_OF,SCF,CME,NQ,1,OF,CME NASDAQ 100 Index Mini,"Roll on Open Interest Switch, Forwards Panama Canal Method",17/09/1999
+SCF/CME_NQ1_ON,SCF,CME,NQ,1,ON,CME NASDAQ 100 Index Mini,"Roll on Open Interest Switch, No Price Adjustment",17/09/1999
+SCF/CME_NQ1_OR,SCF,CME,NQ,1,OR,CME NASDAQ 100 Index Mini,"Roll on Open Interest Switch, Backwards Ratio Method",17/09/1999
+SCF/CME_NE1_EB,SCF,CME,NE,1,EB,CME New Zealand Dollar NZD,"Roll on Last Trading Day, Backwards Panama Canal Method",13/12/2004
+SCF/CME_NE1_EF,SCF,CME,NE,1,EF,CME New Zealand Dollar NZD,"Roll on Last Trading Day, Forwards Panama Canal Method",13/12/2004
+SCF/CME_NE1_EN,SCF,CME,NE,1,EN,CME New Zealand Dollar NZD,"Roll on Last Trading Day, No Price Adjustment",13/12/2004
+SCF/CME_NE1_ER,SCF,CME,NE,1,ER,CME New Zealand Dollar NZD,"Roll on Last Trading Day, Backwards Ratio Method",13/12/2004
+SCF/CME_NE1_EW,SCF,CME,NE,1,EW,CME New Zealand Dollar NZD,"Roll on Last Trading Day, Calendar-Weighted Method",13/12/2004
+SCF/CME_NE1_FB,SCF,CME,NE,1,FB,CME New Zealand Dollar NZD,"Roll on First Day of Month, Backwards Panama Canal Method",13/12/2004
+SCF/CME_NE1_FF,SCF,CME,NE,1,FF,CME New Zealand Dollar NZD,"Roll on First Day of Month, Forwards Panama Canal Method",13/12/2004
+SCF/CME_NE1_FN,SCF,CME,NE,1,FN,CME New Zealand Dollar NZD,"Roll on First Day of Month, No Price Adjustment",13/12/2004
+SCF/CME_NE1_FR,SCF,CME,NE,1,FR,CME New Zealand Dollar NZD,"Roll on First Day of Month, Backwards Ratio Method",13/12/2004
+SCF/CME_NE1_FW,SCF,CME,NE,1,FW,CME New Zealand Dollar NZD,"Roll on First Day of Month, Calendar-Weighted Method",13/12/2004
+SCF/CME_NE1_OB,SCF,CME,NE,1,OB,CME New Zealand Dollar NZD,"Roll on Open Interest Switch, Backwards Panama Canal Method",13/12/2004
+SCF/CME_NE1_OF,SCF,CME,NE,1,OF,CME New Zealand Dollar NZD,"Roll on Open Interest Switch, Forwards Panama Canal Method",13/12/2004
+SCF/CME_NE1_ON,SCF,CME,NE,1,ON,CME New Zealand Dollar NZD,"Roll on Open Interest Switch, No Price Adjustment",13/12/2004
+SCF/CME_NE1_OR,SCF,CME,NE,1,OR,CME New Zealand Dollar NZD,"Roll on Open Interest Switch, Backwards Ratio Method",13/12/2004
+SCF/CME_NK1_EB,SCF,CME,NK,1,EB,CME Nikkei 225,"Roll on Last Trading Day, Backwards Panama Canal Method",19/12/1990
+SCF/CME_NK1_EF,SCF,CME,NK,1,EF,CME Nikkei 225,"Roll on Last Trading Day, Forwards Panama Canal Method",19/12/1990
+SCF/CME_NK1_EN,SCF,CME,NK,1,EN,CME Nikkei 225,"Roll on Last Trading Day, No Price Adjustment",19/12/1990
+SCF/CME_NK1_ER,SCF,CME,NK,1,ER,CME Nikkei 225,"Roll on Last Trading Day, Backwards Ratio Method",19/12/1990
+SCF/CME_NK1_EW,SCF,CME,NK,1,EW,CME Nikkei 225,"Roll on Last Trading Day, Calendar-Weighted Method",19/12/1990
+SCF/CME_NK1_FB,SCF,CME,NK,1,FB,CME Nikkei 225,"Roll on First Day of Month, Backwards Panama Canal Method",19/12/1990
+SCF/CME_NK1_FF,SCF,CME,NK,1,FF,CME Nikkei 225,"Roll on First Day of Month, Forwards Panama Canal Method",19/12/1990
+SCF/CME_NK1_FN,SCF,CME,NK,1,FN,CME Nikkei 225,"Roll on First Day of Month, No Price Adjustment",19/12/1990
+SCF/CME_NK1_FR,SCF,CME,NK,1,FR,CME Nikkei 225,"Roll on First Day of Month, Backwards Ratio Method",19/12/1990
+SCF/CME_NK1_FW,SCF,CME,NK,1,FW,CME Nikkei 225,"Roll on First Day of Month, Calendar-Weighted Method",19/12/1990
+SCF/CME_NK1_OB,SCF,CME,NK,1,OB,CME Nikkei 225,"Roll on Open Interest Switch, Backwards Panama Canal Method",19/12/1990
+SCF/CME_NK1_OF,SCF,CME,NK,1,OF,CME Nikkei 225,"Roll on Open Interest Switch, Forwards Panama Canal Method",19/12/1990
+SCF/CME_NK1_ON,SCF,CME,NK,1,ON,CME Nikkei 225,"Roll on Open Interest Switch, No Price Adjustment",19/12/1990
+SCF/CME_NK1_OR,SCF,CME,NK,1,OR,CME Nikkei 225,"Roll on Open Interest Switch, Backwards Ratio Method",19/12/1990
+SCF/CME_NK2_EB,SCF,CME,NK,2,EB,CME Nikkei 225,"Roll on Last Trading Day, Backwards Panama Canal Method",19/12/1990
+SCF/CME_NK2_EF,SCF,CME,NK,2,EF,CME Nikkei 225,"Roll on Last Trading Day, Forwards Panama Canal Method",19/12/1990
+SCF/CME_NK2_EN,SCF,CME,NK,2,EN,CME Nikkei 225,"Roll on Last Trading Day, No Price Adjustment",19/12/1990
+SCF/CME_NK2_ER,SCF,CME,NK,2,ER,CME Nikkei 225,"Roll on Last Trading Day, Backwards Ratio Method",19/12/1990
+SCF/CME_NK2_EW,SCF,CME,NK,2,EW,CME Nikkei 225,"Roll on Last Trading Day, Calendar-Weighted Method",19/12/1990
+SCF/CME_NK2_FB,SCF,CME,NK,2,FB,CME Nikkei 225,"Roll on First Day of Month, Backwards Panama Canal Method",19/12/1990
+SCF/CME_NK2_FF,SCF,CME,NK,2,FF,CME Nikkei 225,"Roll on First Day of Month, Forwards Panama Canal Method",19/12/1990
+SCF/CME_NK2_FN,SCF,CME,NK,2,FN,CME Nikkei 225,"Roll on First Day of Month, No Price Adjustment",19/12/1990
+SCF/CME_NK2_FR,SCF,CME,NK,2,FR,CME Nikkei 225,"Roll on First Day of Month, Backwards Ratio Method",19/12/1990
+SCF/CME_NK2_FW,SCF,CME,NK,2,FW,CME Nikkei 225,"Roll on First Day of Month, Calendar-Weighted Method",19/12/1990
+SCF/CME_NK2_OB,SCF,CME,NK,2,OB,CME Nikkei 225,"Roll on Open Interest Switch, Backwards Panama Canal Method",19/12/1990
+SCF/CME_NK2_OF,SCF,CME,NK,2,OF,CME Nikkei 225,"Roll on Open Interest Switch, Forwards Panama Canal Method",19/12/1990
+SCF/CME_NK2_ON,SCF,CME,NK,2,ON,CME Nikkei 225,"Roll on Open Interest Switch, No Price Adjustment",19/12/1990
+SCF/CME_NK2_OR,SCF,CME,NK,2,OR,CME Nikkei 225,"Roll on Open Interest Switch, Backwards Ratio Method",19/12/1990
+SCF/CME_MD1_EB,SCF,CME,MD,1,EB,CME S&P 400 Midcap Index,"Roll on Last Trading Day, Backwards Panama Canal Method",19/03/1992
+SCF/CME_MD1_EF,SCF,CME,MD,1,EF,CME S&P 400 Midcap Index,"Roll on Last Trading Day, Forwards Panama Canal Method",19/03/1992
+SCF/CME_MD1_EN,SCF,CME,MD,1,EN,CME S&P 400 Midcap Index,"Roll on Last Trading Day, No Price Adjustment",19/03/1992
+SCF/CME_MD1_ER,SCF,CME,MD,1,ER,CME S&P 400 Midcap Index,"Roll on Last Trading Day, Backwards Ratio Method",19/03/1992
+SCF/CME_MD1_EW,SCF,CME,MD,1,EW,CME S&P 400 Midcap Index,"Roll on Last Trading Day, Calendar-Weighted Method",19/03/1992
+SCF/CME_MD1_FB,SCF,CME,MD,1,FB,CME S&P 400 Midcap Index,"Roll on First Day of Month, Backwards Panama Canal Method",19/03/1992
+SCF/CME_MD1_FF,SCF,CME,MD,1,FF,CME S&P 400 Midcap Index,"Roll on First Day of Month, Forwards Panama Canal Method",19/03/1992
+SCF/CME_MD1_FN,SCF,CME,MD,1,FN,CME S&P 400 Midcap Index,"Roll on First Day of Month, No Price Adjustment",19/03/1992
+SCF/CME_MD1_FR,SCF,CME,MD,1,FR,CME S&P 400 Midcap Index,"Roll on First Day of Month, Backwards Ratio Method",19/03/1992
+SCF/CME_MD1_FW,SCF,CME,MD,1,FW,CME S&P 400 Midcap Index,"Roll on First Day of Month, Calendar-Weighted Method",19/03/1992
+SCF/CME_MD1_OB,SCF,CME,MD,1,OB,CME S&P 400 Midcap Index,"Roll on Open Interest Switch, Backwards Panama Canal Method",19/03/1992
+SCF/CME_MD1_OF,SCF,CME,MD,1,OF,CME S&P 400 Midcap Index,"Roll on Open Interest Switch, Forwards Panama Canal Method",19/03/1992
+SCF/CME_MD1_ON,SCF,CME,MD,1,ON,CME S&P 400 Midcap Index,"Roll on Open Interest Switch, No Price Adjustment",19/03/1992
+SCF/CME_MD1_OR,SCF,CME,MD,1,OR,CME S&P 400 Midcap Index,"Roll on Open Interest Switch, Backwards Ratio Method",19/03/1992
+SCF/CME_MD2_EB,SCF,CME,MD,2,EB,CME S&P 400 Midcap Index,"Roll on Last Trading Day, Backwards Panama Canal Method",19/03/1992
+SCF/CME_MD2_EF,SCF,CME,MD,2,EF,CME S&P 400 Midcap Index,"Roll on Last Trading Day, Forwards Panama Canal Method",19/03/1992
+SCF/CME_MD2_EN,SCF,CME,MD,2,EN,CME S&P 400 Midcap Index,"Roll on Last Trading Day, No Price Adjustment",19/03/1992
+SCF/CME_MD2_ER,SCF,CME,MD,2,ER,CME S&P 400 Midcap Index,"Roll on Last Trading Day, Backwards Ratio Method",19/03/1992
+SCF/CME_MD2_EW,SCF,CME,MD,2,EW,CME S&P 400 Midcap Index,"Roll on Last Trading Day, Calendar-Weighted Method",19/03/1992
+SCF/CME_MD2_FB,SCF,CME,MD,2,FB,CME S&P 400 Midcap Index,"Roll on First Day of Month, Backwards Panama Canal Method",19/03/1992
+SCF/CME_MD2_FF,SCF,CME,MD,2,FF,CME S&P 400 Midcap Index,"Roll on First Day of Month, Forwards Panama Canal Method",19/03/1992
+SCF/CME_MD2_FN,SCF,CME,MD,2,FN,CME S&P 400 Midcap Index,"Roll on First Day of Month, No Price Adjustment",19/03/1992
+SCF/CME_MD2_FR,SCF,CME,MD,2,FR,CME S&P 400 Midcap Index,"Roll on First Day of Month, Backwards Ratio Method",19/03/1992
+SCF/CME_MD2_FW,SCF,CME,MD,2,FW,CME S&P 400 Midcap Index,"Roll on First Day of Month, Calendar-Weighted Method",19/03/1992
+SCF/CME_MD2_OB,SCF,CME,MD,2,OB,CME S&P 400 Midcap Index,"Roll on Open Interest Switch, Backwards Panama Canal Method",19/03/1992
+SCF/CME_MD2_OF,SCF,CME,MD,2,OF,CME S&P 400 Midcap Index,"Roll on Open Interest Switch, Forwards Panama Canal Method",19/03/1992
+SCF/CME_MD2_ON,SCF,CME,MD,2,ON,CME S&P 400 Midcap Index,"Roll on Open Interest Switch, No Price Adjustment",19/03/1992
+SCF/CME_MD2_OR,SCF,CME,MD,2,OR,CME S&P 400 Midcap Index,"Roll on Open Interest Switch, Backwards Ratio Method",19/03/1992
+SCF/CME_SP1_EB,SCF,CME,SP,1,EB,CME S&P 500 Index,"Roll on Last Trading Day, Backwards Panama Canal Method",17/06/1982
+SCF/CME_SP1_EF,SCF,CME,SP,1,EF,CME S&P 500 Index,"Roll on Last Trading Day, Forwards Panama Canal Method",17/06/1982
+SCF/CME_SP1_EN,SCF,CME,SP,1,EN,CME S&P 500 Index,"Roll on Last Trading Day, No Price Adjustment",17/06/1982
+SCF/CME_SP1_ER,SCF,CME,SP,1,ER,CME S&P 500 Index,"Roll on Last Trading Day, Backwards Ratio Method",17/06/1982
+SCF/CME_SP1_EW,SCF,CME,SP,1,EW,CME S&P 500 Index,"Roll on Last Trading Day, Calendar-Weighted Method",17/06/1982
+SCF/CME_SP1_FB,SCF,CME,SP,1,FB,CME S&P 500 Index,"Roll on First Day of Month, Backwards Panama Canal Method",17/06/1982
+SCF/CME_SP1_FF,SCF,CME,SP,1,FF,CME S&P 500 Index,"Roll on First Day of Month, Forwards Panama Canal Method",17/06/1982
+SCF/CME_SP1_FN,SCF,CME,SP,1,FN,CME S&P 500 Index,"Roll on First Day of Month, No Price Adjustment",17/06/1982
+SCF/CME_SP1_FR,SCF,CME,SP,1,FR,CME S&P 500 Index,"Roll on First Day of Month, Backwards Ratio Method",17/06/1982
+SCF/CME_SP1_FW,SCF,CME,SP,1,FW,CME S&P 500 Index,"Roll on First Day of Month, Calendar-Weighted Method",17/06/1982
+SCF/CME_SP1_OB,SCF,CME,SP,1,OB,CME S&P 500 Index,"Roll on Open Interest Switch, Backwards Panama Canal Method",17/06/1982
+SCF/CME_SP1_OF,SCF,CME,SP,1,OF,CME S&P 500 Index,"Roll on Open Interest Switch, Forwards Panama Canal Method",17/06/1982
+SCF/CME_SP1_ON,SCF,CME,SP,1,ON,CME S&P 500 Index,"Roll on Open Interest Switch, No Price Adjustment",17/06/1982
+SCF/CME_SP1_OR,SCF,CME,SP,1,OR,CME S&P 500 Index,"Roll on Open Interest Switch, Backwards Ratio Method",17/06/1982
+SCF/CME_SP2_EB,SCF,CME,SP,2,EB,CME S&P 500 Index,"Roll on Last Trading Day, Backwards Panama Canal Method",17/06/1982
+SCF/CME_SP2_EF,SCF,CME,SP,2,EF,CME S&P 500 Index,"Roll on Last Trading Day, Forwards Panama Canal Method",17/06/1982
+SCF/CME_SP2_EN,SCF,CME,SP,2,EN,CME S&P 500 Index,"Roll on Last Trading Day, No Price Adjustment",17/06/1982
+SCF/CME_SP2_ER,SCF,CME,SP,2,ER,CME S&P 500 Index,"Roll on Last Trading Day, Backwards Ratio Method",17/06/1982
+SCF/CME_SP2_EW,SCF,CME,SP,2,EW,CME S&P 500 Index,"Roll on Last Trading Day, Calendar-Weighted Method",17/06/1982
+SCF/CME_SP2_FB,SCF,CME,SP,2,FB,CME S&P 500 Index,"Roll on First Day of Month, Backwards Panama Canal Method",17/06/1982
+SCF/CME_SP2_FF,SCF,CME,SP,2,FF,CME S&P 500 Index,"Roll on First Day of Month, Forwards Panama Canal Method",17/06/1982
+SCF/CME_SP2_FN,SCF,CME,SP,2,FN,CME S&P 500 Index,"Roll on First Day of Month, No Price Adjustment",17/06/1982
+SCF/CME_SP2_FR,SCF,CME,SP,2,FR,CME S&P 500 Index,"Roll on First Day of Month, Backwards Ratio Method",17/06/1982
+SCF/CME_SP2_FW,SCF,CME,SP,2,FW,CME S&P 500 Index,"Roll on First Day of Month, Calendar-Weighted Method",17/06/1982
+SCF/CME_SP2_OB,SCF,CME,SP,2,OB,CME S&P 500 Index,"Roll on Open Interest Switch, Backwards Panama Canal Method",17/06/1982
+SCF/CME_SP2_OF,SCF,CME,SP,2,OF,CME S&P 500 Index,"Roll on Open Interest Switch, Forwards Panama Canal Method",17/06/1982
+SCF/CME_SP2_ON,SCF,CME,SP,2,ON,CME S&P 500 Index,"Roll on Open Interest Switch, No Price Adjustment",17/06/1982
+SCF/CME_SP2_OR,SCF,CME,SP,2,OR,CME S&P 500 Index,"Roll on Open Interest Switch, Backwards Ratio Method",17/06/1982
+SCF/CME_ES1_EB,SCF,CME,ES,1,EB,CME S&P 500 Index E-Mini,"Roll on Last Trading Day, Backwards Panama Canal Method",18/12/1997
+SCF/CME_ES1_EF,SCF,CME,ES,1,EF,CME S&P 500 Index E-Mini,"Roll on Last Trading Day, Forwards Panama Canal Method",18/12/1997
+SCF/CME_ES1_EN,SCF,CME,ES,1,EN,CME S&P 500 Index E-Mini,"Roll on Last Trading Day, No Price Adjustment",18/12/1997
+SCF/CME_ES1_ER,SCF,CME,ES,1,ER,CME S&P 500 Index E-Mini,"Roll on Last Trading Day, Backwards Ratio Method",18/12/1997
+SCF/CME_ES1_EW,SCF,CME,ES,1,EW,CME S&P 500 Index E-Mini,"Roll on Last Trading Day, Calendar-Weighted Method",18/12/1997
+SCF/CME_ES1_FB,SCF,CME,ES,1,FB,CME S&P 500 Index E-Mini,"Roll on First Day of Month, Backwards Panama Canal Method",18/12/1997
+SCF/CME_ES1_FF,SCF,CME,ES,1,FF,CME S&P 500 Index E-Mini,"Roll on First Day of Month, Forwards Panama Canal Method",18/12/1997
+SCF/CME_ES1_FN,SCF,CME,ES,1,FN,CME S&P 500 Index E-Mini,"Roll on First Day of Month, No Price Adjustment",18/12/1997
+SCF/CME_ES1_FR,SCF,CME,ES,1,FR,CME S&P 500 Index E-Mini,"Roll on First Day of Month, Backwards Ratio Method",18/12/1997
+SCF/CME_ES1_FW,SCF,CME,ES,1,FW,CME S&P 500 Index E-Mini,"Roll on First Day of Month, Calendar-Weighted Method",18/12/1997
+SCF/CME_ES1_OB,SCF,CME,ES,1,OB,CME S&P 500 Index E-Mini,"Roll on Open Interest Switch, Backwards Panama Canal Method",18/12/1997
+SCF/CME_ES1_OF,SCF,CME,ES,1,OF,CME S&P 500 Index E-Mini,"Roll on Open Interest Switch, Forwards Panama Canal Method",18/12/1997
+SCF/CME_ES1_ON,SCF,CME,ES,1,ON,CME S&P 500 Index E-Mini,"Roll on Open Interest Switch, No Price Adjustment",18/12/1997
+SCF/CME_ES1_OR,SCF,CME,ES,1,OR,CME S&P 500 Index E-Mini,"Roll on Open Interest Switch, Backwards Ratio Method",18/12/1997
+SCF/CME_SF1_EB,SCF,CME,SF,1,EB,CME Swiss Franc CHF,"Roll on Last Trading Day, Backwards Panama Canal Method",15/09/1975
+SCF/CME_SF1_EF,SCF,CME,SF,1,EF,CME Swiss Franc CHF,"Roll on Last Trading Day, Forwards Panama Canal Method",15/09/1975
+SCF/CME_SF1_EN,SCF,CME,SF,1,EN,CME Swiss Franc CHF,"Roll on Last Trading Day, No Price Adjustment",15/09/1975
+SCF/CME_SF1_ER,SCF,CME,SF,1,ER,CME Swiss Franc CHF,"Roll on Last Trading Day, Backwards Ratio Method",15/09/1975
+SCF/CME_SF1_EW,SCF,CME,SF,1,EW,CME Swiss Franc CHF,"Roll on Last Trading Day, Calendar-Weighted Method",15/09/1975
+SCF/CME_SF1_FB,SCF,CME,SF,1,FB,CME Swiss Franc CHF,"Roll on First Day of Month, Backwards Panama Canal Method",15/09/1975
+SCF/CME_SF1_FF,SCF,CME,SF,1,FF,CME Swiss Franc CHF,"Roll on First Day of Month, Forwards Panama Canal Method",15/09/1975
+SCF/CME_SF1_FN,SCF,CME,SF,1,FN,CME Swiss Franc CHF,"Roll on First Day of Month, No Price Adjustment",15/09/1975
+SCF/CME_SF1_FR,SCF,CME,SF,1,FR,CME Swiss Franc CHF,"Roll on First Day of Month, Backwards Ratio Method",15/09/1975
+SCF/CME_SF1_FW,SCF,CME,SF,1,FW,CME Swiss Franc CHF,"Roll on First Day of Month, Calendar-Weighted Method",15/09/1975
+SCF/CME_SF1_OB,SCF,CME,SF,1,OB,CME Swiss Franc CHF,"Roll on Open Interest Switch, Backwards Panama Canal Method",15/09/1975
+SCF/CME_SF1_OF,SCF,CME,SF,1,OF,CME Swiss Franc CHF,"Roll on Open Interest Switch, Forwards Panama Canal Method",15/09/1975
+SCF/CME_SF1_ON,SCF,CME,SF,1,ON,CME Swiss Franc CHF,"Roll on Open Interest Switch, No Price Adjustment",15/09/1975
+SCF/CME_SF1_OR,SCF,CME,SF,1,OR,CME Swiss Franc CHF,"Roll on Open Interest Switch, Backwards Ratio Method",15/09/1975
+SCF/ICE_B1_EB,SCF,ICE,B,1,EB,ICE Brent Crude Oil,"Roll on Last Trading Day, Backwards Panama Canal Method",16/12/1993
+SCF/ICE_B1_EF,SCF,ICE,B,1,EF,ICE Brent Crude Oil,"Roll on Last Trading Day, Forwards Panama Canal Method",16/12/1993
+SCF/ICE_B1_EN,SCF,ICE,B,1,EN,ICE Brent Crude Oil,"Roll on Last Trading Day, No Price Adjustment",16/12/1993
+SCF/ICE_B1_ER,SCF,ICE,B,1,ER,ICE Brent Crude Oil,"Roll on Last Trading Day, Backwards Ratio Method",16/12/1993
+SCF/ICE_B1_EW,SCF,ICE,B,1,EW,ICE Brent Crude Oil,"Roll on Last Trading Day, Calendar-Weighted Method",16/12/1993
+SCF/ICE_B1_FB,SCF,ICE,B,1,FB,ICE Brent Crude Oil,"Roll on First Day of Month, Backwards Panama Canal Method",16/12/1993
+SCF/ICE_B1_FF,SCF,ICE,B,1,FF,ICE Brent Crude Oil,"Roll on First Day of Month, Forwards Panama Canal Method",16/12/1993
+SCF/ICE_B1_FN,SCF,ICE,B,1,FN,ICE Brent Crude Oil,"Roll on First Day of Month, No Price Adjustment",16/12/1993
+SCF/ICE_B1_FR,SCF,ICE,B,1,FR,ICE Brent Crude Oil,"Roll on First Day of Month, Backwards Ratio Method",16/12/1993
+SCF/ICE_B1_FW,SCF,ICE,B,1,FW,ICE Brent Crude Oil,"Roll on First Day of Month, Calendar-Weighted Method",16/12/1993
+SCF/ICE_B1_OB,SCF,ICE,B,1,OB,ICE Brent Crude Oil,"Roll on Open Interest Switch, Backwards Panama Canal Method",16/12/1993
+SCF/ICE_B1_OF,SCF,ICE,B,1,OF,ICE Brent Crude Oil,"Roll on Open Interest Switch, Forwards Panama Canal Method",16/12/1993
+SCF/ICE_B1_ON,SCF,ICE,B,1,ON,ICE Brent Crude Oil,"Roll on Open Interest Switch, No Price Adjustment",16/12/1993
+SCF/ICE_B1_OR,SCF,ICE,B,1,OR,ICE Brent Crude Oil,"Roll on Open Interest Switch, Backwards Ratio Method",16/12/1993
+SCF/ICE_B2_EB,SCF,ICE,B,2,EB,ICE Brent Crude Oil,"Roll on Last Trading Day, Backwards Panama Canal Method",16/12/1993
+SCF/ICE_B2_EF,SCF,ICE,B,2,EF,ICE Brent Crude Oil,"Roll on Last Trading Day, Forwards Panama Canal Method",16/12/1993
+SCF/ICE_B2_EN,SCF,ICE,B,2,EN,ICE Brent Crude Oil,"Roll on Last Trading Day, No Price Adjustment",16/12/1993
+SCF/ICE_B2_ER,SCF,ICE,B,2,ER,ICE Brent Crude Oil,"Roll on Last Trading Day, Backwards Ratio Method",16/12/1993
+SCF/ICE_B2_EW,SCF,ICE,B,2,EW,ICE Brent Crude Oil,"Roll on Last Trading Day, Calendar-Weighted Method",16/12/1993
+SCF/ICE_B2_FB,SCF,ICE,B,2,FB,ICE Brent Crude Oil,"Roll on First Day of Month, Backwards Panama Canal Method",16/12/1993
+SCF/ICE_B2_FF,SCF,ICE,B,2,FF,ICE Brent Crude Oil,"Roll on First Day of Month, Forwards Panama Canal Method",16/12/1993
+SCF/ICE_B2_FN,SCF,ICE,B,2,FN,ICE Brent Crude Oil,"Roll on First Day of Month, No Price Adjustment",16/12/1993
+SCF/ICE_B2_FR,SCF,ICE,B,2,FR,ICE Brent Crude Oil,"Roll on First Day of Month, Backwards Ratio Method",16/12/1993
+SCF/ICE_B2_FW,SCF,ICE,B,2,FW,ICE Brent Crude Oil,"Roll on First Day of Month, Calendar-Weighted Method",16/12/1993
+SCF/ICE_B2_OB,SCF,ICE,B,2,OB,ICE Brent Crude Oil,"Roll on Open Interest Switch, Backwards Panama Canal Method",16/12/1993
+SCF/ICE_B2_OF,SCF,ICE,B,2,OF,ICE Brent Crude Oil,"Roll on Open Interest Switch, Forwards Panama Canal Method",16/12/1993
+SCF/ICE_B2_ON,SCF,ICE,B,2,ON,ICE Brent Crude Oil,"Roll on Open Interest Switch, No Price Adjustment",16/12/1993
+SCF/ICE_B2_OR,SCF,ICE,B,2,OR,ICE Brent Crude Oil,"Roll on Open Interest Switch, Backwards Ratio Method",16/12/1993
+SCF/ICE_MP1_EB,SCF,ICE,MP,1,EB,ICE British Pound GBP,"Roll on Last Trading Day, Backwards Panama Canal Method",21/03/2007
+SCF/ICE_MP1_EF,SCF,ICE,MP,1,EF,ICE British Pound GBP,"Roll on Last Trading Day, Forwards Panama Canal Method",21/03/2007
+SCF/ICE_MP1_EN,SCF,ICE,MP,1,EN,ICE British Pound GBP,"Roll on Last Trading Day, No Price Adjustment",21/03/2007
+SCF/ICE_MP1_ER,SCF,ICE,MP,1,ER,ICE British Pound GBP,"Roll on Last Trading Day, Backwards Ratio Method",21/03/2007
+SCF/ICE_MP1_EW,SCF,ICE,MP,1,EW,ICE British Pound GBP,"Roll on Last Trading Day, Calendar-Weighted Method",21/03/2007
+SCF/ICE_MP1_FB,SCF,ICE,MP,1,FB,ICE British Pound GBP,"Roll on First Day of Month, Backwards Panama Canal Method",21/03/2007
+SCF/ICE_MP1_FF,SCF,ICE,MP,1,FF,ICE British Pound GBP,"Roll on First Day of Month, Forwards Panama Canal Method",21/03/2007
+SCF/ICE_MP1_FN,SCF,ICE,MP,1,FN,ICE British Pound GBP,"Roll on First Day of Month, No Price Adjustment",21/03/2007
+SCF/ICE_MP1_FR,SCF,ICE,MP,1,FR,ICE British Pound GBP,"Roll on First Day of Month, Backwards Ratio Method",21/03/2007
+SCF/ICE_MP1_FW,SCF,ICE,MP,1,FW,ICE British Pound GBP,"Roll on First Day of Month, Calendar-Weighted Method",21/03/2007
+SCF/ICE_MP1_OB,SCF,ICE,MP,1,OB,ICE British Pound GBP,"Roll on Open Interest Switch, Backwards Panama Canal Method",21/03/2007
+SCF/ICE_MP1_OF,SCF,ICE,MP,1,OF,ICE British Pound GBP,"Roll on Open Interest Switch, Forwards Panama Canal Method",21/03/2007
+SCF/ICE_MP1_ON,SCF,ICE,MP,1,ON,ICE British Pound GBP,"Roll on Open Interest Switch, No Price Adjustment",21/03/2007
+SCF/ICE_MP1_OR,SCF,ICE,MP,1,OR,ICE British Pound GBP,"Roll on Open Interest Switch, Backwards Ratio Method",21/03/2007
+SCF/ICE_MP2_EB,SCF,ICE,MP,2,EB,ICE British Pound GBP,"Roll on Last Trading Day, Backwards Panama Canal Method",21/03/2007
+SCF/ICE_MP2_EF,SCF,ICE,MP,2,EF,ICE British Pound GBP,"Roll on Last Trading Day, Forwards Panama Canal Method",21/03/2007
+SCF/ICE_MP2_EN,SCF,ICE,MP,2,EN,ICE British Pound GBP,"Roll on Last Trading Day, No Price Adjustment",21/03/2007
+SCF/ICE_MP2_ER,SCF,ICE,MP,2,ER,ICE British Pound GBP,"Roll on Last Trading Day, Backwards Ratio Method",21/03/2007
+SCF/ICE_MP2_EW,SCF,ICE,MP,2,EW,ICE British Pound GBP,"Roll on Last Trading Day, Calendar-Weighted Method",21/03/2007
+SCF/ICE_MP2_FB,SCF,ICE,MP,2,FB,ICE British Pound GBP,"Roll on First Day of Month, Backwards Panama Canal Method",21/03/2007
+SCF/ICE_MP2_FF,SCF,ICE,MP,2,FF,ICE British Pound GBP,"Roll on First Day of Month, Forwards Panama Canal Method",21/03/2007
+SCF/ICE_MP2_FN,SCF,ICE,MP,2,FN,ICE British Pound GBP,"Roll on First Day of Month, No Price Adjustment",21/03/2007
+SCF/ICE_MP2_FR,SCF,ICE,MP,2,FR,ICE British Pound GBP,"Roll on First Day of Month, Backwards Ratio Method",21/03/2007
+SCF/ICE_MP2_FW,SCF,ICE,MP,2,FW,ICE British Pound GBP,"Roll on First Day of Month, Calendar-Weighted Method",21/03/2007
+SCF/ICE_MP2_OB,SCF,ICE,MP,2,OB,ICE British Pound GBP,"Roll on Open Interest Switch, Backwards Panama Canal Method",21/03/2007
+SCF/ICE_MP2_OF,SCF,ICE,MP,2,OF,ICE British Pound GBP,"Roll on Open Interest Switch, Forwards Panama Canal Method",21/03/2007
+SCF/ICE_MP2_ON,SCF,ICE,MP,2,ON,ICE British Pound GBP,"Roll on Open Interest Switch, No Price Adjustment",21/03/2007
+SCF/ICE_MP2_OR,SCF,ICE,MP,2,OR,ICE British Pound GBP,"Roll on Open Interest Switch, Backwards Ratio Method",21/03/2007
+SCF/ICE_CC1_EB,SCF,ICE,CC,1,EB,ICE Cocoa,"Roll on Last Trading Day, Backwards Panama Canal Method",24/03/1970
+SCF/ICE_CC1_EF,SCF,ICE,CC,1,EF,ICE Cocoa,"Roll on Last Trading Day, Forwards Panama Canal Method",24/03/1970
+SCF/ICE_CC1_EN,SCF,ICE,CC,1,EN,ICE Cocoa,"Roll on Last Trading Day, No Price Adjustment",24/03/1970
+SCF/ICE_CC1_ER,SCF,ICE,CC,1,ER,ICE Cocoa,"Roll on Last Trading Day, Backwards Ratio Method",24/03/1970
+SCF/ICE_CC1_EW,SCF,ICE,CC,1,EW,ICE Cocoa,"Roll on Last Trading Day, Calendar-Weighted Method",24/03/1970
+SCF/ICE_CC1_FB,SCF,ICE,CC,1,FB,ICE Cocoa,"Roll on First Day of Month, Backwards Panama Canal Method",24/03/1970
+SCF/ICE_CC1_FF,SCF,ICE,CC,1,FF,ICE Cocoa,"Roll on First Day of Month, Forwards Panama Canal Method",24/03/1970
+SCF/ICE_CC1_FN,SCF,ICE,CC,1,FN,ICE Cocoa,"Roll on First Day of Month, No Price Adjustment",24/03/1970
+SCF/ICE_CC1_FR,SCF,ICE,CC,1,FR,ICE Cocoa,"Roll on First Day of Month, Backwards Ratio Method",24/03/1970
+SCF/ICE_CC1_FW,SCF,ICE,CC,1,FW,ICE Cocoa,"Roll on First Day of Month, Calendar-Weighted Method",24/03/1970
+SCF/ICE_CC1_OB,SCF,ICE,CC,1,OB,ICE Cocoa,"Roll on Open Interest Switch, Backwards Panama Canal Method",24/03/1970
+SCF/ICE_CC1_OF,SCF,ICE,CC,1,OF,ICE Cocoa,"Roll on Open Interest Switch, Forwards Panama Canal Method",24/03/1970
+SCF/ICE_CC1_ON,SCF,ICE,CC,1,ON,ICE Cocoa,"Roll on Open Interest Switch, No Price Adjustment",24/03/1970
+SCF/ICE_CC1_OR,SCF,ICE,CC,1,OR,ICE Cocoa,"Roll on Open Interest Switch, Backwards Ratio Method",24/03/1970
+SCF/ICE_KC1_EB,SCF,ICE,KC,1,EB,ICE Coffee C,"Roll on Last Trading Day, Backwards Panama Canal Method",26/12/1973
+SCF/ICE_KC1_EF,SCF,ICE,KC,1,EF,ICE Coffee C,"Roll on Last Trading Day, Forwards Panama Canal Method",26/12/1973
+SCF/ICE_KC1_EN,SCF,ICE,KC,1,EN,ICE Coffee C,"Roll on Last Trading Day, No Price Adjustment",26/12/1973
+SCF/ICE_KC1_ER,SCF,ICE,KC,1,ER,ICE Coffee C,"Roll on Last Trading Day, Backwards Ratio Method",26/12/1973
+SCF/ICE_KC1_EW,SCF,ICE,KC,1,EW,ICE Coffee C,"Roll on Last Trading Day, Calendar-Weighted Method",26/12/1973
+SCF/ICE_KC1_FB,SCF,ICE,KC,1,FB,ICE Coffee C,"Roll on First Day of Month, Backwards Panama Canal Method",26/12/1973
+SCF/ICE_KC1_FF,SCF,ICE,KC,1,FF,ICE Coffee C,"Roll on First Day of Month, Forwards Panama Canal Method",26/12/1973
+SCF/ICE_KC1_FN,SCF,ICE,KC,1,FN,ICE Coffee C,"Roll on First Day of Month, No Price Adjustment",26/12/1973
+SCF/ICE_KC1_FR,SCF,ICE,KC,1,FR,ICE Coffee C,"Roll on First Day of Month, Backwards Ratio Method",26/12/1973
+SCF/ICE_KC1_FW,SCF,ICE,KC,1,FW,ICE Coffee C,"Roll on First Day of Month, Calendar-Weighted Method",26/12/1973
+SCF/ICE_KC1_OB,SCF,ICE,KC,1,OB,ICE Coffee C,"Roll on Open Interest Switch, Backwards Panama Canal Method",26/12/1973
+SCF/ICE_KC1_OF,SCF,ICE,KC,1,OF,ICE Coffee C,"Roll on Open Interest Switch, Forwards Panama Canal Method",26/12/1973
+SCF/ICE_KC1_ON,SCF,ICE,KC,1,ON,ICE Coffee C,"Roll on Open Interest Switch, No Price Adjustment",26/12/1973
+SCF/ICE_KC1_OR,SCF,ICE,KC,1,OR,ICE Coffee C,"Roll on Open Interest Switch, Backwards Ratio Method",26/12/1973
+SCF/ICE_KC2_EB,SCF,ICE,KC,2,EB,ICE Coffee C,"Roll on Last Trading Day, Backwards Panama Canal Method",26/12/1973
+SCF/ICE_KC2_EF,SCF,ICE,KC,2,EF,ICE Coffee C,"Roll on Last Trading Day, Forwards Panama Canal Method",26/12/1973
+SCF/ICE_KC2_EN,SCF,ICE,KC,2,EN,ICE Coffee C,"Roll on Last Trading Day, No Price Adjustment",26/12/1973
+SCF/ICE_KC2_ER,SCF,ICE,KC,2,ER,ICE Coffee C,"Roll on Last Trading Day, Backwards Ratio Method",26/12/1973
+SCF/ICE_KC2_EW,SCF,ICE,KC,2,EW,ICE Coffee C,"Roll on Last Trading Day, Calendar-Weighted Method",26/12/1973
+SCF/ICE_KC2_FB,SCF,ICE,KC,2,FB,ICE Coffee C,"Roll on First Day of Month, Backwards Panama Canal Method",26/12/1973
+SCF/ICE_KC2_FF,SCF,ICE,KC,2,FF,ICE Coffee C,"Roll on First Day of Month, Forwards Panama Canal Method",26/12/1973
+SCF/ICE_KC2_FN,SCF,ICE,KC,2,FN,ICE Coffee C,"Roll on First Day of Month, No Price Adjustment",26/12/1973
+SCF/ICE_KC2_FR,SCF,ICE,KC,2,FR,ICE Coffee C,"Roll on First Day of Month, Backwards Ratio Method",26/12/1973
+SCF/ICE_KC2_FW,SCF,ICE,KC,2,FW,ICE Coffee C,"Roll on First Day of Month, Calendar-Weighted Method",26/12/1973
+SCF/ICE_KC2_OB,SCF,ICE,KC,2,OB,ICE Coffee C,"Roll on Open Interest Switch, Backwards Panama Canal Method",26/12/1973
+SCF/ICE_KC2_OF,SCF,ICE,KC,2,OF,ICE Coffee C,"Roll on Open Interest Switch, Forwards Panama Canal Method",26/12/1973
+SCF/ICE_KC2_ON,SCF,ICE,KC,2,ON,ICE Coffee C,"Roll on Open Interest Switch, No Price Adjustment",26/12/1973
+SCF/ICE_KC2_OR,SCF,ICE,KC,2,OR,ICE Coffee C,"Roll on Open Interest Switch, Backwards Ratio Method",26/12/1973
+SCF/ICE_CT1_EB,SCF,ICE,CT,1,EB,ICE Cotton,"Roll on Last Trading Day, Backwards Panama Canal Method",06/12/1972
+SCF/ICE_CT1_EF,SCF,ICE,CT,1,EF,ICE Cotton,"Roll on Last Trading Day, Forwards Panama Canal Method",06/12/1972
+SCF/ICE_CT1_EN,SCF,ICE,CT,1,EN,ICE Cotton,"Roll on Last Trading Day, No Price Adjustment",06/12/1972
+SCF/ICE_CT1_ER,SCF,ICE,CT,1,ER,ICE Cotton,"Roll on Last Trading Day, Backwards Ratio Method",06/12/1972
+SCF/ICE_CT1_EW,SCF,ICE,CT,1,EW,ICE Cotton,"Roll on Last Trading Day, Calendar-Weighted Method",06/12/1972
+SCF/ICE_CT1_FB,SCF,ICE,CT,1,FB,ICE Cotton,"Roll on First Day of Month, Backwards Panama Canal Method",06/12/1972
+SCF/ICE_CT1_FF,SCF,ICE,CT,1,FF,ICE Cotton,"Roll on First Day of Month, Forwards Panama Canal Method",06/12/1972
+SCF/ICE_CT1_FN,SCF,ICE,CT,1,FN,ICE Cotton,"Roll on First Day of Month, No Price Adjustment",06/12/1972
+SCF/ICE_CT1_FR,SCF,ICE,CT,1,FR,ICE Cotton,"Roll on First Day of Month, Backwards Ratio Method",06/12/1972
+SCF/ICE_CT1_FW,SCF,ICE,CT,1,FW,ICE Cotton,"Roll on First Day of Month, Calendar-Weighted Method",06/12/1972
+SCF/ICE_CT1_OB,SCF,ICE,CT,1,OB,ICE Cotton,"Roll on Open Interest Switch, Backwards Panama Canal Method",06/12/1972
+SCF/ICE_CT1_OF,SCF,ICE,CT,1,OF,ICE Cotton,"Roll on Open Interest Switch, Forwards Panama Canal Method",06/12/1972
+SCF/ICE_CT1_ON,SCF,ICE,CT,1,ON,ICE Cotton,"Roll on Open Interest Switch, No Price Adjustment",06/12/1972
+SCF/ICE_CT1_OR,SCF,ICE,CT,1,OR,ICE Cotton,"Roll on Open Interest Switch, Backwards Ratio Method",06/12/1972
+SCF/ICE_CT2_EB,SCF,ICE,CT,2,EB,ICE Cotton,"Roll on Last Trading Day, Backwards Panama Canal Method",06/12/1972
+SCF/ICE_CT2_EF,SCF,ICE,CT,2,EF,ICE Cotton,"Roll on Last Trading Day, Forwards Panama Canal Method",06/12/1972
+SCF/ICE_CT2_EN,SCF,ICE,CT,2,EN,ICE Cotton,"Roll on Last Trading Day, No Price Adjustment",06/12/1972
+SCF/ICE_CT2_ER,SCF,ICE,CT,2,ER,ICE Cotton,"Roll on Last Trading Day, Backwards Ratio Method",06/12/1972
+SCF/ICE_CT2_EW,SCF,ICE,CT,2,EW,ICE Cotton,"Roll on Last Trading Day, Calendar-Weighted Method",06/12/1972
+SCF/ICE_CT2_FB,SCF,ICE,CT,2,FB,ICE Cotton,"Roll on First Day of Month, Backwards Panama Canal Method",06/12/1972
+SCF/ICE_CT2_FF,SCF,ICE,CT,2,FF,ICE Cotton,"Roll on First Day of Month, Forwards Panama Canal Method",06/12/1972
+SCF/ICE_CT2_FN,SCF,ICE,CT,2,FN,ICE Cotton,"Roll on First Day of Month, No Price Adjustment",06/12/1972
+SCF/ICE_CT2_FR,SCF,ICE,CT,2,FR,ICE Cotton,"Roll on First Day of Month, Backwards Ratio Method",06/12/1972
+SCF/ICE_CT2_FW,SCF,ICE,CT,2,FW,ICE Cotton,"Roll on First Day of Month, Calendar-Weighted Method",06/12/1972
+SCF/ICE_CT2_OB,SCF,ICE,CT,2,OB,ICE Cotton,"Roll on Open Interest Switch, Backwards Panama Canal Method",06/12/1972
+SCF/ICE_CT2_OF,SCF,ICE,CT,2,OF,ICE Cotton,"Roll on Open Interest Switch, Forwards Panama Canal Method",06/12/1972
+SCF/ICE_CT2_ON,SCF,ICE,CT,2,ON,ICE Cotton,"Roll on Open Interest Switch, No Price Adjustment",06/12/1972
+SCF/ICE_CT2_OR,SCF,ICE,CT,2,OR,ICE Cotton,"Roll on Open Interest Switch, Backwards Ratio Method",06/12/1972
+SCF/ICE_G1_EB,SCF,ICE,G,1,EB,ICE Gasoil,"Roll on Last Trading Day, Backwards Panama Canal Method",12/09/1990
+SCF/ICE_G1_EF,SCF,ICE,G,1,EF,ICE Gasoil,"Roll on Last Trading Day, Forwards Panama Canal Method",12/09/1990
+SCF/ICE_G1_EN,SCF,ICE,G,1,EN,ICE Gasoil,"Roll on Last Trading Day, No Price Adjustment",12/09/1990
+SCF/ICE_G1_ER,SCF,ICE,G,1,ER,ICE Gasoil,"Roll on Last Trading Day, Backwards Ratio Method",12/09/1990
+SCF/ICE_G1_EW,SCF,ICE,G,1,EW,ICE Gasoil,"Roll on Last Trading Day, Calendar-Weighted Method",12/09/1990
+SCF/ICE_G1_FB,SCF,ICE,G,1,FB,ICE Gasoil,"Roll on First Day of Month, Backwards Panama Canal Method",12/09/1990
+SCF/ICE_G1_FF,SCF,ICE,G,1,FF,ICE Gasoil,"Roll on First Day of Month, Forwards Panama Canal Method",12/09/1990
+SCF/ICE_G1_FN,SCF,ICE,G,1,FN,ICE Gasoil,"Roll on First Day of Month, No Price Adjustment",12/09/1990
+SCF/ICE_G1_FR,SCF,ICE,G,1,FR,ICE Gasoil,"Roll on First Day of Month, Backwards Ratio Method",12/09/1990
+SCF/ICE_G1_FW,SCF,ICE,G,1,FW,ICE Gasoil,"Roll on First Day of Month, Calendar-Weighted Method",12/09/1990
+SCF/ICE_G1_OB,SCF,ICE,G,1,OB,ICE Gasoil,"Roll on Open Interest Switch, Backwards Panama Canal Method",12/09/1990
+SCF/ICE_G1_OF,SCF,ICE,G,1,OF,ICE Gasoil,"Roll on Open Interest Switch, Forwards Panama Canal Method",12/09/1990
+SCF/ICE_G1_ON,SCF,ICE,G,1,ON,ICE Gasoil,"Roll on Open Interest Switch, No Price Adjustment",12/09/1990
+SCF/ICE_G1_OR,SCF,ICE,G,1,OR,ICE Gasoil,"Roll on Open Interest Switch, Backwards Ratio Method",12/09/1990
+SCF/ICE_G2_EB,SCF,ICE,G,2,EB,ICE Gasoil,"Roll on Last Trading Day, Backwards Panama Canal Method",12/09/1990
+SCF/ICE_G2_EF,SCF,ICE,G,2,EF,ICE Gasoil,"Roll on Last Trading Day, Forwards Panama Canal Method",12/09/1990
+SCF/ICE_G2_EN,SCF,ICE,G,2,EN,ICE Gasoil,"Roll on Last Trading Day, No Price Adjustment",12/09/1990
+SCF/ICE_G2_ER,SCF,ICE,G,2,ER,ICE Gasoil,"Roll on Last Trading Day, Backwards Ratio Method",12/09/1990
+SCF/ICE_G2_EW,SCF,ICE,G,2,EW,ICE Gasoil,"Roll on Last Trading Day, Calendar-Weighted Method",12/09/1990
+SCF/ICE_G2_FB,SCF,ICE,G,2,FB,ICE Gasoil,"Roll on First Day of Month, Backwards Panama Canal Method",12/09/1990
+SCF/ICE_G2_FF,SCF,ICE,G,2,FF,ICE Gasoil,"Roll on First Day of Month, Forwards Panama Canal Method",12/09/1990
+SCF/ICE_G2_FN,SCF,ICE,G,2,FN,ICE Gasoil,"Roll on First Day of Month, No Price Adjustment",12/09/1990
+SCF/ICE_G2_FR,SCF,ICE,G,2,FR,ICE Gasoil,"Roll on First Day of Month, Backwards Ratio Method",12/09/1990
+SCF/ICE_G2_FW,SCF,ICE,G,2,FW,ICE Gasoil,"Roll on First Day of Month, Calendar-Weighted Method",12/09/1990
+SCF/ICE_G2_OB,SCF,ICE,G,2,OB,ICE Gasoil,"Roll on Open Interest Switch, Backwards Panama Canal Method",12/09/1990
+SCF/ICE_G2_OF,SCF,ICE,G,2,OF,ICE Gasoil,"Roll on Open Interest Switch, Forwards Panama Canal Method",12/09/1990
+SCF/ICE_G2_ON,SCF,ICE,G,2,ON,ICE Gasoil,"Roll on Open Interest Switch, No Price Adjustment",12/09/1990
+SCF/ICE_G2_OR,SCF,ICE,G,2,OR,ICE Gasoil,"Roll on Open Interest Switch, Backwards Ratio Method",12/09/1990
+SCF/ICE_O1_EB,SCF,ICE,O,1,EB,ICE Heating Oil,"Roll on Last Trading Day, Backwards Panama Canal Method",27/04/2006
+SCF/ICE_O1_EF,SCF,ICE,O,1,EF,ICE Heating Oil,"Roll on Last Trading Day, Forwards Panama Canal Method",27/04/2006
+SCF/ICE_O1_EN,SCF,ICE,O,1,EN,ICE Heating Oil,"Roll on Last Trading Day, No Price Adjustment",27/04/2006
+SCF/ICE_O1_ER,SCF,ICE,O,1,ER,ICE Heating Oil,"Roll on Last Trading Day, Backwards Ratio Method",27/04/2006
+SCF/ICE_O1_EW,SCF,ICE,O,1,EW,ICE Heating Oil,"Roll on Last Trading Day, Calendar-Weighted Method",27/04/2006
+SCF/ICE_O1_FB,SCF,ICE,O,1,FB,ICE Heating Oil,"Roll on First Day of Month, Backwards Panama Canal Method",27/04/2006
+SCF/ICE_O1_FF,SCF,ICE,O,1,FF,ICE Heating Oil,"Roll on First Day of Month, Forwards Panama Canal Method",27/04/2006
+SCF/ICE_O1_FN,SCF,ICE,O,1,FN,ICE Heating Oil,"Roll on First Day of Month, No Price Adjustment",27/04/2006
+SCF/ICE_O1_FR,SCF,ICE,O,1,FR,ICE Heating Oil,"Roll on First Day of Month, Backwards Ratio Method",27/04/2006
+SCF/ICE_O1_FW,SCF,ICE,O,1,FW,ICE Heating Oil,"Roll on First Day of Month, Calendar-Weighted Method",27/04/2006
+SCF/ICE_O1_OB,SCF,ICE,O,1,OB,ICE Heating Oil,"Roll on Open Interest Switch, Backwards Panama Canal Method",27/04/2006
+SCF/ICE_O1_OF,SCF,ICE,O,1,OF,ICE Heating Oil,"Roll on Open Interest Switch, Forwards Panama Canal Method",27/04/2006
+SCF/ICE_O1_ON,SCF,ICE,O,1,ON,ICE Heating Oil,"Roll on Open Interest Switch, No Price Adjustment",27/04/2006
+SCF/ICE_O1_OR,SCF,ICE,O,1,OR,ICE Heating Oil,"Roll on Open Interest Switch, Backwards Ratio Method",27/04/2006
+SCF/ICE_O2_EB,SCF,ICE,O,2,EB,ICE Heating Oil,"Roll on Last Trading Day, Backwards Panama Canal Method",27/04/2006
+SCF/ICE_O2_EF,SCF,ICE,O,2,EF,ICE Heating Oil,"Roll on Last Trading Day, Forwards Panama Canal Method",27/04/2006
+SCF/ICE_O2_EN,SCF,ICE,O,2,EN,ICE Heating Oil,"Roll on Last Trading Day, No Price Adjustment",27/04/2006
+SCF/ICE_O2_ER,SCF,ICE,O,2,ER,ICE Heating Oil,"Roll on Last Trading Day, Backwards Ratio Method",27/04/2006
+SCF/ICE_O2_EW,SCF,ICE,O,2,EW,ICE Heating Oil,"Roll on Last Trading Day, Calendar-Weighted Method",27/04/2006
+SCF/ICE_O2_FB,SCF,ICE,O,2,FB,ICE Heating Oil,"Roll on First Day of Month, Backwards Panama Canal Method",27/04/2006
+SCF/ICE_O2_FF,SCF,ICE,O,2,FF,ICE Heating Oil,"Roll on First Day of Month, Forwards Panama Canal Method",27/04/2006
+SCF/ICE_O2_FN,SCF,ICE,O,2,FN,ICE Heating Oil,"Roll on First Day of Month, No Price Adjustment",27/04/2006
+SCF/ICE_O2_FR,SCF,ICE,O,2,FR,ICE Heating Oil,"Roll on First Day of Month, Backwards Ratio Method",27/04/2006
+SCF/ICE_O2_FW,SCF,ICE,O,2,FW,ICE Heating Oil,"Roll on First Day of Month, Calendar-Weighted Method",27/04/2006
+SCF/ICE_O2_OB,SCF,ICE,O,2,OB,ICE Heating Oil,"Roll on Open Interest Switch, Backwards Panama Canal Method",27/04/2006
+SCF/ICE_O2_OF,SCF,ICE,O,2,OF,ICE Heating Oil,"Roll on Open Interest Switch, Forwards Panama Canal Method",27/04/2006
+SCF/ICE_O2_ON,SCF,ICE,O,2,ON,ICE Heating Oil,"Roll on Open Interest Switch, No Price Adjustment",27/04/2006
+SCF/ICE_O2_OR,SCF,ICE,O,2,OR,ICE Heating Oil,"Roll on Open Interest Switch, Backwards Ratio Method",27/04/2006
+SCF/ICE_OJ1_EB,SCF,ICE,OJ,1,EB,ICE Orange Juice,"Roll on Last Trading Day, Backwards Panama Canal Method",17/11/1967
+SCF/ICE_OJ1_EF,SCF,ICE,OJ,1,EF,ICE Orange Juice,"Roll on Last Trading Day, Forwards Panama Canal Method",17/11/1967
+SCF/ICE_OJ1_EN,SCF,ICE,OJ,1,EN,ICE Orange Juice,"Roll on Last Trading Day, No Price Adjustment",17/11/1967
+SCF/ICE_OJ1_ER,SCF,ICE,OJ,1,ER,ICE Orange Juice,"Roll on Last Trading Day, Backwards Ratio Method",17/11/1967
+SCF/ICE_OJ1_EW,SCF,ICE,OJ,1,EW,ICE Orange Juice,"Roll on Last Trading Day, Calendar-Weighted Method",17/11/1967
+SCF/ICE_OJ1_FB,SCF,ICE,OJ,1,FB,ICE Orange Juice,"Roll on First Day of Month, Backwards Panama Canal Method",17/11/1967
+SCF/ICE_OJ1_FF,SCF,ICE,OJ,1,FF,ICE Orange Juice,"Roll on First Day of Month, Forwards Panama Canal Method",17/11/1967
+SCF/ICE_OJ1_FN,SCF,ICE,OJ,1,FN,ICE Orange Juice,"Roll on First Day of Month, No Price Adjustment",17/11/1967
+SCF/ICE_OJ1_FR,SCF,ICE,OJ,1,FR,ICE Orange Juice,"Roll on First Day of Month, Backwards Ratio Method",17/11/1967
+SCF/ICE_OJ1_FW,SCF,ICE,OJ,1,FW,ICE Orange Juice,"Roll on First Day of Month, Calendar-Weighted Method",17/11/1967
+SCF/ICE_OJ1_OB,SCF,ICE,OJ,1,OB,ICE Orange Juice,"Roll on Open Interest Switch, Backwards Panama Canal Method",17/11/1967
+SCF/ICE_OJ1_OF,SCF,ICE,OJ,1,OF,ICE Orange Juice,"Roll on Open Interest Switch, Forwards Panama Canal Method",17/11/1967
+SCF/ICE_OJ1_ON,SCF,ICE,OJ,1,ON,ICE Orange Juice,"Roll on Open Interest Switch, No Price Adjustment",17/11/1967
+SCF/ICE_OJ1_OR,SCF,ICE,OJ,1,OR,ICE Orange Juice,"Roll on Open Interest Switch, Backwards Ratio Method",17/11/1967
+SCF/ICE_OJ2_EB,SCF,ICE,OJ,2,EB,ICE Orange Juice,"Roll on Last Trading Day, Backwards Panama Canal Method",17/11/1967
+SCF/ICE_OJ2_EF,SCF,ICE,OJ,2,EF,ICE Orange Juice,"Roll on Last Trading Day, Forwards Panama Canal Method",17/11/1967
+SCF/ICE_OJ2_EN,SCF,ICE,OJ,2,EN,ICE Orange Juice,"Roll on Last Trading Day, No Price Adjustment",17/11/1967
+SCF/ICE_OJ2_ER,SCF,ICE,OJ,2,ER,ICE Orange Juice,"Roll on Last Trading Day, Backwards Ratio Method",17/11/1967
+SCF/ICE_OJ2_EW,SCF,ICE,OJ,2,EW,ICE Orange Juice,"Roll on Last Trading Day, Calendar-Weighted Method",17/11/1967
+SCF/ICE_OJ2_FB,SCF,ICE,OJ,2,FB,ICE Orange Juice,"Roll on First Day of Month, Backwards Panama Canal Method",17/11/1967
+SCF/ICE_OJ2_FF,SCF,ICE,OJ,2,FF,ICE Orange Juice,"Roll on First Day of Month, Forwards Panama Canal Method",17/11/1967
+SCF/ICE_OJ2_FN,SCF,ICE,OJ,2,FN,ICE Orange Juice,"Roll on First Day of Month, No Price Adjustment",17/11/1967
+SCF/ICE_OJ2_FR,SCF,ICE,OJ,2,FR,ICE Orange Juice,"Roll on First Day of Month, Backwards Ratio Method",17/11/1967
+SCF/ICE_OJ2_FW,SCF,ICE,OJ,2,FW,ICE Orange Juice,"Roll on First Day of Month, Calendar-Weighted Method",17/11/1967
+SCF/ICE_OJ2_OB,SCF,ICE,OJ,2,OB,ICE Orange Juice,"Roll on Open Interest Switch, Backwards Panama Canal Method",17/11/1967
+SCF/ICE_OJ2_OF,SCF,ICE,OJ,2,OF,ICE Orange Juice,"Roll on Open Interest Switch, Forwards Panama Canal Method",17/11/1967
+SCF/ICE_OJ2_ON,SCF,ICE,OJ,2,ON,ICE Orange Juice,"Roll on Open Interest Switch, No Price Adjustment",17/11/1967
+SCF/ICE_OJ2_OR,SCF,ICE,OJ,2,OR,ICE Orange Juice,"Roll on Open Interest Switch, Backwards Ratio Method",17/11/1967
+SCF/ICE_ATW1_EB,SCF,ICE,ATW,1,EB,ICE Rotterdam Coal,"Roll on Last Trading Day, Backwards Panama Canal Method",01/09/2006
+SCF/ICE_ATW1_EF,SCF,ICE,ATW,1,EF,ICE Rotterdam Coal,"Roll on Last Trading Day, Forwards Panama Canal Method",01/09/2006
+SCF/ICE_ATW1_EN,SCF,ICE,ATW,1,EN,ICE Rotterdam Coal,"Roll on Last Trading Day, No Price Adjustment",01/09/2006
+SCF/ICE_ATW1_ER,SCF,ICE,ATW,1,ER,ICE Rotterdam Coal,"Roll on Last Trading Day, Backwards Ratio Method",01/09/2006
+SCF/ICE_ATW1_EW,SCF,ICE,ATW,1,EW,ICE Rotterdam Coal,"Roll on Last Trading Day, Calendar-Weighted Method",01/09/2006
+SCF/ICE_ATW1_FB,SCF,ICE,ATW,1,FB,ICE Rotterdam Coal,"Roll on First Day of Month, Backwards Panama Canal Method",01/09/2006
+SCF/ICE_ATW1_FF,SCF,ICE,ATW,1,FF,ICE Rotterdam Coal,"Roll on First Day of Month, Forwards Panama Canal Method",01/09/2006
+SCF/ICE_ATW1_FN,SCF,ICE,ATW,1,FN,ICE Rotterdam Coal,"Roll on First Day of Month, No Price Adjustment",01/09/2006
+SCF/ICE_ATW1_FR,SCF,ICE,ATW,1,FR,ICE Rotterdam Coal,"Roll on First Day of Month, Backwards Ratio Method",01/09/2006
+SCF/ICE_ATW1_FW,SCF,ICE,ATW,1,FW,ICE Rotterdam Coal,"Roll on First Day of Month, Calendar-Weighted Method",01/09/2006
+SCF/ICE_ATW1_OB,SCF,ICE,ATW,1,OB,ICE Rotterdam Coal,"Roll on Open Interest Switch, Backwards Panama Canal Method",01/09/2006
+SCF/ICE_ATW1_OF,SCF,ICE,ATW,1,OF,ICE Rotterdam Coal,"Roll on Open Interest Switch, Forwards Panama Canal Method",01/09/2006
+SCF/ICE_ATW1_ON,SCF,ICE,ATW,1,ON,ICE Rotterdam Coal,"Roll on Open Interest Switch, No Price Adjustment",01/09/2006
+SCF/ICE_ATW1_OR,SCF,ICE,ATW,1,OR,ICE Rotterdam Coal,"Roll on Open Interest Switch, Backwards Ratio Method",01/09/2006
+SCF/ICE_ATW2_EB,SCF,ICE,ATW,2,EB,ICE Rotterdam Coal,"Roll on Last Trading Day, Backwards Panama Canal Method",01/09/2006
+SCF/ICE_ATW2_EF,SCF,ICE,ATW,2,EF,ICE Rotterdam Coal,"Roll on Last Trading Day, Forwards Panama Canal Method",01/09/2006
+SCF/ICE_ATW2_EN,SCF,ICE,ATW,2,EN,ICE Rotterdam Coal,"Roll on Last Trading Day, No Price Adjustment",01/09/2006
+SCF/ICE_ATW2_ER,SCF,ICE,ATW,2,ER,ICE Rotterdam Coal,"Roll on Last Trading Day, Backwards Ratio Method",01/09/2006
+SCF/ICE_ATW2_EW,SCF,ICE,ATW,2,EW,ICE Rotterdam Coal,"Roll on Last Trading Day, Calendar-Weighted Method",01/09/2006
+SCF/ICE_ATW2_FB,SCF,ICE,ATW,2,FB,ICE Rotterdam Coal,"Roll on First Day of Month, Backwards Panama Canal Method",01/09/2006
+SCF/ICE_ATW2_FF,SCF,ICE,ATW,2,FF,ICE Rotterdam Coal,"Roll on First Day of Month, Forwards Panama Canal Method",01/09/2006
+SCF/ICE_ATW2_FN,SCF,ICE,ATW,2,FN,ICE Rotterdam Coal,"Roll on First Day of Month, No Price Adjustment",01/09/2006
+SCF/ICE_ATW2_FR,SCF,ICE,ATW,2,FR,ICE Rotterdam Coal,"Roll on First Day of Month, Backwards Ratio Method",01/09/2006
+SCF/ICE_ATW2_FW,SCF,ICE,ATW,2,FW,ICE Rotterdam Coal,"Roll on First Day of Month, Calendar-Weighted Method",01/09/2006
+SCF/ICE_ATW2_OB,SCF,ICE,ATW,2,OB,ICE Rotterdam Coal,"Roll on Open Interest Switch, Backwards Panama Canal Method",01/09/2006
+SCF/ICE_ATW2_OF,SCF,ICE,ATW,2,OF,ICE Rotterdam Coal,"Roll on Open Interest Switch, Forwards Panama Canal Method",01/09/2006
+SCF/ICE_ATW2_ON,SCF,ICE,ATW,2,ON,ICE Rotterdam Coal,"Roll on Open Interest Switch, No Price Adjustment",01/09/2006
+SCF/ICE_ATW2_OR,SCF,ICE,ATW,2,OR,ICE Rotterdam Coal,"Roll on Open Interest Switch, Backwards Ratio Method",01/09/2006
+SCF/ICE_RF1_EB,SCF,ICE,RF,1,EB,ICE Russell 1000 Index Mini,"Roll on Last Trading Day, Backwards Panama Canal Method",25/09/2007
+SCF/ICE_RF1_EF,SCF,ICE,RF,1,EF,ICE Russell 1000 Index Mini,"Roll on Last Trading Day, Forwards Panama Canal Method",25/09/2007
+SCF/ICE_RF1_EN,SCF,ICE,RF,1,EN,ICE Russell 1000 Index Mini,"Roll on Last Trading Day, No Price Adjustment",25/09/2007
+SCF/ICE_RF1_ER,SCF,ICE,RF,1,ER,ICE Russell 1000 Index Mini,"Roll on Last Trading Day, Backwards Ratio Method",25/09/2007
+SCF/ICE_RF1_EW,SCF,ICE,RF,1,EW,ICE Russell 1000 Index Mini,"Roll on Last Trading Day, Calendar-Weighted Method",25/09/2007
+SCF/ICE_RF1_FB,SCF,ICE,RF,1,FB,ICE Russell 1000 Index Mini,"Roll on First Day of Month, Backwards Panama Canal Method",25/09/2007
+SCF/ICE_RF1_FF,SCF,ICE,RF,1,FF,ICE Russell 1000 Index Mini,"Roll on First Day of Month, Forwards Panama Canal Method",25/09/2007
+SCF/ICE_RF1_FN,SCF,ICE,RF,1,FN,ICE Russell 1000 Index Mini,"Roll on First Day of Month, No Price Adjustment",25/09/2007
+SCF/ICE_RF1_FR,SCF,ICE,RF,1,FR,ICE Russell 1000 Index Mini,"Roll on First Day of Month, Backwards Ratio Method",25/09/2007
+SCF/ICE_RF1_FW,SCF,ICE,RF,1,FW,ICE Russell 1000 Index Mini,"Roll on First Day of Month, Calendar-Weighted Method",25/09/2007
+SCF/ICE_RF1_OB,SCF,ICE,RF,1,OB,ICE Russell 1000 Index Mini,"Roll on Open Interest Switch, Backwards Panama Canal Method",25/09/2007
+SCF/ICE_RF1_OF,SCF,ICE,RF,1,OF,ICE Russell 1000 Index Mini,"Roll on Open Interest Switch, Forwards Panama Canal Method",25/09/2007
+SCF/ICE_RF1_ON,SCF,ICE,RF,1,ON,ICE Russell 1000 Index Mini,"Roll on Open Interest Switch, No Price Adjustment",25/09/2007
+SCF/ICE_RF1_OR,SCF,ICE,RF,1,OR,ICE Russell 1000 Index Mini,"Roll on Open Interest Switch, Backwards Ratio Method",25/09/2007
+SCF/ICE_RF2_EB,SCF,ICE,RF,2,EB,ICE Russell 1000 Index Mini,"Roll on Last Trading Day, Backwards Panama Canal Method",25/09/2007
+SCF/ICE_RF2_EF,SCF,ICE,RF,2,EF,ICE Russell 1000 Index Mini,"Roll on Last Trading Day, Forwards Panama Canal Method",25/09/2007
+SCF/ICE_RF2_EN,SCF,ICE,RF,2,EN,ICE Russell 1000 Index Mini,"Roll on Last Trading Day, No Price Adjustment",25/09/2007
+SCF/ICE_RF2_ER,SCF,ICE,RF,2,ER,ICE Russell 1000 Index Mini,"Roll on Last Trading Day, Backwards Ratio Method",25/09/2007
+SCF/ICE_RF2_EW,SCF,ICE,RF,2,EW,ICE Russell 1000 Index Mini,"Roll on Last Trading Day, Calendar-Weighted Method",25/09/2007
+SCF/ICE_RF2_FB,SCF,ICE,RF,2,FB,ICE Russell 1000 Index Mini,"Roll on First Day of Month, Backwards Panama Canal Method",25/09/2007
+SCF/ICE_RF2_FF,SCF,ICE,RF,2,FF,ICE Russell 1000 Index Mini,"Roll on First Day of Month, Forwards Panama Canal Method",25/09/2007
+SCF/ICE_RF2_FN,SCF,ICE,RF,2,FN,ICE Russell 1000 Index Mini,"Roll on First Day of Month, No Price Adjustment",25/09/2007
+SCF/ICE_RF2_FR,SCF,ICE,RF,2,FR,ICE Russell 1000 Index Mini,"Roll on First Day of Month, Backwards Ratio Method",25/09/2007
+SCF/ICE_RF2_FW,SCF,ICE,RF,2,FW,ICE Russell 1000 Index Mini,"Roll on First Day of Month, Calendar-Weighted Method",25/09/2007
+SCF/ICE_RF2_OB,SCF,ICE,RF,2,OB,ICE Russell 1000 Index Mini,"Roll on Open Interest Switch, Backwards Panama Canal Method",25/09/2007
+SCF/ICE_RF2_OF,SCF,ICE,RF,2,OF,ICE Russell 1000 Index Mini,"Roll on Open Interest Switch, Forwards Panama Canal Method",25/09/2007
+SCF/ICE_RF2_ON,SCF,ICE,RF,2,ON,ICE Russell 1000 Index Mini,"Roll on Open Interest Switch, No Price Adjustment",25/09/2007
+SCF/ICE_RF2_OR,SCF,ICE,RF,2,OR,ICE Russell 1000 Index Mini,"Roll on Open Interest Switch, Backwards Ratio Method",25/09/2007
+SCF/ICE_TF1_EB,SCF,ICE,TF,1,EB,ICE Russell 2000 Index Mini,"Roll on Last Trading Day, Backwards Panama Canal Method",16/03/2007
+SCF/ICE_TF1_EF,SCF,ICE,TF,1,EF,ICE Russell 2000 Index Mini,"Roll on Last Trading Day, Forwards Panama Canal Method",16/03/2007
+SCF/ICE_TF1_EN,SCF,ICE,TF,1,EN,ICE Russell 2000 Index Mini,"Roll on Last Trading Day, No Price Adjustment",16/03/2007
+SCF/ICE_TF1_ER,SCF,ICE,TF,1,ER,ICE Russell 2000 Index Mini,"Roll on Last Trading Day, Backwards Ratio Method",16/03/2007
+SCF/ICE_TF1_EW,SCF,ICE,TF,1,EW,ICE Russell 2000 Index Mini,"Roll on Last Trading Day, Calendar-Weighted Method",16/03/2007
+SCF/ICE_TF1_FB,SCF,ICE,TF,1,FB,ICE Russell 2000 Index Mini,"Roll on First Day of Month, Backwards Panama Canal Method",16/03/2007
+SCF/ICE_TF1_FF,SCF,ICE,TF,1,FF,ICE Russell 2000 Index Mini,"Roll on First Day of Month, Forwards Panama Canal Method",16/03/2007
+SCF/ICE_TF1_FN,SCF,ICE,TF,1,FN,ICE Russell 2000 Index Mini,"Roll on First Day of Month, No Price Adjustment",16/03/2007
+SCF/ICE_TF1_FR,SCF,ICE,TF,1,FR,ICE Russell 2000 Index Mini,"Roll on First Day of Month, Backwards Ratio Method",16/03/2007
+SCF/ICE_TF1_FW,SCF,ICE,TF,1,FW,ICE Russell 2000 Index Mini,"Roll on First Day of Month, Calendar-Weighted Method",16/03/2007
+SCF/ICE_TF1_OB,SCF,ICE,TF,1,OB,ICE Russell 2000 Index Mini,"Roll on Open Interest Switch, Backwards Panama Canal Method",16/03/2007
+SCF/ICE_TF1_OF,SCF,ICE,TF,1,OF,ICE Russell 2000 Index Mini,"Roll on Open Interest Switch, Forwards Panama Canal Method",16/03/2007
+SCF/ICE_TF1_ON,SCF,ICE,TF,1,ON,ICE Russell 2000 Index Mini,"Roll on Open Interest Switch, No Price Adjustment",16/03/2007
+SCF/ICE_TF1_OR,SCF,ICE,TF,1,OR,ICE Russell 2000 Index Mini,"Roll on Open Interest Switch, Backwards Ratio Method",16/03/2007
+SCF/ICE_TF2_EB,SCF,ICE,TF,2,EB,ICE Russell 2000 Index Mini,"Roll on Last Trading Day, Backwards Panama Canal Method",16/03/2007
+SCF/ICE_TF2_EF,SCF,ICE,TF,2,EF,ICE Russell 2000 Index Mini,"Roll on Last Trading Day, Forwards Panama Canal Method",16/03/2007
+SCF/ICE_TF2_EN,SCF,ICE,TF,2,EN,ICE Russell 2000 Index Mini,"Roll on Last Trading Day, No Price Adjustment",16/03/2007
+SCF/ICE_TF2_ER,SCF,ICE,TF,2,ER,ICE Russell 2000 Index Mini,"Roll on Last Trading Day, Backwards Ratio Method",16/03/2007
+SCF/ICE_TF2_EW,SCF,ICE,TF,2,EW,ICE Russell 2000 Index Mini,"Roll on Last Trading Day, Calendar-Weighted Method",16/03/2007
+SCF/ICE_TF2_FB,SCF,ICE,TF,2,FB,ICE Russell 2000 Index Mini,"Roll on First Day of Month, Backwards Panama Canal Method",16/03/2007
+SCF/ICE_TF2_FF,SCF,ICE,TF,2,FF,ICE Russell 2000 Index Mini,"Roll on First Day of Month, Forwards Panama Canal Method",16/03/2007
+SCF/ICE_TF2_FN,SCF,ICE,TF,2,FN,ICE Russell 2000 Index Mini,"Roll on First Day of Month, No Price Adjustment",16/03/2007
+SCF/ICE_TF2_FR,SCF,ICE,TF,2,FR,ICE Russell 2000 Index Mini,"Roll on First Day of Month, Backwards Ratio Method",16/03/2007
+SCF/ICE_TF2_FW,SCF,ICE,TF,2,FW,ICE Russell 2000 Index Mini,"Roll on First Day of Month, Calendar-Weighted Method",16/03/2007
+SCF/ICE_TF2_OB,SCF,ICE,TF,2,OB,ICE Russell 2000 Index Mini,"Roll on Open Interest Switch, Backwards Panama Canal Method",16/03/2007
+SCF/ICE_TF2_OF,SCF,ICE,TF,2,OF,ICE Russell 2000 Index Mini,"Roll on Open Interest Switch, Forwards Panama Canal Method",16/03/2007
+SCF/ICE_TF2_ON,SCF,ICE,TF,2,ON,ICE Russell 2000 Index Mini,"Roll on Open Interest Switch, No Price Adjustment",16/03/2007
+SCF/ICE_TF2_OR,SCF,ICE,TF,2,OR,ICE Russell 2000 Index Mini,"Roll on Open Interest Switch, Backwards Ratio Method",16/03/2007
+SCF/ICE_SB1_EB,SCF,ICE,SB,1,EB,ICE Sugar No. 11,"Roll on Last Trading Day, Backwards Panama Canal Method",14/02/1964
+SCF/ICE_SB1_EF,SCF,ICE,SB,1,EF,ICE Sugar No. 11,"Roll on Last Trading Day, Forwards Panama Canal Method",14/02/1964
+SCF/ICE_SB1_EN,SCF,ICE,SB,1,EN,ICE Sugar No. 11,"Roll on Last Trading Day, No Price Adjustment",14/02/1964
+SCF/ICE_SB1_ER,SCF,ICE,SB,1,ER,ICE Sugar No. 11,"Roll on Last Trading Day, Backwards Ratio Method",14/02/1964
+SCF/ICE_SB1_EW,SCF,ICE,SB,1,EW,ICE Sugar No. 11,"Roll on Last Trading Day, Calendar-Weighted Method",14/02/1964
+SCF/ICE_SB1_FB,SCF,ICE,SB,1,FB,ICE Sugar No. 11,"Roll on First Day of Month, Backwards Panama Canal Method",14/02/1964
+SCF/ICE_SB1_FF,SCF,ICE,SB,1,FF,ICE Sugar No. 11,"Roll on First Day of Month, Forwards Panama Canal Method",14/02/1964
+SCF/ICE_SB1_FN,SCF,ICE,SB,1,FN,ICE Sugar No. 11,"Roll on First Day of Month, No Price Adjustment",14/02/1964
+SCF/ICE_SB1_FR,SCF,ICE,SB,1,FR,ICE Sugar No. 11,"Roll on First Day of Month, Backwards Ratio Method",14/02/1964
+SCF/ICE_SB1_FW,SCF,ICE,SB,1,FW,ICE Sugar No. 11,"Roll on First Day of Month, Calendar-Weighted Method",14/02/1964
+SCF/ICE_SB1_OB,SCF,ICE,SB,1,OB,ICE Sugar No. 11,"Roll on Open Interest Switch, Backwards Panama Canal Method",14/02/1964
+SCF/ICE_SB1_OF,SCF,ICE,SB,1,OF,ICE Sugar No. 11,"Roll on Open Interest Switch, Forwards Panama Canal Method",14/02/1964
+SCF/ICE_SB1_ON,SCF,ICE,SB,1,ON,ICE Sugar No. 11,"Roll on Open Interest Switch, No Price Adjustment",14/02/1964
+SCF/ICE_SB1_OR,SCF,ICE,SB,1,OR,ICE Sugar No. 11,"Roll on Open Interest Switch, Backwards Ratio Method",14/02/1964
+SCF/ICE_SB2_EB,SCF,ICE,SB,2,EB,ICE Sugar No. 11,"Roll on Last Trading Day, Backwards Panama Canal Method",14/02/1964
+SCF/ICE_SB2_EF,SCF,ICE,SB,2,EF,ICE Sugar No. 11,"Roll on Last Trading Day, Forwards Panama Canal Method",14/02/1964
+SCF/ICE_SB2_EN,SCF,ICE,SB,2,EN,ICE Sugar No. 11,"Roll on Last Trading Day, No Price Adjustment",14/02/1964
+SCF/ICE_SB2_ER,SCF,ICE,SB,2,ER,ICE Sugar No. 11,"Roll on Last Trading Day, Backwards Ratio Method",14/02/1964
+SCF/ICE_SB2_EW,SCF,ICE,SB,2,EW,ICE Sugar No. 11,"Roll on Last Trading Day, Calendar-Weighted Method",14/02/1964
+SCF/ICE_SB2_FB,SCF,ICE,SB,2,FB,ICE Sugar No. 11,"Roll on First Day of Month, Backwards Panama Canal Method",14/02/1964
+SCF/ICE_SB2_FF,SCF,ICE,SB,2,FF,ICE Sugar No. 11,"Roll on First Day of Month, Forwards Panama Canal Method",14/02/1964
+SCF/ICE_SB2_FN,SCF,ICE,SB,2,FN,ICE Sugar No. 11,"Roll on First Day of Month, No Price Adjustment",14/02/1964
+SCF/ICE_SB2_FR,SCF,ICE,SB,2,FR,ICE Sugar No. 11,"Roll on First Day of Month, Backwards Ratio Method",14/02/1964
+SCF/ICE_SB2_FW,SCF,ICE,SB,2,FW,ICE Sugar No. 11,"Roll on First Day of Month, Calendar-Weighted Method",14/02/1964
+SCF/ICE_SB2_OB,SCF,ICE,SB,2,OB,ICE Sugar No. 11,"Roll on Open Interest Switch, Backwards Panama Canal Method",14/02/1964
+SCF/ICE_SB2_OF,SCF,ICE,SB,2,OF,ICE Sugar No. 11,"Roll on Open Interest Switch, Forwards Panama Canal Method",14/02/1964
+SCF/ICE_SB2_ON,SCF,ICE,SB,2,ON,ICE Sugar No. 11,"Roll on Open Interest Switch, No Price Adjustment",14/02/1964
+SCF/ICE_SB2_OR,SCF,ICE,SB,2,OR,ICE Sugar No. 11,"Roll on Open Interest Switch, Backwards Ratio Method",14/02/1964
+SCF/ICE_M1_EB,SCF,ICE,M,1,EB,ICE UK Natural Gas,"Roll on Last Trading Day, Backwards Panama Canal Method",27/02/1997
+SCF/ICE_M1_EF,SCF,ICE,M,1,EF,ICE UK Natural Gas,"Roll on Last Trading Day, Forwards Panama Canal Method",27/02/1997
+SCF/ICE_M1_EN,SCF,ICE,M,1,EN,ICE UK Natural Gas,"Roll on Last Trading Day, No Price Adjustment",27/02/1997
+SCF/ICE_M1_ER,SCF,ICE,M,1,ER,ICE UK Natural Gas,"Roll on Last Trading Day, Backwards Ratio Method",27/02/1997
+SCF/ICE_M1_EW,SCF,ICE,M,1,EW,ICE UK Natural Gas,"Roll on Last Trading Day, Calendar-Weighted Method",27/02/1997
+SCF/ICE_M1_FB,SCF,ICE,M,1,FB,ICE UK Natural Gas,"Roll on First Day of Month, Backwards Panama Canal Method",27/02/1997
+SCF/ICE_M1_FF,SCF,ICE,M,1,FF,ICE UK Natural Gas,"Roll on First Day of Month, Forwards Panama Canal Method",27/02/1997
+SCF/ICE_M1_FN,SCF,ICE,M,1,FN,ICE UK Natural Gas,"Roll on First Day of Month, No Price Adjustment",27/02/1997
+SCF/ICE_M1_FR,SCF,ICE,M,1,FR,ICE UK Natural Gas,"Roll on First Day of Month, Backwards Ratio Method",27/02/1997
+SCF/ICE_M1_FW,SCF,ICE,M,1,FW,ICE UK Natural Gas,"Roll on First Day of Month, Calendar-Weighted Method",27/02/1997
+SCF/ICE_M1_OB,SCF,ICE,M,1,OB,ICE UK Natural Gas,"Roll on Open Interest Switch, Backwards Panama Canal Method",27/02/1997
+SCF/ICE_M1_OF,SCF,ICE,M,1,OF,ICE UK Natural Gas,"Roll on Open Interest Switch, Forwards Panama Canal Method",27/02/1997
+SCF/ICE_M1_ON,SCF,ICE,M,1,ON,ICE UK Natural Gas,"Roll on Open Interest Switch, No Price Adjustment",27/02/1997
+SCF/ICE_M1_OR,SCF,ICE,M,1,OR,ICE UK Natural Gas,"Roll on Open Interest Switch, Backwards Ratio Method",27/02/1997
+SCF/ICE_M2_EB,SCF,ICE,M,2,EB,ICE UK Natural Gas,"Roll on Last Trading Day, Backwards Panama Canal Method",27/02/1997
+SCF/ICE_M2_EF,SCF,ICE,M,2,EF,ICE UK Natural Gas,"Roll on Last Trading Day, Forwards Panama Canal Method",27/02/1997
+SCF/ICE_M2_EN,SCF,ICE,M,2,EN,ICE UK Natural Gas,"Roll on Last Trading Day, No Price Adjustment",27/02/1997
+SCF/ICE_M2_ER,SCF,ICE,M,2,ER,ICE UK Natural Gas,"Roll on Last Trading Day, Backwards Ratio Method",27/02/1997
+SCF/ICE_M2_EW,SCF,ICE,M,2,EW,ICE UK Natural Gas,"Roll on Last Trading Day, Calendar-Weighted Method",27/02/1997
+SCF/ICE_M2_FB,SCF,ICE,M,2,FB,ICE UK Natural Gas,"Roll on First Day of Month, Backwards Panama Canal Method",27/02/1997
+SCF/ICE_M2_FF,SCF,ICE,M,2,FF,ICE UK Natural Gas,"Roll on First Day of Month, Forwards Panama Canal Method",27/02/1997
+SCF/ICE_M2_FN,SCF,ICE,M,2,FN,ICE UK Natural Gas,"Roll on First Day of Month, No Price Adjustment",27/02/1997
+SCF/ICE_M2_FR,SCF,ICE,M,2,FR,ICE UK Natural Gas,"Roll on First Day of Month, Backwards Ratio Method",27/02/1997
+SCF/ICE_M2_FW,SCF,ICE,M,2,FW,ICE UK Natural Gas,"Roll on First Day of Month, Calendar-Weighted Method",27/02/1997
+SCF/ICE_M2_OB,SCF,ICE,M,2,OB,ICE UK Natural Gas,"Roll on Open Interest Switch, Backwards Panama Canal Method",27/02/1997
+SCF/ICE_M2_OF,SCF,ICE,M,2,OF,ICE UK Natural Gas,"Roll on Open Interest Switch, Forwards Panama Canal Method",27/02/1997
+SCF/ICE_M2_ON,SCF,ICE,M,2,ON,ICE UK Natural Gas,"Roll on Open Interest Switch, No Price Adjustment",27/02/1997
+SCF/ICE_M2_OR,SCF,ICE,M,2,OR,ICE UK Natural Gas,"Roll on Open Interest Switch, Backwards Ratio Method",27/02/1997
+SCF/ICE_DX1_EB,SCF,ICE,DX,1,EB,ICE US Dollar Index,"Roll on Last Trading Day, Backwards Panama Canal Method",18/03/1999
+SCF/ICE_DX1_EF,SCF,ICE,DX,1,EF,ICE US Dollar Index,"Roll on Last Trading Day, Forwards Panama Canal Method",18/03/1999
+SCF/ICE_DX1_EN,SCF,ICE,DX,1,EN,ICE US Dollar Index,"Roll on Last Trading Day, No Price Adjustment",18/03/1999
+SCF/ICE_DX1_ER,SCF,ICE,DX,1,ER,ICE US Dollar Index,"Roll on Last Trading Day, Backwards Ratio Method",18/03/1999
+SCF/ICE_DX1_EW,SCF,ICE,DX,1,EW,ICE US Dollar Index,"Roll on Last Trading Day, Calendar-Weighted Method",18/03/1999
+SCF/ICE_DX1_FB,SCF,ICE,DX,1,FB,ICE US Dollar Index,"Roll on First Day of Month, Backwards Panama Canal Method",18/03/1999
+SCF/ICE_DX1_FF,SCF,ICE,DX,1,FF,ICE US Dollar Index,"Roll on First Day of Month, Forwards Panama Canal Method",18/03/1999
+SCF/ICE_DX1_FN,SCF,ICE,DX,1,FN,ICE US Dollar Index,"Roll on First Day of Month, No Price Adjustment",18/03/1999
+SCF/ICE_DX1_FR,SCF,ICE,DX,1,FR,ICE US Dollar Index,"Roll on First Day of Month, Backwards Ratio Method",18/03/1999
+SCF/ICE_DX1_FW,SCF,ICE,DX,1,FW,ICE US Dollar Index,"Roll on First Day of Month, Calendar-Weighted Method",18/03/1999
+SCF/ICE_DX1_OB,SCF,ICE,DX,1,OB,ICE US Dollar Index,"Roll on Open Interest Switch, Backwards Panama Canal Method",18/03/1999
+SCF/ICE_DX1_OF,SCF,ICE,DX,1,OF,ICE US Dollar Index,"Roll on Open Interest Switch, Forwards Panama Canal Method",18/03/1999
+SCF/ICE_DX1_ON,SCF,ICE,DX,1,ON,ICE US Dollar Index,"Roll on Open Interest Switch, No Price Adjustment",18/03/1999
+SCF/ICE_DX1_OR,SCF,ICE,DX,1,OR,ICE US Dollar Index,"Roll on Open Interest Switch, Backwards Ratio Method",18/03/1999
+SCF/ICE_DX2_EB,SCF,ICE,DX,2,EB,ICE US Dollar Index,"Roll on Last Trading Day, Backwards Panama Canal Method",18/03/1999
+SCF/ICE_DX2_EF,SCF,ICE,DX,2,EF,ICE US Dollar Index,"Roll on Last Trading Day, Forwards Panama Canal Method",18/03/1999
+SCF/ICE_DX2_EN,SCF,ICE,DX,2,EN,ICE US Dollar Index,"Roll on Last Trading Day, No Price Adjustment",18/03/1999
+SCF/ICE_DX2_ER,SCF,ICE,DX,2,ER,ICE US Dollar Index,"Roll on Last Trading Day, Backwards Ratio Method",18/03/1999
+SCF/ICE_DX2_EW,SCF,ICE,DX,2,EW,ICE US Dollar Index,"Roll on Last Trading Day, Calendar-Weighted Method",18/03/1999
+SCF/ICE_DX2_FB,SCF,ICE,DX,2,FB,ICE US Dollar Index,"Roll on First Day of Month, Backwards Panama Canal Method",18/03/1999
+SCF/ICE_DX2_FF,SCF,ICE,DX,2,FF,ICE US Dollar Index,"Roll on First Day of Month, Forwards Panama Canal Method",18/03/1999
+SCF/ICE_DX2_FN,SCF,ICE,DX,2,FN,ICE US Dollar Index,"Roll on First Day of Month, No Price Adjustment",18/03/1999
+SCF/ICE_DX2_FR,SCF,ICE,DX,2,FR,ICE US Dollar Index,"Roll on First Day of Month, Backwards Ratio Method",18/03/1999
+SCF/ICE_DX2_FW,SCF,ICE,DX,2,FW,ICE US Dollar Index,"Roll on First Day of Month, Calendar-Weighted Method",18/03/1999
+SCF/ICE_DX2_OB,SCF,ICE,DX,2,OB,ICE US Dollar Index,"Roll on Open Interest Switch, Backwards Panama Canal Method",18/03/1999
+SCF/ICE_DX2_OF,SCF,ICE,DX,2,OF,ICE US Dollar Index,"Roll on Open Interest Switch, Forwards Panama Canal Method",18/03/1999
+SCF/ICE_DX2_ON,SCF,ICE,DX,2,ON,ICE US Dollar Index,"Roll on Open Interest Switch, No Price Adjustment",18/03/1999
+SCF/ICE_DX2_OR,SCF,ICE,DX,2,OR,ICE US Dollar Index,"Roll on Open Interest Switch, Backwards Ratio Method",18/03/1999
+SCF/ICE_T1_EB,SCF,ICE,T,1,EB,ICE WTI Crude Oil,"Roll on Last Trading Day, Backwards Panama Canal Method",17/02/2006
+SCF/ICE_T1_EF,SCF,ICE,T,1,EF,ICE WTI Crude Oil,"Roll on Last Trading Day, Forwards Panama Canal Method",17/02/2006
+SCF/ICE_T1_EN,SCF,ICE,T,1,EN,ICE WTI Crude Oil,"Roll on Last Trading Day, No Price Adjustment",17/02/2006
+SCF/ICE_T1_ER,SCF,ICE,T,1,ER,ICE WTI Crude Oil,"Roll on Last Trading Day, Backwards Ratio Method",17/02/2006
+SCF/ICE_T1_EW,SCF,ICE,T,1,EW,ICE WTI Crude Oil,"Roll on Last Trading Day, Calendar-Weighted Method",17/02/2006
+SCF/ICE_T1_FB,SCF,ICE,T,1,FB,ICE WTI Crude Oil,"Roll on First Day of Month, Backwards Panama Canal Method",17/02/2006
+SCF/ICE_T1_FF,SCF,ICE,T,1,FF,ICE WTI Crude Oil,"Roll on First Day of Month, Forwards Panama Canal Method",17/02/2006
+SCF/ICE_T1_FN,SCF,ICE,T,1,FN,ICE WTI Crude Oil,"Roll on First Day of Month, No Price Adjustment",17/02/2006
+SCF/ICE_T1_FR,SCF,ICE,T,1,FR,ICE WTI Crude Oil,"Roll on First Day of Month, Backwards Ratio Method",17/02/2006
+SCF/ICE_T1_FW,SCF,ICE,T,1,FW,ICE WTI Crude Oil,"Roll on First Day of Month, Calendar-Weighted Method",17/02/2006
+SCF/ICE_T1_OB,SCF,ICE,T,1,OB,ICE WTI Crude Oil,"Roll on Open Interest Switch, Backwards Panama Canal Method",17/02/2006
+SCF/ICE_T1_OF,SCF,ICE,T,1,OF,ICE WTI Crude Oil,"Roll on Open Interest Switch, Forwards Panama Canal Method",17/02/2006
+SCF/ICE_T1_ON,SCF,ICE,T,1,ON,ICE WTI Crude Oil,"Roll on Open Interest Switch, No Price Adjustment",17/02/2006
+SCF/ICE_T1_OR,SCF,ICE,T,1,OR,ICE WTI Crude Oil,"Roll on Open Interest Switch, Backwards Ratio Method",17/02/2006
+SCF/ICE_T2_EB,SCF,ICE,T,2,EB,ICE WTI Crude Oil,"Roll on Last Trading Day, Backwards Panama Canal Method",17/02/2006
+SCF/ICE_T2_EF,SCF,ICE,T,2,EF,ICE WTI Crude Oil,"Roll on Last Trading Day, Forwards Panama Canal Method",17/02/2006
+SCF/ICE_T2_EN,SCF,ICE,T,2,EN,ICE WTI Crude Oil,"Roll on Last Trading Day, No Price Adjustment",17/02/2006
+SCF/ICE_T2_ER,SCF,ICE,T,2,ER,ICE WTI Crude Oil,"Roll on Last Trading Day, Backwards Ratio Method",17/02/2006
+SCF/ICE_T2_EW,SCF,ICE,T,2,EW,ICE WTI Crude Oil,"Roll on Last Trading Day, Calendar-Weighted Method",17/02/2006
+SCF/ICE_T2_FB,SCF,ICE,T,2,FB,ICE WTI Crude Oil,"Roll on First Day of Month, Backwards Panama Canal Method",17/02/2006
+SCF/ICE_T2_FF,SCF,ICE,T,2,FF,ICE WTI Crude Oil,"Roll on First Day of Month, Forwards Panama Canal Method",17/02/2006
+SCF/ICE_T2_FN,SCF,ICE,T,2,FN,ICE WTI Crude Oil,"Roll on First Day of Month, No Price Adjustment",17/02/2006
+SCF/ICE_T2_FR,SCF,ICE,T,2,FR,ICE WTI Crude Oil,"Roll on First Day of Month, Backwards Ratio Method",17/02/2006
+SCF/ICE_T2_FW,SCF,ICE,T,2,FW,ICE WTI Crude Oil,"Roll on First Day of Month, Calendar-Weighted Method",17/02/2006
+SCF/ICE_T2_OB,SCF,ICE,T,2,OB,ICE WTI Crude Oil,"Roll on Open Interest Switch, Backwards Panama Canal Method",17/02/2006
+SCF/ICE_T2_OF,SCF,ICE,T,2,OF,ICE WTI Crude Oil,"Roll on Open Interest Switch, Forwards Panama Canal Method",17/02/2006
+SCF/ICE_T2_ON,SCF,ICE,T,2,ON,ICE WTI Crude Oil,"Roll on Open Interest Switch, No Price Adjustment",17/02/2006
+SCF/ICE_T2_OR,SCF,ICE,T,2,OR,ICE WTI Crude Oil,"Roll on Open Interest Switch, Backwards Ratio Method",17/02/2006
+SCF/CME_RB1_EB,SCF,CME,RB,1,EB,NYMEX Gasoline,"Roll on Last Trading Day, Backwards Panama Canal Method",30/12/2005
+SCF/CME_RB1_EF,SCF,CME,RB,1,EF,NYMEX Gasoline,"Roll on Last Trading Day, Forwards Panama Canal Method",30/12/2005
+SCF/CME_RB1_EN,SCF,CME,RB,1,EN,NYMEX Gasoline,"Roll on Last Trading Day, No Price Adjustment",30/12/2005
+SCF/CME_RB1_ER,SCF,CME,RB,1,ER,NYMEX Gasoline,"Roll on Last Trading Day, Backwards Ratio Method",30/12/2005
+SCF/CME_RB1_EW,SCF,CME,RB,1,EW,NYMEX Gasoline,"Roll on Last Trading Day, Calendar-Weighted Method",30/12/2005
+SCF/CME_RB1_FB,SCF,CME,RB,1,FB,NYMEX Gasoline,"Roll on First Day of Month, Backwards Panama Canal Method",30/12/2005
+SCF/CME_RB1_FF,SCF,CME,RB,1,FF,NYMEX Gasoline,"Roll on First Day of Month, Forwards Panama Canal Method",30/12/2005
+SCF/CME_RB1_FN,SCF,CME,RB,1,FN,NYMEX Gasoline,"Roll on First Day of Month, No Price Adjustment",30/12/2005
+SCF/CME_RB1_FR,SCF,CME,RB,1,FR,NYMEX Gasoline,"Roll on First Day of Month, Backwards Ratio Method",30/12/2005
+SCF/CME_RB1_FW,SCF,CME,RB,1,FW,NYMEX Gasoline,"Roll on First Day of Month, Calendar-Weighted Method",30/12/2005
+SCF/CME_RB1_OB,SCF,CME,RB,1,OB,NYMEX Gasoline,"Roll on Open Interest Switch, Backwards Panama Canal Method",30/12/2005
+SCF/CME_RB1_OF,SCF,CME,RB,1,OF,NYMEX Gasoline,"Roll on Open Interest Switch, Forwards Panama Canal Method",30/12/2005
+SCF/CME_RB1_ON,SCF,CME,RB,1,ON,NYMEX Gasoline,"Roll on Open Interest Switch, No Price Adjustment",30/12/2005
+SCF/CME_RB1_OR,SCF,CME,RB,1,OR,NYMEX Gasoline,"Roll on Open Interest Switch, Backwards Ratio Method",30/12/2005
+SCF/CME_RB2_EB,SCF,CME,RB,2,EB,NYMEX Gasoline,"Roll on Last Trading Day, Backwards Panama Canal Method",30/12/2005
+SCF/CME_RB2_EF,SCF,CME,RB,2,EF,NYMEX Gasoline,"Roll on Last Trading Day, Forwards Panama Canal Method",30/12/2005
+SCF/CME_RB2_EN,SCF,CME,RB,2,EN,NYMEX Gasoline,"Roll on Last Trading Day, No Price Adjustment",30/12/2005
+SCF/CME_RB2_ER,SCF,CME,RB,2,ER,NYMEX Gasoline,"Roll on Last Trading Day, Backwards Ratio Method",30/12/2005
+SCF/CME_RB2_EW,SCF,CME,RB,2,EW,NYMEX Gasoline,"Roll on Last Trading Day, Calendar-Weighted Method",30/12/2005
+SCF/CME_RB2_FB,SCF,CME,RB,2,FB,NYMEX Gasoline,"Roll on First Day of Month, Backwards Panama Canal Method",30/12/2005
+SCF/CME_RB2_FF,SCF,CME,RB,2,FF,NYMEX Gasoline,"Roll on First Day of Month, Forwards Panama Canal Method",30/12/2005
+SCF/CME_RB2_FN,SCF,CME,RB,2,FN,NYMEX Gasoline,"Roll on First Day of Month, No Price Adjustment",30/12/2005
+SCF/CME_RB2_FR,SCF,CME,RB,2,FR,NYMEX Gasoline,"Roll on First Day of Month, Backwards Ratio Method",30/12/2005
+SCF/CME_RB2_FW,SCF,CME,RB,2,FW,NYMEX Gasoline,"Roll on First Day of Month, Calendar-Weighted Method",30/12/2005
+SCF/CME_RB2_OB,SCF,CME,RB,2,OB,NYMEX Gasoline,"Roll on Open Interest Switch, Backwards Panama Canal Method",30/12/2005
+SCF/CME_RB2_OF,SCF,CME,RB,2,OF,NYMEX Gasoline,"Roll on Open Interest Switch, Forwards Panama Canal Method",30/12/2005
+SCF/CME_RB2_ON,SCF,CME,RB,2,ON,NYMEX Gasoline,"Roll on Open Interest Switch, No Price Adjustment",30/12/2005
+SCF/CME_RB2_OR,SCF,CME,RB,2,OR,NYMEX Gasoline,"Roll on Open Interest Switch, Backwards Ratio Method",30/12/2005
+SCF/CME_GC1_EB,SCF,CME,GC,1,EB,NYMEX Gold,"Roll on Last Trading Day, Backwards Panama Canal Method",25/02/1975
+SCF/CME_GC1_EF,SCF,CME,GC,1,EF,NYMEX Gold,"Roll on Last Trading Day, Forwards Panama Canal Method",25/02/1975
+SCF/CME_GC1_EN,SCF,CME,GC,1,EN,NYMEX Gold,"Roll on Last Trading Day, No Price Adjustment",25/02/1975
+SCF/CME_GC1_ER,SCF,CME,GC,1,ER,NYMEX Gold,"Roll on Last Trading Day, Backwards Ratio Method",25/02/1975
+SCF/CME_GC1_EW,SCF,CME,GC,1,EW,NYMEX Gold,"Roll on Last Trading Day, Calendar-Weighted Method",25/02/1975
+SCF/CME_GC1_FB,SCF,CME,GC,1,FB,NYMEX Gold,"Roll on First Day of Month, Backwards Panama Canal Method",25/02/1975
+SCF/CME_GC1_FF,SCF,CME,GC,1,FF,NYMEX Gold,"Roll on First Day of Month, Forwards Panama Canal Method",25/02/1975
+SCF/CME_GC1_FN,SCF,CME,GC,1,FN,NYMEX Gold,"Roll on First Day of Month, No Price Adjustment",25/02/1975
+SCF/CME_GC1_FR,SCF,CME,GC,1,FR,NYMEX Gold,"Roll on First Day of Month, Backwards Ratio Method",25/02/1975
+SCF/CME_GC1_FW,SCF,CME,GC,1,FW,NYMEX Gold,"Roll on First Day of Month, Calendar-Weighted Method",25/02/1975
+SCF/CME_GC1_OB,SCF,CME,GC,1,OB,NYMEX Gold,"Roll on Open Interest Switch, Backwards Panama Canal Method",25/02/1975
+SCF/CME_GC1_OF,SCF,CME,GC,1,OF,NYMEX Gold,"Roll on Open Interest Switch, Forwards Panama Canal Method",25/02/1975
+SCF/CME_GC1_ON,SCF,CME,GC,1,ON,NYMEX Gold,"Roll on Open Interest Switch, No Price Adjustment",25/02/1975
+SCF/CME_GC1_OR,SCF,CME,GC,1,OR,NYMEX Gold,"Roll on Open Interest Switch, Backwards Ratio Method",25/02/1975
+SCF/CME_GC2_EB,SCF,CME,GC,2,EB,NYMEX Gold,"Roll on Last Trading Day, Backwards Panama Canal Method",25/02/1975
+SCF/CME_GC2_EF,SCF,CME,GC,2,EF,NYMEX Gold,"Roll on Last Trading Day, Forwards Panama Canal Method",25/02/1975
+SCF/CME_GC2_EN,SCF,CME,GC,2,EN,NYMEX Gold,"Roll on Last Trading Day, No Price Adjustment",25/02/1975
+SCF/CME_GC2_ER,SCF,CME,GC,2,ER,NYMEX Gold,"Roll on Last Trading Day, Backwards Ratio Method",25/02/1975
+SCF/CME_GC2_EW,SCF,CME,GC,2,EW,NYMEX Gold,"Roll on Last Trading Day, Calendar-Weighted Method",25/02/1975
+SCF/CME_GC2_FB,SCF,CME,GC,2,FB,NYMEX Gold,"Roll on First Day of Month, Backwards Panama Canal Method",25/02/1975
+SCF/CME_GC2_FF,SCF,CME,GC,2,FF,NYMEX Gold,"Roll on First Day of Month, Forwards Panama Canal Method",25/02/1975
+SCF/CME_GC2_FN,SCF,CME,GC,2,FN,NYMEX Gold,"Roll on First Day of Month, No Price Adjustment",25/02/1975
+SCF/CME_GC2_FR,SCF,CME,GC,2,FR,NYMEX Gold,"Roll on First Day of Month, Backwards Ratio Method",25/02/1975
+SCF/CME_GC2_FW,SCF,CME,GC,2,FW,NYMEX Gold,"Roll on First Day of Month, Calendar-Weighted Method",25/02/1975
+SCF/CME_GC2_OB,SCF,CME,GC,2,OB,NYMEX Gold,"Roll on Open Interest Switch, Backwards Panama Canal Method",25/02/1975
+SCF/CME_GC2_OF,SCF,CME,GC,2,OF,NYMEX Gold,"Roll on Open Interest Switch, Forwards Panama Canal Method",25/02/1975
+SCF/CME_GC2_ON,SCF,CME,GC,2,ON,NYMEX Gold,"Roll on Open Interest Switch, No Price Adjustment",25/02/1975
+SCF/CME_GC2_OR,SCF,CME,GC,2,OR,NYMEX Gold,"Roll on Open Interest Switch, Backwards Ratio Method",25/02/1975
+SCF/CME_HO1_EB,SCF,CME,HO,1,EB,NYMEX Heating Oil,"Roll on Last Trading Day, Backwards Panama Canal Method",28/12/1979
+SCF/CME_HO1_EF,SCF,CME,HO,1,EF,NYMEX Heating Oil,"Roll on Last Trading Day, Forwards Panama Canal Method",28/12/1979
+SCF/CME_HO1_EN,SCF,CME,HO,1,EN,NYMEX Heating Oil,"Roll on Last Trading Day, No Price Adjustment",28/12/1979
+SCF/CME_HO1_ER,SCF,CME,HO,1,ER,NYMEX Heating Oil,"Roll on Last Trading Day, Backwards Ratio Method",28/12/1979
+SCF/CME_HO1_EW,SCF,CME,HO,1,EW,NYMEX Heating Oil,"Roll on Last Trading Day, Calendar-Weighted Method",28/12/1979
+SCF/CME_HO1_FB,SCF,CME,HO,1,FB,NYMEX Heating Oil,"Roll on First Day of Month, Backwards Panama Canal Method",28/12/1979
+SCF/CME_HO1_FF,SCF,CME,HO,1,FF,NYMEX Heating Oil,"Roll on First Day of Month, Forwards Panama Canal Method",28/12/1979
+SCF/CME_HO1_FN,SCF,CME,HO,1,FN,NYMEX Heating Oil,"Roll on First Day of Month, No Price Adjustment",28/12/1979
+SCF/CME_HO1_FR,SCF,CME,HO,1,FR,NYMEX Heating Oil,"Roll on First Day of Month, Backwards Ratio Method",28/12/1979
+SCF/CME_HO1_FW,SCF,CME,HO,1,FW,NYMEX Heating Oil,"Roll on First Day of Month, Calendar-Weighted Method",28/12/1979
+SCF/CME_HO1_OB,SCF,CME,HO,1,OB,NYMEX Heating Oil,"Roll on Open Interest Switch, Backwards Panama Canal Method",28/12/1979
+SCF/CME_HO1_OF,SCF,CME,HO,1,OF,NYMEX Heating Oil,"Roll on Open Interest Switch, Forwards Panama Canal Method",28/12/1979
+SCF/CME_HO1_ON,SCF,CME,HO,1,ON,NYMEX Heating Oil,"Roll on Open Interest Switch, No Price Adjustment",28/12/1979
+SCF/CME_HO1_OR,SCF,CME,HO,1,OR,NYMEX Heating Oil,"Roll on Open Interest Switch, Backwards Ratio Method",28/12/1979
+SCF/CME_HO2_EB,SCF,CME,HO,2,EB,NYMEX Heating Oil,"Roll on Last Trading Day, Backwards Panama Canal Method",28/12/1979
+SCF/CME_HO2_EF,SCF,CME,HO,2,EF,NYMEX Heating Oil,"Roll on Last Trading Day, Forwards Panama Canal Method",28/12/1979
+SCF/CME_HO2_EN,SCF,CME,HO,2,EN,NYMEX Heating Oil,"Roll on Last Trading Day, No Price Adjustment",28/12/1979
+SCF/CME_HO2_ER,SCF,CME,HO,2,ER,NYMEX Heating Oil,"Roll on Last Trading Day, Backwards Ratio Method",28/12/1979
+SCF/CME_HO2_EW,SCF,CME,HO,2,EW,NYMEX Heating Oil,"Roll on Last Trading Day, Calendar-Weighted Method",28/12/1979
+SCF/CME_HO2_FB,SCF,CME,HO,2,FB,NYMEX Heating Oil,"Roll on First Day of Month, Backwards Panama Canal Method",28/12/1979
+SCF/CME_HO2_FF,SCF,CME,HO,2,FF,NYMEX Heating Oil,"Roll on First Day of Month, Forwards Panama Canal Method",28/12/1979
+SCF/CME_HO2_FN,SCF,CME,HO,2,FN,NYMEX Heating Oil,"Roll on First Day of Month, No Price Adjustment",28/12/1979
+SCF/CME_HO2_FR,SCF,CME,HO,2,FR,NYMEX Heating Oil,"Roll on First Day of Month, Backwards Ratio Method",28/12/1979
+SCF/CME_HO2_FW,SCF,CME,HO,2,FW,NYMEX Heating Oil,"Roll on First Day of Month, Calendar-Weighted Method",28/12/1979
+SCF/CME_HO2_OB,SCF,CME,HO,2,OB,NYMEX Heating Oil,"Roll on Open Interest Switch, Backwards Panama Canal Method",28/12/1979
+SCF/CME_HO2_OF,SCF,CME,HO,2,OF,NYMEX Heating Oil,"Roll on Open Interest Switch, Forwards Panama Canal Method",28/12/1979
+SCF/CME_HO2_ON,SCF,CME,HO,2,ON,NYMEX Heating Oil,"Roll on Open Interest Switch, No Price Adjustment",28/12/1979
+SCF/CME_HO2_OR,SCF,CME,HO,2,OR,NYMEX Heating Oil,"Roll on Open Interest Switch, Backwards Ratio Method",28/12/1979
+SCF/CME_NG1_EB,SCF,CME,NG,1,EB,NYMEX Natural Gas,"Roll on Last Trading Day, Backwards Panama Canal Method",22/05/1990
+SCF/CME_NG1_EF,SCF,CME,NG,1,EF,NYMEX Natural Gas,"Roll on Last Trading Day, Forwards Panama Canal Method",22/05/1990
+SCF/CME_NG1_EN,SCF,CME,NG,1,EN,NYMEX Natural Gas,"Roll on Last Trading Day, No Price Adjustment",22/05/1990
+SCF/CME_NG1_ER,SCF,CME,NG,1,ER,NYMEX Natural Gas,"Roll on Last Trading Day, Backwards Ratio Method",22/05/1990
+SCF/CME_NG1_EW,SCF,CME,NG,1,EW,NYMEX Natural Gas,"Roll on Last Trading Day, Calendar-Weighted Method",22/05/1990
+SCF/CME_NG1_FB,SCF,CME,NG,1,FB,NYMEX Natural Gas,"Roll on First Day of Month, Backwards Panama Canal Method",22/05/1990
+SCF/CME_NG1_FF,SCF,CME,NG,1,FF,NYMEX Natural Gas,"Roll on First Day of Month, Forwards Panama Canal Method",22/05/1990
+SCF/CME_NG1_FN,SCF,CME,NG,1,FN,NYMEX Natural Gas,"Roll on First Day of Month, No Price Adjustment",22/05/1990
+SCF/CME_NG1_FR,SCF,CME,NG,1,FR,NYMEX Natural Gas,"Roll on First Day of Month, Backwards Ratio Method",22/05/1990
+SCF/CME_NG1_FW,SCF,CME,NG,1,FW,NYMEX Natural Gas,"Roll on First Day of Month, Calendar-Weighted Method",22/05/1990
+SCF/CME_NG1_OB,SCF,CME,NG,1,OB,NYMEX Natural Gas,"Roll on Open Interest Switch, Backwards Panama Canal Method",22/05/1990
+SCF/CME_NG1_OF,SCF,CME,NG,1,OF,NYMEX Natural Gas,"Roll on Open Interest Switch, Forwards Panama Canal Method",22/05/1990
+SCF/CME_NG1_ON,SCF,CME,NG,1,ON,NYMEX Natural Gas,"Roll on Open Interest Switch, No Price Adjustment",22/05/1990
+SCF/CME_NG1_OR,SCF,CME,NG,1,OR,NYMEX Natural Gas,"Roll on Open Interest Switch, Backwards Ratio Method",22/05/1990
+SCF/CME_NG2_EB,SCF,CME,NG,2,EB,NYMEX Natural Gas,"Roll on Last Trading Day, Backwards Panama Canal Method",22/05/1990
+SCF/CME_NG2_EF,SCF,CME,NG,2,EF,NYMEX Natural Gas,"Roll on Last Trading Day, Forwards Panama Canal Method",22/05/1990
+SCF/CME_NG2_EN,SCF,CME,NG,2,EN,NYMEX Natural Gas,"Roll on Last Trading Day, No Price Adjustment",22/05/1990
+SCF/CME_NG2_ER,SCF,CME,NG,2,ER,NYMEX Natural Gas,"Roll on Last Trading Day, Backwards Ratio Method",22/05/1990
+SCF/CME_NG2_EW,SCF,CME,NG,2,EW,NYMEX Natural Gas,"Roll on Last Trading Day, Calendar-Weighted Method",22/05/1990
+SCF/CME_NG2_FB,SCF,CME,NG,2,FB,NYMEX Natural Gas,"Roll on First Day of Month, Backwards Panama Canal Method",22/05/1990
+SCF/CME_NG2_FF,SCF,CME,NG,2,FF,NYMEX Natural Gas,"Roll on First Day of Month, Forwards Panama Canal Method",22/05/1990
+SCF/CME_NG2_FN,SCF,CME,NG,2,FN,NYMEX Natural Gas,"Roll on First Day of Month, No Price Adjustment",22/05/1990
+SCF/CME_NG2_FR,SCF,CME,NG,2,FR,NYMEX Natural Gas,"Roll on First Day of Month, Backwards Ratio Method",22/05/1990
+SCF/CME_NG2_FW,SCF,CME,NG,2,FW,NYMEX Natural Gas,"Roll on First Day of Month, Calendar-Weighted Method",22/05/1990
+SCF/CME_NG2_OB,SCF,CME,NG,2,OB,NYMEX Natural Gas,"Roll on Open Interest Switch, Backwards Panama Canal Method",22/05/1990
+SCF/CME_NG2_OF,SCF,CME,NG,2,OF,NYMEX Natural Gas,"Roll on Open Interest Switch, Forwards Panama Canal Method",22/05/1990
+SCF/CME_NG2_ON,SCF,CME,NG,2,ON,NYMEX Natural Gas,"Roll on Open Interest Switch, No Price Adjustment",22/05/1990
+SCF/CME_NG2_OR,SCF,CME,NG,2,OR,NYMEX Natural Gas,"Roll on Open Interest Switch, Backwards Ratio Method",22/05/1990
+SCF/CME_PA1_EB,SCF,CME,PA,1,EB,NYMEX Palladium,"Roll on Last Trading Day, Backwards Panama Canal Method",14/03/1977
+SCF/CME_PA1_EF,SCF,CME,PA,1,EF,NYMEX Palladium,"Roll on Last Trading Day, Forwards Panama Canal Method",14/03/1977
+SCF/CME_PA1_EN,SCF,CME,PA,1,EN,NYMEX Palladium,"Roll on Last Trading Day, No Price Adjustment",14/03/1977
+SCF/CME_PA1_ER,SCF,CME,PA,1,ER,NYMEX Palladium,"Roll on Last Trading Day, Backwards Ratio Method",14/03/1977
+SCF/CME_PA1_EW,SCF,CME,PA,1,EW,NYMEX Palladium,"Roll on Last Trading Day, Calendar-Weighted Method",14/03/1977
+SCF/CME_PA1_FB,SCF,CME,PA,1,FB,NYMEX Palladium,"Roll on First Day of Month, Backwards Panama Canal Method",14/03/1977
+SCF/CME_PA1_FF,SCF,CME,PA,1,FF,NYMEX Palladium,"Roll on First Day of Month, Forwards Panama Canal Method",14/03/1977
+SCF/CME_PA1_FN,SCF,CME,PA,1,FN,NYMEX Palladium,"Roll on First Day of Month, No Price Adjustment",14/03/1977
+SCF/CME_PA1_FR,SCF,CME,PA,1,FR,NYMEX Palladium,"Roll on First Day of Month, Backwards Ratio Method",14/03/1977
+SCF/CME_PA1_FW,SCF,CME,PA,1,FW,NYMEX Palladium,"Roll on First Day of Month, Calendar-Weighted Method",14/03/1977
+SCF/CME_PA1_OB,SCF,CME,PA,1,OB,NYMEX Palladium,"Roll on Open Interest Switch, Backwards Panama Canal Method",14/03/1977
+SCF/CME_PA1_OF,SCF,CME,PA,1,OF,NYMEX Palladium,"Roll on Open Interest Switch, Forwards Panama Canal Method",14/03/1977
+SCF/CME_PA1_ON,SCF,CME,PA,1,ON,NYMEX Palladium,"Roll on Open Interest Switch, No Price Adjustment",14/03/1977
+SCF/CME_PA1_OR,SCF,CME,PA,1,OR,NYMEX Palladium,"Roll on Open Interest Switch, Backwards Ratio Method",14/03/1977
+SCF/CME_PL1_EB,SCF,CME,PL,1,EB,NYMEX Platinum,"Roll on Last Trading Day, Backwards Panama Canal Method",14/01/1970
+SCF/CME_PL1_EF,SCF,CME,PL,1,EF,NYMEX Platinum,"Roll on Last Trading Day, Forwards Panama Canal Method",14/01/1970
+SCF/CME_PL1_EN,SCF,CME,PL,1,EN,NYMEX Platinum,"Roll on Last Trading Day, No Price Adjustment",14/01/1970
+SCF/CME_PL1_ER,SCF,CME,PL,1,ER,NYMEX Platinum,"Roll on Last Trading Day, Backwards Ratio Method",14/01/1970
+SCF/CME_PL1_EW,SCF,CME,PL,1,EW,NYMEX Platinum,"Roll on Last Trading Day, Calendar-Weighted Method",14/01/1970
+SCF/CME_PL1_FB,SCF,CME,PL,1,FB,NYMEX Platinum,"Roll on First Day of Month, Backwards Panama Canal Method",14/01/1970
+SCF/CME_PL1_FF,SCF,CME,PL,1,FF,NYMEX Platinum,"Roll on First Day of Month, Forwards Panama Canal Method",14/01/1970
+SCF/CME_PL1_FN,SCF,CME,PL,1,FN,NYMEX Platinum,"Roll on First Day of Month, No Price Adjustment",14/01/1970
+SCF/CME_PL1_FR,SCF,CME,PL,1,FR,NYMEX Platinum,"Roll on First Day of Month, Backwards Ratio Method",14/01/1970
+SCF/CME_PL1_FW,SCF,CME,PL,1,FW,NYMEX Platinum,"Roll on First Day of Month, Calendar-Weighted Method",14/01/1970
+SCF/CME_PL1_OB,SCF,CME,PL,1,OB,NYMEX Platinum,"Roll on Open Interest Switch, Backwards Panama Canal Method",14/01/1970
+SCF/CME_PL1_OF,SCF,CME,PL,1,OF,NYMEX Platinum,"Roll on Open Interest Switch, Forwards Panama Canal Method",14/01/1970
+SCF/CME_PL1_ON,SCF,CME,PL,1,ON,NYMEX Platinum,"Roll on Open Interest Switch, No Price Adjustment",14/01/1970
+SCF/CME_PL1_OR,SCF,CME,PL,1,OR,NYMEX Platinum,"Roll on Open Interest Switch, Backwards Ratio Method",14/01/1970
+SCF/CME_SI1_EB,SCF,CME,SI,1,EB,NYMEX Silver,"Roll on Last Trading Day, Backwards Panama Canal Method",30/03/1964
+SCF/CME_SI1_EF,SCF,CME,SI,1,EF,NYMEX Silver,"Roll on Last Trading Day, Forwards Panama Canal Method",30/03/1964
+SCF/CME_SI1_EN,SCF,CME,SI,1,EN,NYMEX Silver,"Roll on Last Trading Day, No Price Adjustment",30/03/1964
+SCF/CME_SI1_ER,SCF,CME,SI,1,ER,NYMEX Silver,"Roll on Last Trading Day, Backwards Ratio Method",30/03/1964
+SCF/CME_SI1_EW,SCF,CME,SI,1,EW,NYMEX Silver,"Roll on Last Trading Day, Calendar-Weighted Method",30/03/1964
+SCF/CME_SI1_FB,SCF,CME,SI,1,FB,NYMEX Silver,"Roll on First Day of Month, Backwards Panama Canal Method",30/03/1964
+SCF/CME_SI1_FF,SCF,CME,SI,1,FF,NYMEX Silver,"Roll on First Day of Month, Forwards Panama Canal Method",30/03/1964
+SCF/CME_SI1_FN,SCF,CME,SI,1,FN,NYMEX Silver,"Roll on First Day of Month, No Price Adjustment",30/03/1964
+SCF/CME_SI1_FR,SCF,CME,SI,1,FR,NYMEX Silver,"Roll on First Day of Month, Backwards Ratio Method",30/03/1964
+SCF/CME_SI1_FW,SCF,CME,SI,1,FW,NYMEX Silver,"Roll on First Day of Month, Calendar-Weighted Method",30/03/1964
+SCF/CME_SI1_OB,SCF,CME,SI,1,OB,NYMEX Silver,"Roll on Open Interest Switch, Backwards Panama Canal Method",30/03/1964
+SCF/CME_SI1_OF,SCF,CME,SI,1,OF,NYMEX Silver,"Roll on Open Interest Switch, Forwards Panama Canal Method",30/03/1964
+SCF/CME_SI1_ON,SCF,CME,SI,1,ON,NYMEX Silver,"Roll on Open Interest Switch, No Price Adjustment",30/03/1964
+SCF/CME_SI1_OR,SCF,CME,SI,1,OR,NYMEX Silver,"Roll on Open Interest Switch, Backwards Ratio Method",30/03/1964
+SCF/CME_CL1_EB,SCF,CME,CL,1,EB,NYMEX WTI Crude Oil,"Roll on Last Trading Day, Backwards Panama Canal Method",18/05/1983
+SCF/CME_CL1_EF,SCF,CME,CL,1,EF,NYMEX WTI Crude Oil,"Roll on Last Trading Day, Forwards Panama Canal Method",18/05/1983
+SCF/CME_CL1_EN,SCF,CME,CL,1,EN,NYMEX WTI Crude Oil,"Roll on Last Trading Day, No Price Adjustment",18/05/1983
+SCF/CME_CL1_ER,SCF,CME,CL,1,ER,NYMEX WTI Crude Oil,"Roll on Last Trading Day, Backwards Ratio Method",18/05/1983
+SCF/CME_CL1_EW,SCF,CME,CL,1,EW,NYMEX WTI Crude Oil,"Roll on Last Trading Day, Calendar-Weighted Method",18/05/1983
+SCF/CME_CL1_FB,SCF,CME,CL,1,FB,NYMEX WTI Crude Oil,"Roll on First Day of Month, Backwards Panama Canal Method",18/05/1983
+SCF/CME_CL1_FF,SCF,CME,CL,1,FF,NYMEX WTI Crude Oil,"Roll on First Day of Month, Forwards Panama Canal Method",18/05/1983
+SCF/CME_CL1_FN,SCF,CME,CL,1,FN,NYMEX WTI Crude Oil,"Roll on First Day of Month, No Price Adjustment",18/05/1983
+SCF/CME_CL1_FR,SCF,CME,CL,1,FR,NYMEX WTI Crude Oil,"Roll on First Day of Month, Backwards Ratio Method",18/05/1983
+SCF/CME_CL1_FW,SCF,CME,CL,1,FW,NYMEX WTI Crude Oil,"Roll on First Day of Month, Calendar-Weighted Method",18/05/1983
+SCF/CME_CL1_OB,SCF,CME,CL,1,OB,NYMEX WTI Crude Oil,"Roll on Open Interest Switch, Backwards Panama Canal Method",18/05/1983
+SCF/CME_CL1_OF,SCF,CME,CL,1,OF,NYMEX WTI Crude Oil,"Roll on Open Interest Switch, Forwards Panama Canal Method",18/05/1983
+SCF/CME_CL1_ON,SCF,CME,CL,1,ON,NYMEX WTI Crude Oil,"Roll on Open Interest Switch, No Price Adjustment",18/05/1983
+SCF/CME_CL1_OR,SCF,CME,CL,1,OR,NYMEX WTI Crude Oil,"Roll on Open Interest Switch, Backwards Ratio Method",18/05/1983
+SCF/CME_CL2_EB,SCF,CME,CL,2,EB,NYMEX WTI Crude Oil,"Roll on Last Trading Day, Backwards Panama Canal Method",18/05/1983
+SCF/CME_CL2_EF,SCF,CME,CL,2,EF,NYMEX WTI Crude Oil,"Roll on Last Trading Day, Forwards Panama Canal Method",18/05/1983
+SCF/CME_CL2_EN,SCF,CME,CL,2,EN,NYMEX WTI Crude Oil,"Roll on Last Trading Day, No Price Adjustment",18/05/1983
+SCF/CME_CL2_ER,SCF,CME,CL,2,ER,NYMEX WTI Crude Oil,"Roll on Last Trading Day, Backwards Ratio Method",18/05/1983
+SCF/CME_CL2_EW,SCF,CME,CL,2,EW,NYMEX WTI Crude Oil,"Roll on Last Trading Day, Calendar-Weighted Method",18/05/1983
+SCF/CME_CL2_FB,SCF,CME,CL,2,FB,NYMEX WTI Crude Oil,"Roll on First Day of Month, Backwards Panama Canal Method",18/05/1983
+SCF/CME_CL2_FF,SCF,CME,CL,2,FF,NYMEX WTI Crude Oil,"Roll on First Day of Month, Forwards Panama Canal Method",18/05/1983
+SCF/CME_CL2_FN,SCF,CME,CL,2,FN,NYMEX WTI Crude Oil,"Roll on First Day of Month, No Price Adjustment",18/05/1983
+SCF/CME_CL2_FR,SCF,CME,CL,2,FR,NYMEX WTI Crude Oil,"Roll on First Day of Month, Backwards Ratio Method",18/05/1983
+SCF/CME_CL2_FW,SCF,CME,CL,2,FW,NYMEX WTI Crude Oil,"Roll on First Day of Month, Calendar-Weighted Method",18/05/1983
+SCF/CME_CL2_OB,SCF,CME,CL,2,OB,NYMEX WTI Crude Oil,"Roll on Open Interest Switch, Backwards Panama Canal Method",18/05/1983
+SCF/CME_CL2_OF,SCF,CME,CL,2,OF,NYMEX WTI Crude Oil,"Roll on Open Interest Switch, Forwards Panama Canal Method",18/05/1983
+SCF/CME_CL2_ON,SCF,CME,CL,2,ON,NYMEX WTI Crude Oil,"Roll on Open Interest Switch, No Price Adjustment",18/05/1983
+SCF/CME_CL2_OR,SCF,CME,CL,2,OR,NYMEX WTI Crude Oil,"Roll on Open Interest Switch, Backwards Ratio Method",18/05/1983
