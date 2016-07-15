@@ -1,0 +1,143 @@
+OLS(...).fit()
+
+class OLS(WLS):
+	...
+
+class WLS(RegressionModel):
+	...
+
+class RegressionModel(base.LikelihoodModel):
+....
+....
+    def fit:
+       if isinstance(self, OLS):
+            lfit = OLSResults(self, beta,
+                       normalized_cov_params=self.normalized_cov_params,
+                       cov_type=cov_type, cov_kwds=cov_kwds, use_t=use_t)
+        else:
+            lfit = RegressionResults(self, beta,
+                       normalized_cov_params=self.normalized_cov_params,
+                       cov_type=cov_type, cov_kwds=cov_kwds, use_t=use_t)
+
+        return RegressionResultsWrapper(lfit)
+
+class OLSResults(RegressionResults):
+...
+..
+
+
+http://statsmodels.sourceforge.net/0.6.0/_modules/statsmodels/base/model.html#LikelihoodModelResults
+
+    bse : array
+        The standard errors of the coefficients.
+
+    @cache_readonly
+[docs]    def bse(self):
+        return np.sqrt(np.diag(self.cov_params()))
+
+    @cache_readonly
+[docs]    def tvalues(self):
+        """
+        Return the t-statistic for a given parameter estimate.
+        """
+        return self.params / self.bse
+
+
+    def cov_params(self, r_matrix=None, column=None, scale=None, cov_p=None,
+            other=None):
+        """
+        Returns the variance/covariance matrix.
+
+----------------------
+
+class ARResults(tsbase.TimeSeriesModelResults):
+
+    bse : array
+        The standard errors of the estimated parameters. If `method` is 'cmle',
+        then the standard errors that are returned are the OLS standard errors
+        of the coefficients. If the `method` is 'mle' then they are computed
+        using the numerical Hessian.
+    k_ar : float
+        Lag length. Sometimes used as `p` in the docs.
+    k_trend : float
+        The number of trend terms included. 'nc'=0, 'c'=1.
+
+
+    def bse(self):  # allow user to specify?
+        if self.model.method == "cmle":  # uses different scale/sigma def.
+            resid = self.resid
+            ssr = np.dot(resid, resid)
+            ols_scale = ssr / (self.nobs - self.k_ar - self.k_trend)
+            return np.sqrt(np.diag(self.cov_params(scale=ols_scale)))
+        else:
+            hess = approx_hess(self.params, self.model.loglike)
+            return np.sqrt(np.diag(-np.linalg.inv(hess))
+
+------------------------------------
+class LikelihoodModelResults(Results):
+
+def cov_params(self, r_matrix=None, column=None, scale=None, cov_p=None,
+               other=None):
+....
+if cov_p is None:
+    if hasattr(self, 'cov_params_default'):
+        cov_p = self.cov_params_default
+    else:
+        if scale is None:
+            scale = self.scale
+        cov_p = self.normalized_cov_params * scale
+
+------------------------------------
+class LikelihoodModelResults(Results):
+    Parameters
+    -----------
+    normalized_cov_params : 2d array
+       Normalized (before scaling) covariance of params. (dot(X.T,X))**-1
+
+-----------------------------------------------------------------------------------------------------------
+###########################################################################################################
+#                                                                                                         #
+###########################################################################################################
+
+In [55]: print_adfuller_results(adfuller(x=y, maxlag=1, regression='nc', autolag=None, regresults=True))
+================== ADF results ==================
+    adf.adf=-1.1106225186
+    adf.crit_vals={'5%': -1.966170703125, '1%': -2.9018868749999998, '10%': -1.5764871874999999}
+    adf.pvalue=0.241887059744
+================== REGRESSION results ==================
+
+C:\Apps\Anaconda2\envs\simpleQT\lib\site-packages\scipy\stats\stats.py:1535: UserWarning: kurtosistest only valid for n>
+=20 ... continuing anyway, n=8
+  "anyway, n=%i" % int(n))
+                            OLS Regression Results
+==============================================================================
+Dep. Variable:                      y   R-squared:                       0.174
+Model:                            OLS   Adj. R-squared:                 -0.101
+Method:                 Least Squares   F-statistic:                    0.6330
+Date:                Fri, 15 Jul 2016   Prob (F-statistic):              0.563
+Time:                        18:38:17   Log-Likelihood:               -0.93915
+No. Observations:                   8   AIC:                             5.878
+Df Residuals:                       6   BIC:                             6.037
+Df Model:                           2
+Covariance Type:            nonrobust
+==============================================================================
+                 coef    std err          t      P>|t|      [95.0% Conf. Int.]
+------------------------------------------------------------------------------
+x1            -0.0028      0.002     -1.111      0.309        -0.009     0.003
+x2            -0.2022      0.326     -0.620      0.558        -1.000     0.596
+==============================================================================
+Omnibus:                       14.806   Durbin-Watson:                   2.167
+Prob(Omnibus):                  0.001   Jarque-Bera (JB):                5.422
+Skew:                          -1.752   Prob(JB):                       0.0665
+Kurtosis:                       4.997   Cond. No.                         143.
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+    resstore.maxlag=1
+    resstore.usedlag=1
+    resstore.adfstat=-1.1106225186
+    resstore.critvalues={'5%': -1.966170703125, '1%': -2.9018868749999998, '10%': -1.5764871874999999}
+    resstore.nobs=8
+    resstore.icbest =None

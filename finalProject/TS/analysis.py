@@ -54,13 +54,18 @@ Y_t3 = pd.Series(Y_t3, name='Y_t3')
 # CQF_January_2016_M4S11_Annotated.pdf
 # http://statsmodels.sourceforge.net/stable/_modules/statsmodels/tsa/ar_model.html#AR
 
-
-sys.exit()
-
 from statsmodels.tsa.tsatools import (lagmat, add_trend)
 # from statsmodels.regression.linear_model import OLS
 from statsmodels.tsa.ar_model import AR
 
+
+def dof_resid(exog=None, nobs=None, my_dof=None):
+    if my_dof is None:
+        rank = np.ndim(exog)
+        dof = nobs - rank
+    else:
+        dof = my_dof
+    return dof
 
 def my_OLS(Y, X, dof=None):
     """
@@ -69,6 +74,8 @@ def my_OLS(Y, X, dof=None):
     :param X: exogenous (independent) variables
     :param dof: degrees of freedom
     :return: dictionary with regression results
+
+    See ref: http://statsmodels.sourceforge.net/devel/_modules/statsmodels/regression/linear_model.html#OLS
     """
 
     # Get estimates for beta coefficients using result beta_hat = [(X'X)^-1]X'Y
@@ -87,8 +94,12 @@ def my_OLS(Y, X, dof=None):
     # See ref above or p.29 in  for more info
 
     nobs = len(resid_hat)  # number of observations
+
+    # The residual degree of freedom, defined as the number of observations minus the rank of the regressor matrix
     if dof is None:  # if degrees of freedom not specified, then set to number of observations in resid_hat
-        dof = nobs
+        dof = dof_resid(exog=X, nobs=nobs)
+    else:
+        dof = dof_resid(my_dof=dof)
 
     ssr = np.dot(resid_hat, resid_hat.T)  # ee' term
     ols_scale = ssr / dof  # ee' term must be scaled by dof to obtain unbiased estimate
@@ -119,6 +130,8 @@ def my_AR(endog, maxlag, trend=None):
     :param maxlag: maximum number of lags to use
     :param trend: 'c': add constant, 'nc' or None: no constant
     :return: my_OLS dictionary
+
+    See ref: http://statsmodels.sourceforge.net/stable/_modules/statsmodels/tsa/ar_model.html#AR
     """
     # Dependent data matrix
     Y = endog[maxlag:]  # has observations for the fit p lags removed
@@ -131,19 +144,49 @@ def my_AR(endog, maxlag, trend=None):
     nobs = len(resid_hat)  # number of observations
     k_ar = maxlag  # number of lags used, which affects number of observations
     k_trend = 0  # the number of trend terms included 'nc'=0, 'c'=1
-    dof = nobs - k_ar - k_trend  # degrees of freedom
+    dof_AR = nobs - k_ar - k_trend  # degrees of freedom
 
-    return my_OLS(Y, X, dof=dof)
+    return my_OLS(Y, X, dof=dof_AR)
 
 
 # =================   ADF TEST   =================
+y = Y_t1.head(10)
+maxlag = 1
 
+y = np.asarray(y)
+# nobs = y.shape[0]
+ydiff = np.diff(y)  # get the differences (dY_t)
 
+ydall = lagmat(ydiff[:, None], maxlag, trim='both', original='in')  # get the diff lags specified (dY_t-k terms)
+nobs = ydall.shape[0]  # number of observations
+ydall[:, 0] = y[-nobs - 1:-1]  # replace 0 ydiff with level of y
+
+ydshort = ydiff[-nobs:]
+
+Y = ydshort
+X = ydall[:, :maxlag + 1]
+
+k_ar = maxlag
+k_trend = 1
+# dof = nobs - k_ar - k_trend  # degrees of freedom
+my_result = my_OLS(Y, X)
+
+from statsmodels.tsa.stattools import adfuller
+py_result = adfuller(x=y, maxlag=1, regression='nc', autolag=None, regresults=True)
+
+sys.exit()
+
+print py_result[3].resols.bse
+s = py_result[3].resols.scale  # the scale used in the cov_params function
+# my_OLS(Y, X, dof=6) == py_result[3].resols.cov_params() == py_result[3].resols.cov_params(scale=s)
+# py_result[3].resols.scale should be == my_result['ols_scale']
 
 # =================   COMPARE MY AR(p) VS STATSMODELS   =================
 
 endog = Y_t1.head(10)
-my_result = my_AR(endog=endog, maxlag=3)
+maxlag = 3
+
+my_result = my_AR(endog=endog, maxlag=maxlag)
 
 # Compare to statsmodels AR(p) model using 'cmle' (conditional maximum likelihood estimation (default method)
 fit = AR(np.array(endog)).fit(maxlag=maxlag, trend='nc')  # use only specified lags and remove constant from models
