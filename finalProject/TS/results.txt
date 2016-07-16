@@ -3,6 +3,7 @@ OLS(...).fit()
 class OLS(WLS):
 	...
 
+
 class WLS(RegressionModel):
 	...
 
@@ -24,18 +25,12 @@ class RegressionModel(base.LikelihoodModel):
 class OLSResults(RegressionResults):
 ...
 ..
-
-
-http://statsmodels.sourceforge.net/0.6.0/_modules/statsmodels/base/model.html#LikelihoodModelResults
-
     bse : array
         The standard errors of the coefficients.
 
-    @cache_readonly
 [docs]    def bse(self):
         return np.sqrt(np.diag(self.cov_params()))
 
-    @cache_readonly
 [docs]    def tvalues(self):
         """
         Return the t-statistic for a given parameter estimate.
@@ -73,8 +68,17 @@ class ARResults(tsbase.TimeSeriesModelResults):
             hess = approx_hess(self.params, self.model.loglike)
             return np.sqrt(np.diag(-np.linalg.inv(hess))
 
+    def fit(self, maxlag=None, method='cmle', ic=None, trend='c',
+            transparams=True, start_params=None, solver='lbfgs', maxiter=35,
+            full_output=1, disp=1, callback=None, **kwargs):
+
 ------------------------------------
 class LikelihoodModelResults(Results):
+
+    Parameters
+    -----------
+    normalized_cov_params : 2d array
+       Normalized (before scaling) covariance of params. (dot(X.T,X))**-1
 
 def cov_params(self, r_matrix=None, column=None, scale=None, cov_p=None,
                other=None):
@@ -88,11 +92,225 @@ if cov_p is None:
         cov_p = self.normalized_cov_params * scale
 
 ------------------------------------
+
+class RegressionResults(base.LikelihoodModelResults):
+...
+    def df_resid(self):
+        """
+        The residual degree of freedom, defined as the number of observations
+        minus the rank of the regressor matrix.
+        """
+
+        if self._df_resid is None:
+            if self.rank is None:
+                self.rank = np_matrix_rank(self.exog)
+            self._df_resid = self.nobs - self.rank
+        return self._df_resid
+
+
+    def scale(self):  # --> default scale used if not specified inside self.cov_params(scale=None) argument
+        wresid = self.wresid
+        return np.dot(wresid, wresid) / self.df_resid
+
+------------------------------------
+
+def adfuller(x, maxlag=None, regression="c", autolag='AIC',
+             store=False, regresults=False):
+    '''
+
+    # Get approx p-value and critical values
+    pvalue = mackinnonp(adfstat, regression=regression, N=1)
+    critvalues = mackinnoncrit(N=1, regression=regression, nobs=nobs)
+    critvalues = {"1%" : critvalues[0], "5%" : critvalues[1],
+                  "10%" : critvalues[2]}
+
+def mackinnoncrit(N=1, regression ="c", nobs=inf):
+...
+	    reg : str {'c', 'tc', 'ctt', 'nc'}
+        	Following MacKinnon (1996), these stand for the type of regression run.
+	        'c' for constant and no trend, 'tc' for constant with a linear trend,
+        	'ctt' for constant with a linear and quadratic trend, and 'nc' for
+	        no constant.
+
+	return polyval(eval("tau_"+reg+"_2010["+str(N-1)+",:,::-1].T"),1./nobs)
+
+
+See: https://github.com/statsmodels/statsmodels/blob/master/statsmodels/tsa/adfvalues.py
+
+for critical values of ADF
+
+--------------------------------------
+
+Optimal lag:
+
+def adfuller(x, maxlag=None, regression="c", autolag='AIC',
+             store=False, regresults=False):
+
+    autolag : {'AIC', 'BIC', 't-stat', None}
+        * if None, then maxlag lags are used
+        * if 'AIC' (default) or 'BIC', then the number of lags is chosen
+          to minimize the corresponding information criterium
+        * 't-stat' based choice of maxlag.  Starts with maxlag and drops a
+          lag until the t-statistic on the last lag length is significant at
+          the 95 % level.
+	#aic and bic: smaller is better
+
+
+
+def _autolag(mod, endog, exog, startlag, maxlag, method, modargs=(),
+             fitargs=(), regresults=False):
+    """
+    Returns the results for the lag length that maximimizes the info criterion.
+
+    results = {}
+    method = method.lower()
+    for lag in range(startlag, startlag + maxlag + 1):
+        mod_instance = mod(endog, exog[:, :lag], *modargs)
+        results[lag] = mod_instance.fit()
+
+    if method == "aic":
+        icbest, bestlag = min((v.aic, k) for k, v in iteritems(results))
+....
+
+
+class RegressionResults(base.LikelihoodModelResults):
+    """
+    This class summarizes the fit of a linear regression model.
+
+    def aic(self):
+        return -2 * self.llf + 2 * (self.df_model + self.k_constant)
+
+.....
+
+
+class RegressionModel(base.LikelihoodModel):
+    """
+    Base class for linear regression models. Should not be directly called.
+
+    def df_model(self):
+        """
+        The model degree of freedom, defined as the rank of the regressor
+        matrix minus 1 if a constant is included.
+        """
+        if self._df_model is None:
+            if self.rank is None:
+                self.rank = np_matrix_rank(self.exog)
+            self._df_model = float(self.rank - self.k_constant)
+        return self._df_model
+
+....
+
 class LikelihoodModelResults(Results):
-    Parameters
-    -----------
-    normalized_cov_params : 2d array
-       Normalized (before scaling) covariance of params. (dot(X.T,X))**-1
+    """
+    Class to contain results from likelihood models
+
+    def llf(self):
+        return self.model.loglike(self.params)
+
+
+class OLS(WLS):
+    __doc__ = """
+    A simple ordinary least squares model.
+...
+
+    def loglike(self, params):
+        """
+        The likelihood function for the clasical OLS model.
+
+        Parameters
+        ----------
+        params : array-like
+            The coefficients with which to estimate the log-likelihood.
+
+        Returns
+        -------
+        The concentrated likelihood function evaluated at params.
+        """
+        nobs2 = self.nobs / 2.0
+        return -nobs2*np.log(2*np.pi)-nobs2*np.log(1/(2*nobs2) *\
+                np.dot(np.transpose(self.endog -
+                    np.dot(self.exog, params)),
+                    (self.endog - np.dot(self.exog,params)))) -\
+                    nobs2
+
+------------------------------------------
+
+Lags
+
+
+
+def _autolag(mod, endog, exog, startlag, maxlag, method, modargs=(),
+             fitargs=(), regresults=False):
+    """
+    Returns the results for the lag length that maximimizes the info criterion.
+
+    results = {}
+    method = method.lower()
+    for lag in range(startlag, startlag + maxlag + 1):
+        mod_instance = mod(endog, exog[:, :lag], *modargs)
+        results[lag] = mod_instance.fit()
+
+    if method == "aic":
+        icbest, bestlag = min((v.aic, k) for k, v in iteritems(results))
+
+...
+
+    if not regresults:
+        return icbest, bestlag
+    else:
+        return icbest, bestlag, results
+
+
+
+def adfuller(x, maxlag=None, regression="c", autolag='AIC',
+             store=False, regresults=False):
+
+...
+
+    xdiff = np.diff(x)
+    xdall = lagmat(xdiff[:, None], maxlag, trim='both', original='in')
+    nobs = xdall.shape[0]  # pylint: disable=E1103
+
+    xdall[:, 0] = x[-nobs - 1:-1]  # replace 0 xdiff with level of x
+    xdshort = xdiff[-nobs:]
+
+....
+
+    if autolag:
+        if regression != 'nc':
+            fullRHS = add_trend(xdall, regression, prepend=True)
+        else:
+            fullRHS = xdall
+        startlag = fullRHS.shape[1] - xdall.shape[1] + 1
+        #search for lag length with smallest information criteria
+        #Note: use the same number of observations to have comparable IC
+        #aic and bic: smaller is better
+
+        if not regresults:
+            icbest, bestlag = _autolag(OLS, xdshort, fullRHS, startlag,
+                                       maxlag, autolag)
+        else:
+            icbest, bestlag, alres = _autolag(OLS, xdshort, fullRHS, startlag,
+                                              maxlag, autolag,
+                                              regresults=regresults)
+            resstore.autolag_results = alres
+
+        bestlag -= startlag  # convert to lag not column index
+
+        #rerun ols with best autolag
+        xdall = lagmat(xdiff[:, None], bestlag, trim='both', original='in')
+        nobs = xdall.shape[0]   # pylint: disable=E1103
+        xdall[:, 0] = x[-nobs - 1:-1]  # replace 0 xdiff with level of x
+        xdshort = xdiff[-nobs:]
+        usedlag = bestlag
+    else:
+        usedlag = maxlag
+        icbest = None
+    if regression != 'nc':
+        resols = OLS(xdshort, add_trend(xdall[:, :usedlag + 1],
+                     regression)).fit()
+    else:
+        resols = OLS(xdshort, xdall[:, :usedlag + 1]).fit()
 
 -----------------------------------------------------------------------------------------------------------
 ###########################################################################################################
@@ -141,3 +359,445 @@ Warnings:
     resstore.critvalues={'5%': -1.966170703125, '1%': -2.9018868749999998, '10%': -1.5764871874999999}
     resstore.nobs=8
     resstore.icbest =None
+
+
+############################################################################################################
+
+my_result = my_adfuller(y, maxlag=1)
+
+In [2]: my_result
+Out[2]:
+{'adfstat': -1.1106225185995267,
+ 'beta_hat': array([-0.002774  , -0.20220192]),
+ 'bse': array([ 0.0024977 ,  0.32607286]),
+ 'cov_params': array([[  6.23850198e-06,   3.34208883e-04],
+        [  3.34208883e-04,   1.06323511e-01]]),
+ 'df_resid': 6.0,
+ 'nobs': 8,
+ 'ols_scale': 0.09872593005916569,
+ 'resid_hat': array([ 0.13821574,  0.10922128, -0.05860862,  0.28979393,  0.07489891,
+         0.06484151, -0.67933893,  0.05090742]),
+ 'ssr': 0.59235558035499414,
+ 'tvalue': array([-1.11062252, -0.6201127 ])}
+
+from statsmodels.tsa.stattools import adfuller
+py_result = adfuller(x=y, maxlag=1, regression='nc', autolag=None, regresults=True)
+
+
+In [4]: py_result[3].resols.summary()
+C:\Apps\Anaconda2\envs\simpleQT\lib\site-packages\scipy\stats\stats.py:1535: UserWarning: kurtosistest only valid for n
+>=20 ... continuing anyway, n=8
+  "anyway, n=%i" % int(n))
+Out[4]:
+<class 'statsmodels.iolib.summary.Summary'>
+"""
+                            OLS Regression Results
+==============================================================================
+Dep. Variable:                      y   R-squared:                       0.174
+Model:                            OLS   Adj. R-squared:                 -0.101
+Method:                 Least Squares   F-statistic:                    0.6330
+Date:                Sat, 16 Jul 2016   Prob (F-statistic):              0.563
+Time:                        15:45:53   Log-Likelihood:               -0.93915
+No. Observations:                   8   AIC:                             5.878
+Df Residuals:                       6   BIC:                             6.037
+Df Model:                           2
+Covariance Type:            nonrobust
+==============================================================================
+                 coef    std err          t      P>|t|      [95.0% Conf. Int.]
+------------------------------------------------------------------------------
+x1            -0.0028      0.002     -1.111      0.309        -0.009     0.003
+x2            -0.2022      0.326     -0.620      0.558        -1.000     0.596
+==============================================================================
+Omnibus:                       14.806   Durbin-Watson:                   2.167
+Prob(Omnibus):                  0.001   Jarque-Bera (JB):                5.422
+Skew:                          -1.752   Prob(JB):                       0.0665
+Kurtosis:                       4.997   Cond. No.                         143.
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+"""
+####################################
+
+(-326.63503772038428, 4)
+
+py_result = adfuller(x=y, maxlag=7, regression='nc', autolag='AIC', regresults=True)
+In [90]: py_result[3].usedlag
+Out[90]: 1L
+In [91]: py_result[3].icbest
+Out[91]: -141.43033122924939
+
+###########============================================================================================
+
+lag=1
+
+In [22]: py_result[3].resols.aic
+Out[22]: 5.8782987424753586
+
+In [23]: py_result[3].resols.llf
+Out[23]: -0.93914937123767928
+
+In [24]: x['aic']
+Out[24]: 5.8782987424753586
+
+In [25]: x['llf']
+Out[25]: -0.93914937123767928
+
+lag=2
+
+In [2]: py_result = adfuller(x=y, maxlag=lag, regression='nc', autolag=None, regresults=True)
+
+In [3]: x = my_adfuller(y, maxlag=lag)
+
+In [4]: py_result[3].resols.aic
+Out[4]: 7.557313802879861
+
+In [5]: py_result[3].resols.llf
+Out[5]: -0.77865690143993049
+
+In [6]: x['aic']
+Out[6]: 7.557313802879861
+
+In [7]: x['llf']
+Out[7]: -0.77865690143993049
+
+lag=3
+
+In [2]: py_result = adfuller(x=y, maxlag=lag, regression='nc', autolag=None, regresults=True)
+
+In [3]: x = my_adfuller(y, maxlag=lag)
+
+In [4]: py_result[3].resols.aic
+Out[4]: 9.1786034636386997
+
+In [5]: py_result[3].resols.llf
+Out[5]: -0.58930173181934986
+
+In [6]: x['aic']
+Out[6]: 9.1786034636386997
+
+In [7]: x['llf']
+Out[7]: -0.58930173181934986
+
+
+In [37]: [(v['aic'], k) for k, v in results.iteritems()]
+Out[37]:
+[(7.2308967346625259, 0),
+ (5.8782987424753586, 1),
+ (7.557313802879861, 2),
+ (9.1786034636386997, 3)]
+
+
+ ###########################################################################################
+
+
+ In [23]: py_result = adfuller(x=y, maxlag=0, regression='nc', autolag='AIC', regresults=True)
+
+In [24]: get_optimal_lag(y, maxlag=0)
+lag= 0
+Out[24]: (7.2308967346625259, 0)
+
+In [25]: py_result[3].icbest
+Out[25]: 7.2308967346625259
+
+In [26]: py_result[3].usedlag
+Out[26]: 0L
+
+In [27]: py_result = adfuller(x=y, maxlag=1, regression='nc', autolag='AIC', regresults=True)
+
+In [28]: py_result[3].usedlag
+Out[28]: 0L
+
+In [29]: py_result[3].icbest
+Out[29]: 4.3752582277710204   ---> why does the icbest change if the usedlag is still zero!?!?
+
+I believe there is a problem with this line in statstools:
+
+def adfuller(x, maxlag=None, regression="c", autolag='AIC',
+             store=False, regresults=False):
+...
+            icbest, bestlag, alres = _autolag(OLS, xdshort, fullRHS, startlag,
+                                              maxlag, autolag,
+                                              regresults=regresults)
+
+with xdshort. This stays constant in the function _autolag, regardless of the loop lag, and then inside _autolag,
+there's a loop, which considers the lag number before the OLS fit:
+
+def _autolag(mod, endog, exog, startlag, maxlag, method, modargs=(),
+             fitargs=(), regresults=False):
+...
+    for lag in range(startlag, startlag + maxlag + 1):
+        mod_instance = mod(endog, exog[:, :lag], *modargs)
+        results[lag] = mod_instance.fit()
+
+Note in the above endog=xdshort and exog=fullRHS. While exog[:, :lag] changes with lag, endog does not - could this be
+the reason for the discrepancy?
+Also note that in the definition of xdshort in adfuller, you get a dependency on nobs, which in turns depend on xdall,
+which depends on maxlag:
+
+def adfuller(x, maxlag=None, regression="c", autolag='AIC',
+             store=False, regresults=False):
+...
+    xdall = lagmat(xdiff[:, None], maxlag, trim='both', original='in')
+    nobs = xdall.shape[0]  # pylint: disable=E1103
+
+    xdall[:, 0] = x[-nobs - 1:-1]  # replace 0 xdiff with level of x
+    xdshort = xdiff[-nobs:]
+
+===============================================================================================
+
+In [123]: get_optimal_lag(Y_t1, maxlag=4)
+lag=0, aic=523.021966669, py_aic=523.021966669
+lag=0, llf=-260.510983335, py_llf=-260.510983335
+lag=1, aic=520.933746228, py_aic=520.933746228
+lag=1, llf=-258.466873114, py_llf=-258.466873114
+lag=2, aic=521.479976064, py_aic=521.479976064
+lag=2, llf=-257.739988032, py_llf=-257.739988032
+lag=3, aic=522.187438204, py_aic=522.187438204
+lag=3, llf=-257.093719102, py_llf=-257.093719102
+lag=4, aic=524.042902294, py_aic=524.042902294
+lag=4, llf=-257.021451147, py_llf=-257.021451147
+Out[123]: (520.93374622812917, 1)
+
+In [124]: py_result = adfuller(x=y, maxlag=4, regression='nc', autolag='AIC', regresults=True)
+
+In [125]: py_result = adfuller(x=Y_t1, maxlag=4, regression='nc', autolag='AIC', regresults=True)
+
+In [126]: py_result[3].usedlag
+Out[126]: 1L
+
+In [127]: py_result[3].icbest
+Out[127]: 521.64097245661173
+
+In [128]: py_result = adfuller(x=Y_t1, maxlag=6, regression='nc', autolag='AIC', regresults=True)
+
+In [129]: py_result[3].usedlag
+Out[129]: 1L
+
+In [130]: py_result[3].icbest
+Out[130]: 522.10139240340686
+
+In [131]: py_result = adfuller(x=Y_t1, maxlag=10, regression='nc', autolag='AIC', regresults=True)
+
+In [132]: py_result[3].usedlag
+Out[132]: 1L
+
+In [133]: py_result[3].icbest
+Out[133]: 515.3823124274611
+
+###################################################################################################
+
+In [148]: get_optimal_lag(Y_t2, maxlag=20)
+Out[148]: (426.31405284313632, 12)
+
+In [147]: r = adfuller(x=Y_t2, maxlag=20, regression='nc', autolag='AIC', regresults=True)[3]
+
+In [149]: r.icbest
+Out[149]: 418.26890525448516
+
+In [150]: r.usedlag
+Out[150]: 10L
+
+In [151]: r.resols.aic
+Out[151]: 427.3263727090341
+
+
+In [153]: r.resols.summary()
+Out[153]:
+<class 'statsmodels.iolib.summary.Summary'>
+"""
+                            OLS Regression Results
+==============================================================================
+Dep. Variable:                      y   R-squared:                       0.077
+Model:                            OLS   Adj. R-squared:                  0.067
+Method:                 Least Squares   F-statistic:                     7.428
+Date:                Sat, 16 Jul 2016   Prob (F-statistic):           2.48e-12
+Time:                        21:10:32   Log-Likelihood:                -202.66
+No. Observations:                 990   AIC:                             427.3
+Df Residuals:                     979   BIC:                             481.2
+Df Model:                          11
+Covariance Type:            nonrobust
+==============================================================================
+                 coef    std err          t      P>|t|      [95.0% Conf. Int.]
+------------------------------------------------------------------------------
+x1            -0.0032      0.001     -4.407      0.000        -0.005    -0.002
+x2             0.0159      0.032      0.500      0.617        -0.046     0.078
+x3            -0.0282      0.032     -0.888      0.375        -0.090     0.034
+x4            -0.0254      0.032     -0.804      0.422        -0.087     0.037
+x5             0.0408      0.032      1.292      0.197        -0.021     0.103
+x6             0.0674      0.032      2.132      0.033         0.005     0.129
+x7             0.0117      0.032      0.371      0.710        -0.050     0.074
+x8            -0.0060      0.032     -0.189      0.850        -0.068     0.056
+x9             0.0526      0.032      1.666      0.096        -0.009     0.115
+x10            0.0521      0.032      1.645      0.100        -0.010     0.114
+x11            0.1009      0.032      3.187      0.001         0.039     0.163
+==============================================================================
+Omnibus:                        0.199   Durbin-Watson:                   2.001
+Prob(Omnibus):                  0.905   Jarque-Bera (JB):                0.114
+Skew:                          -0.003   Prob(JB):                        0.945
+Kurtosis:                       3.052   Cond. No.                         55.9
+==============================================================================
+
+#######################################
+
+
+In [178]: get_optimal_lag(Y_t3, maxlag=40)
+lag=0, aic=443.867422943, py_aic=443.867422943
+lag=1, aic=444.884356877, py_aic=444.884356877
+lag=2, aic=446.228554754, py_aic=446.228554754
+lag=3, aic=441.046747661, py_aic=441.046747661
+lag=4, aic=440.539838509, py_aic=440.539838509
+lag=5, aic=435.948324444, py_aic=435.948324444
+lag=6, aic=431.694624001, py_aic=431.694624001
+lag=7, aic=422.390683605, py_aic=422.390683605
+lag=8, aic=413.485978182, py_aic=413.485978182
+lag=9, aic=412.224661754, py_aic=412.224661754
+lag=10, aic=410.624206135, py_aic=410.624206135
+lag=11, aic=407.430796067, py_aic=407.430796067
+lag=12, aic=407.530926395, py_aic=407.530926395
+lag=13, aic=400.137562827, py_aic=400.137562827
+lag=14, aic=402.742314967, py_aic=402.742314967
+lag=15, aic=402.324618427, py_aic=402.324618427
+lag=16, aic=397.507924301, py_aic=397.507924301
+lag=17, aic=388.886504358, py_aic=388.886504358
+lag=18, aic=386.725833405, py_aic=386.725833405
+lag=19, aic=387.696282901, py_aic=387.696282901
+lag=20, aic=385.393916379, py_aic=385.393916379
+lag=21, aic=387.85940448, py_aic=387.85940448
+lag=22, aic=390.46420666, py_aic=390.46420666
+lag=23, aic=389.032943902, py_aic=389.032943902
+lag=24, aic=387.175924208, py_aic=387.175924208
+lag=25, aic=385.716407843, py_aic=385.716407843
+lag=26, aic=385.097539003, py_aic=385.097539003
+lag=27, aic=385.165415827, py_aic=385.165415827
+lag=28, aic=372.575537863, py_aic=372.575537863
+lag=29, aic=374.454145777, py_aic=374.454145777
+lag=30, aic=375.318568477, py_aic=375.318568477
+lag=31, aic=377.356601146, py_aic=377.356601146
+lag=32, aic=379.870635528, py_aic=379.870635528
+lag=33, aic=382.222724606, py_aic=382.222724606
+lag=34, aic=382.627890218, py_aic=382.627890218
+lag=35, aic=385.101408587, py_aic=385.101408587
+lag=36, aic=384.205178376, py_aic=384.205178376
+lag=37, aic=383.658412462, py_aic=383.658412462
+lag=38, aic=385.717187173, py_aic=385.717187173
+lag=39, aic=387.319743989, py_aic=387.319743989
+lag=40, aic=381.569057775, py_aic=381.569057775
+Out[178]: (372.57553786323047, 28)
+
+In [179]: r = adfuller(x=Y_t3, maxlag=40, regression='nc', autolag='AIC', regresults=True)[3]
+
+In [180]: r.usedlag
+Out[180]: 6L
+
+In [181]: r.icbest
+Out[181]: 360.90011264464215
+
+In [182]: r.resols.sum
+r.resols.summary  r.resols.summary2
+
+In [182]: r.resols.summary()
+Out[182]:
+<class 'statsmodels.iolib.summary.Summary'>
+"""
+                            OLS Regression Results
+==============================================================================
+Dep. Variable:                      y   R-squared:                       0.003
+Model:                            OLS   Adj. R-squared:                 -0.004
+Method:                 Least Squares   F-statistic:                    0.4773
+Date:                Sat, 16 Jul 2016   Prob (F-statistic):              0.851
+Time:                        21:20:12   Log-Likelihood:                -208.85
+No. Observations:                 994   AIC:                             431.7
+Df Residuals:                     987   BIC:                             466.0
+Df Model:                           7
+Covariance Type:            nonrobust
+==============================================================================
+                 coef    std err          t      P>|t|      [95.0% Conf. Int.]
+------------------------------------------------------------------------------
+x1         -4.888e-05      0.001     -0.052      0.959        -0.002     0.002
+x2            -0.0123      0.032     -0.387      0.699        -0.075     0.050
+x3             0.0048      0.032      0.151      0.880        -0.057     0.067
+x4             0.0325      0.032      1.027      0.305        -0.030     0.095
+x5             0.0062      0.032      0.197      0.844        -0.056     0.068
+x6            -0.0398      0.032     -1.263      0.207        -0.102     0.022
+x7            -0.0245      0.032     -0.776      0.438        -0.086     0.037
+==============================================================================
+Omnibus:                        2.226   Durbin-Watson:                   2.002
+Prob(Omnibus):                  0.329   Jarque-Bera (JB):                2.200
+Skew:                          -0.052   Prob(JB):                        0.333
+Kurtosis:                       3.206   Cond. No.                         34.7
+==============================================================================
+
+
+
+In [183]: r = adfuller(x=Y_t2, maxlag=40, regression='nc', autolag='AIC', regresults=True)[3]
+
+In [184]: r.usedlag
+Out[184]: 10L
+
+In [185]: r.icbest
+Out[185]: 410.7924008839384
+
+In [186]: r.resols.summary()
+Out[186]:
+<class 'statsmodels.iolib.summary.Summary'>
+"""
+                            OLS Regression Results
+==============================================================================
+Dep. Variable:                      y   R-squared:                       0.077
+Model:                            OLS   Adj. R-squared:                  0.067
+Method:                 Least Squares   F-statistic:                     7.428
+Date:                Sat, 16 Jul 2016   Prob (F-statistic):           2.48e-12
+Time:                        21:21:56   Log-Likelihood:                -202.66
+No. Observations:                 990   AIC:                             427.3
+Df Residuals:                     979   BIC:                             481.2
+Df Model:                          11
+Covariance Type:            nonrobust
+==============================================================================
+                 coef    std err          t      P>|t|      [95.0% Conf. Int.]
+------------------------------------------------------------------------------
+x1            -0.0032      0.001     -4.407      0.000        -0.005    -0.002
+x2             0.0159      0.032      0.500      0.617        -0.046     0.078
+x3            -0.0282      0.032     -0.888      0.375        -0.090     0.034
+x4            -0.0254      0.032     -0.804      0.422        -0.087     0.037
+x5             0.0408      0.032      1.292      0.197        -0.021     0.103
+x6             0.0674      0.032      2.132      0.033         0.005     0.129
+x7             0.0117      0.032      0.371      0.710        -0.050     0.074
+x8            -0.0060      0.032     -0.189      0.850        -0.068     0.056
+x9             0.0526      0.032      1.666      0.096        -0.009     0.115
+x10            0.0521      0.032      1.645      0.100        -0.010     0.114
+x11            0.1009      0.032      3.187      0.001         0.039     0.163
+==============================================================================
+Omnibus:                        0.199   Durbin-Watson:                   2.001
+Prob(Omnibus):                  0.905   Jarque-Bera (JB):                0.114
+Skew:                          -0.003   Prob(JB):                        0.945
+Kurtosis:                       3.052   Cond. No.                         55.9
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+"""
+
+In [187]: get_optimal_lag(Y_t2, maxlag=20)
+lag=0, aic=445.740418618, py_aic=445.740418618
+lag=1, aic=445.316781705, py_aic=445.316781705
+lag=2, aic=447.408539945, py_aic=447.408539945
+lag=3, aic=448.149072938, py_aic=448.149072938
+lag=4, aic=447.196611277, py_aic=447.196611277
+lag=5, aic=442.258422806, py_aic=442.258422806
+lag=6, aic=444.429501352, py_aic=444.429501352
+lag=7, aic=441.977760833, py_aic=441.977760833
+lag=8, aic=436.523464217, py_aic=436.523464217
+lag=9, aic=434.964969387, py_aic=434.964969387
+lag=10, aic=427.326372709, py_aic=427.326372709
+lag=11, aic=429.719554909, py_aic=429.719554909
+lag=12, aic=426.314052843, py_aic=426.314052843
+lag=13, aic=428.773780504, py_aic=428.773780504
+lag=14, aic=429.375470939, py_aic=429.375470939
+lag=15, aic=431.801330408, py_aic=431.801330408
+lag=16, aic=433.499949211, py_aic=433.499949211
+lag=17, aic=427.383654565, py_aic=427.383654565
+lag=18, aic=429.518584133, py_aic=429.518584133
+lag=19, aic=430.235022901, py_aic=430.235022901
+lag=20, aic=432.57655714, py_aic=432.57655714
+Out[187]: (426.31405284313632, 12)
