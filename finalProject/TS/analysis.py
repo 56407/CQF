@@ -42,7 +42,6 @@ for i in xrange(1, M + 1, 1):
     Y_t2[i] = Y_t2[i-1] + theta2 * (mu - Y_t2[i-1]) * dt + sigma * math.sqrt(dt) * np.random.normal(0, 1)
     Y_t3[i] = Y_t3[i-1] + theta3 * (mu - Y_t3[i-1]) * dt + sigma * math.sqrt(dt) * np.random.normal(0, 1)
 
-# Y_t = pd.Series(index=range(M), data=Y_t)
 Y_t1 = pd.Series(Y_t1, name='Y_t1')
 Y_t2 = pd.Series(Y_t2, name='Y_t2')
 Y_t3 = pd.Series(Y_t3, name='Y_t3')
@@ -54,15 +53,22 @@ Y_t3 = pd.Series(Y_t3, name='Y_t3')
 # CQF_January_2016_M4S11_Annotated.pdf
 # http://statsmodels.sourceforge.net/stable/_modules/statsmodels/tsa/ar_model.html#AR
 
-from statsmodels.tsa.tsatools import (lagmat, add_trend)
-# from statsmodels.regression.linear_model import OLS
-from statsmodels.tsa.ar_model import AR
+from statsmodels.tsa.tsatools import (lagmat, add_trend)  # helper functions to add lags and trends
 
 
-def dof_resid(exog=None, nobs=None, my_dof=None):
+def dof_resid(exog=None, my_dof=None):
+    """
+    Function to get degrees of freedom to calculate the scale of the OLS covariance matrix (see below)
+    :param exog: exogenous variable used to get its dimension
+    :param nobs: number of observations used to estimate parameters
+    :param my_dof: if already know the dof, can also plug instead of using default
+    :return:
+    """
     if my_dof is None:
-        rank = np.ndim(exog)
-        dof = nobs - rank
+        # rank = np.ndim(exog)
+        nobs = exog.shape[0]
+        rank = exog.shape[1]
+        dof = np.float(nobs - rank)
     else:
         dof = my_dof
     return dof
@@ -97,7 +103,7 @@ def my_OLS(Y, X, dof=None):
 
     # The residual degree of freedom, defined as the number of observations minus the rank of the regressor matrix
     if dof is None:  # if degrees of freedom not specified, then set to number of observations in resid_hat
-        dof = dof_resid(exog=X, nobs=nobs)
+        dof = dof_resid(exog=X)
     else:
         dof = dof_resid(my_dof=dof)
 
@@ -141,7 +147,7 @@ def my_AR(endog, maxlag, trend=None):
         X = add_trend(X, prepend=True, trend=trend)  # prepends puts trend column at the beginning
 
     # Get degrees of freedom
-    nobs = len(resid_hat)  # number of observations
+    nobs = len(Y)  # number of observations
     k_ar = maxlag  # number of lags used, which affects number of observations
     k_trend = 0  # the number of trend terms included 'nc'=0, 'c'=1
     dof_AR = nobs - k_ar - k_trend  # degrees of freedom
@@ -149,37 +155,49 @@ def my_AR(endog, maxlag, trend=None):
     return my_OLS(Y, X, dof=dof_AR)
 
 
-# =================   ADF TEST   =================
+def my_adfuller(y, maxlag=None):
+    """
+    Augmented Dickey-Fuller test (it reduces to non-augmented version if maxlag=0: dY_t = phi*Y_{t-1} + eps_t)
+    e.g. maxlag=1 model: dY_t = phi*Y_{t-1} + phi_1*dY_{t-1} + eps_t
+    NOTE: for simplicity this implementation does not allow to add a constant or time-dependence term,
+    also, only the
+    :param y: time series which wants to be checked for stationarity
+    :param maxlag: maximum lag to include
+    :return: dictionary with OLS results
+    """
+    y = np.asarray(y)  # ensure it is in array form
+    ydiff = np.diff(y)  # get the differences (dY_t term)
+    ydall = lagmat(ydiff[:, None], maxlag, trim='both', original='in')  # lagged differences (dY_{t-k} terms)
+    nobs = ydall.shape[0]  # number of observations
+    ydall[:, 0] = y[-nobs - 1:-1]  # replace 0 ydiff with level of y (Y_{t-1} term)
+    ydshort = ydiff[-nobs:]  # level up the dimensions of ydiff to match nobs
+
+    Y = ydshort  # endogenous var
+    X = ydall[:, :maxlag + 1]  # exogenous var
+
+    result = my_OLS(Y, X, dof=None)  # do the usual regression using OLS to estimate parameters
+    result['adfstat'] = result['tvalue'][0] # define adfstat as tvalue of phi coefficient
+
+    return result
+
+# =================   COMPARE MY ADF VS STATSMODELS   =================
+
+# My model
 y = Y_t1.head(10)
-maxlag = 1
+my_result = my_adfuller(y, maxlag=1)
 
-y = np.asarray(y)
-# nobs = y.shape[0]
-ydiff = np.diff(y)  # get the differences (dY_t)
-
-ydall = lagmat(ydiff[:, None], maxlag, trim='both', original='in')  # get the diff lags specified (dY_t-k terms)
-nobs = ydall.shape[0]  # number of observations
-ydall[:, 0] = y[-nobs - 1:-1]  # replace 0 ydiff with level of y
-
-ydshort = ydiff[-nobs:]
-
-Y = ydshort
-X = ydall[:, :maxlag + 1]
-
-k_ar = maxlag
-k_trend = 1
-# dof = nobs - k_ar - k_trend  # degrees of freedom
-my_result = my_OLS(Y, X)
-
+# Statsmodels
 from statsmodels.tsa.stattools import adfuller
 py_result = adfuller(x=y, maxlag=1, regression='nc', autolag=None, regresults=True)
 
 sys.exit()
 
-print py_result[3].resols.bse
-s = py_result[3].resols.scale  # the scale used in the cov_params function
-# my_OLS(Y, X, dof=6) == py_result[3].resols.cov_params() == py_result[3].resols.cov_params(scale=s)
-# py_result[3].resols.scale should be == my_result['ols_scale']
+# # Cross-check for consistency
+# my_result['adfstat'] = py_result[0] == py_result[3].resols.tvalues[0]
+# my_result['bse'] == py_result[3].resols.bse
+# my_result['ols_scale'] == py_result[3].resols.scale
+# my_result['dof'] == py_result[3].resols.df_resid
+# my_result['cov_params'] == py_result[3].resols.cov_params(scale=py_result[3].resols.scale)
 
 # =================   COMPARE MY AR(p) VS STATSMODELS   =================
 
@@ -188,8 +206,8 @@ maxlag = 3
 
 my_result = my_AR(endog=endog, maxlag=maxlag)
 
-# Compare to statsmodels AR(p) model using 'cmle' (conditional maximum likelihood estimation (default method)
-fit = AR(np.array(endog)).fit(maxlag=maxlag, trend='nc')  # use only specified lags and remove constant from models
+# Compare to statsmodels AR(p) ('cmle' - conditional maximum likelihood estimation is default method)
+py_result = AR(np.array(endog)).fit(maxlag=maxlag, trend='nc')  # use only specified lags and remove constant
 
 # Print fitted params and residuals of model, should be equivalent (or very close) to estimates above
 print "\
@@ -200,12 +218,12 @@ AR.fit.cov_params(scale=ols_scale)={6} \n MY cov_params={7} \n\
 AR.fit.bse={8} \n MY bse={9} \n\
 AR.fit.tvalues={10} \n MY tvalue={11} \n\
 ".format(
-    fit.params, my_result['beta_hat'],
-    fit.resid, np.array(my_result['resid_hat']),
-    fit.nobs, my_result['nobs'],
-    fit.cov_params(scale=ols_scale), my_result['cov_params'],
-    fit.bse, my_result['bse'],
-    fit.tvalues, my_result['tvalue']
+    py_result.params, my_result['beta_hat'],
+    py_result.resid, np.array(my_result['resid_hat']),
+    py_result.nobs, my_result['nobs'],
+    py_result.cov_params(scale=my_result['ols_scale']), my_result['cov_params'],
+    py_result.bse, my_result['bse'],
+    py_result.tvalues, my_result['tvalue']
 )
 
 
