@@ -61,16 +61,14 @@ def my_OLS(Y, X):
     rank = X.shape[1]
     df_resid = np.float(nobs - rank)
     ssr = np.dot(resid_hat, resid_hat.T)  # ee' term
-    sigma = ssr / nobs  # aka 'sigma2' or 'scale' in statsmodels
-    ols_scale = ssr / df_resid  # ee' term must be scaled by df_resid to obtain unbiased estimate
+    sigma = ssr / nobs  # aka 'sigma2' or 'scale' in statsmodels (MLE estimator for cov matrix)
+    ols_scale = ssr / df_resid  # OLS estimator for cov matrix
     cov_params = np.kron(G, ols_scale)  # covariance matrix of parameters
     bvar = np.diag(cov_params)  # entries on the diagonal of the covariance matrix  are the variances
     bse = np.sqrt(bvar)  # must take square root to get standard error
     tvalue = params / bse  # t-statistic for a given parameter estimate
     nobs2 = nobs / 2.0
-    llf = -nobs2 * np.log(2 * np.pi) - nobs2 * np.log(1 / (2 * nobs2) * \
-                                                      np.dot(np.transpose(Y - np.dot(X, params)),
-                                                             (Y - np.dot(X, params)))) - nobs2 # log-likelihood function of OLS model
+    llf = -nobs2 * np.log(2 * np.pi) - nobs2 * np.log(sigma) - nobs2  # log-likelihood function of OLS model
     df_model = rank  # degrees of freedom of model
     eigenvalues = np.roots(np.r_[1, -params])  # prepend 1 to -ve of params array to get characteristic equation
     roots = eigenvalues ** -1  # these are used to test for stability in is_stable method
@@ -248,7 +246,6 @@ if __name__ == "__main__":
     # print 'sm_result[3].icbest=', sm_result[3].icbest  # should be  == my icbest == my_result['aic']
     # print 'sm_result[3].resols.aic=', sm_result[3].resols.aic  # should be equivalent to above but for reason it isn't
 
-
     # =================   COMPARE MY ADF VS STATSMODELS   =================
 
     # Instead I use my optimised lag (bestlag), which gives consistent results with statsmodels too
@@ -287,7 +284,6 @@ if __name__ == "__main__":
     sm_icbest = AR(np.array(y)).fit(maxlag=sm_bestlag, trend='nc', method='cmle').aic
     # above line inconsistent since this isn't the lower aic found, e.f. maxlag=29 for Y_t3 gives aic=-2.45, which is lower
     # than sm_bestlag=7 with aic=-2.40
-
 
     # =================   COMPARE MY AR(P) VS STATSMODELS   =================
 

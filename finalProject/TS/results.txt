@@ -312,6 +312,27 @@ def adfuller(x, maxlag=None, regression="c", autolag='AIC',
     else:
         resols = OLS(xdshort, xdall[:, :usedlag + 1]).fit()
 
+
+==================================================================================
+
+class ARResults(tsbase.TimeSeriesModelResults):
+    """
+    Class to hold results from fitting an AR model.
+
+    Parameters
+....
+
+    roots : array
+        The roots of the AR process are the solution to
+        (1 - arparams[0]*z - arparams[1]*z**2 -...- arparams[p-1]*z**k_ar) = 0
+        Stability requires that the roots in modulus lie outside the unit
+        circle.
+...
+
+    def roots(self):
+        k = self.k_trend
+        return np.roots(np.r_[1, -self.params[k:]]) ** -1
+
 -----------------------------------------------------------------------------------------------------------
 ###########################################################################################################
 #                                                                                                         #
