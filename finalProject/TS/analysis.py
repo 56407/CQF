@@ -19,37 +19,6 @@ import matplotlib
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# =================   OU PROCESS   =================
-
-# MC params
-np.random.seed(2000)  # set the seed
-dt = 1  # time step
-M = 1000  # no. of time steps
-
-# Model params:
-mu = 10
-sigma = 0.3
-
-Y_t1 = np.zeros((M + 1))
-Y_t2 = np.zeros((M + 1))
-Y_t3 = np.zeros((M + 1))
-
-Y_t1[0] = -50.0
-Y_t2[0] = 50.0
-Y_t3[0] = 0.0
-
-theta1 = 0.003
-theta2 = 0.01
-theta3 = 0.1
-
-for i in xrange(1, M + 1, 1):
-    Y_t1[i] = Y_t1[i-1] + theta1 * (mu - Y_t1[i-1]) * dt + sigma * math.sqrt(dt) * np.random.normal(0, 1)
-    Y_t2[i] = Y_t2[i-1] + theta2 * (mu - Y_t2[i-1]) * dt + sigma * math.sqrt(dt) * np.random.normal(0, 1)
-    Y_t3[i] = Y_t3[i-1] + theta3 * (mu - Y_t3[i-1]) * dt + sigma * math.sqrt(dt) * np.random.normal(0, 1)
-
-Y_t1 = pd.Series(Y_t1, name='Y_t1')
-Y_t2 = pd.Series(Y_t2, name='Y_t2')
-Y_t3 = pd.Series(Y_t3, name='Y_t3')
 
 # =================   MULTIVARIATE REGRESSION   =================
 
@@ -103,6 +72,8 @@ def my_OLS(Y, X):
                                                       np.dot(np.transpose(Y - np.dot(X, params)),
                                                              (Y - np.dot(X, params)))) - nobs2 # log-likelihood function of OLS model
     df_model = rank  # degrees of freedom of model
+    eigenvalues = np.roots(np.r_[1, -params])  # prepend 1 to -ve of params array to get characteristic equation
+    roots = eigenvalues ** -1  # these are used to test for stability in is_stable method
 
     dic = {
         'X': X,
@@ -119,6 +90,7 @@ def my_OLS(Y, X):
         'tvalue': tvalue,
         'llf': llf,
         'df_model': df_model,
+        'roots': roots
            }
 
     return dic
@@ -140,7 +112,6 @@ def my_AR(endog, maxlag, trend=None):
     X = lagmat(endog, maxlag, trim='both')
     if trend is not None:
         X = add_trend(X, prepend=True, trend=trend)  # prepends puts trend column at the beginning
-
     result = my_OLS(Y, X)
     # Akaike information criterion using statsmodel def for AR(p) (Lutkephol's definition)
     # note this is diff to adfuller's def
@@ -207,94 +178,147 @@ def get_optimal_lag(y, maxlag, model):
     print 'bestlag={0}, icbest={1}'.format(bestlag, icbest)
     return bestlag, icbest
 
+def is_stable(roots):
+    """
+    The roots of the AR process are the solution to
+    (1 - arparams[0]*z - arparams[1]*z**2 -...- arparams[p-1]*z**k_ar) = 0
+    Stability requires that the roots in modulus lie outside the unit circle
+    (or equivalently that modulus of eigenvalues are within unit circle)
+    See ref: http://matthieustigler.github.io/Lectures/Lect2ARMA.pdf
+    :param params: the coefficients of the VAR(p) or adfuller system
+    :return: true/false depending on whether roots stable
+    """
+    if np.all(np.abs(roots) > 1):  # all must be True for it to pass test
+        return True
+    return False
 
-# =================   COMPARE MY OPTIMAL LAG VS STATSMODELS FOR ADF  =================
+if __name__ == "__main__":
 
-y = Y_t3
-my_lag = 35
+    # Generate mean-reverting processes
 
-# My result, try a maximum of lags equal to my_lag
-bestlag , icbest = get_optimal_lag(y, maxlag=my_lag, model='adf')
+    # =================   OU PROCESS   =================
 
-# Statsmodel equivalent to optimise lag using aic criterion - will not use as some inconsistencies seen (see below)
-sm_bestlag = adfuller(x=y, maxlag=my_lag, regression='nc', autolag='AIC', regresults=True)[3].usedlag
-sm_icbest1 = adfuller(x=y, maxlag=sm_bestlag, regression='nc', autolag='AIC', regresults=True)[3].icbest
-sm_icbest2 = adfuller(x=y, maxlag=sm_bestlag, regression='nc', autolag=None, regresults=True)[3].resols.aic
-# sm_icbest1 and sm_icbest2 should be the same but are inconsitent
+    # MC params
+    np.random.seed(2000)  # set the seed
+    dt = 1  # time step
+    M = 1000  # no. of time steps
 
-sys.exit()
-# # Inconsistency observed in statsmodels for optimal lag selection using 'aic'
-# print 'sm_result[3].usedlag=', sm_result[3].usedlag  # should be == bestlag == my_result['maxlag'] but small diff observed
-# print 'sm_result[3].resols.df_model - 1=', sm_result[3].resols.df_model - 1  # equivalent to above
-# print 'sm_result[3].icbest=', sm_result[3].icbest  # should be  == my icbest == my_result['aic']
-# print 'sm_result[3].resols.aic=', sm_result[3].resols.aic  # should be equivalent to above but for reason it isn't
+    # Model params:
+    mu = 10
+    sigma = 0.3
 
+    Y_t1 = np.zeros((M + 1))
+    Y_t2 = np.zeros((M + 1))
+    Y_t3 = np.zeros((M + 1))
 
-# =================   COMPARE MY ADF VS STATSMODELS   =================
+    Y_t1[0] = -50.0
+    Y_t2[0] = 50.0
+    Y_t3[0] = 0.0
 
-# Instead I use my optimised lag (bestlag), which gives consistent results with statsmodels too
-my_result = my_adfuller(y, maxlag=bestlag)
-sm_result = adfuller(x=y, maxlag=bestlag, regression='nc', autolag=None, regresults=True)
-print "my_result['maxlag']={0}, sm_result[3].usedlag={1}".format(my_result['maxlag'], sm_result[3].usedlag)
-print "my_result['aic']={0}, sm_result[3].resols.aic={1}".format(my_result['aic'], sm_result[3].resols.aic)
+    theta1 = 0.003
+    theta2 = 0.01
+    theta3 = 0.1
 
-# # Other cross-checks:
-# sm_result = adfuller(x=y, maxlag=lag, regression='nc', autolag=None, regresults=True)
-# my_result = my_adfuller(y, maxlag=lag)
-# sm_result[3].maxlag
-# sm_result[3].usedlag
-# sm_result[3].icbest
-# sm_result[3].resols.summary()
-# my_result['llf'] == sm_result[3].resols.llf
-# my_result['aic'] == sm_result[3].resols.aic
-# my_result['adfstat'] = sm_result[0] == sm_result[3].resols.tvalues[0]
-# my_result['bse'] == sm_result[3].resols.bse
-# my_result['ols_scale'] == sm_result[3].resols.scale
-# my_result['df_resid'] == sm_result[3].resols.df_resid
-# my_result['cov_params'] == sm_result[3].resols.cov_params(scale=sm_result[3].resols.scale)
-# my_result['llf'] == sm_result[3].resols.llf
-# my_result['X'].shape[1] == sm_result[3].resols.df_model  # rank of regressor matrix
+    for i in xrange(1, M + 1, 1):
+        Y_t1[i] = Y_t1[i-1] + theta1 * (mu - Y_t1[i-1]) * dt + sigma * math.sqrt(dt) * np.random.normal(0, 1)
+        Y_t2[i] = Y_t2[i-1] + theta2 * (mu - Y_t2[i-1]) * dt + sigma * math.sqrt(dt) * np.random.normal(0, 1)
+        Y_t3[i] = Y_t3[i-1] + theta3 * (mu - Y_t3[i-1]) * dt + sigma * math.sqrt(dt) * np.random.normal(0, 1)
 
-# =================   COMPARE MY OPTIMAL LAG VS STATSMODELS FOR AR(P)  =================
+    Y_t1 = pd.Series(Y_t1, name='Y_t1')
+    Y_t2 = pd.Series(Y_t2, name='Y_t2')
+    Y_t3 = pd.Series(Y_t3, name='Y_t3')
 
-y = Y_t3
-my_lag = 35
+    # =================   COMPARE MY OPTIMAL LAG VS STATSMODELS FOR ADF  =================
+    sys.exit()
+    y = Y_t3
+    my_lag = 35
 
-# My result, try a maximum of lags equal to my_lag
-bestlag , icbest = get_optimal_lag(y, maxlag=my_lag, model='ar')
+    # My result, try a maximum of lags equal to my_lag
+    bestlag , icbest = get_optimal_lag(y, maxlag=my_lag, model='adf')
 
-# Statsmodel equivalent to optimise lag using aic criterion - will not use as some inconsistencies seen (see below)
-sm_bestlag = AR(np.array(y)).select_order(maxlag=my_lag, ic='aic', trend='nc', method='cmle')
-sm_icbest = AR(np.array(y)).fit(maxlag=sm_bestlag, trend='nc', method='cmle').aic
-# above line inconsistent since this isn't the lower aic found, e.f. maxlag=29 for Y_t3 gives aic=-2.45, which is lower
-# than sm_bestlag=7 with aic=-2.40
+    # Statsmodel equivalent to optimise lag using aic criterion - will not use as some inconsistencies seen (see below)
+    sm_bestlag = adfuller(x=y, maxlag=my_lag, regression='nc', autolag='AIC', regresults=True)[3].usedlag
+    sm_icbest1 = adfuller(x=y, maxlag=sm_bestlag, regression='nc', autolag='AIC', regresults=True)[3].icbest
+    sm_icbest2 = adfuller(x=y, maxlag=sm_bestlag, regression='nc', autolag=None, regresults=True)[3].resols.aic
+    # sm_icbest1 and sm_icbest2 should be the same but are inconsitent
 
-
-# =================   COMPARE MY AR(P) VS STATSMODELS   =================
-
-# Instead I use my optimised lag (bestlag), which gives consistent results with statsmodels too
-
-my_result = my_AR(endog=y, maxlag=bestlag)
-sm_result = AR(np.array(y)).fit(maxlag=bestlag, trend='nc', method='cmle')
-
-# Cross-checks
-print "\
-AR.fit.params={0} \n MY params={1} \n\
-AR.fit.llf={2} \n MY llf={3} \n\
-AR.fit.nobs={4} \n MY nobs={5} \n\
-AR.fit.cov_params(scale=ols_scale)={6} \n MY cov_params={7} \n\
-AR.fit.bse={8} \n MY bse={9} \n\
-AR.fit.tvalues={10} \n MY tvalue={11} \n\
-".format(
-    sm_result.params, my_result['params'],
-    sm_result.llf, np.array(my_result['llf']),
-    sm_result.nobs, my_result['nobs'],
-    sm_result.cov_params(scale=my_result['ols_scale']), my_result['cov_params'],
-    sm_result.bse, my_result['bse'],
-    sm_result.tvalues, my_result['tvalue']
-)
+    # # Inconsistency observed in statsmodels for optimal lag selection using 'aic'
+    # print 'sm_result[3].usedlag=', sm_result[3].usedlag  # should be == bestlag == my_result['maxlag'] but small diff observed
+    # print 'sm_result[3].resols.df_model - 1=', sm_result[3].resols.df_model - 1  # equivalent to above
+    # print 'sm_result[3].icbest=', sm_result[3].icbest  # should be  == my icbest == my_result['aic']
+    # print 'sm_result[3].resols.aic=', sm_result[3].resols.aic  # should be equivalent to above but for reason it isn't
 
 
+    # =================   COMPARE MY ADF VS STATSMODELS   =================
+
+    # Instead I use my optimised lag (bestlag), which gives consistent results with statsmodels too
+    my_result = my_adfuller(y, maxlag=bestlag)
+    sm_result = adfuller(x=y, maxlag=bestlag, regression='nc', autolag=None, regresults=True)
+    print "my_result['maxlag']={0}, sm_result[3].usedlag={1}".format(my_result['maxlag'], sm_result[3].usedlag)
+    print "my_result['aic']={0}, sm_result[3].resols.aic={1}".format(my_result['aic'], sm_result[3].resols.aic)
+
+    # # Other cross-checks:
+    # sm_result = adfuller(x=y, maxlag=lag, regression='nc', autolag=None, regresults=True)
+    # my_result = my_adfuller(y, maxlag=lag)
+    # sm_result[3].maxlag
+    # sm_result[3].usedlag
+    # sm_result[3].icbest
+    # sm_result[3].resols.summary()
+    # my_result['llf'] == sm_result[3].resols.llf
+    # my_result['aic'] == sm_result[3].resols.aic
+    # my_result['adfstat'] = sm_result[0] == sm_result[3].resols.tvalues[0]
+    # my_result['bse'] == sm_result[3].resols.bse
+    # my_result['ols_scale'] == sm_result[3].resols.scale
+    # my_result['df_resid'] == sm_result[3].resols.df_resid
+    # my_result['cov_params'] == sm_result[3].resols.cov_params(scale=sm_result[3].resols.scale)
+    # my_result['llf'] == sm_result[3].resols.llf
+    # my_result['X'].shape[1] == sm_result[3].resols.df_model  # rank of regressor matrix
+
+    # =================   COMPARE MY OPTIMAL LAG VS STATSMODELS FOR AR(P)  =================
+
+    y = Y_t3
+    my_lag = 35
+
+    # My result, try a maximum of lags equal to my_lag
+    bestlag , icbest = get_optimal_lag(y, maxlag=my_lag, model='ar')
+
+    # Statsmodel equivalent to optimise lag using aic criterion - will not use as some inconsistencies seen (see below)
+    sm_bestlag = AR(np.array(y)).select_order(maxlag=my_lag, ic='aic', trend='nc', method='cmle')
+    sm_icbest = AR(np.array(y)).fit(maxlag=sm_bestlag, trend='nc', method='cmle').aic
+    # above line inconsistent since this isn't the lower aic found, e.f. maxlag=29 for Y_t3 gives aic=-2.45, which is lower
+    # than sm_bestlag=7 with aic=-2.40
+
+
+    # =================   COMPARE MY AR(P) VS STATSMODELS   =================
+
+    # Instead I use my optimised lag (bestlag), which gives consistent results with statsmodels too
+
+    my_result = my_AR(endog=y, maxlag=bestlag)
+    sm_result = AR(np.array(y)).fit(maxlag=bestlag, trend='nc', method='cmle')
+
+    # # Cross-checks
+    # print "\
+    # AR.fit.params={0} \n MY params={1} \n\
+    # AR.fit.llf={2} \n MY llf={3} \n\
+    # AR.fit.nobs={4} \n MY nobs={5} \n\
+    # AR.fit.cov_params(scale=ols_scale)={6} \n MY cov_params={7} \n\
+    # AR.fit.bse={8} \n MY bse={9} \n\
+    # AR.fit.tvalues={10} \n MY tvalue={11} \n\
+    # ".format(
+    #     sm_result.params, my_result['params'],
+    #     sm_result.llf, np.array(my_result['llf']),
+    #     sm_result.nobs, my_result['nobs'],
+    #     sm_result.cov_params(scale=my_result['ols_scale']), my_result['cov_params'],
+    #     sm_result.bse, my_result['bse'],
+    #     sm_result.tvalues, my_result['tvalue']
+    # )
+
+    # =================   COMPARE STABILITY CHECK VS STATSMODELS   =================
+
+    # Cross-checks:
+    # sm_result.roots == my_result['roots']
+    # is_stable(my_result['roots']) == is_stable(sm_result.roots)
+    print 'passes stability check:', is_stable(my_result['roots'])
 
 
 
