@@ -923,3 +923,133 @@ Out[229]: array([-2.56797943, -1.94127193, -1.61655709])
 # Out[25]: 7.2308967346625259
 # In[26]: py_result[3].usedlag
 # Out[26]: 0L
+
+================================================================================================
+
+l = []
+for i in range(1, 40):
+    l += [AR(np.array(Y_t3)).fit(maxlag=i, trend='nc', method='cmle').aic]
+min(l)
+get_optimal_lag(Y_t3, maxlag=40, model='ar')
+AR(np.array(Y_t3)).fit(maxlag=i, trend='nc', method='cmle').llf
+AR(np.array(Y_t3)).fit(maxlag=20, trend='nc', method='cmle').llf
+my_AR(Y_t3, maxlag=20)
+my_result = my_AR(Y_t3, maxlag=20)
+my_result['aic']
+my_result['llf']
+
+================================================================================================
+
+AR(np.array(Y_t3)).fit(maxlag=20, trend='nc', method='cmle').df_model
+result['df_model']
+result['nobs']
+AR(np.array(Y_t3)).fit(maxlag=20, trend='nc', method='cmle').nobs
+AR(np.array(Y_t3)).fit(maxlag=20, trend='nc', method='cmle').scale
+result['ols_scale']
+AR(np.array(Y_t3)).fit(maxlag=20, trend='nc', method='cmle').sigma2
+
+AR(np.array(Y_t3)).fit(maxlag=20, trend='nc', method='cmle').scale
+AR(np.array(Y_t3)).fit(maxlag=20, trend='nc', method='cmle').sigma2
+AR(np.array(Y_t3)).fit(maxlag=20, trend='nc', method='cmle').ssr
+AR(np.array(Y_t3)).fit(maxlag=20, trend='nc', method='cmle').df_resid
+
+==================================================================================================
+
+Y_t1
+
+In [2]: %run analysis.py
+lag=0, aic=523.021966669
+lag=1, aic=520.933746228
+lag=2, aic=521.479976064
+lag=3, aic=522.187438204
+lag=4, aic=524.042902294
+lag=5, aic=525.993331137
+lag=6, aic=525.903372815
+lag=7, aic=527.841056413
+lag=8, aic=521.289548791
+lag=9, aic=523.106205731
+lag=10, aic=524.090661361
+lag=11, aic=525.755168319
+lag=12, aic=527.763509883
+lag=13, aic=528.581094866
+lag=14, aic=525.804317285
+lag=15, aic=524.436541703
+lag=16, aic=525.720620818
+lag=17, aic=523.741479952
+lag=18, aic=525.991984907
+lag=19, aic=524.964445287
+lag=20, aic=526.153599048
+bestlag=1, icbest=520.933746228
+my_result['maxlag']=1, sm_result[3].usedlag=1
+my_result['aic']=520.933746228, sm_result[3].resols.aic=520.933746228
+
+Y_t2
+
+In [3]: %run analysis.py
+lag=0, aic=445.740418618
+lag=1, aic=445.316781705
+lag=2, aic=447.408539945
+lag=3, aic=448.149072938
+lag=4, aic=447.196611277
+lag=5, aic=442.258422806
+lag=6, aic=444.429501352
+lag=7, aic=441.977760833
+lag=8, aic=436.523464217
+lag=9, aic=434.964969387
+lag=10, aic=427.326372709
+lag=11, aic=429.719554909
+lag=12, aic=426.314052843
+lag=13, aic=428.773780504
+lag=14, aic=429.375470939
+lag=15, aic=431.801330408
+lag=16, aic=433.499949211
+lag=17, aic=427.383654565
+lag=18, aic=429.518584133
+lag=19, aic=430.235022901
+lag=20, aic=432.57655714
+bestlag=12, icbest=426.314052843
+my_result['maxlag']=12, sm_result[3].usedlag=12
+my_result['aic']=426.314052843, sm_result[3].resols.aic=426.314052843
+
+Y_t3
+
+In [4]: %run analysis.py
+lag=0, aic=443.867422943
+lag=1, aic=444.884356877
+lag=2, aic=446.228554754
+lag=3, aic=441.046747661
+lag=4, aic=440.539838509
+lag=5, aic=435.948324444
+lag=6, aic=431.694624001
+lag=7, aic=422.390683605
+lag=8, aic=413.485978182
+lag=9, aic=412.224661754
+lag=10, aic=410.624206135
+lag=11, aic=407.430796067
+lag=12, aic=407.530926395
+lag=13, aic=400.137562827
+lag=14, aic=402.742314967
+lag=15, aic=402.324618427
+lag=16, aic=397.507924301
+lag=17, aic=388.886504358
+lag=18, aic=386.725833405
+lag=19, aic=387.696282901
+lag=20, aic=385.393916379
+lag=21, aic=387.85940448
+lag=22, aic=390.46420666
+lag=23, aic=389.032943902
+lag=24, aic=387.175924208
+lag=25, aic=385.716407843
+lag=26, aic=385.097539003
+lag=27, aic=385.165415827
+lag=28, aic=372.575537863
+lag=29, aic=374.454145777
+lag=30, aic=375.318568477
+lag=31, aic=377.356601146
+lag=32, aic=379.870635528
+lag=33, aic=382.222724606
+lag=34, aic=382.627890218
+lag=35, aic=385.101408587
+bestlag=28, icbest=372.575537863
+my_result['maxlag']=28, sm_result[3].usedlag=28
+my_result['aic']=372.575537863, sm_result[3].resols.aic=372.575537863
