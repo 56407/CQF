@@ -801,3 +801,125 @@ lag=18, aic=429.518584133, py_aic=429.518584133
 lag=19, aic=430.235022901, py_aic=430.235022901
 lag=20, aic=432.57655714, py_aic=432.57655714
 Out[187]: (426.31405284313632, 12)
+
+#############################################################################################
+
+In [213]: get_optimal_lag(Y_t3, maxlag=30)
+lag=0, aic=443.867422943, py_aic=443.867422943
+lag=0, nobs=1000, py_nobs=1000.0
+lag=1, aic=444.884356877, py_aic=444.884356877
+lag=1, nobs=999, py_nobs=999.0
+lag=2, aic=446.228554754, py_aic=446.228554754
+lag=2, nobs=998, py_nobs=998.0
+lag=3, aic=441.046747661, py_aic=441.046747661
+lag=3, nobs=997, py_nobs=997.0
+lag=4, aic=440.539838509, py_aic=440.539838509
+lag=4, nobs=996, py_nobs=996.0
+lag=5, aic=435.948324444, py_aic=435.948324444
+lag=5, nobs=995, py_nobs=995.0
+lag=6, aic=431.694624001, py_aic=431.694624001
+lag=6, nobs=994, py_nobs=994.0
+lag=7, aic=422.390683605, py_aic=422.390683605
+lag=7, nobs=993, py_nobs=993.0
+lag=8, aic=413.485978182, py_aic=413.485978182
+lag=8, nobs=992, py_nobs=992.0
+lag=9, aic=412.224661754, py_aic=412.224661754
+lag=9, nobs=991, py_nobs=991.0
+lag=10, aic=410.624206135, py_aic=410.624206135
+lag=10, nobs=990, py_nobs=990.0
+lag=11, aic=407.430796067, py_aic=407.430796067
+lag=11, nobs=989, py_nobs=989.0
+lag=12, aic=407.530926395, py_aic=407.530926395
+lag=12, nobs=988, py_nobs=988.0
+lag=13, aic=400.137562827, py_aic=400.137562827
+lag=13, nobs=987, py_nobs=987.0
+lag=14, aic=402.742314967, py_aic=402.742314967
+lag=14, nobs=986, py_nobs=986.0
+lag=15, aic=402.324618427, py_aic=402.324618427
+lag=15, nobs=985, py_nobs=985.0
+lag=16, aic=397.507924301, py_aic=397.507924301
+lag=16, nobs=984, py_nobs=984.0
+lag=17, aic=388.886504358, py_aic=388.886504358
+lag=17, nobs=983, py_nobs=983.0
+lag=18, aic=386.725833405, py_aic=386.725833405
+lag=18, nobs=982, py_nobs=982.0
+lag=19, aic=387.696282901, py_aic=387.696282901
+lag=19, nobs=981, py_nobs=981.0
+lag=20, aic=385.393916379, py_aic=385.393916379
+lag=20, nobs=980, py_nobs=980.0
+lag=21, aic=387.85940448, py_aic=387.85940448
+lag=21, nobs=979, py_nobs=979.0
+lag=22, aic=390.46420666, py_aic=390.46420666
+lag=22, nobs=978, py_nobs=978.0
+lag=23, aic=389.032943902, py_aic=389.032943902
+lag=23, nobs=977, py_nobs=977.0
+lag=24, aic=387.175924208, py_aic=387.175924208
+lag=24, nobs=976, py_nobs=976.0
+lag=25, aic=385.716407843, py_aic=385.716407843
+lag=25, nobs=975, py_nobs=975.0
+lag=26, aic=385.097539003, py_aic=385.097539003
+lag=26, nobs=974, py_nobs=974.0
+lag=27, aic=385.165415827, py_aic=385.165415827
+lag=27, nobs=973, py_nobs=973.0
+lag=28, aic=372.575537863, py_aic=372.575537863
+lag=28, nobs=972, py_nobs=972.0
+lag=29, aic=374.454145777, py_aic=374.454145777
+lag=29, nobs=971, py_nobs=971.0
+lag=30, aic=375.318568477, py_aic=375.318568477
+lag=30, nobs=970, py_nobs=970.0
+Out[213]: (372.57553786323047, 28)
+
+#################################################################
+
+In [223]: from statsmodels.tsa.adfvalues import mackinnoncrit
+
+In [224]: mackinnoncrit(N=1, regression='nc', nobs=nobs)
+Out[224]: array([-2.56804404, -1.94127987, -1.61654959])
+
+In [225]: nobs
+Out[225]: 972
+
+In [226]: mackinnoncrit(N=1, regression='nc', nobs=970)
+Out[226]: array([-2.5680488 , -1.94128045, -1.61654904])
+
+In [227]: mackinnoncrit(N=1, regression='nc', nobs=800)
+Out[227]: array([-2.56854042, -1.94134095, -1.61649219])
+
+In [228]: mackinnoncrit(N=1, regression='nc', nobs=10)
+Out[228]: array([-2.82559 , -1.970287, -1.592036])
+
+In [229]: mackinnoncrit(N=1, regression='nc', nobs=1000)
+Out[229]: array([-2.56797943, -1.94127193, -1.61655709])
+
+#######################################################################################################
+
+# def my_llf(ols_result):
+#     """
+#     Returns the value of the Gaussian log-likelihood function at params
+#     :param ols_result: result from my_OLS function above
+#     :return llf:
+#     """
+#     # nobs2 = ols_result['nobs'] / 2.0
+#     # llf = -np.log(ssr) * nobs2  # concentrated likelihood
+#     # llf -= (1 + np.log(np.pi / nobs2)) * nobs2  # with likelihood constant
+#     # llf -= 0.5 * np.sum(np.log(sigma))
+#
+#     exog = ols_result['X']
+#     endog = ols_result['Y']
+#     llf = -nobs2 * np.log(2 * np.pi) - nobs2 * np.log(1 / (2 * nobs2) *\
+#            np.dot(np.transpose(endog - np.dot(exog, params)), (endog - np.dot(exog, params)))) - nobs2
+#     # llf = -nobs2 * np.log(2 * np.pi) - nobs2 * np.log(
+#     #     1 / (2 * nobs2) * np.dot(np.transpose(my_result['Y'] - np.dot(my_result['X'], my_result['params'])),
+#     #                              (my_result['Y'] - np.dot(my_result['X'], py_result[3].resols.params)))) - nobs2
+#
+#     return llf
+
+===============================================================================================
+
+# In[23]: py_result = adfuller(x=y, maxlag=0, regression='nc', autolag='AIC', regresults=True)
+# In[24]: get_optimal_lag(y, maxlag=0)
+# Out[24]: (7.2308967346625259, 0)
+# In[25]: py_result[3].icbest
+# Out[25]: 7.2308967346625259
+# In[26]: py_result[3].usedlag
+# Out[26]: 0L

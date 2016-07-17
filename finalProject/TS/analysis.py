@@ -1,5 +1,5 @@
-from datetime import datetime
 import sys
+from datetime import datetime
 
 import pandas as pd
 import numpy as np
@@ -7,6 +7,11 @@ import numpy as np
 import math
 from math import exp, sqrt, log
 
+# To compare my result to statsmodels result
+from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.ar_model import AR
+
+# Debug
 from IPython import embed
 
 # Plotting
@@ -167,7 +172,7 @@ def my_AR(endog, maxlag, trend=None):
     return my_OLS(Y, X, df_resid=df_resid_AR)
 
 
-def my_adfuller(y, maxlag=None, autolag=None):
+def my_adfuller(y, maxlag=None):
     """
     Augmented Dickey-Fuller test (it reduces to non-augmented version if maxlag=0: dY_t = phi*Y_{t-1} + eps_t)
     e.g. maxlag=1 model: dY_t = phi*Y_{t-1} + phi_1*dY_{t-1} + eps_t
@@ -175,7 +180,6 @@ def my_adfuller(y, maxlag=None, autolag=None):
     also, only the
     :param y: time series which wants to be checked for stationarity
     :param maxlag: maximum lag to include
-    :param autolag: set True if you want to use AIC criterion to choose optimal lag, set False or None if maxlag should be used
     :return: dictionary with OLS results
     """
     y = np.asarray(y)  # ensure it is in array form
@@ -210,105 +214,86 @@ def get_optimal_lag(y, maxlag):
     for lag in range(startlag, startlag + maxlag + 1):
         results[lag] = my_adfuller(y, maxlag=lag)
         # Cross-check results vs statsmodels result - warning: small difference observed
-        py_result = adfuller(x=y, maxlag=lag, regression='nc', autolag=None, regresults=True)[3].resols
-        print 'lag={0}, aic={1}, py_aic={2}'.format(lag, results[lag]['aic'], py_result.aic)
-        # print 'lag={0}, llf={1}, py_llf={2}'.format(lag, results[lag]['llf'], py_result.llf)
+        # sm_result = adfuller(x=y, maxlag=lag, regression='nc', autolag=None, regresults=True)[3].resols
+        print 'lag={0}, aic={1}'.format(lag, results[lag]['aic'])
+        # print 'lag={0}, aic={1}, sm_aic={2}'.format(lag, results[lag]['aic'], sm_result.aic)
+        # print 'lag={0}, nobs={1}, sm_nobs={2}'.format(lag, results[lag]['nobs'], sm_result.nobs)
+        # print 'lag={0}, adfstat={1}, sm_adfstat={2}'.format(lag, results[lag]['adfstat'], sm_result.tvalues)
+        # print 'lag={0}, llf={1}, sm_llf={2}'.format(lag, results[lag]['llf'], sm_result.llf)
+    # Optimal lag is the one with lowest aic
     icbest, bestlag = min((v['aic'], k) for k, v in results.iteritems())
+    print 'bestlag={0}, icbest={1}'.format(bestlag, icbest)
+    return bestlag, icbest
 
-    return icbest, bestlag
 
+# =================   COMPARE MY GET_OPTIMAL_LAG VS STATSMODELS   =================
 
-# py_result[3].resols.llf
-# py_result[3].resols.aic
-# py_result[3].maxlag
-# py_result[3].usedlag
-# py_result[3].icbest
-# Cross-check:
-# lag
-# py_result = adfuller(x=y, maxlag=lag, regression='nc', autolag=None, regresults=True)
-# x = my_adfuller(y, maxlag=lag)
-# py_result[3].resols.aic
-# py_result[3].resols.llf
-# x['aic']
-# x['llf']
+y = Y_t1
+my_lag = 20
 
-# In[23]: py_result = adfuller(x=y, maxlag=0, regression='nc', autolag='AIC', regresults=True)
-# In[24]: get_optimal_lag(y, maxlag=0)
-# Out[24]: (7.2308967346625259, 0)
-# In[25]: py_result[3].icbest
-# Out[25]: 7.2308967346625259
-# In[26]: py_result[3].usedlag
-# Out[26]: 0L
+# My result, try a maximum of 20 lags
+bestlag , icbest = get_optimal_lag(y, maxlag=my_lag)
 
-# def my_llf(ols_result):
-#     """
-#     Returns the value of the Gaussian log-likelihood function at params
-#     :param ols_result: result from my_OLS function above
-#     :return llf:
-#     """
-#     # nobs2 = ols_result['nobs'] / 2.0
-#     # llf = -np.log(ssr) * nobs2  # concentrated likelihood
-#     # llf -= (1 + np.log(np.pi / nobs2)) * nobs2  # with likelihood constant
-#     # llf -= 0.5 * np.sum(np.log(sigma))
-#
-#     exog = ols_result['X']
-#     endog = ols_result['Y']
-#     llf = -nobs2 * np.log(2 * np.pi) - nobs2 * np.log(1 / (2 * nobs2) *\
-#            np.dot(np.transpose(endog - np.dot(exog, params)), (endog - np.dot(exog, params)))) - nobs2
-#     # llf = -nobs2 * np.log(2 * np.pi) - nobs2 * np.log(
-#     #     1 / (2 * nobs2) * np.dot(np.transpose(my_result['Y'] - np.dot(my_result['X'], my_result['params'])),
-#     #                              (my_result['Y'] - np.dot(my_result['X'], py_result[3].resols.params)))) - nobs2
-#
-#     return llf
+# Statsmodel equivalent to optimise lag using aic criterion - will not be used as some inconsistencies seen (see comments below)
+sm_result = adfuller(x=y, maxlag=my_lag, regression='nc', autolag='AIC', regresults=True)
+
+# # Inconsistency observed in statsmodels for optimal lag selection using 'aic'
+# print 'sm_result[3].usedlag=', sm_result[3].usedlag  # should be == bestlag == my_result['maxlag'] but small diff observed
+# print 'sm_result[3].resols.df_model - 1=', sm_result[3].resols.df_model - 1  # equivalent to above
+# print 'sm_result[3].icbest=', sm_result[3].icbest  # should be  == my icbest == my_result['aic']
+# print 'sm_result[3].resols.aic=', sm_result[3].resols.aic  # should be equivalent to above but for reason it isn't
 
 
 # =================   COMPARE MY ADF VS STATSMODELS   =================
 
-# My model
-y = Y_t1.head(10)
-my_result = my_adfuller(y, maxlag=3)
+# Instead I use my optimised lag (bestlag), which gives consistent results with statsmodels too
+my_result = my_adfuller(y, maxlag=bestlag)
+sm_result = adfuller(x=y, maxlag=bestlag, regression='nc', autolag=None, regresults=True)
+print "my_result['maxlag']={0}, sm_result[3].usedlag={1}".format(my_result['maxlag'], sm_result[3].usedlag)
+print "my_result['aic']={0}, sm_result[3].resols.aic={1}".format(my_result['aic'], sm_result[3].resols.aic)
 
-# Statsmodels
-from statsmodels.tsa.stattools import adfuller
-py_result = adfuller(x=y, maxlag=3, regression='nc', autolag=None, regresults=True)
+# # Other cross-checks:
+# sm_result = adfuller(x=y, maxlag=lag, regression='nc', autolag=None, regresults=True)
+# my_result = my_adfuller(y, maxlag=lag)
+# sm_result[3].maxlag
+# sm_result[3].usedlag
+# sm_result[3].icbest
+# sm_result[3].resols.summary()
+# my_result['llf'] == sm_result[3].resols.llf
+# my_result['aic'] == sm_result[3].resols.aic
+# my_result['adfstat'] = sm_result[0] == sm_result[3].resols.tvalues[0]
+# my_result['bse'] == sm_result[3].resols.bse
+# my_result['ols_scale'] == sm_result[3].resols.scale
+# my_result['df_resid'] == sm_result[3].resols.df_resid
+# my_result['cov_params'] == sm_result[3].resols.cov_params(scale=sm_result[3].resols.scale)
+# my_result['llf'] == sm_result[3].resols.llf
+# my_result['X'].shape[1] == sm_result[3].resols.df_model  # rank of regressor matrix
 
-sys.exit()
-
-# # Cross-check for consistency
-# my_result['adfstat'] = py_result[0] == py_result[3].resols.tvalues[0]
-# my_result['bse'] == py_result[3].resols.bse
-# my_result['ols_scale'] == py_result[3].resols.scale
-# my_result['df_resid'] == py_result[3].resols.df_resid
-# my_result['cov_params'] == py_result[3].resols.cov_params(scale=py_result[3].resols.scale)
-# my_result['llf'] == py_result[3].resols.llf
-# my_result['X'].shape[1] == py_result[3].resols.df_model  # rank of regressor matrix
 
 # =================   COMPARE MY AR(p) VS STATSMODELS   =================
 
-endog = Y_t1.head(10)
 maxlag = 3
+my_result = my_AR(endog=y, maxlag=maxlag)
 
-my_result = my_AR(endog=endog, maxlag=maxlag)
+# Compare to statsmodels AR(p) model
+sm_result = AR(np.array(y)).fit(maxlag=maxlag, trend='nc')  # use only specified lags and remove constant
 
-# Compare to statsmodels AR(p) ('cmle' - conditional maximum likelihood estimation is default method)
-py_result = AR(np.array(endog)).fit(maxlag=maxlag, trend='nc')  # use only specified lags and remove constant
-
-# Print fitted params and residuals of model, should be equivalent (or very close) to estimates above
-print "\
-AR.fit.params={0} \n MY params={1} \n\
-AR.fit.resid={2} \n MY resid_hat={3} \n\
-AR.fit.nobs={4} \n MY nobs={5} \n\
-AR.fit.cov_params(scale=ols_scale)={6} \n MY cov_params={7} \n\
-AR.fit.bse={8} \n MY bse={9} \n\
-AR.fit.tvalues={10} \n MY tvalue={11} \n\
-".format(
-    py_result.params, my_result['params'],
-    py_result.resid, np.array(my_result['resid_hat']),
-    py_result.nobs, my_result['nobs'],
-    py_result.cov_params(scale=my_result['ols_scale']), my_result['cov_params'],
-    py_result.bse, my_result['bse'],
-    py_result.tvalues, my_result['tvalue']
-)
+# # Cross-checks
+# print "\
+# AR.fit.params={0} \n MY params={1} \n\
+# AR.fit.llf={2} \n MY llf={3} \n\
+# AR.fit.nobs={4} \n MY nobs={5} \n\
+# AR.fit.cov_params(scale=ols_scale)={6} \n MY cov_params={7} \n\
+# AR.fit.bse={8} \n MY bse={9} \n\
+# AR.fit.tvalues={10} \n MY tvalue={11} \n\
+# ".format(
+#     sm_result.params, my_result['params'],
+#     sm_result.llf, np.array(my_result['llf']),
+#     sm_result.nobs, my_result['nobs'],
+#     sm_result.cov_params(scale=my_result['ols_scale']), my_result['cov_params'],
+#     sm_result.bse, my_result['bse'],
+#     sm_result.tvalues, my_result['tvalue']
+# )
 
 
 
