@@ -145,7 +145,7 @@ def my_adfuller(y, maxlag=None):
     result['maxlag'] = maxlag
     # Akaike information criterion using statsmodel def for adfuller - not this is different to the def in AR(p) model
     result['aic'] = -2 * result['llf'] + 2 * result['df_model']
-
+    # result['aic'] = np.log(result['sigma']) + 2.0 * (1.0 + result['df_model']) / result['nobs']  # AR(p) def
     return result
 
 
@@ -164,7 +164,7 @@ def get_optimal_lag(y, maxlag, model):
             results[lag] = my_adfuller(y, maxlag=lag)
         elif model == 'ar':
             results[lag] = my_AR(y, maxlag=lag)
-        print 'lag={0}, aic={1}'.format(lag, results[lag]['aic'])
+        # print 'lag={0}, aic={1}'.format(lag, results[lag]['aic'])
         # Cross-check results vs statsmodels result - warning: small difference observed
         # sm_result = adfuller(x=y, maxlag=lag, regression='nc', autolag=None, regresults=True)[3].resols
         # print 'lag={0}, aic={1}, sm_aic={2}'.format(lag, results[lag]['aic'], sm_result.aic)
@@ -173,7 +173,7 @@ def get_optimal_lag(y, maxlag, model):
         # print 'lag={0}, llf={1}, sm_llf={2}'.format(lag, results[lag]['llf'], sm_result.llf)
     # Optimal lag is the one with lowest aic
     icbest, bestlag = min((v['aic'], k) for k, v in results.iteritems())
-    print 'bestlag={0}, icbest={1}'.format(bestlag, icbest)
+    # print 'bestlag={0}, icbest={1}'.format(bestlag, icbest)
     return bestlag, icbest
 
 def is_stable(roots):
@@ -232,7 +232,7 @@ if __name__ == "__main__":
     my_lag = 35
 
     # My result, try a maximum of lags equal to my_lag
-    bestlag , icbest = get_optimal_lag(y, maxlag=my_lag, model='adf')
+    my_bestlag, my_icbest = get_optimal_lag(y, maxlag=my_lag, model='adf')
 
     # Statsmodel equivalent to optimise lag using aic criterion - will not use as some inconsistencies seen (see below)
     sm_bestlag = adfuller(x=y, maxlag=my_lag, regression='nc', autolag='AIC', regresults=True)[3].usedlag
@@ -241,16 +241,16 @@ if __name__ == "__main__":
     # sm_icbest1 and sm_icbest2 should be the same but are inconsitent
 
     # # Inconsistency observed in statsmodels for optimal lag selection using 'aic'
-    # print 'sm_result[3].usedlag=', sm_result[3].usedlag  # should be == bestlag == my_result['maxlag'] but small diff observed
+    # print 'sm_result[3].usedlag=', sm_result[3].usedlag  # should be == my_bestlag == my_result['maxlag'] but small diff observed
     # print 'sm_result[3].resols.df_model - 1=', sm_result[3].resols.df_model - 1  # equivalent to above
-    # print 'sm_result[3].icbest=', sm_result[3].icbest  # should be  == my icbest == my_result['aic']
+    # print 'sm_result[3].icbest=', sm_result[3].icbest  # should be  == my_icbest == my_result['aic']
     # print 'sm_result[3].resols.aic=', sm_result[3].resols.aic  # should be equivalent to above but for reason it isn't
 
     # =================   COMPARE MY ADF VS STATSMODELS   =================
 
-    # Instead I use my optimised lag (bestlag), which gives consistent results with statsmodels too
-    my_result = my_adfuller(y, maxlag=bestlag)
-    sm_result = adfuller(x=y, maxlag=bestlag, regression='nc', autolag=None, regresults=True)
+    # Instead I use my optimised lag (my_bestlag), which gives consistent results with statsmodels too
+    my_result = my_adfuller(y, maxlag=my_bestlag)
+    sm_result = adfuller(x=y, maxlag=my_bestlag, regression='nc', autolag=None, regresults=True)
     print "my_result['maxlag']={0}, sm_result[3].usedlag={1}".format(my_result['maxlag'], sm_result[3].usedlag)
     print "my_result['aic']={0}, sm_result[3].resols.aic={1}".format(my_result['aic'], sm_result[3].resols.aic)
 
@@ -277,7 +277,7 @@ if __name__ == "__main__":
     my_lag = 35
 
     # My result, try a maximum of lags equal to my_lag
-    bestlag , icbest = get_optimal_lag(y, maxlag=my_lag, model='ar')
+    my_bestlag , my_icbest = get_optimal_lag(y, maxlag=my_lag, model='ar')
 
     # Statsmodel equivalent to optimise lag using aic criterion - will not use as some inconsistencies seen (see below)
     sm_bestlag = AR(np.array(y)).select_order(maxlag=my_lag, ic='aic', trend='nc', method='cmle')
@@ -287,10 +287,10 @@ if __name__ == "__main__":
 
     # =================   COMPARE MY AR(P) VS STATSMODELS   =================
 
-    # Instead I use my optimised lag (bestlag), which gives consistent results with statsmodels too
+    # Instead I use my optimised lag (my_bestlag), which gives consistent results with statsmodels too
 
-    my_result = my_AR(endog=y, maxlag=bestlag)
-    sm_result = AR(np.array(y)).fit(maxlag=bestlag, trend='nc', method='cmle')
+    my_result = my_AR(endog=y, maxlag=my_bestlag)
+    sm_result = AR(np.array(y)).fit(maxlag=my_bestlag, trend='nc', method='cmle')
 
     # # Cross-checks
     # print "\
