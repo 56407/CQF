@@ -10,6 +10,7 @@ from math import exp, sqrt, log
 # To compare my result to statsmodels result
 from statsmodels.tsa.stattools import adfuller
 from statsmodels.tsa.ar_model import AR
+from statsmodels.tsa.tsatools import (lagmat, add_trend)  # helper functions to add lags and trends
 
 # Debug
 from IPython import embed
@@ -27,7 +28,6 @@ import seaborn as sns
 # CQF_January_2016_M4S11_Annotated.pdf
 # http://statsmodels.sourceforge.net/stable/_modules/statsmodels/tsa/ar_model.html#AR
 
-from statsmodels.tsa.tsatools import (lagmat, add_trend)  # helper functions to add lags and trends
 
 
 def my_OLS(Y, X):
@@ -118,14 +118,16 @@ def my_AR(endog, maxlag, trend=None):
     return result
 
 
-def my_adfuller(y, maxlag=None):
+def my_adfuller(y, maxlag=None, regression='c'):
     """
     Augmented Dickey-Fuller test (it reduces to non-augmented version if maxlag=0: dY_t = phi*Y_{t-1} + eps_t)
     e.g. maxlag=1 model: dY_t = phi*Y_{t-1} + phi_1*dY_{t-1} + eps_t
-    NOTE: for simplicity this implementation does not allow to add a constant or time-dependence term,
-    also, only the
+    NOTE: this implementation does not allow to add a time-dependence term
     :param y: time series which wants to be checked for stationarity
     :param maxlag: maximum lag to include
+    :param regression: str {'c','nc'} Constant to include in regression
+        * 'c' : constant only (default)
+        * 'nc' : no constant, no trend
     :return: dictionary with OLS results
     """
     y = np.asarray(y)  # ensure it is in array form
@@ -136,7 +138,10 @@ def my_adfuller(y, maxlag=None):
     ydshort = ydiff[-nobs:]  # level up the dimensions of ydiff to match nobs
 
     Y = ydshort  # endogenous var
-    X = ydall[:, :maxlag + 1]  # exogenous var
+    if regression != 'nc':
+        X = add_trend(ydall[:, :maxlag + 1], regression)  # exogenous var
+    else:
+        X = ydall[:, :maxlag + 1]  # exogenous var
 
     result = my_OLS(Y, X)  # do the usual regression using OLS to estimate parameters
 
@@ -161,12 +166,12 @@ def get_optimal_lag(y, maxlag, model):
     startlag = 0  # loop from 0 up to maxlag
     for lag in range(startlag, startlag + maxlag + 1):
         if model == 'adf':
-            results[lag] = my_adfuller(y, maxlag=lag)
+            results[lag] = my_adfuller(y, maxlag=lag, regression='c')
         elif model == 'ar':
             results[lag] = my_AR(y, maxlag=lag)
         # print 'lag={0}, aic={1}'.format(lag, results[lag]['aic'])
-        # Cross-check results vs statsmodels result - warning: small difference observed
-        # sm_result = adfuller(x=y, maxlag=lag, regression='nc', autolag=None, regresults=True)[3].resols
+        # # Cross-check results vs statsmodels result - warning: small difference observed
+        # sm_result = adfuller(x=y, maxlag=lag, regression='c', autolag=None, regresults=True)[3].resols
         # print 'lag={0}, aic={1}, sm_aic={2}'.format(lag, results[lag]['aic'], sm_result.aic)
         # print 'lag={0}, nobs={1}, sm_nobs={2}'.format(lag, results[lag]['nobs'], sm_result.nobs)
         # print 'lag={0}, adfstat={1}, sm_adfstat={2}'.format(lag, results[lag]['adfstat'], sm_result.tvalues)
