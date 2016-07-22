@@ -8,6 +8,7 @@ import math
 from math import exp, sqrt, log
 
 # To compare my result to statsmodels result
+from statsmodels.regression.linear_model import OLS
 from statsmodels.tsa.stattools import adfuller
 from statsmodels.tsa.ar_model import AR
 from statsmodels.tsa.tsatools import (lagmat, add_trend)  # helper functions to add lags and trends
@@ -111,6 +112,7 @@ def my_AR(endog, maxlag, trend=None):
     if trend is not None:
         X = add_trend(X, prepend=True, trend=trend)  # prepends puts trend column at the beginning
     result = my_OLS(Y, X)
+    result['maxlag'] = maxlag
     # Akaike information criterion using statsmodel def for AR(p) (Lutkephol's definition)
     # note this is diff to adfuller's def
     result['aic'] = np.log(result['sigma']) + 2.0 * (1.0 + result['df_model']) / result['nobs']
