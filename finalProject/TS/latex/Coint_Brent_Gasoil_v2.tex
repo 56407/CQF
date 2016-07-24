@@ -1440,8 +1440,9 @@ strategies the parameters of interest are:
   \(\sigma_{eq} = \sigma_{OU} / \sqrt{2 \theta}\) can be used to plot
   trading bounds for entry/exit signals as \(\mu_e \pm \sigma_{eq}\)
 \item
-  Here we use \(\tau = 1/252\) given our daily data frequency and
-  in-sample data covering 1 trading year i.e. \(\sim 252\) trading days
+  Here we use \(\tau = 1/252\) given our data has daily frequency and
+  the in-sample period covers 1 trading year i.e. \(\sim 252\) trading
+  days
 \end{itemize}
 
     \subsection{Real Data Example}\label{real-data-example}
@@ -2090,52 +2091,127 @@ obtained, where we see the trading bounds are:
   \end{cases}
 \]
 
-    \begin{longtable}[c]{@{}cccccc@{}}
+The AR(3) fit yields a lower standard error in \(\theta\) than AR(1),
+although not by much and yet the \(\theta\) values are quite different.
+This perhaps indicates the OU fit is not suitable regardless of the lag
+order.
+
+    \begin{longtable}[c]{@{}ccccccc@{}}
 \toprule
-Process & \(\theta\) & \(\tilde{\tau}\) & \(\mu_e\) & \(\sigma_{OU}\) &
-\(\sigma_{eq}\)\tabularnewline
+\begin{minipage}[b]{0.11\columnwidth}\centering\strut
+Process
+\strut\end{minipage} &
+\begin{minipage}[b]{0.12\columnwidth}\centering\strut
+\(\theta\)
+\strut\end{minipage} &
+\begin{minipage}[b]{0.13\columnwidth}\centering\strut
+\(\tilde{\tau}\)
+\strut\end{minipage} &
+\begin{minipage}[b]{0.11\columnwidth}\centering\strut
+\(\mu_e\)
+\strut\end{minipage} &
+\begin{minipage}[b]{0.12\columnwidth}\centering\strut
+\(\sigma_{OU}\)
+\strut\end{minipage} &
+\begin{minipage}[b]{0.11\columnwidth}\centering\strut
+\(\sigma_{eq}\)
+\strut\end{minipage} &
+\begin{minipage}[b]{0.13\columnwidth}\centering\strut
+\(s.e._\theta\)
+\strut\end{minipage}\tabularnewline
 \midrule
 \endhead
-AR(1) & 49.1253 & 0.0141 & -0.1255 & 16.3957 & 1.6541\tabularnewline
-AR(3) & 258.9327 & 0.0027 & -0.0529 & 20.0723 & 0.8820\tabularnewline
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+AR(1)
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+49.1253
+\strut\end{minipage} &
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+0.0141
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+-0.1255
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+16.3957
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+1.6541
+\strut\end{minipage} &
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+7.3850
+\strut\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+AR(3)
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+258.9327
+\strut\end{minipage} &
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+0.0027
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+-0.0529
+\strut\end{minipage} &
+\begin{minipage}[t]{0.12\columnwidth}\centering\strut
+20.0723
+\strut\end{minipage} &
+\begin{minipage}[t]{0.11\columnwidth}\centering\strut
+0.8820
+\strut\end{minipage} &
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+5.6638
+\strut\end{minipage}\tabularnewline
 \bottomrule
 \end{longtable}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}11}]:} \PY{c}{\PYZsh{} ======  FIT TO OU PROCESS  ======}
-         
-         \PY{c}{\PYZsh{} My implementations}
-         \PY{k+kn}{from} \PY{n+nn}{analysis} \PY{k+kn}{import} \PY{n}{my\PYZus{}AR}  \PY{c}{\PYZsh{} AR(p) model}
-         
-         \PY{c}{\PYZsh{} Import statsmodels equivalents to validate results}
-         \PY{k+kn}{from} \PY{n+nn}{statsmodels.tsa.ar\PYZus{}model} \PY{k+kn}{import} \PY{n}{AR}
-         
-         \PY{c}{\PYZsh{} Run AR(1) model with constant term with e\PYZus{}t\PYZus{}hat as endogenous variable}
-         \PY{n}{my\PYZus{}res\PYZus{}ar} \PY{o}{=} \PY{n}{my\PYZus{}AR}\PY{p}{(}\PY{n}{endog}\PY{o}{=}\PY{n}{e\PYZus{}t\PYZus{}hat}\PY{p}{,} \PY{n}{maxlag}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{trend}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{c}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         \PY{n}{sm\PYZus{}res\PYZus{}ar} \PY{o}{=} \PY{n}{AR}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{e\PYZus{}t\PYZus{}hat}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{maxlag}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{trend}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{c}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{cmle}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         
-         \PY{c}{\PYZsh{} Stability Check}
-         \PY{k}{print} \PY{l+s}{\PYZsq{}}\PY{l+s}{is AR(\PYZob{}0\PYZcb{}) model stable: \PYZob{}1\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{sm\PYZus{}res\PYZus{}ar}\PY{o}{.}\PY{n}{k\PYZus{}ar}\PY{p}{,} \PY{n}{is\PYZus{}stable}\PY{p}{(}\PY{n}{sm\PYZus{}res\PYZus{}ar}\PY{o}{.}\PY{n}{roots}\PY{p}{)}\PY{p}{)}
-         \PY{k}{print} \PY{l+s}{\PYZsq{}}\PY{l+s}{is AR(\PYZob{}0\PYZcb{}) model stable: \PYZob{}1\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{my\PYZus{}res\PYZus{}ar}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{maxlag}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{is\PYZus{}stable}\PY{p}{(}\PY{n}{my\PYZus{}res\PYZus{}ar}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{roots}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
-         
-         \PY{c}{\PYZsh{} Cross\PYZhy{}checks}
-         \PY{k}{print} \PY{l+s}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}}
-         \PY{l+s}{AR(\PYZob{}12\PYZcb{}).fit.params=\PYZob{}0\PYZcb{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{ MY\PYZus{}AR(\PYZob{}13\PYZcb{}) params=\PYZob{}1\PYZcb{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}}
-         \PY{l+s}{AR(\PYZob{}12\PYZcb{}).fit.llf=\PYZob{}2\PYZcb{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{ MY\PYZus{}AR(\PYZob{}13\PYZcb{}) llf=\PYZob{}3\PYZcb{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}}
-         \PY{l+s}{AR(\PYZob{}12\PYZcb{}).fit.nobs=\PYZob{}4\PYZcb{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{ MY\PYZus{}AR(\PYZob{}13\PYZcb{}) nobs=\PYZob{}5\PYZcb{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}}
-         \PY{l+s}{AR(\PYZob{}12\PYZcb{}).fit.cov\PYZus{}params(scale=ols\PYZus{}scale)=\PYZob{}6\PYZcb{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{ MY\PYZus{}AR(\PYZob{}13\PYZcb{}) cov\PYZus{}params=\PYZob{}7\PYZcb{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}}
-         \PY{l+s}{AR(\PYZob{}12\PYZcb{}).fit.bse=\PYZob{}8\PYZcb{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{ MY\PYZus{}AR(\PYZob{}13\PYZcb{}) bse=\PYZob{}9\PYZcb{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}}
-         \PY{l+s}{AR(\PYZob{}12\PYZcb{}).fit.tvalues=\PYZob{}10\PYZcb{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{ MY\PYZus{}AR(\PYZob{}13\PYZcb{}) tvalue=\PYZob{}11\PYZcb{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}}
-         \PY{l+s}{AR(\PYZob{}12\PYZcb{}).fit.k\PYZus{}ar=\PYZob{}12\PYZcb{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{ MY\PYZus{}AR(\PYZob{}13\PYZcb{}) maxlag=\PYZob{}13\PYZcb{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}}
-         \PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}
-             \PY{n}{sm\PYZus{}res\PYZus{}ar}\PY{o}{.}\PY{n}{params}\PY{p}{,} \PY{n}{my\PYZus{}res\PYZus{}ar}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{params}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
-             \PY{n}{sm\PYZus{}res\PYZus{}ar}\PY{o}{.}\PY{n}{llf}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{my\PYZus{}res\PYZus{}ar}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{llf}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,}
-             \PY{n}{sm\PYZus{}res\PYZus{}ar}\PY{o}{.}\PY{n}{nobs}\PY{p}{,} \PY{n}{my\PYZus{}res\PYZus{}ar}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{nobs}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
-             \PY{n}{sm\PYZus{}res\PYZus{}ar}\PY{o}{.}\PY{n}{cov\PYZus{}params}\PY{p}{(}\PY{n}{scale}\PY{o}{=}\PY{n}{my\PYZus{}res\PYZus{}ar}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{ols\PYZus{}scale}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{my\PYZus{}res\PYZus{}ar}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{cov\PYZus{}params}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
-             \PY{n}{sm\PYZus{}res\PYZus{}ar}\PY{o}{.}\PY{n}{bse}\PY{p}{,} \PY{n}{my\PYZus{}res\PYZus{}ar}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{bse}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
-             \PY{n}{sm\PYZus{}res\PYZus{}ar}\PY{o}{.}\PY{n}{tvalues}\PY{p}{,} \PY{n}{my\PYZus{}res\PYZus{}ar}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{tvalue}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
-             \PY{n}{sm\PYZus{}res\PYZus{}ar}\PY{o}{.}\PY{n}{k\PYZus{}ar}\PY{p}{,} \PY{n}{my\PYZus{}res\PYZus{}ar}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{maxlag}\PY{l+s}{\PYZsq{}}\PY{p}{]}
-         \PY{p}{)}
+{\color{incolor}In [{\color{incolor}295}]:} \PY{c}{\PYZsh{} ======  FIT TO OU PROCESS  ======}
+          
+          \PY{c}{\PYZsh{} My implementations}
+          \PY{k+kn}{from} \PY{n+nn}{analysis} \PY{k+kn}{import} \PY{n}{my\PYZus{}AR}  \PY{c}{\PYZsh{} AR(p) model}
+          
+          \PY{c}{\PYZsh{} Import statsmodels equivalents to validate results}
+          \PY{k+kn}{from} \PY{n+nn}{statsmodels.tsa.ar\PYZus{}model} \PY{k+kn}{import} \PY{n}{AR}
+          
+          \PY{c}{\PYZsh{} Run AR(1) model with constant term with e\PYZus{}t\PYZus{}hat as endogenous variable}
+          \PY{n}{my\PYZus{}res\PYZus{}ar} \PY{o}{=} \PY{n}{my\PYZus{}AR}\PY{p}{(}\PY{n}{endog}\PY{o}{=}\PY{n}{e\PYZus{}t\PYZus{}hat}\PY{p}{,} \PY{n}{maxlag}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{trend}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{c}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{sm\PYZus{}res\PYZus{}ar} \PY{o}{=} \PY{n}{AR}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{e\PYZus{}t\PYZus{}hat}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{maxlag}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{trend}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{c}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{cmle}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c}{\PYZsh{} Stability Check}
+          \PY{k}{print} \PY{l+s}{\PYZsq{}}\PY{l+s}{is AR(\PYZob{}0\PYZcb{}) model stable: \PYZob{}1\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{sm\PYZus{}res\PYZus{}ar}\PY{o}{.}\PY{n}{k\PYZus{}ar}\PY{p}{,} \PY{n}{is\PYZus{}stable}\PY{p}{(}\PY{n}{sm\PYZus{}res\PYZus{}ar}\PY{o}{.}\PY{n}{roots}\PY{p}{)}\PY{p}{)}
+          \PY{k}{print} \PY{l+s}{\PYZsq{}}\PY{l+s}{is AR(\PYZob{}0\PYZcb{}) model stable: \PYZob{}1\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{my\PYZus{}res\PYZus{}ar}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{maxlag}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{is\PYZus{}stable}\PY{p}{(}\PY{n}{my\PYZus{}res\PYZus{}ar}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{roots}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          
+          \PY{c}{\PYZsh{} Cross\PYZhy{}checks}
+          \PY{k}{print} \PY{l+s}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}}
+          \PY{l+s}{AR(\PYZob{}12\PYZcb{}).fit.params=\PYZob{}0\PYZcb{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{ MY\PYZus{}AR(\PYZob{}13\PYZcb{}) params=\PYZob{}1\PYZcb{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}}
+          \PY{l+s}{AR(\PYZob{}12\PYZcb{}).fit.llf=\PYZob{}2\PYZcb{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{ MY\PYZus{}AR(\PYZob{}13\PYZcb{}) llf=\PYZob{}3\PYZcb{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}}
+          \PY{l+s}{AR(\PYZob{}12\PYZcb{}).fit.nobs=\PYZob{}4\PYZcb{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{ MY\PYZus{}AR(\PYZob{}13\PYZcb{}) nobs=\PYZob{}5\PYZcb{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}}
+          \PY{l+s}{AR(\PYZob{}12\PYZcb{}).fit.cov\PYZus{}params(scale=ols\PYZus{}scale)=\PYZob{}6\PYZcb{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{ MY\PYZus{}AR(\PYZob{}13\PYZcb{}) cov\PYZus{}params=\PYZob{}7\PYZcb{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}}
+          \PY{l+s}{AR(\PYZob{}12\PYZcb{}).fit.bse=\PYZob{}8\PYZcb{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{ MY\PYZus{}AR(\PYZob{}13\PYZcb{}) bse=\PYZob{}9\PYZcb{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}}
+          \PY{l+s}{AR(\PYZob{}12\PYZcb{}).fit.tvalues=\PYZob{}10\PYZcb{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{ MY\PYZus{}AR(\PYZob{}13\PYZcb{}) tvalue=\PYZob{}11\PYZcb{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}}
+          \PY{l+s}{AR(\PYZob{}12\PYZcb{}).fit.k\PYZus{}ar=\PYZob{}12\PYZcb{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{ MY\PYZus{}AR(\PYZob{}13\PYZcb{}) maxlag=\PYZob{}13\PYZcb{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}}
+          \PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}
+              \PY{n}{sm\PYZus{}res\PYZus{}ar}\PY{o}{.}\PY{n}{params}\PY{p}{,} \PY{n}{my\PYZus{}res\PYZus{}ar}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{params}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+              \PY{n}{sm\PYZus{}res\PYZus{}ar}\PY{o}{.}\PY{n}{llf}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{my\PYZus{}res\PYZus{}ar}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{llf}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+              \PY{n}{sm\PYZus{}res\PYZus{}ar}\PY{o}{.}\PY{n}{nobs}\PY{p}{,} \PY{n}{my\PYZus{}res\PYZus{}ar}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{nobs}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+              \PY{n}{sm\PYZus{}res\PYZus{}ar}\PY{o}{.}\PY{n}{cov\PYZus{}params}\PY{p}{(}\PY{n}{scale}\PY{o}{=}\PY{n}{my\PYZus{}res\PYZus{}ar}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{ols\PYZus{}scale}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{my\PYZus{}res\PYZus{}ar}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{cov\PYZus{}params}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+              \PY{n}{sm\PYZus{}res\PYZus{}ar}\PY{o}{.}\PY{n}{bse}\PY{p}{,} \PY{n}{my\PYZus{}res\PYZus{}ar}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{bse}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+              \PY{n}{sm\PYZus{}res\PYZus{}ar}\PY{o}{.}\PY{n}{tvalues}\PY{p}{,} \PY{n}{my\PYZus{}res\PYZus{}ar}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{tvalue}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+              \PY{n}{sm\PYZus{}res\PYZus{}ar}\PY{o}{.}\PY{n}{k\PYZus{}ar}\PY{p}{,} \PY{n}{my\PYZus{}res\PYZus{}ar}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{maxlag}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+          \PY{p}{)}
+          
+          \PY{c}{\PYZsh{} Get the fit errors}
+          \PY{n}{ar1} \PY{o}{=} \PY{n}{AR}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{e\PYZus{}t\PYZus{}hat}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{maxlag}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{trend}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{c}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{cmle}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ar3} \PY{o}{=} \PY{n}{AR}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{e\PYZus{}t\PYZus{}hat}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{maxlag}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{trend}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{c}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{cmle}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+          \PY{c}{\PYZsh{} print ar1.bse}
+          \PY{c}{\PYZsh{} print ar3.bse}
+          
+          \PY{c}{\PYZsh{} Standard error propagation in theta }
+          \PY{c}{\PYZsh{} (using formula in https://en.wikipedia.org/wiki/Propagation\PYZus{}of\PYZus{}uncertainty\PYZsh{}Simplification )}
+          \PY{k}{print} \PY{l+s}{\PYZsq{}}\PY{l+s}{theta s.e. AR(1) = \PYZob{}0:.4f\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{p}{(}\PY{l+m+mf}{1.}\PY{o}{/}\PY{n}{tau}\PY{o}{*}\PY{n}{my\PYZus{}B}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{*} \PY{p}{(}\PY{n}{ar1}\PY{o}{.}\PY{n}{bse}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+          \PY{k}{print} \PY{l+s}{\PYZsq{}}\PY{l+s}{theta s.e. AR(3) = \PYZob{}0:.4f\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{p}{(}\PY{l+m+mf}{1.}\PY{o}{/}\PY{n}{tau}\PY{o}{*}\PY{n}{sm\PYZus{}B}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{*} \PY{p}{(}\PY{n}{ar3}\PY{o}{.}\PY{n}{bse}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
@@ -2158,7 +2234,10 @@ AR(3).fit.bse=[ 0.05201268  0.06279833  0.0618892   0.06264041]
 AR(3).fit.tvalues=[-0.65333296  5.6991455   6.14539696  2.91496187] 
  MY\_AR(1) tvalue=[ -0.37753101  23.10604287] 
 AR(3).fit.k\_ar=3 
- MY\_AR(1) maxlag=1
+ MY\_AR(1) maxlag=1 
+
+theta s.e. AR(1) = 7.3850
+theta s.e. AR(3) = 5.6638
     \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
@@ -2298,9 +2377,7 @@ statsmodels implementation.
 
     \section{Trading Strategies}\label{trading-strategies}
 
-    \subsection{Intro}\label{intro}
-
-Below we describe a few strategies which exploit the cointegration
+    Below we describe a few strategies which exploit the cointegration
 properties. It should be noted that it is actually very difficult to
 find a directly tradable asset that possesses mean-reverting behaviour -
 in practice this is instead achieved by creating a \emph{stationary
@@ -2529,8 +2606,18 @@ Given this, a simple strategy would then be:
   zero
 \end{itemize}
 
-The figure below shows the out-of-sample z-score spread, as estimated by
-Equation X with the OU entry/exit bounds marked.
+The figure below shows the out-of-sample z-score spread with the AR(3)
+OU entry/exit bounds (Eqn. X).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}351}]:} \PY{k}{print} \PY{l+s}{\PYZsq{}}\PY{l+s}{AR(3) OU bounds}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{sm\PYZus{}mu\PYZus{}e}\PY{p}{,} \PY{n}{sm\PYZus{}sigma\PYZus{}e}
+          \PY{k}{print} \PY{l+s}{\PYZsq{}}\PY{l+s}{AR(1) OU bounds}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{my\PYZus{}mu\PYZus{}e}\PY{p}{,} \PY{n}{my\PYZus{}sigma\PYZus{}e}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+AR(3) OU bounds -0.0529223314626 0.882039704225
+AR(1) OU bounds -0.125460333308 1.65410500427
+    \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
 {\color{incolor}In [{\color{incolor}215}]:} \PY{k}{def} \PY{n+nf}{static\PYZus{}zscore}\PY{p}{(}\PY{n}{series}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{n+nb+bp}{None}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{n+nb+bp}{None}\PY{p}{)}\PY{p}{:}
@@ -2576,7 +2663,7 @@ Equation X with the OU entry/exit bounds marked.
 \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}217}]:} \PY{c}{\PYZsh{} ========= IN\PYZhy{}SAMPLE P\PYZam{}l =========}
+{\color{incolor}In [{\color{incolor}299}]:} \PY{c}{\PYZsh{} ========= IN\PYZhy{}SAMPLE P\PYZam{}l =========}
           
           \PY{c}{\PYZsh{} e\PYZus{}t\PYZus{}hat is the in\PYZhy{}sample spread}
           \PY{n}{df\PYZus{}pnl\PYZus{}is} \PY{o}{=} \PY{n}{get\PYZus{}pnl\PYZus{}df}\PY{p}{(}\PY{n}{e\PYZus{}t\PYZus{}hat}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{n}{sm\PYZus{}mu\PYZus{}e}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{n}{sm\PYZus{}sigma\PYZus{}e}\PY{p}{)}
@@ -2584,7 +2671,7 @@ Equation X with the OU entry/exit bounds marked.
 \end{Verbatim}
 
             \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}217}]:}              e\_t\_hat  e\_t\_hat\_norm  pos       chg       pnl    pnl\_cum
+{\color{outcolor}Out[{\color{outcolor}299}]:}              e\_t\_hat  e\_t\_hat\_norm  pos       chg       pnl    pnl\_cum
           Date                                                                  
           2014-12-24 -1.760881     -1.936374  1.0  0.128608  0.128608  31.408631
           2014-12-26 -1.632273     -1.790567  1.0  1.019330  1.019330  32.427960
@@ -2594,7 +2681,7 @@ Equation X with the OU entry/exit bounds marked.
 \end{Verbatim}
         
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}219}]:} \PY{c}{\PYZsh{} ========= OUT\PYZhy{}OF\PYZhy{}SAMPLE P\PYZam{}l =========}
+{\color{incolor}In [{\color{incolor}306}]:} \PY{c}{\PYZsh{} ========= OUT\PYZhy{}OF\PYZhy{}SAMPLE P\PYZam{}l =========}
           
           \PY{c}{\PYZsh{} Construct the out\PYZhy{}of\PYZhy{}sample spread}
           \PY{n}{e\PYZus{}t\PYZus{}hat\PYZus{}os} \PY{o}{=} \PY{n}{df\PYZus{}os}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{gasoil}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{c\PYZus{}hat} \PY{o}{\PYZhy{}} \PY{n}{beta2\PYZus{}hat}\PY{o}{*}\PY{n}{df\PYZus{}os}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{brent}\PY{l+s}{\PYZsq{}}\PY{p}{]}
@@ -2604,7 +2691,7 @@ Equation X with the OU entry/exit bounds marked.
 \end{Verbatim}
 
             \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}219}]:}              e\_t\_hat  e\_t\_hat\_norm  pos       chg       pnl    pnl\_cum
+{\color{outcolor}Out[{\color{outcolor}306}]:}              e\_t\_hat  e\_t\_hat\_norm  pos       chg       pnl    pnl\_cum
           Date                                                                  
           2015-06-24  0.087063      0.158706  1.0 -1.161693 -1.161693  40.100749
           2015-06-25 -1.074630     -1.158346  1.0  0.445164  0.445164  40.545913
@@ -2614,7 +2701,7 @@ Equation X with the OU entry/exit bounds marked.
 \end{Verbatim}
         
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}220}]:} \PY{c}{\PYZsh{} ======== PLOT OUT\PYZhy{}OF\PYZhy{}SAMPLE Z\PYZhy{}SCORE ========}
+{\color{incolor}In [{\color{incolor}301}]:} \PY{c}{\PYZsh{} ======== PLOT OUT\PYZhy{}OF\PYZhy{}SAMPLE Z\PYZhy{}SCORE ========}
           
           \PY{c}{\PYZsh{} Normalise to OU bounds}
           \PY{n}{normalised\PYZus{}e\PYZus{}t\PYZus{}hat\PYZus{}os} \PY{o}{=} \PY{n}{static\PYZus{}zscore}\PY{p}{(}\PY{n}{e\PYZus{}t\PYZus{}hat\PYZus{}os}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{n}{sm\PYZus{}mu\PYZus{}e}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{n}{sm\PYZus{}sigma\PYZus{}e}\PY{p}{)}
@@ -2623,16 +2710,16 @@ Equation X with the OU entry/exit bounds marked.
           \PY{n}{plt}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{green}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZhy{}\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}
           \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdl{}}\PY{l+s}{\PYZbs{}}\PY{l+s}{hat\PYZob{}e\PYZcb{}\PYZus{}t\PYZdl{}}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{+1}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZhy{}1}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{upper right}\PY{l+s}{\PYZsq{}}\PY{p}{)}
           \PY{n}{plt}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{grey}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{z\PYZhy{}score}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{AR(3) OU z\PYZhy{}score}\PY{l+s}{\PYZsq{}}\PY{p}{)}
           \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Normalised Out\PYZhy{}of\PYZhy{}sample Cointegrated Spread }\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{(Gasoil\PYZhy{}Brent)}\PY{l+s}{\PYZsq{}}\PY{p}{)}
 \end{Verbatim}
 
             \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}220}]:} <matplotlib.text.Text at 0x1808a5c0>
+{\color{outcolor}Out[{\color{outcolor}301}]:} <matplotlib.text.Text at 0x2028e908>
 \end{Verbatim}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_92_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_93_1.png}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -2643,34 +2730,47 @@ periods. In addition, note this doesn't include \textbf{transaction
 costs} which could certainly add up to an overall loss.
 
     \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}307}]:} \PY{c}{\PYZsh{} ======= P\PYZam{}L USING AR(1) BOUNDS INSTEAD OF AR(3) BOUNDS =======}
+          \PY{n}{ar1\PYZus{}df\PYZus{}pnl\PYZus{}is} \PY{o}{=} \PY{n}{get\PYZus{}pnl\PYZus{}df}\PY{p}{(}\PY{n}{e\PYZus{}t\PYZus{}hat}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{n}{my\PYZus{}mu\PYZus{}e}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{n}{my\PYZus{}sigma\PYZus{}e}\PY{p}{)}
+          \PY{n}{ar1\PYZus{}df\PYZus{}pnl\PYZus{}os} \PY{o}{=} \PY{n}{get\PYZus{}pnl\PYZus{}df}\PY{p}{(}\PY{n}{e\PYZus{}t\PYZus{}hat\PYZus{}os}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{n}{my\PYZus{}mu\PYZus{}e}\PY{p}{,} \PY{n}{sigma}\PY{o}{=}\PY{n}{my\PYZus{}sigma\PYZus{}e}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
 {\color{incolor}In [{\color{incolor}232}]:} \PY{o}{\PYZpc{}}\PY{k}{run} my\PYZus{}pyfolio.py  \PYZsh{} needed to run functions below
 \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}256}]:} \PY{c}{\PYZsh{} ====== PLOT THE P\PYZam{}L CURVE FOR IN\PYZhy{}SAMPLE AND OUT\PYZhy{}OF\PYZhy{}SAMPLE ======}
+{\color{incolor}In [{\color{incolor}350}]:} \PY{c}{\PYZsh{} ====== PLOT THE P\PYZam{}L CURVE FOR IN\PYZhy{}SAMPLE AND OUT\PYZhy{}OF\PYZhy{}SAMPLE ======}
           
-          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
           
           \PY{n}{df}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{gasoil}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{shift}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{cumsum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{grey}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZhy{}\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}  \PY{c}{\PYZsh{} market benchmark for gasoil (long gasoil)}
           \PY{n}{df}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{brent}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{shift}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{cumsum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{grey}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}  \PY{c}{\PYZsh{} market benchmark for brent (long brent)}
           
           \PY{n}{k} \PY{o}{=} \PY{n}{df\PYZus{}pnl\PYZus{}is}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{pnl\PYZus{}cum}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}  \PY{c}{\PYZsh{} last non\PYZhy{}nan row of in\PYZhy{}sample pnl}
           \PY{n}{plot\PYZus{}drawdown\PYZus{}periods}\PY{p}{(}\PY{n}{df\PYZus{}pnl\PYZus{}is}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{pnl}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{top}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
-          \PY{n}{plot\PYZus{}drawdown\PYZus{}periods}\PY{p}{(}\PY{n}{df\PYZus{}pnl\PYZus{}os}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{pnl}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{n}{k}\PY{p}{,} \PY{n}{top}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{r}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plot\PYZus{}drawdown\PYZus{}periods}\PY{p}{(}\PY{n}{df\PYZus{}pnl\PYZus{}os}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{pnl}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{n}{k}\PY{p}{,} \PY{n}{top}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{sns}\PY{o}{.}\PY{n}{xkcd\PYZus{}rgb}\PY{p}{[}\PY{l+s}{\PYZdq{}}\PY{l+s}{pale red}\PY{l+s}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
           
-          \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{gasoil benchmark}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{brent benchmark}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{strategy in\PYZhy{}sample}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{strategy out\PYZhy{}of\PYZhy{}sample}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
-                     \PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{upper left}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{large}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-          \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{df\PYZus{}temp}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{black}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZhy{}\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+          \PY{c}{\PYZsh{} PnL using AR(1) bounds}
+          \PY{n}{ar1\PYZus{}df\PYZus{}pnl\PYZus{}is}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{pnl\PYZus{}cum}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{n}{sns}\PY{o}{.}\PY{n}{xkcd\PYZus{}rgb}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{denim blue}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZhy{}\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+          \PY{p}{(}\PY{n}{ar1\PYZus{}df\PYZus{}pnl\PYZus{}os}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{pnl\PYZus{}cum}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{n}{ar1\PYZus{}df\PYZus{}pnl\PYZus{}is}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{pnl\PYZus{}cum}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{n}{sns}\PY{o}{.}\PY{n}{xkcd\PYZus{}rgb}\PY{p}{[}\PY{l+s}{\PYZdq{}}\PY{l+s}{pale red}\PY{l+s}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZhy{}\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{gasoil benchmark}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{brent benchmark}\PY{l+s}{\PYZsq{}}\PY{p}{,} 
+                      \PY{l+s}{\PYZsq{}}\PY{l+s}{AR(3) in\PYZhy{}sample}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{AR(3) out\PYZhy{}of\PYZhy{}sample}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                     \PY{l+s}{\PYZsq{}}\PY{l+s}{AR(1) in\PYZhy{}sample}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{AR(1) out\PYZhy{}of\PYZhy{}sample}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                     \PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{upper left}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{large}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{ncol}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{df\PYZus{}temp}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{black}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{:}\PY{l+s}{\PYZsq{}}\PY{p}{)}
           \PY{n}{plt}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{black}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{P\PYZam{}L and top 5 drawdown periods }\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{ (in\PYZhy{}sample and out\PYZhy{}of\PYZhy{}sample)}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{P\PYZam{}L for two pair trading strategies and market benchmarks }\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{xx\PYZhy{}large}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{df\PYZus{}pnl\PYZus{}is}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{pnl}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{(top 5 drawdown periods shown for AR(3))}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{large}\PY{l+s}{\PYZsq{}}\PY{p}{)}
 \end{Verbatim}
 
             \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}256}]:} <matplotlib.text.Text at 0x1f7c32b0>
+{\color{outcolor}Out[{\color{outcolor}350}]:} <matplotlib.text.Text at 0x2abcf240>
 \end{Verbatim}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_95_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_97_1.png}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -2889,7 +2989,7 @@ Gas}\label{cointegration-between-italian-and-dutch-gas}
 \end{Verbatim}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_105_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_107_1.png}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -2970,7 +3070,7 @@ Gas}\label{cointegration-between-italian-and-dutch-gas}
 \end{Verbatim}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_107_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_109_1.png}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -2980,7 +3080,7 @@ Gas}\label{cointegration-between-italian-and-dutch-gas}
 \end{Verbatim}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_108_0.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_110_0.png}
     \end{center}
     { \hspace*{\fill} \\}
     
