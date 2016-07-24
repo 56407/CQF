@@ -262,9 +262,7 @@
 %          \PY{c}{\PYZsh{} pylab.rcParams[\PYZsq{}figure.figsize\PYZsq{}] = (20, 10)}
 %\end{Verbatim}
 
-To  calculate the Credit Valuation Adjustment
-(CVA) taken by counterparty `A' to the price of an Interest Rate Swap
-(IRS) with counterparty `B', the main inputs are:
+We wish to model the scenario of an Interest Rate Swap (IRS) entered by two counterparties `A' and `B'.  The IRS is assumed to be written on a 6M LIBOR \(L_{6M}\) variable rate, with notional $N=1$. To  calculate the Credit Valuation Adjustment the main inputs would be:
 
 \begin{itemize}
 \tightlist
@@ -276,16 +274,8 @@ To  calculate the Credit Valuation Adjustment
   Discount Factors (DFs)
 \end{itemize}
 
-Below we discuss each of these aspects separately. Additional assumptions for this scenario are:
+Below we discuss each of these aspects separately. All the relevant scripts and spreadsheets to arrive at the results can be found in the project repository ``\emph{finalProject/CVA}'' in the attached USB drive. In particular the ipython notebook \emph{CVA.ipynb}  demonstrates how to run the code, which is omitted in this report for brevity. The project repository is also available online on Github \url{https://github.com/tsando/CQF/tree/master/finalProject}.
 
-\begin{itemize}
-\tightlist
-\item
-  The IRS is assumed to be written on a 6M LIBOR \(L_{6M}\) expiring in
-  5Y, hence the payment frequency is \(\tau=0.5\)
-\item
-  The notional is assumed to be \(N=1\)
-\end{itemize}
 
     \section{Default Probabilities}\label{default-probabilities}
 
@@ -913,13 +903,15 @@ For this hypothetical IRS scenario the CVA adjustment came out to be quite small
 
   \begin{thebibliography}{1}
 
+ \bibitem{repo} Tanya Sandoval, {\em Github repository}  \url{https://github.com/tsando/CQF/tree/master/finalProject}
+
   \bibitem{notes} Richard Diamond, {\em CQF Lectures - Heath Jarrow \& Morton Model},  2016
   
     \bibitem{notes2} Richard Diamond, {\em CQF Lectures - Final Project Workshop Part I},  2016
     
    \bibitem{notes3} Riaz Ahmad, {\em Stochastic Interest Rate Modeling},  2016
    
-   \bibitem{data} {\em Bank of England Yield Curves},  2016: \url{http://www.bankofengland.co.uk/statistics/Pages/yieldcurve/archive.aspx}
+   \bibitem{data} {\em Bank of England Yield Curves},  2016 \url{http://www.bankofengland.co.uk/statistics/Pages/yieldcurve/archive.aspx}
    
 %
 %  \bibitem{impj}  The Japan Reader {\em Imperial Japan 1800-1945} 1973:

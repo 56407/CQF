@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.4.14)  24 JUL 2016 18:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.4.14)  24 JUL 2016 18:45
 entering extended mode
 **./CVA.tex
 (CVA.tex
@@ -531,171 +531,170 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
  [1
 
 {C:/Users/Tanya.Sandoval/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 272.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 270.
 
 
 ("C:\Apps\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 272.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 270.
 
 ("C:\Apps\MiKTeX 2.9\tex\latex\ucs\uni-34.def"
 File: uni-34.def 2013/05/13 UCS: Unicode data U+2200..U+22FF
 ) [2]
-<CVA_files/CVA_9_0.png, id=98, 894.34125pt x 381.425pt>
+<CVA_files/CVA_9_0.png, id=100, 894.34125pt x 381.425pt>
 File: CVA_files/CVA_9_0.png Graphic file (type png)
 
 <use CVA_files/CVA_9_0.png>
-Package pdftex.def Info: CVA_files/CVA_9_0.png used on input line 384.
+Package pdftex.def Info: CVA_files/CVA_9_0.png used on input line 374.
 (pdftex.def)             Requested size: 894.33907pt x 381.42406pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--387
+Underfull \hbox (badness 10000) in paragraph at lines 376--377
 
  []
 
-<CVA_files/CVA_10_0.png, id=100, 902.37125pt x 350.30875pt>
+<CVA_files/CVA_10_0.png, id=102, 902.37125pt x 350.30875pt>
 File: CVA_files/CVA_10_0.png Graphic file (type png)
 
 <use CVA_files/CVA_10_0.png>
-Package pdftex.def Info: CVA_files/CVA_10_0.png used on input line 405.
+Package pdftex.def Info: CVA_files/CVA_10_0.png used on input line 395.
 (pdftex.def)             Requested size: 902.36905pt x 350.30789pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 407--408
+Underfull \hbox (badness 10000) in paragraph at lines 397--398
 
  []
 
 [3 <./CVA_files/CVA_9_0.png> <./CVA_files/CVA_10_0.png>]
-<CVA_files/CVA_18_0.png, id=109, 889.3225pt x 350.30875pt>
+<CVA_files/CVA_18_0.png, id=111, 889.3225pt x 350.30875pt>
 File: CVA_files/CVA_18_0.png Graphic file (type png)
 
 <use CVA_files/CVA_18_0.png>
-Package pdftex.def Info: CVA_files/CVA_18_0.png used on input line 480.
+Package pdftex.def Info: CVA_files/CVA_18_0.png used on input line 470.
 (pdftex.def)             Requested size: 889.32031pt x 350.30789pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 482--483
+Underfull \hbox (badness 10000) in paragraph at lines 472--473
 
  []
 
-<CVA_files/CVA_20_0.png, id=110, 881.2925pt x 341.275pt>
+<CVA_files/CVA_20_0.png, id=112, 881.2925pt x 341.275pt>
 File: CVA_files/CVA_20_0.png Graphic file (type png)
 
 <use CVA_files/CVA_20_0.png>
-Package pdftex.def Info: CVA_files/CVA_20_0.png used on input line 503.
+Package pdftex.def Info: CVA_files/CVA_20_0.png used on input line 493.
 (pdftex.def)             Requested size: 881.29034pt x 341.27415pt.
  [4 <./CVA_files/CVA_18_0.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 505--506
+Underfull \hbox (badness 10000) in paragraph at lines 495--496
 
  []
 
-<../PCA/figs/eigenvectors2.PNG, id=117, 603.75563pt x 405.76593pt>
+<../PCA/figs/eigenvectors2.PNG, id=119, 603.75563pt x 405.76593pt>
 File: ../PCA/figs/eigenvectors2.PNG Graphic file (type png)
 
 <use ../PCA/figs/eigenvectors2.PNG>
-Package pdftex.def Info: ../PCA/figs/eigenvectors2.PNG used on input line 532.
+Package pdftex.def Info: ../PCA/figs/eigenvectors2.PNG used on input line 522.
 (pdftex.def)             Requested size: 603.75415pt x 405.76494pt.
  [5 <./CVA_files/CVA_20_0.png> <../PCA/figs/eigenvectors2.PNG>] <../PCA/figs/Vo
-l_1.PNG, id=126, 462.97969pt x 274.77657pt>
+l_1.PNG, id=128, 462.97969pt x 274.77657pt>
 File: ../PCA/figs/Vol_1.PNG Graphic file (type png)
 
 <use ../PCA/figs/Vol_1.PNG>
-Package pdftex.def Info: ../PCA/figs/Vol_1.PNG used on input line 561.
+Package pdftex.def Info: ../PCA/figs/Vol_1.PNG used on input line 551.
 (pdftex.def)             Requested size: 462.97855pt x 274.77588pt.
 
-<../PCA/figs/Vol_2.PNG, id=127, 513.41812pt x 312.41719pt>
+<../PCA/figs/Vol_2.PNG, id=129, 513.41812pt x 312.41719pt>
 File: ../PCA/figs/Vol_2.PNG Graphic file (type png)
 
 <use ../PCA/figs/Vol_2.PNG>
-Package pdftex.def Info: ../PCA/figs/Vol_2.PNG used on input line 562.
+Package pdftex.def Info: ../PCA/figs/Vol_2.PNG used on input line 552.
 (pdftex.def)             Requested size: 513.41685pt x 312.41641pt.
 
-<../PCA/figs/Vol_3.PNG, id=128, 554.07pt x 306.39468pt>
+<../PCA/figs/Vol_3.PNG, id=130, 554.07pt x 306.39468pt>
 File: ../PCA/figs/Vol_3.PNG Graphic file (type png)
 
 <use ../PCA/figs/Vol_3.PNG>
-Package pdftex.def Info: ../PCA/figs/Vol_3.PNG used on input line 563.
+Package pdftex.def Info: ../PCA/figs/Vol_3.PNG used on input line 553.
 (pdftex.def)             Requested size: 554.06865pt x 306.39394pt.
  [6 <../PCA/figs/Vol_1.PNG> <../PCA/figs/Vol_2.PNG> <../PCA/figs/Vol_3.PNG>]
-<CVA_files/CVA_35_0.png, id=138, 901.3675pt x 350.30875pt>
+<CVA_files/CVA_35_0.png, id=140, 901.3675pt x 350.30875pt>
 File: CVA_files/CVA_35_0.png Graphic file (type png)
 
 <use CVA_files/CVA_35_0.png>
-Package pdftex.def Info: CVA_files/CVA_35_0.png used on input line 646.
+Package pdftex.def Info: CVA_files/CVA_35_0.png used on input line 636.
 (pdftex.def)             Requested size: 901.36528pt x 350.30789pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 648--649
+Underfull \hbox (badness 10000) in paragraph at lines 638--639
 
  []
 
 [7 <./CVA_files/CVA_35_0.png>]
-LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 708
+LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 698
 .
-LaTeX Font Info:    No file OMScmtt.fd. on input line 708.
+LaTeX Font Info:    No file OMScmtt.fd. on input line 698.
 
 
 LaTeX Font Warning: Font shape `OMS/cmtt/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbackslash' on input line 708.
+(Font)              for symbol `textbackslash' on input line 698.
 
-[8] <CVA_files/CVA_44_0.png, id=157, 893.3375pt x 341.275pt>
+[8] <CVA_files/CVA_44_0.png, id=159, 893.3375pt x 341.275pt>
 File: CVA_files/CVA_44_0.png Graphic file (type png)
 
 <use CVA_files/CVA_44_0.png>
-Package pdftex.def Info: CVA_files/CVA_44_0.png used on input line 776.
+Package pdftex.def Info: CVA_files/CVA_44_0.png used on input line 766.
 (pdftex.def)             Requested size: 893.33531pt x 341.27415pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 778--779
+Underfull \hbox (badness 10000) in paragraph at lines 768--769
 
  []
 
 [9 <./CVA_files/CVA_44_0.png>]
-<CVA_files/CVA_48_1.png, id=164, 893.3375pt x 341.275pt>
+<CVA_files/CVA_48_1.png, id=166, 893.3375pt x 341.275pt>
 File: CVA_files/CVA_48_1.png Graphic file (type png)
 
 <use CVA_files/CVA_48_1.png>
-Package pdftex.def Info: CVA_files/CVA_48_1.png used on input line 818.
+Package pdftex.def Info: CVA_files/CVA_48_1.png used on input line 808.
 (pdftex.def)             Requested size: 893.33531pt x 341.27415pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 820--821
+Underfull \hbox (badness 10000) in paragraph at lines 810--811
 
  []
 
-<CVA_files/CVA_50_0.png, id=166, 905.3825pt x 568.1225pt>
+<CVA_files/CVA_50_0.png, id=168, 905.3825pt x 568.1225pt>
 File: CVA_files/CVA_50_0.png Graphic file (type png)
 
 <use CVA_files/CVA_50_0.png>
-Package pdftex.def Info: CVA_files/CVA_50_0.png used on input line 843.
+Package pdftex.def Info: CVA_files/CVA_50_0.png used on input line 833.
 (pdftex.def)             Requested size: 905.3803pt x 568.1211pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 845--846
+Underfull \hbox (badness 10000) in paragraph at lines 835--836
 
  []
 
 [10 <./CVA_files/CVA_48_1.png> <./CVA_files/CVA_50_0.png>]
-<CVA_files/CVA_52_0.png, id=177, 902.37125pt x 381.425pt>
+<CVA_files/CVA_52_0.png, id=179, 902.37125pt x 381.425pt>
 File: CVA_files/CVA_52_0.png Graphic file (type png)
 
 <use CVA_files/CVA_52_0.png>
-Package pdftex.def Info: CVA_files/CVA_52_0.png used on input line 860.
+Package pdftex.def Info: CVA_files/CVA_52_0.png used on input line 850.
 (pdftex.def)             Requested size: 902.36905pt x 381.42406pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 862--863
+Underfull \hbox (badness 10000) in paragraph at lines 852--853
 
  []
 
 [11 <./CVA_files/CVA_52_0.png>]
-Underfull \hbox (badness 2970) in paragraph at lines 922--923
-[]\OT1/cmr/m/it/10 Bank of Eng-land Yield Curves\OT1/cmr/m/n/10 , 2016: [][]$\O
-T1/cmtt/m/n/10 http : / / www . bankofengland . co . uk / statistics / Pages /$
-
+Underfull \hbox (badness 6461) in paragraph at lines 914--915
+[]\OT1/cmr/m/it/10 Bank of Eng-land Yield Curves\OT1/cmr/m/n/10 , 2016 [][]$\OT
+1/cmtt/m/n/10 http : / / www . bankofengland . co . uk / statistics / Pages /$
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 938.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 930.
 [12]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 938.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 930.
  (CVA.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 938.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 938.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 930.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 930.
 Package rerunfilecheck Info: File `CVA.out' has not changed.
 (rerunfilecheck)             Checksum: 7C14F7AF99EEB65A59BFB843452EBB2A;816.
 
@@ -705,13 +704,13 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 938.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 930.
  ) 
 Here is how much of TeX's memory you used:
- 8813 strings out of 493634
- 126173 string characters out of 3147362
- 237094 words of memory out of 3000000
- 11994 multiletter control sequences out of 15000+200000
+ 8815 strings out of 493634
+ 126188 string characters out of 3147362
+ 237120 words of memory out of 3000000
+ 11995 multiletter control sequences out of 15000+200000
  14638 words of font info for 57 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
  36i,9n,33p,736b,538s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -730,9 +729,9 @@ KTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Apps/MiKTeX 2.9/fonts/typ
 e1/public/amsfonts/cm/cmti10.pfb><C:/Apps/MiKTeX 2.9/fonts/type1/public/amsfont
 s/cm/cmti9.pfb><C:/Apps/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C
 :/Apps/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on CVA.pdf (12 pages, 1182676 bytes).
+Output written on CVA.pdf (12 pages, 1226797 bytes).
 PDF statistics:
- 266 PDF objects out of 1000 (max. 8388607)
- 47 named destinations out of 1000 (max. 500000)
+ 270 PDF objects out of 1000 (max. 8388607)
+ 48 named destinations out of 1000 (max. 500000)
  178 words of extra memory for PDF output out of 10000 (max. 10000000)
 
