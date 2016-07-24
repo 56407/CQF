@@ -33,6 +33,7 @@
     \usepackage{longtable} % longtable support required by pandoc >1.10
     \usepackage{booktabs}  % table support for pandoc > 1.12.2
     \usepackage{graphicx}
+    \usepackage{afterpage}
 
 
     \definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
@@ -234,7 +235,12 @@
    % \newpage
 
     \tableofcontents
+    
+       \afterpage{\null\newpage}
     \newpage
+    
+   %\afterpage{\blankpage}
+
 
 
     \section{Introduction}\label{cva-calculation-for-an-interest-rate-swap}

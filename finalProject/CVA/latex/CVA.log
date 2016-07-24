@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.4.14)  24 JUL 2016 18:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.4.14)  24 JUL 2016 19:10
 entering extended mode
 **./CVA.tex
 (CVA.tex
@@ -414,13 +414,19 @@ Package: booktabs 2005/04/14 v1.61803 publication quality tables
 \@lastruleclass=\count128
 \@thisrulewidth=\dimen149
 )
-Package color Info: Redefining color red on input line 49.
-Package color Info: Redefining color green on input line 50.
-Package color Info: Redefining color blue on input line 52.
-Package color Info: Redefining color cyan on input line 54.
-Package color Info: Redefining color lightgray on input line 55.
-Package hyperref Info: Option `breaklinks' set `true' on input line 213.
-Package hyperref Info: Option `colorlinks' set `true' on input line 213.
+("C:\Apps\MiKTeX 2.9\tex\latex\tools\afterpage.sty"
+Package: afterpage 2014/10/28 v1.08 After-Page Package (DPC)
+\AP@output=\toks30
+\AP@partial=\box36
+\AP@footins=\box37
+)
+Package color Info: Redefining color red on input line 50.
+Package color Info: Redefining color green on input line 51.
+Package color Info: Redefining color blue on input line 53.
+Package color Info: Redefining color cyan on input line 55.
+Package color Info: Redefining color lightgray on input line 56.
+Package hyperref Info: Option `breaklinks' set `true' on input line 214.
+Package hyperref Info: Option `colorlinks' set `true' on input line 214.
  (CVA.aux
 
 LaTeX Warning: Label `cva' multiply defined.
@@ -428,33 +434,33 @@ LaTeX Warning: Label `cva' multiply defined.
 )
 \openout1 = `CVA.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 220.
-LaTeX Font Info:    ... okay on input line 220.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 220.
-LaTeX Font Info:    ... okay on input line 220.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 220.
-LaTeX Font Info:    ... okay on input line 220.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 220.
-LaTeX Font Info:    ... okay on input line 220.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 220.
-LaTeX Font Info:    ... okay on input line 220.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 220.
-LaTeX Font Info:    ... okay on input line 220.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 220.
-LaTeX Font Info:    ... okay on input line 220.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 221.
+LaTeX Font Info:    ... okay on input line 221.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 221.
+LaTeX Font Info:    ... okay on input line 221.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 221.
+LaTeX Font Info:    ... okay on input line 221.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 221.
+LaTeX Font Info:    ... okay on input line 221.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 221.
+LaTeX Font Info:    ... okay on input line 221.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 221.
+LaTeX Font Info:    ... okay on input line 221.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 221.
+LaTeX Font Info:    ... okay on input line 221.
  ("C:\Apps\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count129
 \scratchdimen=\dimen150
-\scratchbox=\box36
+\scratchbox=\box38
 \nofMPsegments=\count130
 \nofMParguments=\count131
-\everyMPshowfont=\toks30
+\everyMPshowfont=\toks31
 \MPscratchCnt=\count132
 \MPscratchDim=\dimen151
 \MPnumerator=\count133
 \makeMPintoPDFobject=\count134
-\everyMPtoPDFconversion=\toks31
+\everyMPtoPDFconversion=\toks32
 )
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -497,8 +503,8 @@ Package geometry Warning: The marginal notes overrun the paper.
 ("C:\Apps\MiKTeX 2.9\tex\latex\ucs\ucsencs.def"
 File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
 )
-\AtBeginShipoutBox=\box37
-Package hyperref Info: Link coloring ON on input line 220.
+\AtBeginShipoutBox=\box39
+Package hyperref Info: Link coloring ON on input line 221.
 
 ("C:\Apps\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -508,19 +514,19 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count135
 )
-LaTeX Info: Redefining \ref on input line 220.
-LaTeX Info: Redefining \pageref on input line 220.
-LaTeX Info: Redefining \nameref on input line 220.
+LaTeX Info: Redefining \ref on input line 221.
+LaTeX Info: Redefining \pageref on input line 221.
+LaTeX Info: Redefining \nameref on input line 221.
  (CVA.out)
 (CVA.out)
 \@outlinefile=\write4
 \openout4 = `CVA.out'.
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 224.
+LaTeX Font Info:    Try loading font information for U+msa on input line 225.
  ("C:\Apps\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 224.
+LaTeX Font Info:    Try loading font information for U+msb on input line 225.
 
 ("C:\Apps\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -530,171 +536,172 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
  [1
 
-{C:/Users/Tanya.Sandoval/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 270.
+{C:/Users/Tanya.Sandoval/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2
+]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 276.
 
 
 ("C:\Apps\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 270.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 276.
 
 ("C:\Apps\MiKTeX 2.9\tex\latex\ucs\uni-34.def"
 File: uni-34.def 2013/05/13 UCS: Unicode data U+2200..U+22FF
-) [2]
-<CVA_files/CVA_9_0.png, id=100, 894.34125pt x 381.425pt>
+) [3]
+<CVA_files/CVA_9_0.png, id=104, 894.34125pt x 381.425pt>
 File: CVA_files/CVA_9_0.png Graphic file (type png)
 
 <use CVA_files/CVA_9_0.png>
-Package pdftex.def Info: CVA_files/CVA_9_0.png used on input line 374.
+Package pdftex.def Info: CVA_files/CVA_9_0.png used on input line 380.
 (pdftex.def)             Requested size: 894.33907pt x 381.42406pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 376--377
+Underfull \hbox (badness 10000) in paragraph at lines 382--383
 
  []
 
-<CVA_files/CVA_10_0.png, id=102, 902.37125pt x 350.30875pt>
+<CVA_files/CVA_10_0.png, id=106, 902.37125pt x 350.30875pt>
 File: CVA_files/CVA_10_0.png Graphic file (type png)
 
 <use CVA_files/CVA_10_0.png>
-Package pdftex.def Info: CVA_files/CVA_10_0.png used on input line 395.
+Package pdftex.def Info: CVA_files/CVA_10_0.png used on input line 401.
 (pdftex.def)             Requested size: 902.36905pt x 350.30789pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 397--398
+Underfull \hbox (badness 10000) in paragraph at lines 403--404
 
  []
 
-[3 <./CVA_files/CVA_9_0.png> <./CVA_files/CVA_10_0.png>]
-<CVA_files/CVA_18_0.png, id=111, 889.3225pt x 350.30875pt>
+[4 <./CVA_files/CVA_9_0.png> <./CVA_files/CVA_10_0.png>]
+<CVA_files/CVA_18_0.png, id=115, 889.3225pt x 350.30875pt>
 File: CVA_files/CVA_18_0.png Graphic file (type png)
 
 <use CVA_files/CVA_18_0.png>
-Package pdftex.def Info: CVA_files/CVA_18_0.png used on input line 470.
+Package pdftex.def Info: CVA_files/CVA_18_0.png used on input line 476.
 (pdftex.def)             Requested size: 889.32031pt x 350.30789pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 472--473
+Underfull \hbox (badness 10000) in paragraph at lines 478--479
 
  []
 
-<CVA_files/CVA_20_0.png, id=112, 881.2925pt x 341.275pt>
+<CVA_files/CVA_20_0.png, id=116, 881.2925pt x 341.275pt>
 File: CVA_files/CVA_20_0.png Graphic file (type png)
 
 <use CVA_files/CVA_20_0.png>
-Package pdftex.def Info: CVA_files/CVA_20_0.png used on input line 493.
+Package pdftex.def Info: CVA_files/CVA_20_0.png used on input line 499.
 (pdftex.def)             Requested size: 881.29034pt x 341.27415pt.
- [4 <./CVA_files/CVA_18_0.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 495--496
+ [5 <./CVA_files/CVA_18_0.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 501--502
 
  []
 
-<../PCA/figs/eigenvectors2.PNG, id=119, 603.75563pt x 405.76593pt>
+<../PCA/figs/eigenvectors2.PNG, id=123, 603.75563pt x 405.76593pt>
 File: ../PCA/figs/eigenvectors2.PNG Graphic file (type png)
 
 <use ../PCA/figs/eigenvectors2.PNG>
-Package pdftex.def Info: ../PCA/figs/eigenvectors2.PNG used on input line 522.
+Package pdftex.def Info: ../PCA/figs/eigenvectors2.PNG used on input line 528.
 (pdftex.def)             Requested size: 603.75415pt x 405.76494pt.
- [5 <./CVA_files/CVA_20_0.png> <../PCA/figs/eigenvectors2.PNG>] <../PCA/figs/Vo
-l_1.PNG, id=128, 462.97969pt x 274.77657pt>
+ [6 <./CVA_files/CVA_20_0.png> <../PCA/figs/eigenvectors2.PNG>] <../PCA/figs/Vo
+l_1.PNG, id=132, 462.97969pt x 274.77657pt>
 File: ../PCA/figs/Vol_1.PNG Graphic file (type png)
 
 <use ../PCA/figs/Vol_1.PNG>
-Package pdftex.def Info: ../PCA/figs/Vol_1.PNG used on input line 551.
+Package pdftex.def Info: ../PCA/figs/Vol_1.PNG used on input line 557.
 (pdftex.def)             Requested size: 462.97855pt x 274.77588pt.
 
-<../PCA/figs/Vol_2.PNG, id=129, 513.41812pt x 312.41719pt>
+<../PCA/figs/Vol_2.PNG, id=133, 513.41812pt x 312.41719pt>
 File: ../PCA/figs/Vol_2.PNG Graphic file (type png)
 
 <use ../PCA/figs/Vol_2.PNG>
-Package pdftex.def Info: ../PCA/figs/Vol_2.PNG used on input line 552.
+Package pdftex.def Info: ../PCA/figs/Vol_2.PNG used on input line 558.
 (pdftex.def)             Requested size: 513.41685pt x 312.41641pt.
 
-<../PCA/figs/Vol_3.PNG, id=130, 554.07pt x 306.39468pt>
+<../PCA/figs/Vol_3.PNG, id=134, 554.07pt x 306.39468pt>
 File: ../PCA/figs/Vol_3.PNG Graphic file (type png)
 
 <use ../PCA/figs/Vol_3.PNG>
-Package pdftex.def Info: ../PCA/figs/Vol_3.PNG used on input line 553.
+Package pdftex.def Info: ../PCA/figs/Vol_3.PNG used on input line 559.
 (pdftex.def)             Requested size: 554.06865pt x 306.39394pt.
- [6 <../PCA/figs/Vol_1.PNG> <../PCA/figs/Vol_2.PNG> <../PCA/figs/Vol_3.PNG>]
-<CVA_files/CVA_35_0.png, id=140, 901.3675pt x 350.30875pt>
+ [7 <../PCA/figs/Vol_1.PNG> <../PCA/figs/Vol_2.PNG> <../PCA/figs/Vol_3.PNG>]
+<CVA_files/CVA_35_0.png, id=145, 901.3675pt x 350.30875pt>
 File: CVA_files/CVA_35_0.png Graphic file (type png)
 
 <use CVA_files/CVA_35_0.png>
-Package pdftex.def Info: CVA_files/CVA_35_0.png used on input line 636.
+Package pdftex.def Info: CVA_files/CVA_35_0.png used on input line 642.
 (pdftex.def)             Requested size: 901.36528pt x 350.30789pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 638--639
+Underfull \hbox (badness 10000) in paragraph at lines 644--645
 
  []
 
-[7 <./CVA_files/CVA_35_0.png>]
-LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 698
+[8 <./CVA_files/CVA_35_0.png>]
+LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 704
 .
-LaTeX Font Info:    No file OMScmtt.fd. on input line 698.
+LaTeX Font Info:    No file OMScmtt.fd. on input line 704.
 
 
 LaTeX Font Warning: Font shape `OMS/cmtt/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbackslash' on input line 698.
+(Font)              for symbol `textbackslash' on input line 704.
 
-[8] <CVA_files/CVA_44_0.png, id=159, 893.3375pt x 341.275pt>
+[9] <CVA_files/CVA_44_0.png, id=163, 893.3375pt x 341.275pt>
 File: CVA_files/CVA_44_0.png Graphic file (type png)
 
 <use CVA_files/CVA_44_0.png>
-Package pdftex.def Info: CVA_files/CVA_44_0.png used on input line 766.
+Package pdftex.def Info: CVA_files/CVA_44_0.png used on input line 772.
 (pdftex.def)             Requested size: 893.33531pt x 341.27415pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 768--769
+Underfull \hbox (badness 10000) in paragraph at lines 774--775
 
  []
 
-[9 <./CVA_files/CVA_44_0.png>]
-<CVA_files/CVA_48_1.png, id=166, 893.3375pt x 341.275pt>
+[10 <./CVA_files/CVA_44_0.png>]
+<CVA_files/CVA_48_1.png, id=170, 893.3375pt x 341.275pt>
 File: CVA_files/CVA_48_1.png Graphic file (type png)
 
 <use CVA_files/CVA_48_1.png>
-Package pdftex.def Info: CVA_files/CVA_48_1.png used on input line 808.
+Package pdftex.def Info: CVA_files/CVA_48_1.png used on input line 814.
 (pdftex.def)             Requested size: 893.33531pt x 341.27415pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 810--811
+Underfull \hbox (badness 10000) in paragraph at lines 816--817
 
  []
 
-<CVA_files/CVA_50_0.png, id=168, 905.3825pt x 568.1225pt>
+<CVA_files/CVA_50_0.png, id=172, 905.3825pt x 568.1225pt>
 File: CVA_files/CVA_50_0.png Graphic file (type png)
 
 <use CVA_files/CVA_50_0.png>
-Package pdftex.def Info: CVA_files/CVA_50_0.png used on input line 833.
+Package pdftex.def Info: CVA_files/CVA_50_0.png used on input line 839.
 (pdftex.def)             Requested size: 905.3803pt x 568.1211pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 835--836
+Underfull \hbox (badness 10000) in paragraph at lines 841--842
 
  []
 
-[10 <./CVA_files/CVA_48_1.png> <./CVA_files/CVA_50_0.png>]
-<CVA_files/CVA_52_0.png, id=179, 902.37125pt x 381.425pt>
+[11 <./CVA_files/CVA_48_1.png> <./CVA_files/CVA_50_0.png>]
+<CVA_files/CVA_52_0.png, id=183, 902.37125pt x 381.425pt>
 File: CVA_files/CVA_52_0.png Graphic file (type png)
 
 <use CVA_files/CVA_52_0.png>
-Package pdftex.def Info: CVA_files/CVA_52_0.png used on input line 850.
+Package pdftex.def Info: CVA_files/CVA_52_0.png used on input line 856.
 (pdftex.def)             Requested size: 902.36905pt x 381.42406pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 852--853
+Underfull \hbox (badness 10000) in paragraph at lines 858--859
 
  []
 
-[11 <./CVA_files/CVA_52_0.png>]
-Underfull \hbox (badness 6461) in paragraph at lines 914--915
+[12 <./CVA_files/CVA_52_0.png>]
+Underfull \hbox (badness 6461) in paragraph at lines 920--921
 []\OT1/cmr/m/it/10 Bank of Eng-land Yield Curves\OT1/cmr/m/n/10 , 2016 [][]$\OT
 1/cmtt/m/n/10 http : / / www . bankofengland . co . uk / statistics / Pages /$
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 930.
-[12]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 930.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 936.
+[13]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 936.
  (CVA.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 930.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 930.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 936.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 936.
 Package rerunfilecheck Info: File `CVA.out' has not changed.
 (rerunfilecheck)             Checksum: 7C14F7AF99EEB65A59BFB843452EBB2A;816.
 
@@ -704,13 +711,13 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 930.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 936.
  ) 
 Here is how much of TeX's memory you used:
- 8815 strings out of 493634
- 126188 string characters out of 3147362
- 237120 words of memory out of 3000000
- 11995 multiletter control sequences out of 15000+200000
+ 8834 strings out of 493634
+ 126456 string characters out of 3147362
+ 237600 words of memory out of 3000000
+ 12010 multiletter control sequences out of 15000+200000
  14638 words of font info for 57 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
  36i,9n,33p,736b,538s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -729,9 +736,9 @@ KTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Apps/MiKTeX 2.9/fonts/typ
 e1/public/amsfonts/cm/cmti10.pfb><C:/Apps/MiKTeX 2.9/fonts/type1/public/amsfont
 s/cm/cmti9.pfb><C:/Apps/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C
 :/Apps/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on CVA.pdf (12 pages, 1226797 bytes).
+Output written on CVA.pdf (13 pages, 1211554 bytes).
 PDF statistics:
- 270 PDF objects out of 1000 (max. 8388607)
- 48 named destinations out of 1000 (max. 500000)
+ 276 PDF objects out of 1000 (max. 8388607)
+ 49 named destinations out of 1000 (max. 500000)
  178 words of extra memory for PDF output out of 10000 (max. 10000000)
 
