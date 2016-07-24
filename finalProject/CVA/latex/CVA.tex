@@ -1,7 +1,6 @@
-
 % Default to the notebook output style
 
-    
+
 
 
 % Inherit from the specified cell style.
@@ -9,13 +8,13 @@
 
 
 
-    
-\documentclass{article}
 
-    
-    
+\documentclass[reqno]{article}
+
+
+
     \usepackage{graphicx} % Used to insert images
-    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{adjustbox} % Used to constrain images to a maximum size
     \usepackage{color} % Allow colors to be defined
     \usepackage{enumerate} % Needed for markdown enumerations to work
     \usepackage{geometry} % Used to adjust the document margins
@@ -25,18 +24,17 @@
     \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
     \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
     \usepackage{fancyvrb} % verbatim replacement that allows latex
-    \usepackage{grffile} % extends the file name processing of package graphics 
-                         % to support a larger range 
+    \usepackage{grffile} % extends the file name processing of package graphics
+                         % to support a larger range
     % The hyperref package gives us a pdf with properly built
     % internal navigation ('pdf bookmarks' for the table of contents,
     % internal cross-reference links, web links for URLs, etc.)
     \usepackage{hyperref}
     \usepackage{longtable} % longtable support required by pandoc >1.10
     \usepackage{booktabs}  % table support for pandoc > 1.12.2
-    
+    \usepackage{graphicx}
 
-    
-    
+
     \definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
     \definecolor{darkorange}{rgb}{.71,0.21,0.01}
     \definecolor{darkgreen}{rgb}{.12,.54,.11}
@@ -55,7 +53,7 @@
     \definecolor{purple}{rgb}{.698,.145,.698}
     \definecolor{cyan}{rgb}{0,.698,.698}
     \definecolor{lightgray}{gray}{0.5}
-    
+
     % bright ansi colors
     \definecolor{darkgray}{gray}{0.25}
     \definecolor{lightred}{rgb}{1.0,0.39,0.28}
@@ -63,7 +61,7 @@
     \definecolor{lightblue}{rgb}{0.53,0.81,0.92}
     \definecolor{lightpurple}{rgb}{0.87,0.63,0.87}
     \definecolor{lightcyan}{rgb}{0.5,1.0,0.83}
-    
+
     % commands and environments needed by pandoc snippets
     % extracted from the output of `pandoc -s`
     \providecommand{\tightlist}{%
@@ -85,7 +83,7 @@
     \newcommand{\RegionMarkerTok}[1]{{#1}}
     \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
     \newcommand{\NormalTok}[1]{{#1}}
-    
+
     % Define a nice break command that doesn't care if a line doesn't already
     % exist.
     \def\br{\hspace*{\fill} \\* }
@@ -93,13 +91,14 @@
     \def\gt{>}
     \def\lt{<}
     % Document parameters
-    \title{CVA}
-    
-    
-    
+    \title{Credit Valuation Adjustment for an Interest Rate Swap}
+    \author{Tanya Sandoval}
+
+
+
 
     % Pygments definitions
-    
+
 \makeatletter
 \def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
     \let\PY@ul=\relax \let\PY@tc=\relax%
@@ -201,9 +200,9 @@
 
 
 
-    
+
     % Prevent overflowing lines due to hard-to-break entities
-    \sloppy 
+    \sloppy
     % Setup hyperref package
     \hypersetup{
       breaklinks=true,  % so long urls are correctly broken across lines
@@ -213,29 +212,40 @@
       citecolor=darkgreen,
       }
     % Slightly bigger margins than the latex defaults
-    
+
     \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
-    
-    
+
+
 
     \begin{document}
-    
-    
-    \maketitle
-    
-    
 
-    
-    \section{CVA calculation for an Interest Rate
-Swap}\label{cva-calculation-for-an-interest-rate-swap}
+%%%%%%%%%%%%%%%%%%%%%%   TITLE
+    \maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%   ABSTRACT
+    \begin{abstract}
+    \emph{
+    In this report we demonstrate some of the techniques currently used  to calculate Credit Valuation Adjustments for fixed income instruments. 
+    We take the hypothetical scenario of an Interest Rate Swap entered by two counterparties. Through the simulation of forward rates using the HJM model on recent data and default probabilities using Credit Default Swaps spreads, we arrive at the fair price of the risk taken by counterparty A in entering the swap with counterparty B.
+     }
+    \end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%   TABLE OF CONTENTS
+   % \newpage
+
+    \tableofcontents
+    \newpage
+
+
+    \section{Introduction}\label{cva-calculation-for-an-interest-rate-swap}
 
 %    \begin{Verbatim}[commandchars=\\\{\}]
 %{\color{incolor}In [{\color{incolor}37}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k+kn}{as} \PY{n+nn}{pd}
-%         
+%
 %         \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k+kn}{as} \PY{n+nn}{sns}
 %         \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
 %         \PY{k+kn}{from} \PY{n+nn}{matplotlib.ticker} \PY{k+kn}{import} \PY{n}{FuncFormatter}  \PY{c}{\PYZsh{} to apply percentage formatting to labels}
-%         
+%
 %         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
 %\end{Verbatim}
 %
@@ -248,15 +258,13 @@ Swap}\label{cva-calculation-for-an-interest-rate-swap}
 %                   \PY{l+s}{\PYZsq{}}\PY{l+s}{xtick.labelsize}\PY{l+s}{\PYZsq{}}\PY{p}{:}\PY{l+s}{\PYZsq{}}\PY{l+s}{x\PYZhy{}large}\PY{l+s}{\PYZsq{}}\PY{p}{,}
 %                   \PY{l+s}{\PYZsq{}}\PY{l+s}{ytick.labelsize}\PY{l+s}{\PYZsq{}}\PY{p}{:}\PY{l+s}{\PYZsq{}}\PY{l+s}{x\PYZhy{}large}\PY{l+s}{\PYZsq{}}\PY{p}{\PYZcb{}}
 %          \PY{n}{pylab}\PY{o}{.}\PY{n}{rcParams}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{params}\PY{p}{)}
-%          
+%
 %          \PY{c}{\PYZsh{} pylab.rcParams[\PYZsq{}figure.figsize\PYZsq{}] = (20, 10)}
 %\end{Verbatim}
 
-    In this report we show how to calculate the Credit Valuation Adjustment
-(CVA) taken by Counterparty `A' to the price of an Interest Rate Swap
-(IRS) using the credit spreads for Counerparty B.
-
-The inputs for the CVA calculation are:
+To  calculate the Credit Valuation Adjustment
+(CVA) taken by counterparty `A' to the price of an Interest Rate Swap
+(IRS) with counterparty `B', the main inputs are:
 
 \begin{itemize}
 \tightlist
@@ -268,9 +276,7 @@ The inputs for the CVA calculation are:
   Discount Factors (DFs)
 \end{itemize}
 
-Below we discuss each of these aspects separately.
-
-Additional assumptions for this calculation are:
+Below we discuss each of these aspects separately. Additional assumptions for this scenario are:
 
 \begin{itemize}
 \tightlist
@@ -281,27 +287,27 @@ Additional assumptions for this calculation are:
   The notional is assumed to be \(N=1\)
 \end{itemize}
 
-    \subsection{Default Probabilities}\label{default-probabilities}
+    \section{Default Probabilities}\label{default-probabilities}
 
-The Default Probabilities are implied from Credit Default Swaps (CDS)
+The Default Probabilities can be implied from Credit Default Swaps (CDS)
 spreads using the bootstrapping technique.
 
-    \subsubsection{CDS bootstrapping}\label{cds-bootstrapping}
+    \subsection{CDS bootstrapping}\label{cds-bootstrapping}
 
     The bootstrapping formula used was:
 
-\[
+\begin{equation}
 P(T_N) = \frac{ \sum^{N−1}_{n=1} D(0, T_n)
 [ LP(T_n−1) − (L+ \Delta t_n S_N) P(T_n)]}
 { D(0, T_N)(L+ \Delta t_n S_N) }
 +
 \frac{P(T_{N−1})L}
 {(L+\Delta t_N S_N)}
-\]
+\end{equation}
 
-where \(P\) is the survival probability, \(L = 1-R\) is the loss
+where \(P\) is the survival probability, \(L = 1-R\) is the expected loss
 calculated from the recovery rate \(R\), \(\Delta t\) is the payment
-frequency, \(S\) is the spread and \(D\) is the discount factor
+frequency, \(S\) is the CDS  spread and \(D\) is the discount factor
 
 \begin{itemize}
 \tightlist
@@ -316,9 +322,9 @@ frequency, \(S\) is the spread and \(D\) is the discount factor
   The Recovery Rate is assumed to be 40\%
 \item
   Linear interpolation is used to approximate the CDS spreads at the
-  half increments for which there wasn't market data available
+  half increments for which there was no market data available
 \item
-  For consistency and simplicity, the Discount Factors used were the
+  For consistency and simplicity, the discount factors used were the
   same as those implied from the HJM model after taking their average
   for each tenor (see methodology below)
 \item
@@ -335,8 +341,8 @@ probability. Note that by definition \(PD\) is over a period, whereas
 
 %    \begin{Verbatim}[commandchars=\\\{\}]
 %{\color{incolor}In [{\color{incolor}71}]:} \PY{n}{data2} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{input.csv}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
-%         \PY{n}{out} \PY{o}{=} \PY{n}{data2}\PY{o}{.}\PY{n}{to\PYZus{}string}\PY{p}{(}\PY{n}{formatters}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{Lambda}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZob{}:,.4}\PY{l+s}{\PYZpc{}}\PY{l+s}{\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{,} 
-%                                     \PY{l+s}{\PYZsq{}}\PY{l+s}{PD}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZob{}:,.4}\PY{l+s}{\PYZpc{}}\PY{l+s}{\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{,} 
+%         \PY{n}{out} \PY{o}{=} \PY{n}{data2}\PY{o}{.}\PY{n}{to\PYZus{}string}\PY{p}{(}\PY{n}{formatters}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{Lambda}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZob{}:,.4}\PY{l+s}{\PYZpc{}}\PY{l+s}{\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{,}
+%                                     \PY{l+s}{\PYZsq{}}\PY{l+s}{PD}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZob{}:,.4}\PY{l+s}{\PYZpc{}}\PY{l+s}{\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{,}
 %                                     \PY{l+s}{\PYZsq{}}\PY{l+s}{P}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZob{}:,.4}\PY{l+s}{\PYZpc{}}\PY{l+s}{\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}
 %                                    \PY{p}{\PYZcb{}}\PY{p}{)}
 %         \PY{k}{print}\PY{p}{(}\PY{n}{out}\PY{p}{)}
@@ -344,7 +350,7 @@ probability. Note that by definition \(PD\) is over a period, whereas
 
     \begin{Verbatim}[commandchars=\\\{\}]
 CDS        DF  Lambda      PD         P
-Tenor                                             
+Tenor
 0.0        NaN  1.000000    nan\%    nan\% 100.0000\%
 0.5    114.400  0.995835 1.8976\% 0.9443\%  99.0557\%
 1.0    133.770  0.990963 2.2197\% 1.2510\%  97.8047\%
@@ -358,13 +364,8 @@ Tenor
 5.0    380.650  0.939187 6.5842\% 4.1914\%  71.9490\%
     \end{Verbatim}
 
-    The figures below show the period default probability
-\(PD(T_i, T_{i-1}) = P(T_{i-1})\) and the hazard rates \(\lambda_i\) are
-not flat but actually have a term structure, which hence should be
-accounted in our CVA. The cumulative distribution for \(P\) shows how
-the survival probability decreases with time as expected (and viceversa
-for the cumulative \(PD\) since by definition this is equal to
-\(1 - P\)).
+    The figures below show the term structure of the estimated  default probability  
+ and  hazard rates. As these aren't flat, this needs to be accounted in the CVA. 
 
 %    \begin{Verbatim}[commandchars=\\\{\}]
 %{\color{incolor}In [{\color{incolor}124}]:} \PY{n}{index\PYZus{}interpol} \PY{o}{=} \PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{0.0\PYZhy{}0.5}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{0.5\PYZhy{}1.0}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{1.0\PYZhy{}1.5}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{1.5\PYZhy{}2.0}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{2.0\PYZhy{}2.5}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{2.5\PYZhy{}3.0}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{3.0\PYZhy{}3.5}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{3.5\PYZhy{}4.0}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{4.0\PYZhy{}4.5}\PY{l+s}{\PYZsq{}}\PY{p}{,}
@@ -383,29 +384,35 @@ for the cumulative \(PD\) since by definition this is equal to
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{CVA_files/CVA_9_0.png}
     \end{center}
     { \hspace*{\fill} \\}
-    
+
 %    \begin{Verbatim}[commandchars=\\\{\}]
 %{\color{incolor}In [{\color{incolor}125}]:} \PY{n}{df} \PY{o}{=}  \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{data2}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{P}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{data2}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{P}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{keys}\PY{o}{=}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{P}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{PD\PYZus{}cum}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
 %          \PY{c}{\PYZsh{} out = df.to\PYZus{}string(formatters=\PYZob{}\PYZsq{}P\PYZsq{}: \PYZsq{}\PYZob{}:,.2\PYZpc{}\PYZcb{}\PYZsq{}.format, }
 %          \PY{c}{\PYZsh{}                             \PYZsq{}PD\PYZus{}cum\PYZsq{}: \PYZsq{}\PYZob{}:,.2\PYZpc{}\PYZcb{}\PYZsq{}.format}
 %          \PY{c}{\PYZsh{}                            \PYZcb{})}
 %          \PY{c}{\PYZsh{} print(out)}
-%          
+%
 %          \PY{n}{ax} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{marker}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{o}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Cumulative distributions}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{ylim}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{1.1}\PY{p}{)}\PY{p}{)}
 %          \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Tenor (years)}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-%          \PY{n}{ax}\PY{o}{.}\PY{n}{yaxis}\PY{o}{.}\PY{n}{set\PYZus{}major\PYZus{}formatter}\PY{p}{(}\PY{n}{FuncFormatter}\PY{p}{(}\PY{k}{lambda} \PY{n}{y}\PY{p}{,} \PY{n}{\PYZus{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZob{}:.0}\PY{l+s}{\PYZpc{}}\PY{l+s}{\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)}\PY{p}{)} 
+%          \PY{n}{ax}\PY{o}{.}\PY{n}{yaxis}\PY{o}{.}\PY{n}{set\PYZus{}major\PYZus{}formatter}\PY{p}{(}\PY{n}{FuncFormatter}\PY{p}{(}\PY{k}{lambda} \PY{n}{y}\PY{p}{,} \PY{n}{\PYZus{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZob{}:.0}\PY{l+s}{\PYZpc{}}\PY{l+s}{\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)}\PY{p}{)}
 %\end{Verbatim}
+
+The plot below shows how the cumulative distribution for the survival probability \(P\) decreases with time, and vice versa
+for the cumulative \(PD\) since by definition this is equal to
+\(1 - P\).
 
     \begin{center}
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{CVA_files/CVA_10_0.png}
     \end{center}
     { \hspace*{\fill} \\}
-    
+
+\newpage
+
     \subsection{Forward LIBORs}\label{forward-libors}
 
-    The Forward LIBOR was obtained by simulating the forward curves with the
-HJM model. However, this had to be calibrated to recent data to give a
-more realistic picture of the CVA value. The steps taken are described
+    We then proceed to simulate the forward rates  with the
+HJM model. To give a
+more realistic picture of the current CVA value, the HJM model was first calibrated to recent data . The steps taken are described
 in detail below.
 
     \subsubsection{PCA}\label{pca}
@@ -418,20 +425,21 @@ using Principal Component Analysis (PCA) on historical forward rates.
 \begin{itemize}
 \item
   To calibrate these functions to recent data, the forward rates were
-  taken from the Bank of England Bank Liability Curve (BLC) for the
-  period 31-May-2013 to 31-May-2016 (worth 3 years or 759 data points).
-  The data can be found at:
+  taken from the Bank of England (BoE) Bank Liability Curve (BLC) for the last 3 years (31-May-2013 to 31-May-2016).
+  The data was taken from:
+  \begin{itemize}
 \item
   \href{http://www.bankofengland.co.uk/statistics/Documents/yieldcurve/ukblc16_mdaily.xlsx}{ukblc16\_mdaily.xlsx}
 \item
   \href{http://www.bankofengland.co.uk/statistics/Documents/yieldcurve/ukblc05_mdaily.xlsx}{ukblc05\_mdaily.xlsx}
+  \end{itemize}
 \item
   Although we only need the short-end of the curve for the CVA
   calculation, we take the full curve to calibrate the HJM model,
   i.e.~up the \(25Y\) tenor. The dataset is hence constructed by taking
   the BLC forward curve short-end data (\emph{``1. fwds,short end''}
   tab) for the tenors \([0.5Y, 1.0Y, 1.5Y, ..., 5Y]\) as it offers a
-  better approximation to the short-end, and for the remaining tenors
+  better approximation to the short-end. For the remaining tenors
   \([5.5Y, ..., 25.0Y]\) we use the full approximation (\emph{``2. fwd
   curve''} tab)
 \item
@@ -441,9 +449,8 @@ using Principal Component Analysis (PCA) on historical forward rates.
 \item
   Dates with missing data values were removed
 \item
-  The resulting dataset is found in the project reporsitory under
-  ``CVA/PCA/my\_ukblc\_310513\_310516.xlsx'' and this was pasted into
-  the ``data'' tab of ``\emph{HJM Model - PCA.XLSM}'' to run the PCA
+  The resulting dataset is found in the project repository under
+  \emph{CVA/PCA/my\_ukblc\_310513\_310516.xlsx}
 \end{itemize}
 
     The figure below shows the forward curve for four sample dates spanning
@@ -473,12 +480,12 @@ expected.
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{CVA_files/CVA_18_0.png}
     \end{center}
     { \hspace*{\fill} \\}
-    
-    The figure below shows the historical evolution of the rate in the
-dataset for 3 example tenors. The \(0.08Y\) tenor is a proxy for the
-spot rate. This shows the spot rate has remained pretty constant
+
+    The next figure shows the historical evolution of the rate in the
+dataset for 3 example tenors. As mentioned, the \(0.08Y\) tenor is a proxy for the
+spot rate. This shows the spot rate has remained quite constant
 throughout. The rate increases for the shorter tenors but then decreases
-for the longer tenors - so is the case for 25Y vs 10Y below. This could
+for the longer tenors, .e.g. $25Y$ vs $10Y$ below. This could
 be interpreted as a lack of liquidity for the longer tenors.
 
 %    \begin{Verbatim}[commandchars=\\\{\}]
@@ -496,20 +503,20 @@ be interpreted as a lack of liquidity for the longer tenors.
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{CVA_files/CVA_20_0.png}
     \end{center}
     { \hspace*{\fill} \\}
-    
+
     \paragraph{Principal Components}\label{principal-components}
 
     To obtain the volatility functions for the HJM model, the day-on-day
 changes (differences) for each tenor are calculated. This produces a set
-of independent random variables that can be used to get principal
+of independent random variables that can be used to get the  principal
 components (PC), taken as the 3 largest eigenvalues and corresponding
-eigenvectors which explain 97.5\% of the observed variance. The
+eigenvectors that explain 97.5\% of the observed variance. The
 calculation details can be found in the project repository under
-``\emph{PCA/my HJM Model - PCA.XLSM} The results are summarised below:
+``\emph{PCA/my HJM Model - PCA.XLSM}''. The results are summarised below:
 
 \begin{longtable}[c]{@{}llll@{}}
 \toprule
-& Tenor & Eigenvalue & Cum. R\^{}2\tabularnewline
+& Tenor & Eigenvalue & Cum. R$^2$\tabularnewline
 \midrule
 \endhead
 1st largest PC & 10.0 & 0.0076790 & 0.9107\tabularnewline
@@ -519,38 +526,44 @@ calculation details can be found in the project repository under
 \end{longtable}
 
 The figure below shows the resulting eigenvectors of the principal
-components.
+components. In general, the largest component (PC1) is attributed to parallel shifts in the curve, the 2nd largest (PC2) to steepening/flattening (skewness) and 3rd largest to bending about specific maturity points (convexity).
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{../PCA/figs/eigenvectors2.PNG}
+    \adjustimage{max size={0.7\linewidth}{0.9\paperheight}}{../PCA/figs/eigenvectors2.PNG}
     \end{center}
-    
+
     We now proceed to use these eigenvectors to obtain the volatility
 functions for the HJM model.
+
+\newpage
 
     \subsubsection{HJM}\label{hjm}
 
     \paragraph{Volatility functions}\label{volatility-functions}
 
-    The volatility functions for the HJM model are calculated as: \[
-Vol_i = \sqrt{\lambda_i} \space e(i) \space\space\space \forall \space i=1,2,3
-\] where \(\lambda_i\) is the eigenvalue and \(e(i)\) the eigenvector.
+    The volatility functions for the HJM model are defined as:
+    \begin{equation}
+\text{Vol}_i = \sqrt{\lambda_i} \space e(i) \quad \forall ~~  i=1,2,3
+\end{equation}
+ where \(\lambda_i\) is the eigenvalue and \(e(i)\) the eigenvector.
 This is equivalent to one standard deviation move in the \(e(i)\)
 direction.
 
 The volatility functions have to then be fitted as we need analytical
-functions to carry out the integration to get the drift. In this case,
+functions to carry out the integration to get the drift in the HJM model. In this case,
 3rd, 5th and 6th degree polynomials were fitted to guarantee a goodness
 of fit of over 97\%. These are shown in the figures below. In
-particular, for \(Vol_{1}\) fitting a constant (red line) is not suited
+particular, for \(Vol_{1}\) fitting a constant (red line) is not really suited
 and justifies the need for a polynomial fit (however, this could also
 lead to overfitting issues).
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{../PCA/figs/Vol_1.PNG}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{../PCA/figs/Vol_2.PNG}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{../PCA/figs/Vol_3.PNG}
+    \adjustimage{max size={0.55\linewidth}{0.9\paperheight}}{../PCA/figs/Vol_1.PNG}
+    \adjustimage{max size={0.55\linewidth}{0.9\paperheight}}{../PCA/figs/Vol_2.PNG}
+    \adjustimage{max size={0.55\linewidth}{0.9\paperheight}}{../PCA/figs/Vol_3.PNG}
     \end{center}
+
+\newpage
 
     \paragraph{Drift}\label{drift}
 
@@ -564,44 +577,43 @@ principal components and assuming that volatility is a function of time.
 %\end{Verbatim}
 
     The calibrated volatility and drift functions above are then entered
-into the HJM model Monte Carlo simulation in ``my\_HJM\_model.py'',
-which evolves the whole forward curve according to the SDE: \[
+into the HJM model Monte Carlo simulation script  \emph{my\_HJM\_model.py},
+which evolves the whole forward curve according to the stochastic differential equation (SDE):
+
+\begin{equation}
 d\bar{f} = \mu (t) dt + \sum_{i=1}^{3} Vol_i \phi_i \sqrt{dt} + \frac{dF}{d\tau} dt
-\]
+\end{equation}
 
 where \(\phi_i\) is a random number drawn from the standard normal
-distribution and the last term is the Musiela correction. For brevity
+distribution and the last term is the \emph{ Musiela correction}. For brevity
 the details of the model are omitted here but additional details of the
 MC simulation are outlined below:
 
 \begin{itemize}
 \tightlist
 \item
-  Python 2.7 was used in the python script
-\item
   The forward curve was initialised using the the last observed forward
-  curve data (last row in the BLC data)
+  curve  (last row in the BLC data)
 \item
-  Time step \(dt = 0.01\)
+  Time step taken was \(dt = 0.01\)
 \item
-  Number of simulations \(I = 1,000\)
+  Number of simulations used was \(I = 1000\)
 \item
-  The random number generator used is python's numpy standard normal
-  random number generator (`np.random.standard\_normal') which draw
-  samples from a standard Normal distribution (mean=0, stdev=1)
+  The random variables were taken from  python's numpy module \emph{np.random.standard\_normal} which draws
+  numbers from a standard normal distribution $ N(\mu=0, \sigma=1)$
 \item
-  The antithetic variance reduction technique has not been used here
+  Due to time constrains, the antithetic variance reduction technique was not implemented in the script, so the simulation error is less negligible
 \end{itemize}
 
 To obtain an expectation of LIBOR rate in the future
 \(L(t; T_i, T_{i+1})\), the forward rate \(f\) is selected from the
 corresponding tenor column \(\tau = T_{i+1} - T_i\) of the HJM output,
-from the correct simulated time \(t\). This is then converted to LIBOR
+from the correct simulated time \(t\). This is then converted to a LIBOR rate 
 using \(L = \frac{1}{\tau}(e^{f\tau}-1)\) where
-\(\tau_i=0.5 \space \forall \space i\) is the frequency in this case.
+\(\tau_i=0.5 ~ \forall ~ i\) in this case.
 
 For the IRS in question (written on 6M LIBOR for 5Y), the relevant
-simulated rates are:
+simulated rates we need are:
 
 \begin{longtable}[c]{@{}c@{}}
 \toprule
@@ -621,410 +633,68 @@ L(t; 4.5, 5)\tabularnewline
 \bottomrule
 \end{longtable}
 
-    The figure below shows a sample of 100 simulations for the above Libor
+    The figure below shows a sample of 100 simulations for the above LIBOR
 rates
 
 %    \begin{Verbatim}[commandchars=\\\{\}]
-%{\color{incolor}In [{\color{incolor}150}]:} \PY{n}{L\PYZus{}plus}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{Forward Libor}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+%{\color{incolor}In [{\color{incolor}150}]:} \PY{n}{L\PYZus{}plus}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{Forward LIBOR}\PY{l+s}{\PYZsq{}}\PY{p}{)}
 %          \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Tenor (years)}\PY{l+s}{\PYZsq{}}\PY{p}{)}
 %          \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}  \PY{c}{\PYZsh{} remove legend}
 %\end{Verbatim}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{CVA_files/CVA_35_0.png}
+    \adjustimage{max size={0.85\linewidth}{0.9\paperheight}}{CVA_files/CVA_35_0.png}
     \end{center}
     { \hspace*{\fill} \\}
-    
-    \subsection{Discount Factors}\label{discount-factors}
 
-The DFs are implied from the HJM Forward Libor for each simulation via
+    \section{Discount Factors}\label{discount-factors}
+
+The DFs are implied from the HJM Forward LIBOR for each simulation via
 the formula:
 
-\[
-DF(0, T_{i+1}) = \prod_{i} \frac{1}{1 + \tau_i L(t; T_i, T_{i+1})} 
-\]
+\begin{equation}
+DF(0, T_{i+1}) = \prod_{i} \frac{1}{1 + \tau_i L(t; T_i, T_{i+1})}
+\end{equation}
 
 which is equivalent to `integrating under the curve'. This then gives
 1000 simulations of the DF for each tenor. For simplicity, an
 expectation across all simulations is taken to get a single value for
 \(DF(0, T_{i+1})\). This is then used to obtain the forward-starting
-discount factors \(DF(T_i, T_{i+1})\) for the IRS in question, where: \[
+discount factors as a single number \(DF(T_i, T_{i+1})\) for the IRS in question, where:
+
+\begin{equation}
 DF(T_i, T_{i+1}) = \frac{DF(0, T_{i+1})}{DF(0, T_i)}
-\]
+\end{equation}
 
 and by definition \(DF(T_{i+1}, T_{i+1}) = 1.0\)
 
-\begin{longtable}[c]{@{}cllllllllll@{}}
-\toprule
-\begin{minipage}[b]{0.08\columnwidth}\centering\strut
-Tenor
-\strut\end{minipage} &
-\begin{minipage}[b]{0.15\columnwidth}\raggedright\strut
-0.5
-\strut\end{minipage} &
-\begin{minipage}[b]{0.13\columnwidth}\raggedright\strut
-1.0
-\strut\end{minipage} &
-\begin{minipage}[b]{0.15\columnwidth}\raggedright\strut
-1.5
-\strut\end{minipage} &
-\begin{minipage}[b]{0.13\columnwidth}\raggedright\strut
-2.0
-\strut\end{minipage} &
-\begin{minipage}[b]{0.15\columnwidth}\raggedright\strut
-2.5
-\strut\end{minipage} &
-\begin{minipage}[b]{0.13\columnwidth}\raggedright\strut
-3.0
-\strut\end{minipage} &
-\begin{minipage}[b]{0.15\columnwidth}\raggedright\strut
-3.5
-\strut\end{minipage} &
-\begin{minipage}[b]{0.13\columnwidth}\raggedright\strut
-4.0
-\strut\end{minipage} &
-\begin{minipage}[b]{0.15\columnwidth}\raggedright\strut
-4.5
-\strut\end{minipage} &
-\begin{minipage}[b]{0.13\columnwidth}\raggedright\strut
-5.0
-\strut\end{minipage}\tabularnewline
-\midrule
-\endhead
-\begin{minipage}[t]{0.08\columnwidth}\centering\strut
-0.5
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-DF(0.5, 0.5)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(0.5, 1)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-DF(0.5, 1.5)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(0.5, 2)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-DF(0.5, 2.5)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(0.5, 3)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-DF(0.5, 3.5)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(0.5, 4)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-DF(0.5, 4.5)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(0.5, 5)
-\strut\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.08\columnwidth}\centering\strut
-1.0
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(1, 1)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-DF(1, 1.5)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(1, 2)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-DF(1, 2.5)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(1, 3)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-DF(1, 3.5)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(1, 4)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-DF(1, 4.5)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(1, 5)
-\strut\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.08\columnwidth}\centering\strut
-1.5
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-DF(1.5, 1.5)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(1.5, 2)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-DF(1.5, 2.5)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(1.5, 3)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-DF(1.5, 3.5)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(1.5, 4)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-DF(1.5, 4.5)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(1.5, 5)
-\strut\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.08\columnwidth}\centering\strut
-2.0
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(2, 2)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-DF(2, 2.5)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(2, 3)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-DF(2, 3.5)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(2, 4)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-DF(2, 4.5)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(2, 5)
-\strut\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.08\columnwidth}\centering\strut
-2.5
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-DF(2.5, 2.5)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(2.5, 3)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-DF(2.5, 3.5)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(2.5, 4)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-DF(2.5, 4.5)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(2.5, 5)
-\strut\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.08\columnwidth}\centering\strut
-3.0
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(3, 3)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-DF(3, 3.5)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(3, 4)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-DF(3, 4.5)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(3, 5)
-\strut\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.08\columnwidth}\centering\strut
-3.5
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-DF(3.5, 3.5)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(3.5, 4)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-DF(3.5, 4.5)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(3.5, 5)
-\strut\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.08\columnwidth}\centering\strut
-4.0
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(4, 4)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-DF(4, 4.5)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(4, 5)
-\strut\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.08\columnwidth}\centering\strut
-4.5
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
-DF(4.5, 4.5)
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(4.5, 5)
-\strut\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.08\columnwidth}\centering\strut
-5.0
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
--
-\strut\end{minipage} &
-\begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-DF(5, 5)
-\strut\end{minipage}\tabularnewline
-\bottomrule
-\end{longtable}
+\begin{table}[h]
+\Large
+\centering
+%\caption{My caption}
+\label{my-label}
+\resizebox{\textwidth}{!}{%
 
-    The numerical values are shown in the table below:
+\begin{tabular}{lllllllllll}
+ \hline
+Tenor & 0.5          & 1.0        & 1.5          & 2.0        & 2.5          & 3.0        & 3.5          & 4.0        & 4.5          & 5.0        \\
+ \hline
+0.5   & 1.0 & DF(0.5, 1.0) & DF(0.5, 1.5) & DF(0.5, 2.0) & DF(0.5, 2.5) & DF(0.5, 3.0) & DF(0.5, 3.5) & DF(0.5, 4.0) & DF(0.5, 4.5) & DF(0.5, 5.0) \\
+1.0   & -            & 1.0   & DF(1.0, 1.5)   & DF(1.0, 2.0)   & DF(1.0, 2.5)   & DF(1.0, 3.0)   & DF(1.0, 3.5)   & DF(1.0, 4.0)   & DF(1.0, 4.5)   & DF(1.0, 5.0)   \\
+1.5   & -            & -          & 1.0 & DF(1.5, 2.0) & DF(1.5, 2.5) & DF(1.5, 3.0) & DF(1.5, 3.5) & DF(1.5, 4.0) & DF(1.5, 4.5) & DF(1.5, 5.0) \\
+2.0   & -            & -          & -            & 1.0   & DF(2.0, 2.5)   & DF(2.0, 3.0)   & DF(2.0, 3.5)   & DF(2.0, 4.0)   & DF(2.0, 4.5)   & DF(2.0, 5.0)   \\
+2.5   & -            & -          & -            & -          & 1.0 & DF(2.5, 3.0) & DF(2.5, 3.5) & DF(2.5, 4.0) & DF(2.5, 4.5) & DF(2.5, 5.0) \\
+3.0   & -            & -          & -            & -          & -            & 1.0  & DF(3.0, 3.5)   & DF(3.0, 4.0)   & DF(3.0, 4.5)   & DF(3.0, 5.0)   \\
+3.5   & -            & -          & -            & -          & -            & -          & 1.0 & DF(3.5, 4.0) & DF(3.5, 4.5) & DF(3.5, 5.0) \\
+4.0   & -            & -          & -            & -          & -            & -          & -            & 1.0  & DF(4.0, 4.5)   & DF(4.0, 5.0)   \\
+4.5   & -            & -          & -            & -          & -            & -          & -            & -          & 1.0 & DF(4.5, 5.0) \\
+5.0   & -            & -          & -            & -          & -            & -          & -            & -          & -            & 1.0
+\end{tabular}%
+}
+\end{table}
+
+
+    The numerical values are shown  below:
 
 %    \begin{Verbatim}[commandchars=\\\{\}]
 %{\color{incolor}In [{\color{incolor}156}]:} \PY{n}{DF2} \PY{o}{=} \PY{n}{DF}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
@@ -1032,67 +702,69 @@ DF(5, 5)
 %          \PY{n}{DF2}
 %\end{Verbatim}
 
+{ \small
             \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}156}]:}       0.0       0.5       1.0       1.5       2.0       2.5       3.0  \textbackslash{}
-          Tenor                                                                   
-          0.0     1  0.995835  0.990963  0.985697  0.980105  0.974101  0.967832   
-          0.5     0         1  0.995108  0.989819  0.984204  0.978175   0.97188   
-          1.0     0         0         1  0.994686  0.989043  0.982984  0.976658   
-          1.5     0         0         0         1  0.994327  0.988236  0.981876   
-          2.0     0         0         0         0         1  0.993874  0.987478   
-          2.5     0         0         0         0         0         1  0.993565   
-          3.0     0         0         0         0         0         0         1   
-          3.5     0         0         0         0         0         0         0   
-          4.0     0         0         0         0         0         0         0   
-          4.5     0         0         0         0         0         0         0   
-          5.0     0         0         0         0         0         0         0   
-          
-                      3.5       4.0       4.5       5.0  
-          Tenor                                          
-          0.0    0.961232  0.954239  0.946899  0.939187  
-          0.5    0.965253  0.958231  0.950859  0.943115  
-          1.0    0.969998  0.962941  0.955534  0.947752  
-          1.5    0.975181  0.968086  0.960639  0.952816  
-          2.0    0.980744  0.973609   0.96612  0.958252  
-          2.5    0.986789   0.97961  0.972075  0.964158  
-          3.0    0.993181  0.985955  0.978371  0.970403  
-          3.5           1  0.992725  0.985088  0.977066  
-          4.0           0         1  0.992308  0.984226  
-          4.5           0         0         1  0.991856  
-          5.0           0         0         0         1  
+
+          Tenor   0.0       0.5       1.0       1.5       2.0       2.5       3.0  \textbackslash{}
+          0.0     1  0.995835  0.990963  0.985697  0.980105  0.974101  0.967832
+          0.5     0         1  0.995108  0.989819  0.984204  0.978175   0.97188
+          1.0     0         0         1  0.994686  0.989043  0.982984  0.976658
+          1.5     0         0         0         1  0.994327  0.988236  0.981876
+          2.0     0         0         0         0         1  0.993874  0.987478
+          2.5     0         0         0         0         0         1  0.993565
+          3.0     0         0         0         0         0         0         1
+          3.5     0         0         0         0         0         0         0
+          4.0     0         0         0         0         0         0         0
+          4.5     0         0         0         0         0         0         0
+          5.0     0         0         0         0         0         0         0
+
+          Tenor  3.5       4.0       4.5       5.0
+          0.0    0.961232  0.954239  0.946899  0.939187
+          0.5    0.965253  0.958231  0.950859  0.943115
+          1.0    0.969998  0.962941  0.955534  0.947752
+          1.5    0.975181  0.968086  0.960639  0.952816
+          2.0    0.980744  0.973609   0.96612  0.958252
+          2.5    0.986789   0.97961  0.972075  0.964158
+          3.0    0.993181  0.985955  0.978371  0.970403
+          3.5           1  0.992725  0.985088  0.977066
+          4.0           0         1  0.992308  0.984226
+          4.5           0         0         1  0.991856
+          5.0           0         0         0         1
 \end{Verbatim}
-        
-    \subsection{CVA}\label{cva}
 
-    \subsubsection{MTM of the IRS}\label{mtm-of-the-irs}
+}
 
-    The mark-to-market value of the swap \(V(T_i)\) i.e.~the evolution of
-swap value over time is obtained via:
+    \section{Credit Valuation Adjustment}\label{cva}
+
+    \subsection{Mark-to-Market}\label{mtm-of-the-irs}
+
+    The mark-to-market (MTM) value of the swap \(V(T_i)\), i.e.~the evolution of
+swap value over time, is obtained via:
 
 
-\begin{align} 
+\begin{align*}
 V(T_i=0)= \sum_{i=1}^{11} N \tau D(0, T_i)(L_i - K) \\
 V(T_i=0.5)= \sum_{i=2}^{11} N \tau D(0.5, T_i)(L_i - K) \\
 V(T_i=1.0)= \sum_{i=3}^{11} N \tau D(1.0, T_i)(L_i - K) \\
-\vdots \space \space \vdots \space \space \vdots \\
+\vdots \qquad  \qquad  \vdots \qquad  \qquad \vdots \qquad \qquad  \\
 V(T_i=5.0)= \sum_{i=11}^{11} N \tau D(5.0, T_i)(L_i - K)
-\end{align}
+\end{align*}
 
-where \(N\) is the notional and \(K\) the fixed agreed rate and
-\(L_i = L(t; T_{i-1}, T_{i})\).
-
-Here we assume a par swap by choosing
+where \(N\) is the notional, \(K\) the fixed agreed rate and
+\(L_i = L(t; T_{i-1}, T_{i})\) the LIBOR effective for the period $T_i$. Here we assume a ``par swap'' (ATM) by choosing
 \(K = L(t; 0, 0.5) \approx 0.0063845\) to have zero initial cashflows
 upon entering the swap.
 
-    \subsubsection{Exposure}\label{exposure}
+    \subsection{Exposure}\label{exposure}
 
     Finally, the exposure for each tenor \(E_i\) is calculated from the
-positive part of the MTM simulations as: \[
-E_i = max(V_i, 0)
-\]
+positive part of the MTM simulations as:
 
-The figure below shows sample simulations of the exposure profile.
+\begin{equation}
+E_i = max(V_i, 0)
+\end{equation}
+
+The figure below shows some sample simulations of the exposure profile.
 
 %    \begin{Verbatim}[commandchars=\\\{\}]
 %{\color{incolor}In [{\color{incolor}164}]:} \PY{n}{E\PYZus{}plus}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{E\PYZus{}plus}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mf}{0.5}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{Exposure Profiles}\PY{l+s}{\PYZsq{}}\PY{p}{)}
@@ -1104,21 +776,22 @@ The figure below shows sample simulations of the exposure profile.
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{CVA_files/CVA_44_0.png}
     \end{center}
     { \hspace*{\fill} \\}
-    
-    \subsubsection{Expected Exposure}\label{expected-exposure}
+
+
+    \subsection{Expected Exposure}\label{expected-exposure}
 
     The Expected Exposure (EE) is calculated as the median of the Exposure
 profile. The median is here preferred over the mean as the latter can be
 skewed by large observations and is more sensitive to outliers.
 
-The figure below shows \(EE_i\) as calculated from the mean and median,
-as well as the Potential Future Exposure (PFE) take to be the 97.5
+The figure below shows the period expected exposure \(EE_i\) as calculated from the mean and median,
+as well as the Potential Future Exposure (PFE), taken to be the 97.5
 percentile of the \(E_i\) distribution. From this we see that using the
 median, the maximum EE and PFE are attained at the beginning of the swap
-in this case (equal to \textasciitilde{}5.33\% and
-\textasciitilde{}14.89\% of the notional respectively). Clearly the PFE
+in this case (equal to $\sim 5.33\%$ and $\sim 14.89\%$ 
+ of the notional respectively). Clearly the PFE
 is always bigger than the EE - in a way this tells us it is 97.5\%
-probable that our exposure will not exceed \textasciitilde{}14.89\%.
+probable that our exposure will not exceed $\sim 14.89\%$ .
 
 %    \begin{Verbatim}[commandchars=\\\{\}]
 %{\color{incolor}In [{\color{incolor}183}]:} \PY{k}{print} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{EE\PYZus{}plus\PYZus{}median}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{100.0}
@@ -1140,20 +813,23 @@ probable that our exposure will not exceed \textasciitilde{}14.89\%.
 %            \begin{Verbatim}[commandchars=\\\{\}]
 %{\color{outcolor}Out[{\color{outcolor}165}]:} <matplotlib.legend.Legend at 0x20b0e048>
 %\end{Verbatim}
-        
+
     \begin{center}
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{CVA_files/CVA_48_1.png}
     \end{center}
     { \hspace*{\fill} \\}
-    
-    \subsubsection{CVA}\label{cva}
+
+    \subsection{CVA}\label{cva}
 
 Lastly, the CVA is approximated by a linear interpolation across the
-tenors: \[
-CVA \approx \sum_i (1-R)E(\frac{T_{i-1}-T_i}{2}) DF(\frac{T_{i-1}-T_i}{2}) PD(\frac{T_{i-1}-T_i}{2})
-\]
+tenors \footnote{Note that the discount factors are more appropriately extrapolated using a log-linear extrapolation instead of purely linear as done here. Due to time constrains this wasn't implemented.}:
 
-The figure below shows each of the components in this equation
+\begin{equation}
+CVA \approx \sum_i (1-R)E(\frac{T_{i-1}-T_i}{2}) DF(\frac{T_{i-1}-T_i}{2}) PD(\frac{T_{i-1}-T_i}{2})
+\end{equation}
+
+
+The figure below shows each of the components in this equation, where we see their term structure isn't flat, except for the loss factor $(1-R)$.
 
 %    \begin{Verbatim}[commandchars=\\\{\}]
 %{\color{incolor}In [{\color{incolor}171}]:} \PY{n}{Loss} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{n}{index\PYZus{}interpol}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{RR}\PY{p}{)}\PY{p}{)}
@@ -1164,17 +840,15 @@ The figure below shows each of the components in this equation
 %\end{Verbatim}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{CVA_files/CVA_50_0.png}
+    \adjustimage{max size={0.8\linewidth}{0.9\paperheight}}{CVA_files/CVA_50_0.png}
     \end{center}
     { \hspace*{\fill} \\}
-    
-    The figure below shows the CVA for each tenor range in percentage terms
-over the notional value. We see a 'hump'shape telling us the maximum is
-found in the 2.5-3.0Y tenor period.
 
-Based on this, the total CVA over the the lifetime of the swap amounts
-to \textasciitilde{}0.473\% over the notional. So for example, if the
-notional was \$1m, the CVA would amount to \textasciitilde{}\$4,726
+    The figure below shows the final CVA result for each tenor range in percentage terms
+over the notional value. We see a `hump'-shape, telling us the maximum is
+found in the $2.5-3.0Y$ tenor period. Based on this, the total CVA over the the lifetime of the swap amounts
+to $~0.473\%$ over the notional. So for example, if the
+notional was \$1m, the CVA would have amounted to $\sim \$4,730$, which although small is not negligible when it comes to pricing the true value of the swap.
 
 %    \begin{Verbatim}[commandchars=\\\{\}]
 %{\color{incolor}In [{\color{incolor}191}]:} \PY{n}{ax} \PY{o}{=}\PY{n}{CVA}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{width}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{CVA}\PY{l+s}{\PYZsq{}}\PY{p}{)}
@@ -1186,7 +860,7 @@ notional was \$1m, the CVA would amount to \textasciitilde{}\$4,726
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{CVA_files/CVA_52_0.png}
     \end{center}
     { \hspace*{\fill} \\}
-    
+
 %    \begin{Verbatim}[commandchars=\\\{\}]
 %{\color{incolor}In [{\color{incolor}195}]:} \PY{k}{print} \PY{n+nb}{round}\PY{p}{(}\PY{n}{CVA\PYZus{}total}\PY{o}{*}\PY{l+m+mf}{100.0}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
 %\end{Verbatim}
@@ -1204,16 +878,61 @@ notional was \$1m, the CVA would amount to \textasciitilde{}\$4,726
 %    \end{Verbatim}
 
 
-\section{Summary}
+\section{Conclusion}
+
+For this hypothetical IRS scenario the CVA adjustment came out to be quite small. This was found a bit `surprising', given AirFrance's relatively high probability of default compared to other companies CDS. Whether the CVA value arrived at is accurate or not is debatable, since through the exercise the following issues were noted:
 
 \begin{itemize}
-\item Accruals: Not included effect from accruals
-\item Errors: Not provided errors in result, such as the MC simulation error, potential overfitting of the volatility 
-\item etc...
+\item Typically a `hump' structure should have been seen already in the Exposure profile, but this wasn't the case here and rather the maximum exposure was attained at the very start. This is atypical  for the long-term contracts such as a $5Y$  IRS because the forward rates at these tenors are relatively high.  One potential cause could be the HJM recalibration to recent data, given the rates have been historically low. Another possibility could be that the forward rates are too low compared to the estimated discount factors. On the other hand, the CVA plot did show a hump, but this is likely due to the default probability term structure. Overall this would require further investigation
+
+\item Due to time constrains, a `shortcut' was taken when calculating the discount factors for the swap - an expectation across all simulations was taken to get a single value for each period. The effect on the valuation from this would need to be understood
+
+\item The above is in addition to all the pros and cons of the HJM model and MC associated errors. In particular, the antithetic reduction technique wasn't implemented here, yielding a higher simulation error
+
+\item The effect from accruals wasn't estimated either, although this is expected to be small
+
 \end{itemize}
 
-    % Add a bibliography block to the postdoc
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%   APPENDIX
+
+%\begin{appendix}
+%\section{Appendix - Background reading}
+%Paul is sweet
+%\end{appendix}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%   BIBLIOGRAPHY
+
+\newpage
+
+\addcontentsline{toc}{section}{References}
+
+  \begin{thebibliography}{1}
+
+  \bibitem{notes} Richard Diamond, {\em CQF Lectures - Heath Jarrow \& Morton Model},  2016
+  
+    \bibitem{notes2} Richard Diamond, {\em CQF Lectures - Final Project Workshop Part I},  2016
     
-    
-    
-    \end{document}
+   \bibitem{notes3} Riaz Ahmad, {\em Stochastic Interest Rate Modeling},  2016
+   
+   \bibitem{data} {\em Bank of England Yield Curves},  2016: \url{http://www.bankofengland.co.uk/statistics/Pages/yieldcurve/archive.aspx}
+   
+%
+%  \bibitem{impj}  The Japan Reader {\em Imperial Japan 1800-1945} 1973:
+%  Random House, N.Y.
+%
+%  \bibitem{norman} E. H. Norman {\em Japan's emergence as a modern
+%  state} 1940: International Secretariat, Institute of Pacific
+%  Relations.
+%
+%  \bibitem{fo} Bob Tadashi Wakabayashi {\em Anti-Foreignism and Western
+%  Learning in Early-Modern Japan} 1986: Harvard University Press.
+
+  \end{thebibliography}
+
+
+\end{document}
