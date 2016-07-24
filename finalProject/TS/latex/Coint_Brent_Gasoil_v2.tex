@@ -335,13 +335,12 @@ and out-of-sample periods), where the two series indeed seem to be
 closely related, having parallel up and down trends.
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{temp} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{data/df\PYZus{}brent\PYZus{}gasoil.csv}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{parse\PYZus{}dates}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,} \PY{n}{dayfirst}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
-        \PY{n}{df} \PY{o}{=} \PY{n}{temp}\PY{p}{[}\PY{n}{datetime}\PY{p}{(}\PY{l+m+mi}{2014}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}\PY{n}{datetime}\PY{p}{(}\PY{l+m+mi}{2015}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{)}\PY{p}{]}
-        \PY{n}{df\PYZus{}is} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{datetime}\PY{p}{(}\PY{l+m+mi}{2014}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}\PY{n}{datetime}\PY{p}{(}\PY{l+m+mi}{2014}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{31}\PY{p}{)}\PY{p}{]}  \PY{c}{\PYZsh{} in\PYZhy{}sample dataset}
-        \PY{n}{df\PYZus{}os} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{datetime}\PY{p}{(}\PY{l+m+mi}{2015}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}\PY{n}{datetime}\PY{p}{(}\PY{l+m+mi}{2015}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{31}\PY{p}{)}\PY{p}{]}  \PY{c}{\PYZsh{} out\PYZhy{}of\PYZhy{}sample dataset}
-        \PY{k}{print} \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
-        \PY{k}{print} \PY{n}{df}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{p}{)}
-        \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}391}]:} \PY{n}{temp} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{data/df\PYZus{}brent\PYZus{}gasoil.csv}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{parse\PYZus{}dates}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,} \PY{n}{dayfirst}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+          \PY{n}{df} \PY{o}{=} \PY{n}{temp}\PY{p}{[}\PY{n}{datetime}\PY{p}{(}\PY{l+m+mi}{2014}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}\PY{n}{datetime}\PY{p}{(}\PY{l+m+mi}{2015}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{)}\PY{p}{]}
+          \PY{n}{df\PYZus{}is} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{datetime}\PY{p}{(}\PY{l+m+mi}{2014}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}\PY{n}{datetime}\PY{p}{(}\PY{l+m+mi}{2014}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{31}\PY{p}{)}\PY{p}{]}  \PY{c}{\PYZsh{} in\PYZhy{}sample dataset}
+          \PY{n}{df\PYZus{}os} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{datetime}\PY{p}{(}\PY{l+m+mi}{2015}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}\PY{n}{datetime}\PY{p}{(}\PY{l+m+mi}{2015}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{31}\PY{p}{)}\PY{p}{]}  \PY{c}{\PYZsh{} out\PYZhy{}of\PYZhy{}sample dataset}
+          \PY{k}{print} \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+          \PY{k}{print} \PY{n}{df}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
@@ -361,8 +360,12 @@ Date
 2015-06-30  63.59  77.013423
     \end{Verbatim}
 
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}392}]:} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_8_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_9_0.png}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -403,7 +406,7 @@ differencing \(Y_t - Y_{t-1} = \alpha + \epsilon_t\)
 \end{Verbatim}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_11_0.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_12_0.png}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -473,48 +476,48 @@ exit/entry thresholds and also assess the `quality' of mean-reversion.
 \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}53}]:} \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k+kn}{import} \PY{n}{gridspec}
-         
-         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
-         \PY{n}{gs} \PY{o}{=} \PY{n}{gridspec}\PY{o}{.}\PY{n}{GridSpec}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{height\PYZus{}ratios}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
-         \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{n}{gs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
-         \PY{c}{\PYZsh{} plt.subplot(211)}
-         
-         \PY{c}{\PYZsh{} f, (a0, a1) = plt.subplots(2, 1, gridspec\PYZus{}kw = \PYZob{}\PYZsq{}height\PYZus{}ratios\PYZsq{}:[2, 1]\PYZcb{})}
-         \PY{c}{\PYZsh{} a0.plot(Y\PYZus{}t1)}
-         \PY{c}{\PYZsh{} a0.plot(Y\PYZus{}t2)}
-         \PY{c}{\PYZsh{} a0.plot(Y\PYZus{}t3)}
-         \PY{c}{\PYZsh{} a0.axhline(mu, color=\PYZsq{}grey\PYZsq{}, linestyle=\PYZsq{}\PYZhy{}\PYZhy{}\PYZsq{}) }
-         \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{Y\PYZus{}t1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
-         \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{Y\PYZus{}t2}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
-         \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{Y\PYZus{}t3}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
-         \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{n}{mu}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{grey}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZhy{}\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{)} 
-         
-         \PY{c}{\PYZsh{} \PYZus{} = plt.ylabel(\PYZsq{}Series Value\PYZsq{})}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Ornstein\PYZhy{}Uhlenbeck process for different mean\PYZhy{}reversion speeds}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdl{}Y\PYZus{}t\PYZdl{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s}{r\PYZsq{}}\PY{l+s}{\PYZdl{}}\PY{l+s}{\PYZbs{}}\PY{l+s}{theta=\PYZob{}0\PYZcb{}, Y\PYZus{}0=\PYZob{}1:0.0f\PYZcb{}\PYZdl{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{theta1}\PY{p}{,} \PY{n}{Y\PYZus{}t1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,} 
-                     \PY{l+s}{r\PYZsq{}}\PY{l+s}{\PYZdl{}}\PY{l+s}{\PYZbs{}}\PY{l+s}{theta=\PYZob{}0\PYZcb{}, Y\PYZus{}0=\PYZob{}1:0.0f\PYZcb{}\PYZdl{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{theta2}\PY{p}{,} \PY{n}{Y\PYZus{}t2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}
-                     \PY{l+s}{r\PYZsq{}}\PY{l+s}{\PYZdl{}}\PY{l+s}{\PYZbs{}}\PY{l+s}{theta=\PYZob{}0\PYZcb{}, Y\PYZus{}0=\PYZob{}1:0.0f\PYZcb{}\PYZdl{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{theta3}\PY{p}{,} \PY{n}{Y\PYZus{}t3}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}
-                     \PY{l+s}{r\PYZsq{}}\PY{l+s}{\PYZdl{}}\PY{l+s}{\PYZbs{}}\PY{l+s}{mu=\PYZob{}0\PYZcb{}\PYZdl{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{mu}\PY{p}{)}\PY{p}{]}\PY{p}{,}
-                    \PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{lower right}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         
-         \PY{c}{\PYZsh{} \PYZsh{} plt.subplot(212)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{n}{gs}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{sharex}\PY{o}{=}\PY{n}{ax}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Differences}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         \PY{n}{Y\PYZus{}t1}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
-         \PY{n}{Y\PYZus{}t2}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
-         \PY{n}{Y\PYZus{}t3}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdl{}dY\PYZus{}t\PYZdl{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Time}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}393}]:} \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k+kn}{import} \PY{n}{gridspec}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+          \PY{n}{gs} \PY{o}{=} \PY{n}{gridspec}\PY{o}{.}\PY{n}{GridSpec}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{height\PYZus{}ratios}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{n}{gs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+          \PY{c}{\PYZsh{} plt.subplot(211)}
+          
+          \PY{c}{\PYZsh{} f, (a0, a1) = plt.subplots(2, 1, gridspec\PYZus{}kw = \PYZob{}\PYZsq{}height\PYZus{}ratios\PYZsq{}:[2, 1]\PYZcb{})}
+          \PY{c}{\PYZsh{} a0.plot(Y\PYZus{}t1)}
+          \PY{c}{\PYZsh{} a0.plot(Y\PYZus{}t2)}
+          \PY{c}{\PYZsh{} a0.plot(Y\PYZus{}t3)}
+          \PY{c}{\PYZsh{} a0.axhline(mu, color=\PYZsq{}grey\PYZsq{}, linestyle=\PYZsq{}\PYZhy{}\PYZhy{}\PYZsq{}) }
+          \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{Y\PYZus{}t1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+          \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{Y\PYZus{}t2}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+          \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{Y\PYZus{}t3}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+          \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{n}{mu}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{grey}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZhy{}\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{)} 
+          
+          \PY{c}{\PYZsh{} \PYZus{} = plt.ylabel(\PYZsq{}Series Value\PYZsq{})}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Ornstein\PYZhy{}Uhlenbeck process for different mean\PYZhy{}reversion speeds}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdl{}Y\PYZus{}t\PYZdl{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s}{r\PYZsq{}}\PY{l+s}{\PYZdl{}}\PY{l+s}{\PYZbs{}}\PY{l+s}{theta=\PYZob{}0\PYZcb{}, Y\PYZus{}0=\PYZob{}1:0.0f\PYZcb{}\PYZdl{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{theta1}\PY{p}{,} \PY{n}{Y\PYZus{}t1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,} 
+                      \PY{l+s}{r\PYZsq{}}\PY{l+s}{\PYZdl{}}\PY{l+s}{\PYZbs{}}\PY{l+s}{theta=\PYZob{}0\PYZcb{}, Y\PYZus{}0=\PYZob{}1:0.0f\PYZcb{}\PYZdl{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{theta2}\PY{p}{,} \PY{n}{Y\PYZus{}t2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                      \PY{l+s}{r\PYZsq{}}\PY{l+s}{\PYZdl{}}\PY{l+s}{\PYZbs{}}\PY{l+s}{theta=\PYZob{}0\PYZcb{}, Y\PYZus{}0=\PYZob{}1:0.0f\PYZcb{}\PYZdl{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{theta3}\PY{p}{,} \PY{n}{Y\PYZus{}t3}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                      \PY{l+s}{r\PYZsq{}}\PY{l+s}{\PYZdl{}}\PY{l+s}{\PYZbs{}}\PY{l+s}{mu=\PYZob{}0\PYZcb{}\PYZdl{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{mu}\PY{p}{)}\PY{p}{]}\PY{p}{,}
+                     \PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{lower right}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c}{\PYZsh{} \PYZsh{} plt.subplot(212)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{n}{gs}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{sharex}\PY{o}{=}\PY{n}{ax}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Differences}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{Y\PYZus{}t1}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+          \PY{n}{Y\PYZus{}t2}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+          \PY{n}{Y\PYZus{}t3}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdl{}dY\PYZus{}t\PYZdl{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Time}\PY{l+s}{\PYZsq{}}\PY{p}{)}
 \end{Verbatim}
 
             \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}53}]:} <matplotlib.text.Text at 0x18e5d4a8>
+{\color{outcolor}Out[{\color{outcolor}393}]:} <matplotlib.text.Text at 0x33800438>
 \end{Verbatim}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_14_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_15_1.png}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -649,7 +652,7 @@ Y\_t3 & 0.100 & 2\tabularnewline
 \end{Verbatim}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_24_0.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_25_0.png}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -970,7 +973,7 @@ ref2}):
           
           \PY{n}{p\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{n}{Y\PYZus{}t}\PY{p}{,} \PY{n}{Y\PYZus{}t1}\PY{p}{,} \PY{n}{Y\PYZus{}t2}\PY{p}{,} \PY{n}{Y\PYZus{}t3}\PY{p}{]}
           
-          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
           
           \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{p} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{p\PYZus{}list}\PY{p}{)}\PY{p}{:}
               \PY{n}{autocorrelation\PYZus{}plot}\PY{p}{(}\PY{n}{p}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{n}{p}\PY{o}{.}\PY{n}{name}\PY{p}{)}
@@ -980,7 +983,7 @@ ref2}):
 \end{Verbatim}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_31_0.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_32_0.png}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -1028,7 +1031,7 @@ ref2}):
 \end{Verbatim}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_33_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_34_1.png}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -1104,7 +1107,7 @@ y_{1t} = y_{2t} + 5.0 + \epsilon_t
 \end{Verbatim}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_36_0.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_37_0.png}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -1196,114 +1199,83 @@ below the \(1\%\) critical value (\(-2.5748\)), confirming the
 stationarity of the spread, which by design we expected.
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}7}]:} \PY{c}{\PYZsh{} ======  ENGLE\PYZhy{}GRANGER 2\PYZhy{}STEP METHOD  ======}
-        
-        \PY{c}{\PYZsh{} ===== STEP 1: GET SPREAD FROM OLS =====}
-        
-        \PY{c}{\PYZsh{} My OLS and ADF implementatin}
-        \PY{k+kn}{from} \PY{n+nn}{analysis} \PY{k+kn}{import} \PY{n}{my\PYZus{}OLS}
-        
-        \PY{c}{\PYZsh{} Import statsmodels equivalents to validate results}
-        \PY{k+kn}{from} \PY{n+nn}{statsmodels.tsa.tsatools} \PY{k+kn}{import} \PY{n}{add\PYZus{}constant}
-        \PY{k+kn}{from} \PY{n+nn}{statsmodels.regression.linear\PYZus{}model} \PY{k+kn}{import} \PY{n}{OLS}
-        
-        \PY{n}{y\PYZus{}2t} \PY{o}{=} \PY{n}{add\PYZus{}constant}\PY{p}{(}\PY{n}{y\PYZus{}2t}\PY{p}{)}
-        \PY{n}{my\PYZus{}res\PYZus{}ols} \PY{o}{=} \PY{n}{my\PYZus{}OLS}\PY{p}{(}\PY{n}{y\PYZus{}1t}\PY{p}{,} \PY{n}{y\PYZus{}2t}\PY{p}{)}
-        \PY{n}{sm\PYZus{}res\PYZus{}ols} \PY{o}{=} \PY{n}{OLS}\PY{p}{(}\PY{n}{y\PYZus{}1t}\PY{p}{,} \PY{n}{y\PYZus{}2t}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}  \PY{c}{\PYZsh{} validate result with statsmodels}
-        \PY{n}{y\PYZus{}2t} \PY{o}{=} \PY{n}{y\PYZus{}2t}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}  \PY{c}{\PYZsh{} remove the constant now that we\PYZsq{}re done}
-        
-        \PY{c}{\PYZsh{} Set values of estimated parameters}
-        \PY{n}{c\PYZus{}hat} \PY{o}{=} \PY{n}{my\PYZus{}res\PYZus{}ols}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{params}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
-        \PY{n}{beta2\PYZus{}hat} \PY{o}{=} \PY{n}{my\PYZus{}res\PYZus{}ols}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{params}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
-        
-        \PY{c}{\PYZsh{} cointegration spread}
-        \PY{n}{e\PYZus{}t\PYZus{}hat} \PY{o}{=} \PY{n}{y\PYZus{}1t} \PY{o}{\PYZhy{}} \PY{n}{c\PYZus{}hat} \PY{o}{\PYZhy{}} \PY{n}{beta2\PYZus{}hat}\PY{o}{*}\PY{n}{y\PYZus{}2t}  \PY{c}{\PYZsh{} == sm\PYZus{}res\PYZus{}ols.resid ==  my\PYZus{}res\PYZus{}ols[\PYZsq{}resid\PYZus{}hat\PYZsq{}]}
-        \PY{n}{e\PYZus{}t\PYZus{}hat}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{e\PYZus{}t\PYZus{}hat}\PY{l+s}{\PYZsq{}}
-        
-        \PY{c}{\PYZsh{} print my\PYZus{}res\PYZus{}ols[\PYZsq{}params\PYZsq{}]}
-        \PY{c}{\PYZsh{} print sm\PYZus{}res\PYZus{}ols.params}
-        \PY{n}{sm\PYZus{}res\PYZus{}ols}\PY{o}{.}\PY{n}{summary2}\PY{p}{(}\PY{p}{)}
-        \PY{c}{\PYZsh{} print my\PYZus{}res\PYZus{}ols[\PYZsq{}resid\PYZus{}hat\PYZsq{}].head()}
-        \PY{c}{\PYZsh{} print sm\PYZus{}res\PYZus{}ols.resid.head()}
-        \PY{c}{\PYZsh{} print e\PYZus{}t\PYZus{}hat.head()}
+{\color{incolor}In [{\color{incolor}374}]:} \PY{c}{\PYZsh{} ======  ENGLE\PYZhy{}GRANGER 2\PYZhy{}STEP METHOD  ======}
+          
+          \PY{c}{\PYZsh{} ===== STEP 1: GET SPREAD FROM OLS =====}
+          
+          \PY{c}{\PYZsh{} My OLS and ADF implementatin}
+          \PY{k+kn}{from} \PY{n+nn}{analysis} \PY{k+kn}{import} \PY{n}{my\PYZus{}OLS}
+          
+          \PY{c}{\PYZsh{} Import statsmodels equivalents to validate results}
+          \PY{k+kn}{from} \PY{n+nn}{statsmodels.tsa.tsatools} \PY{k+kn}{import} \PY{n}{add\PYZus{}constant}
+          \PY{k+kn}{from} \PY{n+nn}{statsmodels.regression.linear\PYZus{}model} \PY{k+kn}{import} \PY{n}{OLS}
+          
+          \PY{n}{y\PYZus{}2t} \PY{o}{=} \PY{n}{add\PYZus{}constant}\PY{p}{(}\PY{n}{y\PYZus{}2t}\PY{p}{)}
+          \PY{n}{my\PYZus{}res\PYZus{}ols} \PY{o}{=} \PY{n}{my\PYZus{}OLS}\PY{p}{(}\PY{n}{y\PYZus{}1t}\PY{p}{,} \PY{n}{y\PYZus{}2t}\PY{p}{)}
+          \PY{n}{sm\PYZus{}res\PYZus{}ols} \PY{o}{=} \PY{n}{OLS}\PY{p}{(}\PY{n}{y\PYZus{}1t}\PY{p}{,} \PY{n}{y\PYZus{}2t}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}  \PY{c}{\PYZsh{} validate result with statsmodels}
+          \PY{n}{y\PYZus{}2t} \PY{o}{=} \PY{n}{y\PYZus{}2t}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}  \PY{c}{\PYZsh{} remove the constant now that we\PYZsq{}re done}
+          
+          \PY{c}{\PYZsh{} Set values of estimated parameters}
+          \PY{n}{c\PYZus{}hat} \PY{o}{=} \PY{n}{my\PYZus{}res\PYZus{}ols}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{params}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+          \PY{n}{beta2\PYZus{}hat} \PY{o}{=} \PY{n}{my\PYZus{}res\PYZus{}ols}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{params}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+          
+          \PY{c}{\PYZsh{} cointegration spread}
+          \PY{n}{e\PYZus{}t\PYZus{}hat} \PY{o}{=} \PY{n}{y\PYZus{}1t} \PY{o}{\PYZhy{}} \PY{n}{c\PYZus{}hat} \PY{o}{\PYZhy{}} \PY{n}{beta2\PYZus{}hat}\PY{o}{*}\PY{n}{y\PYZus{}2t}  \PY{c}{\PYZsh{} == sm\PYZus{}res\PYZus{}ols.resid ==  my\PYZus{}res\PYZus{}ols[\PYZsq{}resid\PYZus{}hat\PYZsq{}]}
+          \PY{n}{e\PYZus{}t\PYZus{}hat}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{e\PYZus{}t\PYZus{}hat}\PY{l+s}{\PYZsq{}}
+          
+          \PY{c}{\PYZsh{} print my\PYZus{}res\PYZus{}ols[\PYZsq{}params\PYZsq{}]}
+          \PY{c}{\PYZsh{} print sm\PYZus{}res\PYZus{}ols.params}
+          \PY{n}{sm\PYZus{}res\PYZus{}ols}\PY{o}{.}\PY{n}{summary2}\PY{p}{(}\PY{p}{)}
+          \PY{c}{\PYZsh{} print my\PYZus{}res\PYZus{}ols[\PYZsq{}resid\PYZus{}hat\PYZsq{}].head()}
+          \PY{c}{\PYZsh{} print sm\PYZus{}res\PYZus{}ols.resid.head()}
+          \PY{c}{\PYZsh{} print e\PYZus{}t\PYZus{}hat.head()}
 \end{Verbatim}
 
             \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}7}]:} <class 'statsmodels.iolib.summary2.Summary'>
-        """
-                          Results: Ordinary least squares
-        ==================================================================
-        Model:              OLS              Adj. R-squared:     0.990    
-        Dependent Variable: y\_1t             AIC:                725.9157 
-        Date:               2016-07-23 17:32 BIC:                732.9586 
-        No. Observations:   250              Log-Likelihood:     -360.96  
-        Df Model:           1                F-statistic:        2.412e+04
-        Df Residuals:       248              Prob (F-statistic): 4.58e-249
-        R-squared:          0.990            Scale:              1.0595   
-        ---------------------------------------------------------------------
-                 Coef.     Std.Err.       t        P>|t|     [0.025    0.975]
-        ---------------------------------------------------------------------
-        const    5.0330      0.1000     50.3359    0.0000    4.8360    5.2299
-        y\_2t     1.0052      0.0065    155.2941    0.0000    0.9924    1.0179
-        ------------------------------------------------------------------
-        Omnibus:              2.007         Durbin-Watson:           2.217
-        Prob(Omnibus):        0.367         Jarque-Bera (JB):        1.696
-        Skew:                 -0.059        Prob(JB):                0.428
-        Kurtosis:             2.614         Condition No.:           24   
-        ==================================================================
-        
-        """
+{\color{outcolor}Out[{\color{outcolor}374}]:} <class 'statsmodels.iolib.summary2.Summary'>
+          """
+                            Results: Ordinary least squares
+          ==================================================================
+          Model:              OLS              Adj. R-squared:     0.990    
+          Dependent Variable: y\_1t             AIC:                725.9157 
+          Date:               2016-07-24 13:06 BIC:                732.9586 
+          No. Observations:   250              Log-Likelihood:     -360.96  
+          Df Model:           1                F-statistic:        2.412e+04
+          Df Residuals:       248              Prob (F-statistic): 4.58e-249
+          R-squared:          0.990            Scale:              1.0595   
+          ---------------------------------------------------------------------
+                   Coef.     Std.Err.       t        P>|t|     [0.025    0.975]
+          ---------------------------------------------------------------------
+          const    5.0330      0.1000     50.3359    0.0000    4.8360    5.2299
+          y\_2t     1.0052      0.0065    155.2941    0.0000    0.9924    1.0179
+          ------------------------------------------------------------------
+          Omnibus:              2.007         Durbin-Watson:           2.217
+          Prob(Omnibus):        0.367         Jarque-Bera (JB):        1.696
+          Skew:                 -0.059        Prob(JB):                0.428
+          Kurtosis:             2.614         Condition No.:           24   
+          ==================================================================
+          
+          """
 \end{Verbatim}
         
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}48}]:} \PY{c}{\PYZsh{} ===== PLOT OLS FIT  =====}
-         
-         \PY{c}{\PYZsh{} generate equally spaced X values between true X range}
-         \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{y\PYZus{}2t}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{y\PYZus{}2t}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
-         
-         \PY{c}{\PYZsh{} Plot the estimated dependent variable}
-         \PY{n}{y\PYZus{}1t\PYZus{}hat} \PY{o}{=} \PY{n}{c\PYZus{}hat} \PY{o}{+} \PY{n}{beta2\PYZus{}hat}\PY{o}{*}\PY{n}{x}
-         
-         \PY{c}{\PYZsh{} Plot own fit on top of seaborn scatter + fit}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Cointegrated series regression}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         \PY{n}{ax} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{regplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{y\PYZus{}2t}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{y\PYZus{}1t}\PY{p}{,} \PY{n}{fit\PYZus{}reg}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}  \PY{c}{\PYZsh{} true values}
-         \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y\PYZus{}1t\PYZus{}hat}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{r}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{OLS fit}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{simulated data}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{lower right}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}375}]:} \PY{c}{\PYZsh{} ===== PLOT OLS FIT  =====}
+          
+          \PY{c}{\PYZsh{} generate equally spaced X values between true X range}
+          \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{y\PYZus{}2t}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{y\PYZus{}2t}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+          
+          \PY{c}{\PYZsh{} Plot the estimated dependent variable}
+          \PY{n}{y\PYZus{}1t\PYZus{}hat} \PY{o}{=} \PY{n}{c\PYZus{}hat} \PY{o}{+} \PY{n}{beta2\PYZus{}hat}\PY{o}{*}\PY{n}{x}
+          
+          \PY{c}{\PYZsh{} Plot own fit on top of seaborn scatter + fit}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Cointegrated series regression}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{regplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{y\PYZus{}2t}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{y\PYZus{}1t}\PY{p}{,} \PY{n}{fit\PYZus{}reg}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}  \PY{c}{\PYZsh{} true values}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y\PYZus{}1t\PYZus{}hat}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{r}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{OLS fit}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{simulated data}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{lower right}\PY{l+s}{\PYZsq{}}\PY{p}{)}
 \end{Verbatim}
 
             \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}48}]:} <matplotlib.legend.Legend at 0x108b56d8>
-\end{Verbatim}
-        
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_41_1.png}
-    \end{center}
-    { \hspace*{\fill} \\}
-    
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}51}]:} \PY{c}{\PYZsh{} ===== CHECK OPTIMAL LAG ORDER  =====}
-         \PY{k+kn}{from} \PY{n+nn}{statsmodels.graphics.tsaplots} \PY{k+kn}{import} \PY{n}{plot\PYZus{}pacf}
-         \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k+kn}{import} \PY{n}{gridspec}
-         
-         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{)}\PY{p}{)}
-         \PY{c}{\PYZsh{} gs = gridspec.GridSpec(2, 1, height\PYZus{}ratios=[3, 1])}
-         \PY{n}{gs} \PY{o}{=} \PY{n}{gridspec}\PY{o}{.}\PY{n}{GridSpec}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
-         
-         \PY{c}{\PYZsh{} Plot cointegrated residual}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{n}{gs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Cointegrating spread \PYZdl{}}\PY{l+s}{\PYZbs{}}\PY{l+s}{hat\PYZob{}e\PYZcb{}\PYZus{}t\PYZdl{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         \PY{n}{e\PYZus{}t\PYZus{}hat}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{n}{e\PYZus{}t\PYZus{}hat}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{red}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZhy{}\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{)} \PY{c}{\PYZsh{} Add the mean}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdl{}}\PY{l+s}{\PYZbs{}}\PY{l+s}{hat\PYZob{}e\PYZcb{}\PYZus{}t\PYZdl{}}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{mean(\PYZdl{}}\PY{l+s}{\PYZbs{}}\PY{l+s}{hat\PYZob{}e\PYZcb{}\PYZus{}t\PYZdl{})}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{lower right}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         
-         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{n}{gs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
-         \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{plot\PYZus{}pacf}\PY{p}{(}\PY{n}{e\PYZus{}t\PYZus{}hat}\PY{p}{,} \PY{n}{lags}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.01}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Partial Autocorrelation \PYZdl{}}\PY{l+s}{\PYZbs{}}\PY{l+s}{hat\PYZob{}e\PYZcb{}\PYZus{}t\PYZdl{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-         \PY{c}{\PYZsh{} plt.text(x=40.5, y=0.85, s=\PYZsq{}\PYZdl{}\PYZbs{}hat\PYZob{}e\PYZcb{}\PYZus{}t\PYZdl{}\PYZsq{}, size=\PYZsq{}xx\PYZhy{}large\PYZsq{})}
-\end{Verbatim}
-
-            \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}51}]:} <matplotlib.text.Text at 0x117539e8>
+{\color{outcolor}Out[{\color{outcolor}375}]:} <matplotlib.legend.Legend at 0x2a71b320>
 \end{Verbatim}
         
     \begin{center}
@@ -1311,8 +1283,37 @@ stationarity of the spread, which by design we expected.
     \end{center}
     { \hspace*{\fill} \\}
     
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}378}]:} \PY{c}{\PYZsh{} ===== CHECK OPTIMAL LAG ORDER  =====}
+          \PY{k+kn}{from} \PY{n+nn}{statsmodels.graphics.tsaplots} \PY{k+kn}{import} \PY{n}{plot\PYZus{}pacf}
+          \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k+kn}{import} \PY{n}{gridspec}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+          \PY{c}{\PYZsh{} gs = gridspec.GridSpec(2, 1, height\PYZus{}ratios=[3, 1])}
+          \PY{n}{gs} \PY{o}{=} \PY{n}{gridspec}\PY{o}{.}\PY{n}{GridSpec}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{height\PYZus{}ratios}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{0.7}\PY{p}{]}\PY{p}{)}
+          
+          \PY{c}{\PYZsh{} Plot cointegrated residual}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{n}{gs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Cointegrating spread \PYZdl{}}\PY{l+s}{\PYZbs{}}\PY{l+s}{hat\PYZob{}e\PYZcb{}\PYZus{}t\PYZdl{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{e\PYZus{}t\PYZus{}hat}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{n}{e\PYZus{}t\PYZus{}hat}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{red}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZhy{}\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{)} \PY{c}{\PYZsh{} Add the mean}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdl{}}\PY{l+s}{\PYZbs{}}\PY{l+s}{hat\PYZob{}e\PYZcb{}\PYZus{}t\PYZdl{}}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{mean(\PYZdl{}}\PY{l+s}{\PYZbs{}}\PY{l+s}{hat\PYZob{}e\PYZcb{}\PYZus{}t\PYZdl{})}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{lower right}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{axx} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{n}{gs}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+          \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{plot\PYZus{}pacf}\PY{p}{(}\PY{n}{e\PYZus{}t\PYZus{}hat}\PY{p}{,} \PY{n}{lags}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.01}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{axx}\PY{p}{)}
+          \PY{c}{\PYZsh{} plt.title(\PYZsq{}Partial Autocorrelation \PYZdl{}\PYZbs{}hat\PYZob{}e\PYZcb{}\PYZus{}t\PYZdl{}\PYZsq{})}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Lags}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+m+mi}{19}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+m+mf}{0.85}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{Partial Autocorrelation \PYZdl{}}\PY{l+s}{\PYZbs{}}\PY{l+s}{hat\PYZob{}e\PYZcb{}\PYZus{}t\PYZdl{}}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{x\PYZhy{}large}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}378}]:} <matplotlib.text.Text at 0x33176400>
+\end{Verbatim}
+        
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_42_2.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_43_1.png}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -1615,7 +1616,7 @@ Yes
 \end{Verbatim}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_51_0.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_52_0.png}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -1779,7 +1780,7 @@ Engle-Granger two-step procedure previously described.
 \end{Verbatim}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_56_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_57_1.png}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -1930,7 +1931,7 @@ mu=2.12116284916e-13, sigma=1.66126722372
 \end{Verbatim}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_59_2.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_60_2.png}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -2353,19 +2354,162 @@ AR(1): my\_C=-0.0222212062071, my\_B=0.822882614599, tau=0.00396825396825, my\_t
 \end{Verbatim}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_72_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_73_1.png}
     \end{center}
     { \hspace*{\fill} \\}
     
     \subsection{Granger Causality}\label{granger-causality}
 
-When implementing the regression to estimate \(e_t\) an assumption must
-be made about which the dependent variable is. This will also influence
-the parameters estimates and test results.
+When implementing the cointegrating regression to estimate \(e_t\), an
+assumption must be made about which the dependent variable is. It is
+actually important to determining the best choice for the independent
+variable and the dependent variable, as this can largely influence the
+parameters estimates and test results.
 
-Due to time constrains this was not self-implemented but used the python
-statsmodels implementation.
+\begin{itemize}
+\tightlist
+\item
+  optimal lag determined from the PACF plot of Brent and Gasoil, which
+  shows maxlag=1 is only necessary
+\item
+  only do this test in the in-sample, assuming relationship holds in
+  out-of-sample
+\end{itemize}
 
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}386}]:} \PY{n}{df\PYZus{}is}\PY{p}{[}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{gasoil}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{brent}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}386}]:}                 gasoil   brent
+          Date                          
+          2014-01-02  123.959732  107.78
+          2014-01-03  122.181208  106.89
+          2014-01-06  122.181208  106.73
+          2014-01-07  122.214765  107.35
+          2014-01-08  122.449664  107.15
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}390}]:} \PY{k+kn}{from} \PY{n+nn}{statsmodels.tsa} \PY{k+kn}{import} \PY{n}{stattools}
+          \PY{c}{\PYZsh{} Granger causality}
+          
+          \PY{c}{\PYZsh{} The Null hypothesis for grangercausalitytests is that the time series in the second column, x2,}
+          \PY{c}{\PYZsh{} does NOT Granger cause the time series in the first column, x1. }
+          \PY{c}{\PYZsh{} Grange causality means that past values of x2 have a statistically significant effect on }
+          \PY{c}{\PYZsh{} the current value of x1, taking past values of x1 into account as regressors. }
+          \PY{c}{\PYZsh{} We reject the null hypothesis that x2 does not Granger cause x1 if the pvalues are below}
+          \PY{c}{\PYZsh{} a desired size of the test.}
+          
+          \PY{c}{\PYZsh{} test whether the time series in the second column Granger causes the time series in the first column}
+          \PY{n}{stattools}\PY{o}{.}\PY{n}{grangercausalitytests}\PY{p}{(}\PY{n}{df\PYZus{}is}\PY{p}{[}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{gasoil}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{brent}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{maxlag}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Granger Causality
+('number of lags (no zero)', 1)
+ssr based F test:         F=12.3110 , p=0.0005  , df\_denom=254, df\_num=1
+ssr based chi2 test:   chi2=12.4564 , p=0.0004  , df=1
+likelihood ratio test: chi2=12.1639 , p=0.0005  , df=1
+parameter F test:         F=12.3110 , p=0.0005  , df\_denom=254, df\_num=1
+
+Granger Causality
+('number of lags (no zero)', 2)
+ssr based F test:         F=9.5373  , p=0.0001  , df\_denom=251, df\_num=2
+ssr based chi2 test:   chi2=19.4545 , p=0.0001  , df=2
+likelihood ratio test: chi2=18.7507 , p=0.0001  , df=2
+parameter F test:         F=9.5373  , p=0.0001  , df\_denom=251, df\_num=2
+
+Granger Causality
+('number of lags (no zero)', 3)
+ssr based F test:         F=9.6706  , p=0.0000  , df\_denom=248, df\_num=3
+ssr based chi2 test:   chi2=29.8308 , p=0.0000  , df=3
+likelihood ratio test: chi2=28.2111 , p=0.0000  , df=3
+parameter F test:         F=9.6706  , p=0.0000  , df\_denom=248, df\_num=3
+    \end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}390}]:} \{1: (\{'lrtest': (12.163944250927784, 0.00048722235486658359, 1),
+             'params\_ftest': (12.310997505212017, 0.00053246127585440358, 254.0, 1L),
+             'ssr\_chi2test': (12.456402987558841, 0.00041656136528318664, 1),
+             'ssr\_ftest': (12.310997505213797, 0.00053246127585392078, 254.0, 1)\},
+            [<statsmodels.regression.linear\_model.RegressionResultsWrapper at 0x2dbd79b0>,
+             <statsmodels.regression.linear\_model.RegressionResultsWrapper at 0x2c9ff978>,
+             array([[ 0.,  1.,  0.]])]),
+           2: (\{'lrtest': (18.750722119558645, 8.4787616321132408e-05, 2),
+             'params\_ftest': (9.5372635776677939, 0.00010182564815372929, 251.0, 2L),
+             'ssr\_chi2test': (19.454497815799865, 5.9636133077774484e-05, 2),
+             'ssr\_ftest': (9.5372635776675114, 0.00010182564815375676, 251.0, 2)\},
+            [<statsmodels.regression.linear\_model.RegressionResultsWrapper at 0x332fbc88>,
+             <statsmodels.regression.linear\_model.RegressionResultsWrapper at 0x2e1d0160>,
+             array([[ 0.,  0.,  1.,  0.,  0.],
+                    [ 0.,  0.,  0.,  1.,  0.]])]),
+           3: (\{'lrtest': (28.211133329455606, 3.2796625892383071e-06, 3),
+             'params\_ftest': (9.6706495866600743, 4.6437170249114676e-06, 248.0, 3L),
+             'ssr\_chi2test': (29.830834410463282, 1.4978827154663208e-06, 3),
+             'ssr\_ftest': (9.6706495866599926, 4.643717024911881e-06, 248.0, 3)\},
+            [<statsmodels.regression.linear\_model.RegressionResultsWrapper at 0x2cc30828>,
+             <statsmodels.regression.linear\_model.RegressionResultsWrapper at 0x2cc02da0>,
+             array([[ 0.,  0.,  0.,  1.,  0.,  0.,  0.],
+                    [ 0.,  0.,  0.,  0.,  1.,  0.,  0.],
+                    [ 0.,  0.,  0.,  0.,  0.,  1.,  0.]])])\}
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}389}]:} \PY{c}{\PYZsh{} test whether the time series in the second column Granger causes the time series in the first column}
+          \PY{n}{stattools}\PY{o}{.}\PY{n}{grangercausalitytests}\PY{p}{(}\PY{n}{df\PYZus{}is}\PY{p}{[}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{brent}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{gasoil}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{maxlag}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Granger Causality
+('number of lags (no zero)', 1)
+ssr based F test:         F=1.4384  , p=0.2315  , df\_denom=254, df\_num=1
+ssr based chi2 test:   chi2=1.4554  , p=0.2277  , df=1
+likelihood ratio test: chi2=1.4513  , p=0.2283  , df=1
+parameter F test:         F=1.4384  , p=0.2315  , df\_denom=254, df\_num=1
+
+Granger Causality
+('number of lags (no zero)', 2)
+ssr based F test:         F=1.2146  , p=0.2986  , df\_denom=251, df\_num=2
+ssr based chi2 test:   chi2=2.4775  , p=0.2897  , df=2
+likelihood ratio test: chi2=2.4656  , p=0.2915  , df=2
+parameter F test:         F=1.2146  , p=0.2986  , df\_denom=251, df\_num=2
+
+Granger Causality
+('number of lags (no zero)', 3)
+ssr based F test:         F=0.8276  , p=0.4797  , df\_denom=248, df\_num=3
+ssr based chi2 test:   chi2=2.5530  , p=0.4658  , df=3
+likelihood ratio test: chi2=2.5403  , p=0.4681  , df=3
+parameter F test:         F=0.8276  , p=0.4797  , df\_denom=248, df\_num=3
+    \end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}389}]:} \{1: (\{'lrtest': (1.4512730753793903, 0.22832378661890962, 1),
+             'params\_ftest': (1.4383895986699133, 0.23151771235925203, 254.0, 1L),
+             'ssr\_chi2test': (1.4553784521978825, 0.22766689122765738, 1),
+             'ssr\_ftest': (1.4383895986702808, 0.23151771235919735, 254.0, 1)\},
+            [<statsmodels.regression.linear\_model.RegressionResultsWrapper at 0x2e5517f0>,
+             <statsmodels.regression.linear\_model.RegressionResultsWrapper at 0x30b619b0>,
+             array([[ 0.,  1.,  0.]])]),
+           2: (\{'lrtest': (2.4655963160421379, 0.29147584007346639, 2),
+             'params\_ftest': (1.2145595349170704, 0.29857919573389075, 251.0, 2L),
+             'ssr\_chi2test': (2.4775078959264998, 0.28974503048213451, 2),
+             'ssr\_ftest': (1.2145595349170926, 0.2985791957338868, 251.0, 2)\},
+            [<statsmodels.regression.linear\_model.RegressionResultsWrapper at 0x310fa978>,
+             <statsmodels.regression.linear\_model.RegressionResultsWrapper at 0x310fa9b0>,
+             array([[ 0.,  0.,  1.,  0.,  0.],
+                    [ 0.,  0.,  0.,  1.,  0.]])]),
+           3: (\{'lrtest': (2.540261854712071, 0.46805878594719308, 3),
+             'params\_ftest': (0.82762520417184871, 0.47973549563362006, 248.0, 3L),
+             'ssr\_chi2test': (2.5529567789981269, 0.46579657968737131, 3),
+             'ssr\_ftest': (0.82762520417194174, 0.47973549563357443, 248.0, 3)\},
+            [<statsmodels.regression.linear\_model.RegressionResultsWrapper at 0x310facf8>,
+             <statsmodels.regression.linear\_model.RegressionResultsWrapper at 0x310fae10>,
+             array([[ 0.,  0.,  0.,  1.,  0.,  0.,  0.],
+                    [ 0.,  0.,  0.,  0.,  1.,  0.,  0.],
+                    [ 0.,  0.,  0.,  0.,  0.,  1.,  0.]])])\}
+\end{Verbatim}
+        
     \section{Issues with Cointegration}\label{issues-with-cointegration}
 
 \begin{itemize}
@@ -2403,18 +2547,18 @@ Backtesting.
 
     \subsubsection{Backtesting}\label{backtesting}
 
-Backtesting is the process of testing a trading strategy on historical
-data to gauge its effectiveness. When we backtest a model, the results
-achieved are highly dependent on the tested period and this can cause
-the strategy to fail in the future, as regime changes or \emph{model
-overfitting} could have taken place.
+Backtesting is the process of testing a trading strategy or model on
+historical data to gauge its effectiveness. When we backtest a model,
+the results achieved are highly dependent on the tested period and this
+can cause the strategy to fail in the future, as regime changes or
+\emph{model overfitting} could have taken place.
 
 To alleviate this, the test data is usually split into \emph{in-sample}
-and \emph{out-of-sample} data (a `rule-of-thumb' is an 80-20 split). The
-model/strategy is then fitted/tested to the in-sample data \emph{only}
-and then tested on the out-of-sample data, which has been `unseen'. This
-process provides a better way to assess the \emph{true} performance of a
-strategy.
+and \emph{out-of-sample} (a `rule-of-thumb' is to use an 80-20 split).
+The model/strategy is then fitted/tested to the in-sample data
+\emph{only} and then tested on the out-of-sample data, which was
+`unseen'. This process provides a better way to assess the true
+performance.
 
     \subsection{Naive Beta-Hedging
 Strategy}\label{naive-beta-hedging-strategy}
@@ -2719,15 +2863,24 @@ AR(1) OU bounds -0.125460333308 1.65410500427
 \end{Verbatim}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_93_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_97_1.png}
     \end{center}
     { \hspace*{\fill} \\}
     
-    The corresponding P\&L is shown below, for both the in-sample and
-out-of-sample periods separated by the black dotted line. A positive
-performance is observed in both, although there are prolonged drawdown
-periods. In addition, note this doesn't include \textbf{transaction
-costs} which could certainly add up to an overall loss.
+    The corresponding P\&L using the AR(3) bounds is shown below for both
+the in-sample and out-of-sample periods. A positive performance is
+observed throughout, although with prolonged drawdown periods. In
+addition, note this doesn't include \textbf{transaction costs} which
+could certainly add up to an overall loss. The P\&L using the AR(1)
+bounds is also shown, where it is clear it is worse off than AR(3). Both
+however are better off than having simply gone long in gasoil or brent -
+this is taken as the market `benchmark'.
+
+Given the positive results, it would be interesting to see the P\&L from
+extending to more than 2 assets cointegrated with oil, with a strategy
+that trades multiple cointegrated spreads at the same time, or a single
+spread composed of more factors. In this case, the \textbf{Johansen
+test} would need to be implemented instead of CADF.
 
     \begin{Verbatim}[commandchars=\\\{\}]
 {\color{incolor}In [{\color{incolor}307}]:} \PY{c}{\PYZsh{} ======= P\PYZam{}L USING AR(1) BOUNDS INSTEAD OF AR(3) BOUNDS =======}
@@ -2740,48 +2893,64 @@ costs} which could certainly add up to an overall loss.
 \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}350}]:} \PY{c}{\PYZsh{} ====== PLOT THE P\PYZam{}L CURVE FOR IN\PYZhy{}SAMPLE AND OUT\PYZhy{}OF\PYZhy{}SAMPLE ======}
+{\color{incolor}In [{\color{incolor}353}]:} \PY{c}{\PYZsh{} ====== PLOT THE P\PYZam{}L CURVE FOR IN\PYZhy{}SAMPLE AND OUT\PYZhy{}OF\PYZhy{}SAMPLE ======}
           
           \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
           
-          \PY{n}{df}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{gasoil}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{shift}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{cumsum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{grey}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZhy{}\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}  \PY{c}{\PYZsh{} market benchmark for gasoil (long gasoil)}
-          \PY{n}{df}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{brent}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{shift}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{cumsum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{grey}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}  \PY{c}{\PYZsh{} market benchmark for brent (long brent)}
+          \PY{c}{\PYZsh{} Plot market benchmarks (going long on the asset)}
+          \PY{n}{df}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{gasoil}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{shift}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{cumsum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{grey}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZhy{}\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{df}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{brent}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{shift}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{cumsum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{grey}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}
           
+          \PY{c}{\PYZsh{} Plot in\PYZhy{}sample and out\PYZhy{}of\PYZhy{}sample pnl for AR(3) bounds}
           \PY{n}{k} \PY{o}{=} \PY{n}{df\PYZus{}pnl\PYZus{}is}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{pnl\PYZus{}cum}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}  \PY{c}{\PYZsh{} last non\PYZhy{}nan row of in\PYZhy{}sample pnl}
           \PY{n}{plot\PYZus{}drawdown\PYZus{}periods}\PY{p}{(}\PY{n}{df\PYZus{}pnl\PYZus{}is}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{pnl}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{top}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
           \PY{n}{plot\PYZus{}drawdown\PYZus{}periods}\PY{p}{(}\PY{n}{df\PYZus{}pnl\PYZus{}os}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{pnl}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{n}{k}\PY{p}{,} \PY{n}{top}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{sns}\PY{o}{.}\PY{n}{xkcd\PYZus{}rgb}\PY{p}{[}\PY{l+s}{\PYZdq{}}\PY{l+s}{pale red}\PY{l+s}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
           
-          \PY{c}{\PYZsh{} PnL using AR(1) bounds}
+          \PY{c}{\PYZsh{} Plot pnl using AR(1) bounds}
           \PY{n}{ar1\PYZus{}df\PYZus{}pnl\PYZus{}is}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{pnl\PYZus{}cum}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{n}{sns}\PY{o}{.}\PY{n}{xkcd\PYZus{}rgb}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{denim blue}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZhy{}\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}
           \PY{p}{(}\PY{n}{ar1\PYZus{}df\PYZus{}pnl\PYZus{}os}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{pnl\PYZus{}cum}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{n}{ar1\PYZus{}df\PYZus{}pnl\PYZus{}is}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{pnl\PYZus{}cum}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{n}{sns}\PY{o}{.}\PY{n}{xkcd\PYZus{}rgb}\PY{p}{[}\PY{l+s}{\PYZdq{}}\PY{l+s}{pale red}\PY{l+s}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZhy{}\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}
           
+          \PY{c}{\PYZsh{} Legends and line markers}
           \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{gasoil benchmark}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{brent benchmark}\PY{l+s}{\PYZsq{}}\PY{p}{,} 
                       \PY{l+s}{\PYZsq{}}\PY{l+s}{AR(3) in\PYZhy{}sample}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{AR(3) out\PYZhy{}of\PYZhy{}sample}\PY{l+s}{\PYZsq{}}\PY{p}{,}
                      \PY{l+s}{\PYZsq{}}\PY{l+s}{AR(1) in\PYZhy{}sample}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{AR(1) out\PYZhy{}of\PYZhy{}sample}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
                      \PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{upper left}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{large}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{ncol}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
           \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{df\PYZus{}temp}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{black}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{:}\PY{l+s}{\PYZsq{}}\PY{p}{)}
           \PY{n}{plt}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{black}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{P\PYZam{}L for two pair trading strategies and market benchmarks }\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{xx\PYZhy{}large}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{P\PYZam{}L for two pair trading strategies vs market benchmarks }\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{xx\PYZhy{}large}\PY{l+s}{\PYZsq{}}\PY{p}{)}
           \PY{n}{plt}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{df\PYZus{}pnl\PYZus{}is}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{pnl}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{(top 5 drawdown periods shown for AR(3))}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{large}\PY{l+s}{\PYZsq{}}\PY{p}{)}
 \end{Verbatim}
 
             \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}350}]:} <matplotlib.text.Text at 0x2abcf240>
+{\color{outcolor}Out[{\color{outcolor}353}]:} <matplotlib.text.Text at 0x2be023c8>
 \end{Verbatim}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_97_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_101_1.png}
     \end{center}
     { \hspace*{\fill} \\}
     
-    Although earlier the Gasoil-Brent spread passed the Anderson-Darling
-test for normality, we also saw it had memory AR(3) and this is expected
-to interfere with the OU fit which is for AR(1) spreads. Hence, we are
-motivated to search for alternative bounds to \(\mu_e \pm \sigma_{eq}\)
-that could yield a higher PnL. One approach is through `brute
-optimisation' as described below.
-
     \subsubsection{Bounds from Optimisation}\label{bounds-from-optimisation}
+
+Although earlier the Gasoil-Brent spread passed the Anderson-Darling
+test for normality, we also saw it had memory AR(3). Hence, it is
+perhaps not optimal to use an OU fit to define the bounds, as this is
+only suited for an AR(1) spread. The P\&L plot also suggests the
+performance is sensitive to where bounds are. This motivates the search
+for the \emph{optimal bound}, which maximises the P\&L or any other
+P\&L-related metric, e.g.~number of trades. Optimisation techniques can
+be used to test different combinations of \(\mu_e \pm \sigma_{eq}\) in
+the in-sample data, although again, this can suffer from model
+overfitting and cause a worse performance in the out-of-sample. Due to
+time constrains this was not evaluated in this report.
+
+    \subsubsection{Dynamic Bounds}\label{dynamic-bounds}
+
+Another alternative is to use rolling values for
+\(\mu_e \pm \sigma_{eq}\) instead of static. Again, an optimisation
+could be done to optimise the optimal period for the rolling window,
+which could be different for \(\mu_e\) and \(\sigma_{eq}\) given their
+different sensitivity to time-scales.
 
     \section{APPENDIX}\label{appendix}
 
@@ -2989,7 +3158,7 @@ Gas}\label{cointegration-between-italian-and-dutch-gas}
 \end{Verbatim}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_107_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_111_1.png}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -3070,7 +3239,7 @@ Gas}\label{cointegration-between-italian-and-dutch-gas}
 \end{Verbatim}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_109_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_113_1.png}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -3080,7 +3249,7 @@ Gas}\label{cointegration-between-italian-and-dutch-gas}
 \end{Verbatim}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_110_0.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_114_0.png}
     \end{center}
     { \hspace*{\fill} \\}
     
