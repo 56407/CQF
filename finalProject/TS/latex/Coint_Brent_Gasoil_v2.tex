@@ -50,7 +50,8 @@
     \usepackage{booktabs}  % table support for pandoc > 1.12.2
     \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
                                 % normalem makes italics be italics, not underlines
-\usepackage[titletoc]{appendix}% http://ctan.org/pkg/appendices                                
+\usepackage[titletoc]{appendix}% http://ctan.org/pkg/appendices           
+    \usepackage{afterpage}                     
                                 
     % Colors for the hyperref package
     \definecolor{urlcolor}{rgb}{0,.145,.698}
@@ -246,6 +247,10 @@
     \newpage
 
     \tableofcontents
+    
+           \afterpage{\null\newpage}
+   
+    
     \newpage
 
 
@@ -1077,23 +1082,61 @@ which could be different between \(\mu_e\) and \(\sigma_{eq}\) given their diffe
     \begin{figure}[!ht] 
         \begin{center}
     \adjustimage{max size={1.\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_104_1.png}
+
     \end{center}
     \caption{} \label{figpnl}
     \end{figure}
 
+        { \hspace*{\fill} \\}
+        
+        { \hspace*{\fill} \\}
+        
+    \begin{center}
+    \adjustimage{max size={1.\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_106_1.png}
+    \end{center}
 
-\newpage
+%%%%%%%%%%%%%%%%%%%%%%  CONCLUSION
+
+\clearpage
     
         \section{Conclusion}\label{conclusion}
     
-   Cointegration should not be assumed to yield always meaningful results, specially when working with real data. Some frequent issues to be aware of are:
+Through this project I learned for the first time how to apply cointegration to time series data and  design trading strategies around it that could potential generate business value. The P\&L  obtained from trading a simple Brent-Gasoil spread in the out-of-sample was surprisingly good, given the low performance one often finds at this step already. However, I feel the validity of results for real trading is debatable due to the following:
+
+\begin{itemize}
+\tightlist
+
+\item Transaction costs and market effects weren't really considered and this could have a large effect given the high number of positions taken (see position plot above)
+
+\item The AR(3) memory in the Brent-Gasoil spread wasn't well understood and it wasn't clear whether this was a problem with the  data or truly economic effects
+
+\item A thorough data quality assessment on the Quandl dataset wasn't done and this had some adjustments applied (e.g. roll corrections) which would need to be  understood
+
+\item The strategy wasn't backtested over other out-of-sample periods to see if the `good performance'  holds
+
+\end{itemize} 
+In addition, given the time limitations it wasn't possible to deep-dive into some interesting aspects which I would have liked to understand better, such as:
+
+\begin{itemize}
+\tightlist
+
+\item Designing trading strategies  for more than 2 assets in the commodities space. In particular it would be good to gain some experience with the Johansen procedure (currently not implemented in python's statsmodels library)
+
+\item Optimisation of P\&L metrics, like Sharpe ratio and trading bounds
+
+\item Getting additional plots and metric to assess the P\&L, such as those found in the Pyfolio package~\cite{pyfolio}
+
+
+\end{itemize}     
+ Regardless, cointegration should not be assumed to yield always meaningful results, specially when working with real data. Some frequent issues to be aware of are:
    
       
 \begin{itemize}
 \tightlist
-\item Statistical tests may find cointegration when there is actually {\em none}. Moreover, the tests are quite sensitive to how the  regression  is formulated, e.g. including a deterministic trend or drift term could yield a different result, as well as different number of lags. Conversely, tests can also failed at detecting cointegration.
-\item The long-term equilibrium is a relative concept and there is no unique way to define it
-\item Using cointegration for forecasting ...
+\item Statistical tests may find cointegration when there is actually {\em none}. Moreover, the tests are quite sensitive to how the  regression  is formulated, e.g. including a deterministic trend or drift term could yield a different result, as well as different number of lags. Conversely, tests can also fail at detecting it
+\item Cointegration can be a temporary effect, and testing needs to be constantly done to confirm the stationarity of the spread, yet, which period to use for testing is somehow arbitrary
+\item The `long-term equilibrium' is a relative concept and there is no `best' way to define it
+\item Using cointegration for forecasting can lead to large errors, specially when forecasting series which aren't stationary
 \end{itemize}
 
 
@@ -1134,6 +1177,9 @@ which could be different between \(\mu_e\) and \(\sigma_{eq}\) given their diffe
 \bibitem{pandasref2} \href{https://github.com/pydata/pandas/blob/master/pandas/tools/plotting.py}{https://github.com/pydata/pandas/blob/master/pandas/tools/plotting.py}
 \bibitem{ref2} \href{http://statsmodels.sourceforge.net/devel/generated/statsmodels.stats.diagnostic.kstest\_normal.html}{http://statsmodels.sourceforge.net/devel/generated/statsmodels.stats.diagnostic.kstest\_normal.html}
 
+\bibitem{quantopian} \href{https://www.quantopian.com/lectures}{Quantopian Lectures - quantopian.com/lectures}
+
+\bibitem{pyfolio} \href{https://github.com/quantopian/pyfolio/blob/master/pyfolio}{https://github.com/quantopian/pyfolio/blob/master/pyfolio}
 
 \bibitem{ref} \href{https://en.wikipedia.org/wiki/Information\_criterion}{https://en.wikipedia.org/wiki/Information\_criterion}
 \bibitem{error} \href{https://en.wikipedia.org/wiki/Propagation\_of\_uncertainty\#Simplification}{https://en.wikipedia.org/wiki/Propagation\_of\_uncertainty\#Simplification}
