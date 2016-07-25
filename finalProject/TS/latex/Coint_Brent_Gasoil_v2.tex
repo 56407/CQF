@@ -22,7 +22,8 @@
     % in the conversion process - todo).
     \usepackage{caption}
     \DeclareCaptionLabelFormat{nolabel}{}
-    \captionsetup{labelformat=nolabel}
+%    \captionsetup{labelformat=nolabel}  % removes figure labels
+\renewcommand{\thefigure}{\Alph{figure}}  % sets figure labels to letters
     \usepackage{adjustbox} % Used to constrain images to a maximum size 
     \usepackage{xcolor} % Allow colors to be defined
     \usepackage{enumerate} % Needed for markdown enumerations to work
@@ -325,7 +326,7 @@ The figure below shows the resulting dataset (spanning both in-sample
 and out-of-sample periods), where the two series indeed seem to be
 closely related, having very similar trends.
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_9_0.png}
+    \adjustimage{max size={1.0\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_9_0.png}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -376,10 +377,10 @@ and mean-reverting, we can design trading strategies using these
 properties which are more independent of market effects. In a later
 section we shall see how the OU parameters can be used to design
 exit/entry thresholds and also assess the {\em quality} of mean-reversion.
+
     \begin{center}
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_15_1.png}
     \end{center}
-    { \hspace*{\fill} \\}
     
     
     \subsection{Tests}\label{tests}
@@ -449,7 +450,6 @@ $Y_{t3}$ & 0.100 & 2\tabularnewline
     \begin{center}
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_25_0.png}
     \end{center}
-    { \hspace*{\fill} \\}
     
     \paragraph{ADF}\label{adf}
     
@@ -457,6 +457,9 @@ Using as optimal lag \emph{p=1}, we run the ADF test and compare the
 corresponding t-statistic to the critical values (taken from
 statsmodels, based on
 MacKinnon(2010) \cite{MacKinnon(2010)}). The results are summarised in the table below, where we confirm what we expected: the null hypothesis of non-stationary is rejected for all, except for $Y_t$, which by definition is non-stationary given its drift
+
+\newpage 
+
     \begin{longtable}[]{@{}lllllll@{}}
 \toprule
 Process & $\theta$ & ADF t-stat & 5\% Crit. Val. & p-value & Stationary & Stable\tabularnewline
@@ -491,18 +494,20 @@ references \cite{pandasref1} and \cite{pandasref2}):
 \tightlist
 \item
   \textbf{Autocorrelation plot:} This shows the autocorrelation function
-  (ACF) at varying time lags. For perfectly stationary series or independent and identically distributed (iid)
+  (ACF) at varying time lags. For perfectly stationary series or iid
   random variables, the autocorrelations should be near zero for all
   time-lag separations. The horizontal lines displayed in the plot
   correspond to 95\% and 99\% confidence levels. Indeed in the example below none of
   the $dY_t$  processes show significant autocorrelation. Also, the
   OU process with the highest mean-reversion speed $Y_{t3}$ rapidly loses
-  autocorrelation to its lags, and looking stationary.
+  autocorrelation to its lags, looking  stationary to the higher order lags.
 \end{itemize}
+
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_32_0.png}
+    \adjustimage{max size={0.8\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_32_0.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
+
     \begin{itemize}
 \tightlist
 \item
@@ -512,16 +517,14 @@ references \cite{pandasref1} and \cite{pandasref2}):
   is shown for two of the OU processes and their differences. This
   confirms the results from the autocorrelation plot - the fastest
   mean-reverting $Y_{t3}$ has little relation to the 10th lag, unlike $Y_{t1}$,
-  which has a lower speed. As expected, the stationary differences are
-  insensitive to the lags, even for \(Y_{t-1}\).
+  which has a lower speed and a clear relationship. As expected, the stationary differences show little relationship  to the lags, even for \(Y_{t-1}\).
 \end{itemize}
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_34_1.png}
+    \adjustimage{max size={0.8\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_34_1.png}
     \end{center}
-    { \hspace*{\fill} \\}
+        
     \section{Cointegration}\label{cointegration}
-    Having covered the key concepts to understand cointegration, we proceed
-to explain this topic.
+    Having covered  key concepts, we now proceed to  deep-dive into the topic of cointegration.
 Two or more time series $\mathbf{Y}_{\emph{t}} = (y_{1t}, \dots,
 y_{nt})^{\prime} $ are said to be cointegrated if a linear
 combination exists which makes the collection `integrated of order
@@ -529,18 +532,17 @@ zero' I(0) i.e stationary:
 \begin{equation}
 \mathbf{\beta^\prime Y}_t = \beta_1 y_{1t} + \dots + \beta_n y_{nt} \sim I(0)
 \end{equation}
-This is known as the \emph{long-run (static) equilibrium} model and is
+This is known as the \emph{long-run equilibrium model} and is
 expressed in normalised form as:
 \begin{equation}
 y_{1t} = \beta_2 y_{2t} + \dots + \beta_n y_{nt} + e_t
 \end{equation}
-where the residual \(e_t \sim I(0)\) is referred to as the
-\emph{cointegrating residual/spread} and
+where  \(e_t \) is referred to as the
+\emph{cointegrating residual} or {\em spread} and
 \(\mathbf{\beta} = (1, -\beta_2, \dots, -\beta_n)^\prime\) is the
-\emph{cointegrating vector}.
-Due to time constraints, this report covers only a pair of
-cointegrated time series, however the concept can be extended to more
-series and higher orders of integration.
+\emph{cointegrating vector}. In particular,  \(e_t \sim I(0)\), i.e. the spread is `integrated of order 0' - another way to say {\em stationary}. The  concept can be extended to higher orders of integration, although these are more rare.
+
+
 In real data, cointegration usually exists when there is a deep
 economic link between the assets and hence these cannot drift too far
 apart because economic forces will act to restore the long-run
@@ -554,17 +556,19 @@ and \(y_{2t}\) as the independent variable:
 \begin{equation}
 y_{1t} = y_{2t} + 5.0 + \epsilon_t
 \end{equation}
+
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_37_0.png}
+    \adjustimage{max size={1.0\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_37_0.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
     \subsection{Tests}\label{tests}
-Again, we need a robust statistical test to confirm cointegration. The
-three main approaches are:
+Again, we need a robust method to confirm cointegration. The
+three main statistical tests are:
 \begin{itemize}
 \item
   \textbf{Engle--Granger two-step method:} This can only be used to test
-  a \emph{single} cointegrating relationship. The steps are:
+  a \emph{single} cointegrating relationship. 
+  The steps are:
   \begin{enumerate}
   \def\labelenumi{(\roman{enumi})}
   \item
@@ -576,13 +580,14 @@ three main approaches are:
     the hypotheses to be tested are:
   \end{enumerate}
   \begin{equation}
-  H_0 \space :  \space \hat{e}_t = \mathbf{\hat{\beta}^\prime} \mathbf{Y}_t \sim I(1) \qquad \mathrm{(no \text{ } cointegration)}
+  H_0 \space :  \space \hat{e}_t = \mathbf{\hat{\beta}^\prime} \mathbf{Y}_t \sim I(1) \qquad \mathrm{(null hypothesis: no cointegration)}
   \end{equation}
   \begin{equation}
-  H_1 \space :  \space \hat{e}_t = \mathbf{\hat{\beta}^\prime} \mathbf{Y}_t \sim I(0) \qquad \mathrm{(cointegration)}
+  H_1 \space :  \space \hat{e}_t = \mathbf{\hat{\beta}^\prime} \mathbf{Y}_t \sim I(0) \qquad \mathrm{(alternative hypothesis: cointegration)}
   \end{equation}
 \end{itemize}
-We refer to this use case of the ADF as `CADF'
+
+
 \begin{itemize}
 \item
   \textbf{Johansen test:} Based on maximum likelihood techniques, this
@@ -609,31 +614,37 @@ cointegrating spread is:
 \end{equation}
 We then test \(\hat{e}_t\) for stationarity using ADF. Since the mean of
 \(\hat{e}_t\) is zero, the ADF can be implemented without a constant or
-trend (See reference \cite{refp445}). Also note that the critical values used are taken as in
+trend \cite{refp445}. Also note that the critical values used are taken as in
 statsmodels from MacKinnon (2010) \cite{(seeref)}, whereas other sources suggest to use the Phillips-Ouliaris
-tabulation in this case.
-The figure below shows the OLS fit:
+tabulation.
+The figure below shows the fitted OLS result:
 \begin{equation}
 \hat{y}_{1t} = 5.0330 + 1.0052 y_{2t} + \hat{e}_t
 \end{equation}
-which is in good agreement with its true value. Plotted is also the
-estimated \(\hat{e}_t\) and its PACF. The PACF shows the spread is
-\emph{memoryless}, i.e.~no lag order appears significant so it is a
-random (Markov) process.
-Although \(\hat{e}_t\) appeared memoryless, conservatively the CADF
-t-statistic was computed using one lag. This was \(-12.051\), which was
-below the \(1\%\) critical value (\(-2.5748\)), confirming the
-stationarity of the spread, which by design we expected.
+which is in good agreement with the true parameters we defined.
+
+    { \hspace*{\fill} \\}
     \begin{center}
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_42_1.png}
     \end{center}
     { \hspace*{\fill} \\}
+    
+The
+estimated \(\hat{e}_t\) and its PACF is shown below. The PACF shows the spread is
+\emph{memoryless}, i.e.~no lag order appears significant, as expected from a
+random  process. Conservatively the ADF
+t-statistic can be computed with one lag. This is \(-12.051\), which is
+below the \(1\%\) critical value (\(-2.5748\)), confirming the
+stationarity of the spread, as expected.
+
+    { \hspace*{\fill} \\}
+    
     \begin{center}
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_43_1.png}
     \end{center}
-    { \hspace*{\fill} \\}
-    \subsection{Error Correction Model
-(ECM)}\label{error-correction-model-ecm}
+    
+    \subsection{Error Correction Model (ECM)}\label{error-correction-model-ecm}
+    
 Cointegration implies the existence of an Error Correction Model (ECM),
 which provides an adjustment to the long-run equilibrium from the
 short-run dynamics. This is particularly useful when modelling
@@ -660,26 +671,30 @@ y_t = \alpha y_{t-1} +  \beta_0 + \beta_1 x_t + \beta_2 x_{t-1} + \epsilon_t
   \Delta y_{t} = \beta_1 \Delta x_t - (1- \alpha) e_{t-1} + \epsilon_t
   \end{equation}
   where \(e_{t-1}\) is the lagged cointegrating spread from the
-  equilibrium model. The parameter \(-(1-\alpha)\) is interpreted as the
-  speed of correction towards the equilibrium level (more details on this in the next
+  equilibrium model. The parameter \(-(1-\alpha)\) can be  interpreted as a
+  speed of correction towards the equilibrium level (see next
   section)
 \item
   Since all the variables in the ECM are I(0), OLS can be used to
   estimate the parameters
 \end{itemize}
+
+
     \subsection{Quality of mean-reversion}\label{quality-of-mean-reversion}
+    
+    
 If the cointegrating spread \(e_t\) is stationary, we could use the OU
 process to model it:
 \begin{equation}
 d e_t = \theta (\mu_e - e_t) dt + \sigma dW
 \end{equation}
-In discrete time this can be written as:
+In discrete time this is written as:
 \begin{equation} 
 \Delta e_t = \alpha \mu_e - \alpha e_{t-1} + \epsilon_{t, \tau}
 \end{equation}
 where \(\alpha= 1 - e^{-\theta \tau}\) and \(\tau\) is a small period of
 time. This is in fact the implied ECM representation for \(e_t\). As
-discussed in the Appendix, the above equation can be written in its
+discussed in Appendix~\ref{autoregression-models---arp}, the above equation can be written in its
 AR(1) representation as:
 \begin{equation}
 e_t = \alpha \mu_e + (1-\alpha)e_{t-1} + \epsilon_{t, \tau}
@@ -713,22 +728,26 @@ strategies the parameters of interest are:
   the in-sample period covers one trading year, i.e. \(\sim 252\) trading
   days
 \end{itemize}
+
+
     \subsection{Real Data Example}\label{real-data-example}
-    We now proceed to apply the concepts discussed above to real data:
+
+    We now move on to apply the concepts to real data, which will highlight some of the challenges that can be encountered.
 \begin{itemize}
 \item
-  We use the in-sample dataset for Brent crude and Gasoil (Jan-2014 to
-  Dec-2014). The out-of-sample dataset is later used to backtest trading
+  We use the {\bf in-sample} dataset for Brent crude and Gasoil (Jan-2014 to
+  Dec-2014) to estimate the cointegration parameters. The {\bf out-of-sample} dataset is later used to backtest trading
   strategies
 \item
-  For now we assume Brent is the independent variable \(x_t\) and Gasoil
-  the dependent variable \(y_t\), and later check if this is accurate
+  For now we assume Brent is the independent variable `\(x_t\)' and Gasoil
+  the dependent variable `\(y_t\)', and later check if this is accurate
   via \emph{Granger's causality test}
 \end{itemize}
     \subsubsection{Stationarity}\label{stationarity}
-First we check the individual price series for unit root I(1). We apply the ADF test using one lag only as recommended by
+    
+First we check the individual price series for unit root. We apply the ADF test using one lag only as recommended by
 their PACF plot below. A drift term (constant) is also included in the
-test. The results are summarised in the table below and support the assumption that Brent
+test. The results are summarised in the table below. These support the assumption that Brent
 and Gasoil are I(1) processes whilst their differences are I(0).
     \begin{longtable}[]{@{}llllll@{}}
 \toprule
@@ -738,18 +757,20 @@ Stable\tabularnewline
 \endhead
 \(x_t\) (Brent) & 3.5768 & -2.8728 & 1.00 & No & No\tabularnewline
 \(y_t\) (Gasoil) & 3.9374 & -2.8728 & 1.00 & No & No\tabularnewline
-\(\Delta x_t\) & -18.1437 & -2.8728 & 2.49E-30 & Yes &
+\(\Delta x_t\) & -18.1437 & -2.8728 & $<10^{-30}$ & Yes &
 Yes\tabularnewline
 \(\Delta y_t\) & -18.9247 & -2.8728 & 0.00 & Yes & Yes\tabularnewline
 \bottomrule
 \end{longtable}
+
     \begin{center}
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_52_0.png}
     \end{center}
-    { \hspace*{\fill} \\}
+
+
     \subsubsection{Cointegration}\label{cointegration2}
 We then proceed to test whether the pair is cointegrated, using the
-Engle-Granger two-step procedure previously described.
+Engle-Granger two-step procedure  described in Section~\ref{engle-granger-test-implementation}.
 \begin{itemize}
 \item
   The long-run equilibrium model is shown in the figure below. The OLS
@@ -765,84 +786,70 @@ Engle-Granger two-step procedure previously described.
     { \hspace*{\fill} \\}
     \begin{itemize}
 \item
-  The estimated cointegrating spread \(\hat{e}_t\) series, histogram and
-  PACF are shown below. First the mean of \(\hat{e}_t\) is zero for all
-  practical purposes (\(\sim10^{-13}\)).
+  The estimated cointegrating spread \(\hat{e}_t\), its distribution and
+  PACF are shown in Figure~\ref{figa}. The mean of \(\hat{e}_t\) was found to be zero for all
+  practical purposes (\(<10^{-13}\)).
 \item
   We also want \(\hat{e}_t\) to be normally distributed. The histogram
-  below shows the spread distribution fitted to a normal distribution
+   shows the spread distribution fitted to a normal distribution
   with \(\mu \sim 0\) and \(\sigma=1.66\). Two tests (\emph{Lilliefors}
-  and \emph{Anderson-Darling}, see
-  references \cite{ref1} and \cite{ref2})
+  and \emph{Anderson-Darling},\cite{ref1, ref2})
   were carried out to assess the goodness of fit and neither rejected the
   null hypothesis that \(\hat{e}_t\) is normally distributed
 \item
   Next, we note that the PACF plot shows a peculiarity of this spread -
-  it seems to have an AR(3) `memory', given the first three lags appear
-  significant. Memory in the cointegrating spread is actually \emph{not
-  desirable} because it will interfere with both mean-reversion and
-  diffusion components of the OU process. One hypothesis is that this
-  has an `economic explanation' in terms of commodity pricing,
-  cyclicality or storage (e.g.~asset cannot dramatically drop because
-  there are storage/delivery `carry' costs borne by the sellers)
+  it seems to have an AR(3) memory, given the first three lags appear
+  significant. This memory order is actually not
+  desirable to model with the OU process, which is an AR(1) process. It could have an economic explanation, e.g. it could represent
+  cyclicality or storage effects e.g.~asset cannot dramatically drop because
+  there are storage/delivery carry costs borne by the sellers. Or it could be from mere fluctuations in the data for this particular dataset, which only spans 1 trading year.
 \item
   Next, \(\hat{e}_t\) was tested for stationarity using the CADF test.
-  Since \(\hat{\mu}_e \sim 0\) the test was implemented without a
+  Since the mean is \( \sim 0\) the test was implemented without a
   constant or trend. Also, as suggested by the PACF plot, the test was
   ran with 3 lags. The results below show stationary could only be
-  confirmed at the 95\% C.L.
-\end{itemize}
-    \begin{longtable}[]{@{}lllllll@{}}
-\toprule
-\begin{minipage}[b]{0.07\columnwidth}\raggedright\strut
-Series\strut
-\end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\raggedright\strut
-ADF t-stat\strut
-\end{minipage} & \begin{minipage}[b]{0.13\columnwidth}\raggedright\strut
-5\% Crit. Val.\strut
-\end{minipage} & \begin{minipage}[b]{0.13\columnwidth}\raggedright\strut
-1\% Crit. Val.\strut
-\end{minipage} & \begin{minipage}[b]{0.08\columnwidth}\raggedright\strut
-p-value\strut
-\end{minipage} & \begin{minipage}[b]{0.22\columnwidth}\raggedright\strut
-Stationary (95\% C.L.)\strut
-\end{minipage} & \begin{minipage}[b]{0.07\columnwidth}\raggedright\strut
-Stable\strut
-\end{minipage}\tabularnewline
-\midrule
-\endhead
-\begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
-\(\hat{e}_t\)\strut
-\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
--2.2335\strut
-\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
--1.9421\strut
-\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
--2.5746\strut
-\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright\strut
-0.0245\strut
-\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright\strut
-Yes\strut
-\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
-Yes\strut
-\end{minipage}\tabularnewline
-\bottomrule
-\end{longtable}
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_60_2.png}
-    \end{center}
-    { \hspace*{\fill} \\}
+  confirmed at the 95\% C.L. and not at the 99\% C.L.
+  \end{itemize}
+  
+
+      
+\begin{table}[!ht]
+\centering
+%\caption{My caption}
+\label{tabadf}
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+\textbf{Series} & \textbf{ADF t-stat} & \textbf{5\% Crit. Val.} & \textbf{1\% Crit. Val.} & \textbf{p-value} & \textbf{\begin{tabular}[c]{@{}l@{}}Stationary\\     (95\% C.L.)\end{tabular}} & \textbf{Stable} \\ \hline
+e\_t            & -2.2335             & -1.9421                 & -2.5746                 & 0.0245           & Yes                                                                           & Yes             \\ \hline
+\end{tabular}
+\end{table}
+
+
+    
+    
     \subsubsection{ECM}\label{ecm}
+    
+    
 The corresponding ECM adjustment was determined to be:
 \begin{equation}
 \begin{array}{ccc}
-\Delta y_{t}  = & -0.0861 + & 0.6455 \Delta x_t -0.1623 e_{t-1} + \epsilon_t \qquad \mathrm{(with~constant,~R^2=0.407)} \\
+\Delta y_{t}  = & -0.0861 + & 0.6455 \Delta x_t -0.1623 e_{t-1} + \epsilon_t \qquad \mathrm{(with~constant~fit,~R^2=0.407)} \\
 \Delta y_{t}  = & & 0.6596 \Delta x_t -0.1633 e_{t-1} + \epsilon_t
-\qquad \mathrm{(no~constant, ~R^2=0.422)}
+\qquad \mathrm{(no~constant~fit, ~R^2=0.422)}
 \end{array}
 \end{equation}
 This represents the second-order adjustment to the price, which as we
-see is quite significant.
+see can be significant.
+
+\begin{figure}[!ht] 
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_74_2.png}
+    \end{center}
+        \caption{} \label{figa}
+\end{figure}
+    { \hspace*{\fill} \\}
+    
+    
     \subsubsection{Quality of
 mean-reversion}\label{quality-of-mean-reversion}
     Given the peculiar PACF of \(\hat{e}_t\), which suggests it is an AR(3)
@@ -851,7 +858,8 @@ be suitable. We proceed nevertheless to compare the results between both
 fits. For AR(3) we take the OU parameters as for AR(1): the constant
 term equals \(\alpha \mu_e\) and the coefficient of the \(e_{t-1}\) term
 is \(\alpha = 1 - e^{-\theta \tau}\). The table below shows the results
-obtained, where we see the trading bounds are:
+obtained, from which the following trading bounds can be defined:
+
 \begin{equation}
  \mu_e \pm \sigma_{eq} =
   \begin{cases}
@@ -859,8 +867,8 @@ obtained, where we see the trading bounds are:
     -0.0529 \pm  0.8820  & \quad \text{AR(3)}\\
   \end{cases}
 \end{equation}
-The AR(3) fit yields a lower standard error in \(\theta\) than AR(1),
-although not by much and yet the \(\theta\) values are quite different.
+The AR(3) fit yields a lower  \(\theta\) standard error  than AR(1),
+although not by much\footnote{To calculate the standard error, the simplified formula for error propagation in~\cite{error} was used } and yet the \(\theta\) values are quite different.
 This perhaps indicates the OU fit is not suitable regardless of the lag
 order.
     \begin{longtable}[]{@{}ccccccc@{}}
@@ -875,83 +883,77 @@ AR(3) & 258.9327 & 0.0027 & -0.0529 & 20.0723 & 0.8820 &
 5.6638\tabularnewline
 \bottomrule
 \end{longtable}
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_73_1.png}
-    \end{center}
-    { \hspace*{\fill} \\}
+%    \begin{center}
+%    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_74_2.png}
+%    \end{center}
+%    { \hspace*{\fill} \\}
     
     
     \subsection{Granger Causality}\label{granger-causality}
-    
-    
+
+
 When implementing the cointegrating regression to estimate \(e_t\), an
 assumption must be made about which the dependent variable is. It is
-actually important to determine the best choice for the independent
-variable and the dependent variable, as this can largely influence the
-parameters estimates and test results.
-\begin{itemize}
-\tightlist
-\item
-  Optimal lag determined from the PACF plot of Brent and Gasoil, which
-  shows only maxlag=1 is necessary
-\item
-  Only do this test in the in-sample, assuming the relationship holds in
-  the out-of-sample
-\end{itemize}
+actually important to determine the best choice for this as it can largely influence the results.
 
-
-    \subsection{Issues with Cointegration}\label{issues-with-cointegration}
+ Grange causality means that lags of $x_2$ have a statistically significant effect on the current value of $x_1$, taking lags of $x_1$ into account as regressors. We reject the null hypothesis $H_0$ that $x_2$ does not Granger cause $x_1$ if the pvalues are below a desired size of the test. The ready implementation from statsmodels~\cite{causality} was used, which uses the F distribution critical values. Running the test over the in-sample Brent-Gasoil data using up to 3 lags (which should be enough given theirs PACF plot) yields the results in the table below. This confirms that taking Brent as the independent variable is acceptable. The hypothesis of Gasoil causing Brent moves is rejected too, which further supports the result.    
     
-\begin{itemize}
-\tightlist
-\item
-  Johansen procedure - MLE for multivariate cointegration on asset price
-  data (levels, not returns)
-\end{itemize}
+       
+\begin{table}[!ht]
+\centering
+%\caption{My caption}
+\label{tabcausality}
+\begin{tabular}{c|c|c|c|}
+\cline{2-4}
+                                                 & \multicolumn{3}{c|}{F test p-value}                     \\ \hline
+\multicolumn{1}{|c|}{ $H_0$}                & 1 lag & 2 lags & 3 lags                 \\ \hline
+\multicolumn{1}{|c|}{Brent doesn't cause Gasoil} & 0.0005         & 0.0001          & \textless 10\textasciicircum -4 \\ \hline
+\multicolumn{1}{|c|}{Gasoil doesn’t cause Brent} & 0.2315         & 0.2986          & 0.4797                          \\ \hline
+\end{tabular}
+\end{table}
 
+
+
+
+\newpage
 
     \section{Trading Strategies}\label{trading-strategies}
     
-    Below we describe a few strategies which exploit the cointegration
-properties. It should be noted that it is actually very difficult to
-find a directly tradable asset that possesses mean-reverting behaviour -
-in practice this is instead achieved by creating a \emph{stationary
+    Below we describe a few simple strategies which exploit the cointegration
+properties so far discussed. The first step is to construct a \emph{stationary
 portfolio} of separately interrelated assets. For the demonstrations
-below however, we remain with a the 2-asset portfolio from before: Brent
+below however, we assume this portfolio is limited to the 2 assets from before: Brent
 and Gasoil.
 
     \subsection{Regime changes}\label{regime-changes}
     
 Tests for cointegration assume that the cointegrating vector is constant
-during the period of study. In reality, it is possible that the long-run
-relationship between the underlying variables change (shifts in the
-cointegrating vector can occur), e.g from changes in their
+during the period of study. In reality, it is common for the relationship of the underlying variables to change, e.g from changes in their
 \emph{fundamental factors}. This is especially likely to be the case if
 the sample period is long. Hence, it should not be assumed that because
 the assets have passed a cointegration test historically, they will
 continue to remain cointegrated. Practitioners' advice is to estimate
 using one year of historic data and trade the estimates for a 6-month
 period.
-This is then a good introduction to the next topic, which is
-backtesting.
+This is then a good introduction to {\em backtesting}.
 
     \subsection{Backtesting}\label{backtesting}
     
 Backtesting is the process of testing a trading strategy or model on
-historical data to gauge its effectiveness. When we backtest a model,
+historical data to gauge its effectiveness. When we `backtest a model',
 the results achieved are highly dependent on the tested period and this
-can cause the strategy to fail in the future, as regime changes or
-\emph{model overfitting} could have taken place.
+can cause the strategy to fail in the future due  regime changes or
+\emph{model overfitting}.
 To alleviate this, the test data is usually split into \emph{in-sample}
 and \emph{out-of-sample} (a `rule-of-thumb' is to use an 80-20 split).
 The model/strategy is then fitted/tested to the in-sample data
 \emph{only} and then tested on the out-of-sample data, which was
 `unseen'. This process provides a better way to assess the true
-performance.
+performance of a strategy.
 
     \subsection{Naive Beta-Hedging Strategy}\label{naive-beta-hedging-strategy}
     
-    ** Factor models** are a way of explaining the returns of one asset via
+    {\em Factor models} are a way of explaining the returns of one asset via
 a linear combination of the returns of other assets. This can be
 expressed as a simple linear regression:
 \begin{equation}\Delta Y = \alpha + \beta_1 \Delta X_1 + \beta_2 \Delta X_2 + \dots + \beta_n \Delta X_n + \epsilon_t \end{equation}
@@ -961,9 +963,9 @@ other assets and \(\alpha\) as the market-neutral excess return:
 since \(\mathrm{E}[\epsilon_t] =0\).
 For the case of Brent and Gasoil only this would be:
 \begin{equation}\Delta Y_{gasoil} = \alpha + \beta \Delta X_{brent} + \epsilon_t \end{equation}
-We could take a short position in Brent equal to
+i.e. we could take a short position in Brent equal to
 \(\beta \Delta X_{brent}\) to try to eliminate the \emph{risk} in our
-Gasoil position. Hence, we would expect our returns to be on average:
+Gasoil position. On average, we would expect our returns to be:
 \begin{equation}\mathrm{E} [\Delta Y_{gasoil} - \beta X_{brent}] = \alpha \end{equation}
 For the \textbf{in-sample} data, running the above regression would
 actually yield negative returns, although less severe than just going
@@ -975,7 +977,7 @@ long on Gasoil:
 -0.2148  \qquad  \text{(no fit)}
 \end{array}
 \end{equation}
-One problem could be that the estimated beta is not constant as we walk
+This shows the estimated beta is not constant as we walk
 forward in time. As such, the short position we took out in Brent is not
 perfectly hedging our portfolio. Another is that additional factors or
 assets should be included into the model.
@@ -988,129 +990,174 @@ data, and still worse off than just going long on Gasoil over this period:
 \mathrm{E} [ \Delta Y_{gasoil}^{os}] =   & \mathrm{E}[ \alpha_t]   =  0.05806  \qquad  \text{(no fit)}
 \end{array}
 \end{equation}
+
     \subsection{Pairs Trading Strategy}\label{pairs-trading-strategy}
-    Moving to a more sophisticated approach, we now apply the concepts of
-cointegration learned. Although it is commonly referred as `pairs
-trading', the concept applies to any stationary portfolio of assets.
-For a pair of assets, if they are cointegrated, e.g.~because they belong
+    
+    Moving to a more sophisticated approach with cointegration, we now look into  `pairs
+trading'. 
+For a pair of  assets, if they are cointegrated, e.g.~because they belong
 to the same `sector', they are likely to be exposed to similar market
 factors. Occasionally their relative prices will diverge due to certain
 events, but eventually will revert to the long-run equilibrium. Hence,
 positions are taken relative to where the \textbf{cointegrating spread
-\(\hat{e}_t\)} is with respect to the equilibrium level. The objective
-is to hedge the position from price level dynamics (market risk). The
-P\&L generated will then be driven by the quality of mean-reversion.
-For Gasoil and Brent, we estimated the \textbf{in-sample} cointegrating
+\(\hat{e}_t\)} is with respect to this equilibrium. The objective
+is to hedge the position from price level dynamics (systematic risk). The
+P\&L  will then be driven by the quality of mean-reversion (Section~\ref{quality-of-mean-reversion}).
+For Gasoil and Brent, we estimated the \textbf{in-sample} 
 relationship as:
+
 \begin{equation}
 Y_{gasoil}^{is} = 0.9699 X_{brent}^{is}  + 16.3229 + \hat{e}_t^{is}
 \end{equation}
+
 Under the assumption that the relationship holds, we use the same beta
 and constant to estimate the \textbf{out-of-sample} spread:
+
 \begin{equation}
 \hat{e}_t^{os} = Y_{gasoil}^{os} - 0.9699 X_{brent}^{os}  - 16.3229 
 \end{equation}
+
 This is then what we use to \textbf{backtest} the strategy.
     \subsubsection{Bounds from OU process}\label{bounds-from-ou-process}
 As we saw, we could define thresholds for trading the spread by fitting
 to the OU process and using the fitted mean \(\mu_e\) and relative
 standard deviation \(\sigma_{eq}\). Assuming normality of the spread
 \(e_{t, \tau \to \infty} \sim N (\mu_e, \sigma^2_{eq})\), a z-score
-could be used to `normalise' the spread:
+could be used to `normalise' the spread as:
 \begin{equation}
 z = \frac{\hat{e}_t - \mu_e}{\sigma_{eq}}
 \end{equation}
-Given this, a simple strategy would then be:
+With the z-score, a simple strategy would then be:
 \begin{itemize}
 \item
-  Go ``Long'' the spread when the z-score is below -1.0: this means
-  longing \(Y_{gasoil}\) and shorting \(X_{brent}\)
+  Go ``Long'' the spread when the z-score is below -1.0, as the expectation is that it will rise (this means we are  longing \(Y_{gasoil}\) and shorting \(X_{brent}\))
 \item
-  Go ``Short'' the spread when the z-score is above 1.0: this means
-  shorting \(Y_{gasoil}\) and longing \(X_{brent}\)
+  Go ``Short'' the spread when the z-score is above 1.0, as the expectation is that it will fall (this means we are  shorting \(Y_{gasoil}\) and longing \(X_{brent}\))
 \item
-  Exit positions when the z-score is within \([-0.1, 0.1]\), i.e.~near
-  zero
+  Exit positions when the z-score is near zero, e.g. within \([-0.1, 0.1]\)
+ 
 \end{itemize}
-The figure below shows the out-of-sample z-score spread with the AR(3)
-OU entry/exit bounds (Eqn. 29).
+The figure  below shows the out-of-sample z-score spread with the AR(3)
+OU entry/exit bounds marked.
+
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_97_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_99_1.png}
     \end{center}
     { \hspace*{\fill} \\}
-    The corresponding P\&L using the AR(3) bounds is shown below for both
+ 
+ 
+  The corresponding P\&L  is shown in Figure~\ref{figpnl} for both
 the in-sample and out-of-sample periods. A positive performance is
 observed throughout, although with prolonged drawdown periods. In
-addition, note this does not include \textbf{transaction costs} which
+addition, note this does not include \textbf{transaction costs} and other market effects which
 could certainly add up to an overall loss. The P\&L using the AR(1)
 bounds is also shown, where it is clear it is worse off than AR(3). Both
 however are better off than having simply gone long in Gasoil or Brent -
 this is taken as the market `benchmark'.
 Given the positive results, it would be interesting to see the P\&L from
 extending to more than 2 assets cointegrated with oil, with a strategy
-that trades multiple cointegrated spreads at the same time, or a single
+that trades multiple cointegrating spreads at the same time, or a single
 spread composed of more factors. In this case, the \textbf{Johansen
-test} would need to be implemented instead of CADF.
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_101_1.png}
-    \end{center}
-    { \hspace*{\fill} \\}
-    \subsubsection{Bounds from Optimisation}\label{bounds-from-optimisation}
+test} would be more suitable, although this is not covered here.
+
+
+    
+    \subsubsection{Optimal bounds}\label{bounds-from-optimisation}
 Although earlier the Gasoil-Brent spread passed the Anderson-Darling
 test for normality, we also saw it had memory AR(3). Hence, it is
-perhaps not optimal to use an OU fit to define the bounds, as this is
-only suited for an AR(1) spread. The P\&L plot also suggests the
-performance is sensitive to where bounds are. This motivates the search
-for the \emph{optimal bound}, which maximises the P\&L or any other
-P\&L-related metric, e.g.~number of trades. Optimisation techniques can
+perhaps not optimal to use an OU fit to define the bounds. The P\&L plot also suggests the
+performance is sensitive to where the bounds are. This motivates the search
+for the \emph{optimal bounds}, which maximise the P\&L or any other
+ metric of interest, e.g.~Sharpe ratio or number of trades. Optimisation techniques can
 be used to test different combinations of \(\mu_e \pm \sigma_{eq}\) in
-the in-sample data, although again, this can suffer from model
-overfitting and cause a worse performance in the out-of-sample. Due to
-time constraints this was not evaluated in this report.
-    \subsubsection{Dynamic Bounds}\label{dynamic-bounds}
-Another alternative is to use rolling values for
-\(\mu_e \pm \sigma_{eq}\) instead of static. Again, an optimisation
-could be done to find the optimal period for the rolling window,
-which could be different for \(\mu_e\) and \(\sigma_{eq}\) given their
-different sensitivity to time-scales.
+the in-sample data. A dynamic/rolling bound could even be defined and  an optimisation
+could be ran to find the optimal period for the rolling window,
+which could be different between \(\mu_e\) and \(\sigma_{eq}\) given their different time-scales. However, the impact on performance in the out-of-sample would have to be addressed given that this introduces additional parameters into the model, potentially causing model-overfitting.
     
+    \begin{figure}[!ht] 
+        \begin{center}
+    \adjustimage{max size={1.\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_104_1.png}
+    \end{center}
+    \caption{} \label{figpnl}
+    \end{figure}
+
+
+\newpage
+    
+        \section{Conclusion}\label{conclusion}
+    
+   Cointegration should not be assumed to yield always meaningful results, specially when working with real data. Some frequent issues to be aware of are:
+   
+      
+\begin{itemize}
+\tightlist
+\item Statistical tests may find cointegration when there is actually {\em none}. Moreover, the tests are quite sensitive to how the  regression  is formulated, e.g. including a deterministic trend or drift term could yield a different result, as well as different number of lags. Conversely, tests can also failed at detecting cointegration.
+\item The long-term equilibrium is a relative concept and there is no unique way to define it
+\item Using cointegration for forecasting ...
+\end{itemize}
+
+
     
     %%%%%%%%%%%%%%%%%%%%%%   BIBLIOGRAPHY
 \newpage
 
 \addcontentsline{toc}{section}{References}
     \begin{thebibliography}{1}
+    
+\bibitem{refp445} {\em Modeling Financial Time Series with S-PLUS - Chapter 12 - Cointegration} by Zivot, E. and Wang J. (2006)
+
+\bibitem{cqfnotes} CQF lectures on {\em Cointegration and Statistical Arbitrage}, Diamond, R. (2016)
+\bibitem{magazine}  {\em Learning and Trusting Cointegration in Statistical Arbitrage}, Diamond, R., Wilmott Magazine (2013)
+
+ \bibitem{repo} {\em Personal Github repository}   \href{https://github.com/tsando/CQF/tree/master/finalProject}{https://github.com/tsando/CQF/tree/master/finalProject}
+    
 \bibitem{ICEconversionfactor} \href{https://www.theice.com/publicdocs/futures/ICE\_Gas\_Oil\_Crack.pdf}{https://www.theice.com/publicdocs/futures/ICE\_Gas\_Oil\_Crack.pdf}
-\bibitem{PartialAutocorrelationFunction} \href{http://nl.mathworks.com/help/econ/autocorrelation-and-partial-autocorrelation.html}{http://nl.mathworks.com/help/econ/autocorrelation-and-partial-autocorrelation.html}
-\bibitem{pandasref1} \href{http://pandas.pydata.org/pandas-docs/stable/visualization.html\#autocorrelation-plot}{http://pandas.pydata.org/pandas-docs/stable/visualization.html\#autocorrelation-plot}
-\bibitem{pandasref2} \href{https://github.com/pydata/pandas/blob/master/pandas/tools/plotting.py}{https://github.com/pydata/pandas/blob/master/pandas/tools/plotting.py}
 \bibitem{Gasoil} \href{https://www.theice.com/products/34361119/Low-Sulphur-Gasoil-Futures}{https://www.theice.com/products/34361119/Low-Sulphur-Gasoil-Futures}
-\bibitem{statstools} \href{http://statsmodels.sourceforge.net/stable/vector\_ar.html\#lag-order-selection}{http://statsmodels.sourceforge.net/stable/vector\_ar.html\#lag-order-selection}
-\bibitem{wikiAR} \href{https://en.wikipedia.org/wiki/Autoregressive\_model}{https://en.wikipedia.org/wiki/Autoregressive\_model}
-\bibitem{ref2} \href{http://statsmodels.sourceforge.net/devel/generated/statsmodels.stats.diagnostic.kstest\_normal.html}{http://statsmodels.sourceforge.net/devel/generated/statsmodels.stats.diagnostic.kstest\_normal.html}
-\bibitem{wikiVAR} \href{https://en.wikipedia.org/wiki/Vector\_autoregression}{https://en.wikipedia.org/wiki/Vector\_autoregression}
-\bibitem{wikiADF} \href{https://en.wikipedia.org/wiki/Augmented\_Dickey\%E2\%80\%93Fuller\_test}{https://en.wikipedia.org/wiki/Augmented\_Dickey\%E2\%80\%93Fuller\_test}
-\bibitem{refmissing} \href{}{}
 \bibitem{Brent} \href{https://www.theice.com/products/219/Brent-Crude-Futures}{https://www.theice.com/products/219/Brent-Crude-Futures}
-\bibitem{(seeref)} \href{http://statsmodels.sourceforge.net/stable/generated/statsmodels.tsa.stattools.adfuller.html\#statsmodels.tsa.stattools.adfuller}{http://statsmodels.sourceforge.net/stable/generated/statsmodels.tsa.stattools.adfuller.html\#statsmodels.tsa.stattools.adfuller}
-\bibitem{wikiDF} \href{https://en.wikipedia.org/wiki/Dickey\%E2\%80\%93Fuller\_test}{https://en.wikipedia.org/wiki/Dickey\%E2\%80\%93Fuller\_test}
-\bibitem{MacKinnon(2010)} \href{http://statsmodels.sourceforge.net/stable/generated/statsmodels.tsa.stattools.adfuller.html\#statsmodels.tsa.stattools.adfuller}{http://statsmodels.sourceforge.net/stable/generated/statsmodels.tsa.stattools.adfuller.html\#statsmodels.tsa.stattools.adfuller}
-\bibitem{refp445} \href{file:///C:/Users/Tanya.Sandoval/Downloads/Cointegration\%20-\%20Book\%20Chapter\%20-\%20UWashington\%20E\%20Zivot.pdf}{file:///C:/Users/Tanya.Sandoval/Downloads/Cointegration\%20-\%20Book\%20Chapter\%20-\%20UWashington\%20E\%20Zivot.pdf}
+
+\bibitem{Quandl'sStevenContinuousSeries} \href{https://www.quandl.com/data/SCF/documentation/about}{https://www.quandl.com/data/SCF/documentation/about}
+
+
 \bibitem{statsmodelslibrary} \href{http://statsmodels.sourceforge.net/}{http://statsmodels.sourceforge.net/}
+
+\bibitem{statstools} \href{http://statsmodels.sourceforge.net/stable/vector\_ar.html\#lag-order-selection}{http://statsmodels.sourceforge.net/stable/vector\_ar.html\#lag-order-selection}
+
+\bibitem{(seeref)} \href{http://statsmodels.sourceforge.net/stable/generated/statsmodels.tsa.stattools.adfuller.html\#statsmodels.tsa.stattools.adfuller}{http://statsmodels.sourceforge.net/stable/generated/statsmodels.tsa.stattools.adfuller.html\#statsmodels.tsa.stattools.adfuller}
+\bibitem{MacKinnon(2010)} \href{http://statsmodels.sourceforge.net/stable/generated/statsmodels.tsa.stattools.adfuller.html\#statsmodels.tsa.stattools.adfuller}{http://statsmodels.sourceforge.net/stable/generated/statsmodels.tsa.stattools.adfuller.html\#statsmodels.tsa.stattools.adfuller}
+
 \bibitem{ref1} \href{http://statsmodels.sourceforge.net/notebooks/generated/statsmodels.stats.diagnostic.normal\_ad.html}{http://statsmodels.sourceforge.net/notebooks/generated/statsmodels.stats.diagnostic.normal\_ad.html}
 \bibitem{ref} \href{http://matthieustigler.github.io/Lectures/Lect2ARMA.pdf}{http://matthieustigler.github.io/Lectures/Lect2ARMA.pdf}
-\bibitem{Quandl'sStevenContinuousSeries} \href{https://www.quandl.com/data/SCF/documentation/about}{https://www.quandl.com/data/SCF/documentation/about}
+
+\bibitem{causality} \href{http://statsmodels.sourceforge.net/stable/generated/statsmodels.tsa.stattools.grangercausalitytests.html\#statsmodels.tsa.stattools.grangercausalitytests}{http://statsmodels.sourceforge.net/stable/generated/statsmodels.tsa.stattools.grangercausalitytests.html\#statsmodels.tsa.stattools.grangercausalitytests}
+
+\bibitem{pandasref1} \href{http://pandas.pydata.org/pandas-docs/stable/visualization.html\#autocorrelation-plot}{http://pandas.pydata.org/pandas-docs/stable/visualization.html\#autocorrelation-plot}
+\bibitem{pandasref2} \href{https://github.com/pydata/pandas/blob/master/pandas/tools/plotting.py}{https://github.com/pydata/pandas/blob/master/pandas/tools/plotting.py}
+\bibitem{ref2} \href{http://statsmodels.sourceforge.net/devel/generated/statsmodels.stats.diagnostic.kstest\_normal.html}{http://statsmodels.sourceforge.net/devel/generated/statsmodels.stats.diagnostic.kstest\_normal.html}
+
+
 \bibitem{ref} \href{https://en.wikipedia.org/wiki/Information\_criterion}{https://en.wikipedia.org/wiki/Information\_criterion}
+\bibitem{error} \href{https://en.wikipedia.org/wiki/Propagation\_of\_uncertainty\#Simplification}{https://en.wikipedia.org/wiki/Propagation\_of\_uncertainty\#Simplification}
+\bibitem{wikiAR} \href{https://en.wikipedia.org/wiki/Autoregressive\_model}{https://en.wikipedia.org/wiki/Autoregressive\_model}
+\bibitem{wikiVAR} \href{https://en.wikipedia.org/wiki/Vector\_autoregression}{https://en.wikipedia.org/wiki/Vector\_autoregression}
+\bibitem{wikiADF} \href{https://en.wikipedia.org/wiki/Augmented\_Dickey\%E2\%80\%93Fuller\_test}{https://en.wikipedia.org/wiki/Augmented\_Dickey\%E2\%80\%93Fuller\_test}
+\bibitem{wikiDF} \href{https://en.wikipedia.org/wiki/Dickey\%E2\%80\%93Fuller\_test}{https://en.wikipedia.org/wiki/Dickey\%E2\%80\%93Fuller\_test}
+
+
+
+\bibitem{PartialAutocorrelationFunction} \href{http://nl.mathworks.com/help/econ/autocorrelation-and-partial-autocorrelation.html}{http://nl.mathworks.com/help/econ/autocorrelation-and-partial-autocorrelation.html}
+
+
 \end{thebibliography}
 
 %%%%%%%%%%%%%%%%%%%%%%%  APPENDIX
 
+    \newpage 
     
 %    \section{Appendix}\label{appendix}
     
 \begin{appendices}    
     
-    \chapter{} \label{appendixA}
+    \chapter{{\huge \bf Appendix}} \label{appendixA}
     
     \section{Multivariate Regression}\label{multivariate-regression}
     
@@ -1127,20 +1174,26 @@ residuals vector.
 The OLS method, which minimises the sum of squared residuals via the
 Maximum Likelihood Estimation method (MLE), is used to estimate the
 parameters:
-\begin{equation}
+
+\begin{align}
 \hat{\beta} = (X^\prime X)^{-1} X^\prime Y \\
 \hat{\epsilon} = Y - X \hat{\beta}
-\end{equation}
+\end{align}
+
 The covariance matrix of the residuals estimate is:
 \begin{equation}
 \hat{\Sigma} = scale \times  \sum \epsilon \epsilon^\prime
-\end{equation} where \(scale = 1/ n\) using the MLE estimator or
-\(scale= 1/ (n - kp)\) using the OLS estimator for a model with \(k\)
+\end{equation} where the scale equals  \(1/ n\) using the MLE estimator or
+\(1/ (n - kp)\) using the OLS estimator for a model with \(k\)
 variables and \(p\) lags.
+
+
 The covariance matrix for the coefficients is:
 \begin{equation}
 (X X^\prime)^{-1} \otimes \hat{\Sigma}
 \end{equation} where \(\otimes\) is the \emph{Kronecker product}.
+
+
 The Log Likelihood Function for OLS is:
 \begin{equation}
 \log(L) = -\frac{n}{2}\log (2 \pi) -\frac{n}{2}\log | \hat{\Sigma}| - \frac{n}{2}
@@ -1150,21 +1203,27 @@ elements of the corresponding covariance matrices, from which the
 standard errors can be calculated.
 These are the conventions used in the script \emph{analysis.py}.
 Additional mathematical details can be found in reference \cite{wikiVAR}.
-The are several assumptions about the nature of the variables in the
-model to hold. In particular, these should be \emph{stationary} and the
+
+
+There are several assumptions about the nature of the variables in multivariate regression. In particular, these should be \emph{stationary} and the residual
 \(\epsilon\) homoscedastic (with finite variance) and normally
 distributed.
-The main applications of the multivariate regression are: * Vector
-Autoregression Models - also known as VAR(p), these can be used to
-forecast, test for stationarity (e.g.~ADF test) or model stationary
-series like returns * Error Correction Model - also known as ECM, these
+The main applications of the multivariate regression are:
+
+\begin{itemize}
+\tightlist
+\item  Autoregression Models -  these can be used to
+forecast and test or model stationary time series 
+
+\item  Error Correction Model -  these
 are used to model series which aren't stationary or that have stochastic
 trends, like prices
+\end{itemize}
 
 
     \subsection{Autoregression Models - AR(p)}\label{autoregression-models---arp}
     
-Also referred to as VAR(p) where \emph{p} is the lag order, it is
+Also referred to as AR(p) where \emph{p} is the lag order, it is
 simply a linear regression on a time series and its lagged (past)
 values:
 \begin{equation}
@@ -1177,16 +1236,16 @@ trying to model.
 Computationally, the model can be fitted in one go by using the OLS
 method described above with a special matrix formulation. Example code
 for this can be found in \emph{analysis.py} in the project repository.
-As shown in Section X, the VAR(p) system can be re-written in terms of
-differences and lagged differences, which is how it is commonly expressed
+
+An AR(p) system can be re-written in terms of
+differences, which is how it is commonly expressed
 in some cases, for example in the ADF test. See more details in references \cite{wikiVAR} and \cite{wikiAR}.
 
 
     \subsubsection{Dickey-Fuller Test and ADF}\label{dickey-fuller-test-and-adf}
     
 The \emph{Dickey-Fuller test} examines the null hypothesis of whether a
-unit root is present in the autoregressive model (also known as AR(p),
-see Appendix) of the time series. For example, a simple AR(1) model is:
+unit root is present in the autoregressive model AR(p) of a time series. For example, a simple AR(1) model is:
 \begin{equation}
 Y_t = \beta Y_{t-1} + \epsilon_t
 \end{equation}
@@ -1197,7 +1256,7 @@ non-stationary. The equation can be re-written as:
 \end{equation}
 where \(\phi= \beta-1\). Hence, testing for unit root is equivalent to
 testing \(\phi=0\).
-The value of the test $\text{statistic}(\hat{\phi})/\text{std.err}(\hat{\phi})$ is
+The value of the test statistic $\frac{\hat{\phi}}{\text{std.err}(\hat{\phi})}$ is
 then compared to the relevant critical values for the Dickey-Fuller
 distribution. If found lower, then the null hypothesis \(\phi=0\) is
 rejected and the series can be considered stationary.
@@ -1214,19 +1273,22 @@ time-dependent terms are included:
   Test for a unit root with drift and deterministic time-trend:
   \(\Delta Y_t = c_0 + c_1 t + \phi Y_{t-1} + \epsilon_t\)
 \end{itemize}
-Each version of the test has its own critical value which depends on
-the size of the sample. Which version to use is not straightforward and
-the wrong choice can lead to wrong conclusions. In general, financial
+Each version of the test has its own critical values which depend on
+the size of the sample. 
+
+Which version to use is not straightforward and
+the wrong choice can lead to wrong result. In general, financial
 time series exclude the time-trend.
-There is an extension to the test called the \textbf{Augmented
-Dickey--Fuller test (ADF)}, which removes autocorrelation effects by
+There is an extension to the test referred to as the {\em Augmented
+Dickey--Fuller test} (ADF), which removes autocorrelation effects by
 including lagged difference terms \(\phi_p \Delta Y_{t-p}\). The optimal
-lag order could then be determined from the information criteria (see
-above).
-Clearly the above equations belong to the family of generalised linear
-models, which means the parameters can be estimated using the familiar
-linear regression described above.
-Additional details on this topic can be found in references \cite{wikiADF}, \cite{wikiDF} and the Appendix.
+lag order could then be determined from an  information criteria (see
+below).
+
+As this belong to the family of generalised linear
+models,  the parameters can be estimated using the 
+multivariate regression described above.
+Additional details on this topic can be found in references \cite{wikiADF}, \cite{wikiDF}.
 
     \subsubsection{Optimal Lag Order}\label{optimal-lag-order}
     
@@ -1249,29 +1311,27 @@ criteria can be used, see for example reference \cite{ref}.
 
     \subsubsection{Stability Condition}\label{stability-condition}
     
-It is required for the eigenvalues of the estimated coefficients matrix or
-vector to be inside the unit circle ($ \textless{} 1$): \begin{equation}
+For an AR(p) system, it is required for the eigenvalues of the estimated coefficients to be inside the unit circle ($ \textless{} 1$): \begin{equation}
 | \lambda I - \hat{\beta} | = 0
 \end{equation} This is equivalent to requiring the roots of the characteristic
 polynomial of the AR(p) system to be outside the unit circle - see
-reference \cite{ref}.
+ \cite{ref}.
 
 \chapter{} \label{appendixB}
 
+\newpage 
     \section{Cointegration between Italian and Dutch Gas}\label{cointegration-between-italian-and-dutch-gas}
+    
+    A similar study was started using the price series of Italian (PSV) and Dutch Gas (TTF) futures, however, due to time limitations this wasn't finished. In any case one could already see from the spread plot that the quality wasn't as good as that of Brent-Gasoil (subject to data quality assessment). Some of the related plots are shown below. Note that the spread memory noticed in Brent-Gasoil seems more severe in this case.
     
     \begin{center}
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_111_1.png}
+        \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_113_1.png}
     \end{center}
-    { \hspace*{\fill} \\}
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_113_1.png}
-    \end{center}
-    { \hspace*{\fill} \\}
+
     \begin{center}
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_114_0.png}
     \end{center}
-    { \hspace*{\fill} \\}
 
   \end{appendices}
 

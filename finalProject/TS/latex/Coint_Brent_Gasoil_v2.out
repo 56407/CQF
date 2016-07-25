@@ -18,19 +18,18 @@
 \BOOKMARK [3][-]{subsubsection.4.4.3}{ECM}{subsection.4.4}% 18
 \BOOKMARK [3][-]{subsubsection.4.4.4}{Quality of mean-reversion}{subsection.4.4}% 19
 \BOOKMARK [2][-]{subsection.4.5}{Granger Causality}{section.4}% 20
-\BOOKMARK [2][-]{subsection.4.6}{Issues with Cointegration}{section.4}% 21
-\BOOKMARK [1][-]{section.5}{Trading Strategies}{}% 22
-\BOOKMARK [2][-]{subsection.5.1}{Regime changes}{section.5}% 23
-\BOOKMARK [2][-]{subsection.5.2}{Backtesting}{section.5}% 24
-\BOOKMARK [2][-]{subsection.5.3}{Naive Beta-Hedging Strategy}{section.5}% 25
-\BOOKMARK [2][-]{subsection.5.4}{Pairs Trading Strategy}{section.5}% 26
-\BOOKMARK [3][-]{subsubsection.5.4.1}{Bounds from OU process}{subsection.5.4}% 27
-\BOOKMARK [3][-]{subsubsection.5.4.2}{Bounds from Optimisation}{subsection.5.4}% 28
-\BOOKMARK [3][-]{subsubsection.5.4.3}{Dynamic Bounds}{subsection.5.4}% 29
-\BOOKMARK [1][-]{subsubsection.5.4.3}{References}{}% 30
-\BOOKMARK [1][-]{Appendix.1.A}{Appendix Multivariate Regression}{}% 31
-\BOOKMARK [2][-]{subsection.1.A.1}{Autoregression Models - AR\(p\)}{Appendix.1.A}% 32
-\BOOKMARK [3][-]{subsubsection.1.A.1.1}{Dickey-Fuller Test and ADF}{subsection.1.A.1}% 33
-\BOOKMARK [3][-]{subsubsection.1.A.1.2}{Optimal Lag Order}{subsection.1.A.1}% 34
-\BOOKMARK [3][-]{subsubsection.1.A.1.3}{Stability Condition}{subsection.1.A.1}% 35
-\BOOKMARK [1][-]{Appendix.1.B}{Appendix Cointegration between Italian and Dutch Gas}{}% 36
+\BOOKMARK [1][-]{section.5}{Trading Strategies}{}% 21
+\BOOKMARK [2][-]{subsection.5.1}{Regime changes}{section.5}% 22
+\BOOKMARK [2][-]{subsection.5.2}{Backtesting}{section.5}% 23
+\BOOKMARK [2][-]{subsection.5.3}{Naive Beta-Hedging Strategy}{section.5}% 24
+\BOOKMARK [2][-]{subsection.5.4}{Pairs Trading Strategy}{section.5}% 25
+\BOOKMARK [3][-]{subsubsection.5.4.1}{Bounds from OU process}{subsection.5.4}% 26
+\BOOKMARK [3][-]{subsubsection.5.4.2}{Optimal bounds}{subsection.5.4}% 27
+\BOOKMARK [1][-]{section.6}{Conclusion}{}% 28
+\BOOKMARK [1][-]{section.6}{References}{}% 29
+\BOOKMARK [1][-]{Appendix.1.A}{Appendix Multivariate Regression}{}% 30
+\BOOKMARK [2][-]{subsection.1.A.1}{Autoregression Models - AR\(p\)}{Appendix.1.A}% 31
+\BOOKMARK [3][-]{subsubsection.1.A.1.1}{Dickey-Fuller Test and ADF}{subsection.1.A.1}% 32
+\BOOKMARK [3][-]{subsubsection.1.A.1.2}{Optimal Lag Order}{subsection.1.A.1}% 33
+\BOOKMARK [3][-]{subsubsection.1.A.1.3}{Stability Condition}{subsection.1.A.1}% 34
+\BOOKMARK [1][-]{Appendix.1.B}{Appendix Cointegration between Italian and Dutch Gas}{}% 35
