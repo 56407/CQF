@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.4.14)  25 JUL 2016 13:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.4.14)  25 JUL 2016 13:44
 entering extended mode
 **./Coint_Brent_Gasoil_v2.tex
 (Coint_Brent_Gasoil_v2.tex
@@ -673,329 +673,328 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 239.
 
 ("C:\Apps\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1
+) (Coint_Brent_Gasoil_v2.toc
+[1
 
-{C:/Users/Tanya.Sandoval/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] (C
-oint_Brent_Gasoil_v2.toc)
+{C:/Users/Tanya.Sandoval/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}])
 \tf@toc=\write5
 \openout5 = `Coint_Brent_Gasoil_v2.toc'.
 
-
-[2] [3]
-Underfull \hbox (badness 1297) in paragraph at lines 282--283
+[2]
+Underfull \hbox (badness 1297) in paragraph at lines 289--290
 []\OT1/cmr/m/n/10.95 All the rel-e-vant scripts to ar-rive at the re-sults can 
 be found in the project repos-
  []
 
 
-Underfull \hbox (badness 1077) in paragraph at lines 282--283
+Underfull \hbox (badness 1077) in paragraph at lines 289--290
 \OT1/cmr/m/n/10.95 i-tory ``\OT1/cmr/m/it/10.95 fi-nal-Pro-ject/TS\OT1/cmr/m/n/
 10.95 '' in the at-tached USB drive. In par-tic-u-lar the ipython note-book
  []
 
-[4]
-<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_9_0.png, id=219, 890.32625pt
+[3]
+<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_9_0.png, id=215, 890.32625pt
  x 352.31625pt>
 File: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_9_0.png Graphic file (t
 ype png)
 
 <use Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_9_0.png>
 Package pdftex.def Info: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_9_0.
-png used on input line 334.
+png used on input line 341.
 (pdftex.def)             Requested size: 890.32408pt x 352.31538pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 336--337
+Underfull \hbox (badness 10000) in paragraph at lines 343--344
 
  []
 
 
-<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_12_0.png, id=221, 901.3675pt
+<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_12_0.png, id=217, 901.3675pt
  x 341.275pt>
 File: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_12_0.png Graphic file (
 type png)
  <use Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_12_0.png>
 Package pdftex.def Info: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_12_0
-.png used on input line 353.
+.png used on input line 360.
 (pdftex.def)             Requested size: 901.36528pt x 341.27415pt.
 
-[5 <./Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_9_0.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 355--356
+[4 <./Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_9_0.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 362--363
 
  []
 
 
-<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_15_1.png, id=232, 939.51pt x
+<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_15_1.png, id=228, 939.51pt x
  633.36626pt>
 File: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_15_1.png Graphic file (
 type png)
  <use Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_15_1.png>
 Package pdftex.def Info: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_15_1
-.png used on input line 387.
+.png used on input line 394.
 (pdftex.def)             Requested size: 939.5077pt x 633.36472pt.
 
-[6 <./Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_12_0.png>]
+[5 <./Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_12_0.png>]
 
-LaTeX Warning: Citation `refmissing' on page 7 undefined on input line 406.
+LaTeX Warning: Citation `refmissing' on page 6 undefined on input line 413.
 
-[7 <./Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_15_1.png>]
-<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_25_0.png, id=254, 881.2925pt
+[6 <./Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_15_1.png>]
+<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_25_0.png, id=249, 881.2925pt
  x 630.355pt>
 File: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_25_0.png Graphic file (
 type png)
  <use Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_25_0.png>
 Package pdftex.def Info: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_25_0
-.png used on input line 456.
+.png used on input line 463.
 (pdftex.def)             Requested size: 881.29034pt x 630.35345pt.
 
-[8 <./Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_25_0.png>]
-<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_32_0.png, id=267, 924.45375p
+[7 <./Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_25_0.png>]
+<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_32_0.png, id=263, 924.45375p
 t x 565.11125pt>
 File: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_32_0.png Graphic file (
 type png)
 
 <use Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_32_0.png>
 Package pdftex.def Info: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_32_0
-.png used on input line 512.
+.png used on input line 519.
 (pdftex.def)             Requested size: 924.45149pt x 565.10986pt.
- [9 <./Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_32_0.png>]
-<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_34_1.png, id=277, 920.43875p
+ [8 <./Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_32_0.png>]
+<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_34_1.png, id=273, 920.43875p
 t x 510.90875pt>
 File: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_34_1.png Graphic file (
 type png)
 
 <use Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_34_1.png>
 Package pdftex.def Info: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_34_1
-.png used on input line 528.
+.png used on input line 535.
 (pdftex.def)             Requested size: 920.43651pt x 510.9075pt.
 
-<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_37_0.png, id=278, 925.4575pt
+<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_37_0.png, id=274, 925.4575pt
  x 353.32pt>
 File: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_37_0.png Graphic file (
 type png)
  <use Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_37_0.png>
 Package pdftex.def Info: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_37_0
-.png used on input line 566.
+.png used on input line 573.
 (pdftex.def)             Requested size: 925.45525pt x 353.31914pt.
 
-[10 <./Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_34_1.png>] [11 <./Coin
-t_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_37_0.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 631--632
+[9 <./Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_34_1.png>] [10 <./Coint
+_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_37_0.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 638--639
 
  []
 
 
-<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_42_1.png, id=302, 920.43875p
+<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_42_1.png, id=298, 920.43875p
 t x 353.32pt>
 File: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_42_1.png Graphic file (
 type png)
  <use Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_42_1.png>
 Package pdftex.def Info: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_42_1
-.png used on input line 633.
+.png used on input line 640.
 (pdftex.def)             Requested size: 920.43651pt x 353.31914pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 635--636
+Underfull \hbox (badness 10000) in paragraph at lines 642--643
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 645--646
+Underfull \hbox (badness 10000) in paragraph at lines 652--653
 
  []
 
 
-<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_43_1.png, id=303, 895.345pt 
+<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_43_1.png, id=299, 895.345pt 
 x 523.9575pt>
 File: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_43_1.png Graphic file (
 type png)
  <use Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_43_1.png>
 Package pdftex.def Info: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_43_1
-.png used on input line 648.
+.png used on input line 655.
 (pdftex.def)             Requested size: 895.34282pt x 523.95622pt.
 
-[12 <./Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_42_1.png> <./Coint_Bre
-nt_Gasoil_v2_files/Coint_Brent_Gasoil_v2_43_1.png>] [13]
-<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_52_0.png, id=325, 885.3075pt
+[11 <./Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_42_1.png> <./Coint_Bre
+nt_Gasoil_v2_files/Coint_Brent_Gasoil_v2_43_1.png>] [12]
+<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_52_0.png, id=320, 885.3075pt
  x 353.32pt>
 File: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_52_0.png Graphic file (
 type png)
  <use Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_52_0.png>
 Package pdftex.def Info: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_52_0
-.png used on input line 772.
+.png used on input line 779.
 (pdftex.def)             Requested size: 885.30533pt x 353.31914pt.
 
-<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_57_1.png, id=327, 924.45375p
+<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_57_1.png, id=322, 924.45375p
 t x 353.32pt>
 File: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_57_1.png Graphic file (
 type png)
  <use Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_57_1.png>
 Package pdftex.def Info: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_57_1
-.png used on input line 789.
+.png used on input line 796.
 (pdftex.def)             Requested size: 924.45149pt x 353.31914pt.
 
-[14 <./Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_52_0.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 791--792
+[13 <./Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_52_0.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 798--799
 
  []
 
 
-<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_74_2.png, id=338, 920.43875p
+<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_74_2.png, id=334, 920.43875p
 t x 1085.05376pt>
 File: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_74_2.png Graphic file (
 type png)
 
 <use Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_74_2.png>
 Package pdftex.def Info: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_74_2
-.png used on input line 851.
+.png used on input line 858.
 (pdftex.def)             Requested size: 920.43651pt x 1085.0511pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 855--856
+Underfull \hbox (badness 10000) in paragraph at lines 862--863
 
  []
 
-[15 <./Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_57_1.png>] [16 <./Coin
+[14 <./Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_57_1.png>] [15 <./Coin
 t_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_74_2.png>]
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 915.
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 922.
 
 
 ("C:\Apps\MiKTeX 2.9\tex\latex\base\omlcmr.fd"
 File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 915.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 922.
 
 ("C:\Apps\MiKTeX 2.9\tex\latex\ucs\uni-32.def"
 File: uni-32.def 2013/05/13 UCS: Unicode data U+2000..U+20FF
-) [17] [18]
-<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_99_1.png, id=379, 881.2925pt
+) [16] [17]
+<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_99_1.png, id=375, 881.2925pt
  x 359.3425pt>
 File: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_99_1.png Graphic file (
 type png)
 
 <use Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_99_1.png>
 Package pdftex.def Info: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_99_1
-.png used on input line 1049.
+.png used on input line 1056.
 (pdftex.def)             Requested size: 881.29034pt x 359.34161pt.
- [19]
-Underfull \hbox (badness 10000) in paragraph at lines 1051--1052
+ [18]
+Underfull \hbox (badness 10000) in paragraph at lines 1058--1059
 
  []
 
 
-<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_104_1.png, id=390, 910.40125
+<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_104_1.png, id=385, 910.40125
 pt x 620.3175pt>
 File: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_104_1.png Graphic file 
 (type png)
 
 <use Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_104_1.png>
 Package pdftex.def Info: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_104_
-1.png used on input line 1084.
+1.png used on input line 1091.
 (pdftex.def)             Requested size: 910.39902pt x 620.316pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1090--1091
+Underfull \hbox (badness 10000) in paragraph at lines 1097--1098
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1092--1093
+Underfull \hbox (badness 10000) in paragraph at lines 1099--1100
 
  []
 
 
-<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_106_1.png, id=391, 881.2925p
+<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_106_1.png, id=386, 881.2925p
 t x 359.3425pt>
 File: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_106_1.png Graphic file 
 (type png)
 
 <use Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_106_1.png>
 Package pdftex.def Info: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_106_
-1.png used on input line 1095.
+1.png used on input line 1102.
 (pdftex.def)             Requested size: 881.29034pt x 359.34161pt.
- [20 <./Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_99_1.png>] [21 <./Coi
+ [19 <./Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_99_1.png>] [20 <./Coi
 nt_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_104_1.png> <./Coint_Brent_Gasoil
-_v2_files/Coint_Brent_Gasoil_v2_106_1.png>] [22
+_v2_files/Coint_Brent_Gasoil_v2_106_1.png>] [21
 
 ]
-Overfull \hbox (155.5821pt too wide) in paragraph at lines 1168--1169
+Overfull \hbox (155.5821pt too wide) in paragraph at lines 1175--1176
 [][][]\OT1/cmr/m/n/10.95 http://statsmodels.sourceforge.net/stable/generated/st
 atsmodels.tsa.stattools.adfuller.html#statsmodels.tsa.stattools.adfuller[][] 
  []
 
 
-Overfull \hbox (155.5821pt too wide) in paragraph at lines 1169--1170
+Overfull \hbox (155.5821pt too wide) in paragraph at lines 1176--1177
 [][][]\OT1/cmr/m/n/10.95 http://statsmodels.sourceforge.net/stable/generated/st
 atsmodels.tsa.stattools.adfuller.html#statsmodels.tsa.stattools.adfuller[][] 
  []
 
 
-Overfull \hbox (38.67851pt too wide) in paragraph at lines 1171--1172
+Overfull \hbox (38.67851pt too wide) in paragraph at lines 1178--1179
 [][][]\OT1/cmr/m/n/10.95 http://statsmodels.sourceforge.net/notebooks/generated
 /statsmodels.stats.diagnostic.normal[]ad.html[][] 
  []
 
 
-Overfull \hbox (283.14977pt too wide) in paragraph at lines 1174--1175
+Overfull \hbox (283.14977pt too wide) in paragraph at lines 1181--1182
 [][][]\OT1/cmr/m/n/10.95 http://statsmodels.sourceforge.net/stable/generated/st
 atsmodels.tsa.stattools.grangercausalitytests.html#statsmodels.tsa.stattools.gr
 angercausalitytests[][] 
  []
 
 
-Overfull \hbox (30.831pt too wide) in paragraph at lines 1178--1179
+Overfull \hbox (30.831pt too wide) in paragraph at lines 1185--1186
 [][][]\OT1/cmr/m/n/10.95 http://statsmodels.sourceforge.net/devel/generated/sta
 tsmodels.stats.diagnostic.kstest[]normal.html[][] 
  []
 
-[23pdfTeX warning (ext4): destination with the same identifier (name{cite.ref})
+[22pdfTeX warning (ext4): destination with the same identifier (name{cite.ref})
  has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1200     \newpage
-                   ] [24] [25]
+l.1207     \newpage
+                   ] [23] [24]
 
-LaTeX Warning: Command \textless invalid in math mode on input line 1360.
+LaTeX Warning: Command \textless invalid in math mode on input line 1367.
 
 
-LaTeX Warning: Command \textless invalid in math mode on input line 1360.
+LaTeX Warning: Command \textless invalid in math mode on input line 1367.
 
-[26]
-<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_111_1.png, id=482, 880.28876
+[25]
+<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_111_1.png, id=478, 880.28876
 pt x 332.24126pt>
 File: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_111_1.png Graphic file 
 (type png)
 
 <use Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_111_1.png>
 Package pdftex.def Info: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_111_
-1.png used on input line 1374.
+1.png used on input line 1381.
 (pdftex.def)             Requested size: 880.2866pt x 332.24043pt.
 
-<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_113_1.png, id=483, 895.345pt
+<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_113_1.png, id=479, 895.345pt
  x 332.24126pt>
 File: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_113_1.png Graphic file 
 (type png)
 
 <use Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_113_1.png>
 Package pdftex.def Info: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_113_
-1.png used on input line 1375.
+1.png used on input line 1382.
 (pdftex.def)             Requested size: 895.34282pt x 332.24043pt.
 
-<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_114_0.png, id=484, 895.345pt
+<Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_114_0.png, id=480, 895.345pt
  x 333.245pt>
 File: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_114_0.png Graphic file 
 (type png)
 
 <use Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_114_0.png>
 Package pdftex.def Info: Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_114_
-0.png used on input line 1379.
+0.png used on input line 1386.
 (pdftex.def)             Requested size: 895.34282pt x 333.24417pt.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1389.
- [27 <./Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_111_1.png> <./Coint_B
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1396.
+ [26 <./Coint_Brent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_111_1.png> <./Coint_B
 rent_Gasoil_v2_files/Coint_Brent_Gasoil_v2_113_1.png> <./Coint_Brent_Gasoil_v2_
 files/Coint_Brent_Gasoil_v2_114_0.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1389.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1396.
  (Coint_Brent_Gasoil_v2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1389.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1389.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1396.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1396.
 
 Package rerunfilecheck Info: File `Coint_Brent_Gasoil_v2.out' has not changed.
 (rerunfilecheck)             Checksum: DC394CFD0E7073F535E5D6E0AFDD6F7C;2433.
@@ -1006,12 +1005,12 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1389.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1396.
  ) 
 Here is how much of TeX's memory you used:
- 10833 strings out of 493634
- 162451 string characters out of 3147362
- 263277 words of memory out of 3000000
+ 10832 strings out of 493634
+ 162444 string characters out of 3147362
+ 263276 words of memory out of 3000000
  13877 multiletter control sequences out of 15000+200000
  17702 words of font info for 66 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
@@ -1030,9 +1029,9 @@ msfonts/cm/cmr6.pfb><C:/Apps/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb
 lic/amsfonts/cm/cmsy8.pfb><C:/Apps/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
 ti10.pfb><C:/Apps/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti8.pfb><C:/Apps/
 MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on Coint_Brent_Gasoil_v2.pdf (27 pages, 1254956 bytes).
+Output written on Coint_Brent_Gasoil_v2.pdf (26 pages, 1258454 bytes).
 PDF statistics:
- 579 PDF objects out of 1000 (max. 8388607)
- 145 named destinations out of 1000 (max. 500000)
+ 573 PDF objects out of 1000 (max. 8388607)
+ 144 named destinations out of 1000 (max. 500000)
  371 words of extra memory for PDF output out of 10000 (max. 10000000)
 
